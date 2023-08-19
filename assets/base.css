@@ -1,0 +1,58 @@
+
+:root {
+
+    --color-general:#EFE1E1;
+    --button-color:#B49696;
+    --gradient-color: linear-gradient(93.24deg, #B49696 0.26%, #CFB9B9 46.15%, #D5C0C0 56.56%, #EFE1E1 100%);
+    --frame-color:#DADEDF;
+  }
+  
+  /* semantic color variables for this project */
+  :root {
+    --color-background: var(--background-general);
+    --color-background-soft: var(--background-secondary);
+    --color-background-mute: var(--vt-c-white-mute);
+  
+    --color-border: var(--border-color);
+    --color-border-hover: var(--vt-c-divider-light-1);
+  
+    --color-heading: var(--text-primary);
+    --color-text: var(--text-secondary);
+  
+    --section-gap: 160px;
+  }
+  
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --color-background: var(--vt-c-black);
+      --color-background-soft: var(--vt-c-black-soft);
+      --color-background-mute: var(--vt-c-black-mute);
+  
+      --color-border: var(--vt-c-divider-dark-2);
+      --color-border-hover: var(--vt-c-divider-dark-1);
+  
+      --color-heading: var(--vt-c-text-dark-1);
+      --color-text: var(--vt-c-text-dark-2);
+    }
+  }
+  
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+    margin: 0;
+    font-weight: normal;
+  }
+  
+  body {
+  overflow: hidden;
+    color: var(--color-text);
+    background-color:var(--background-general);
+    line-height: 1.6;
+    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+      Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+    font-size: 15px;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }

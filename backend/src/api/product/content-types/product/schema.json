@@ -1,0 +1,57 @@
+{
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "product"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "brand": {
+      "type": "string"
+    },
+    "description_small": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "new": {
+      "type": "boolean"
+    },
+    "bestseller": {
+      "type": "boolean"
+    },
+    "sale": {
+      "type": "boolean"
+    },
+    "matureSkin": {
+      "type": "boolean"
+    },
+    "sensitiveSkin": {
+      "type": "boolean"
+    },
+    "oilySkin": {
+      "type": "boolean"
+    },
+    "drySkin": {
+      "type": "boolean"
+    },
+    "problemSkin": {
+      "type": "boolean"
+    },
+    "forBody": {
+      "type": "boolean"
+    }
+  }
+}

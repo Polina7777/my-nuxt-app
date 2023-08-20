@@ -4,7 +4,8 @@
   "info": {
     "singularName": "product",
     "pluralName": "products",
-    "displayName": "product"
+    "displayName": "product",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -51,6 +52,9 @@
       "type": "boolean"
     },
     "forBody": {
+      "type": "boolean"
+    },
+    "basket": {
       "type": "boolean"
     }
   }

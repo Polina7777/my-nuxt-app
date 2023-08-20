@@ -44,58 +44,59 @@ export const sortProductsDESC = async()=>{
     return product;
 }
 export const getAllNewProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?new=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[new]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllSaleProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?sale=true`,{method:'GET'});
+    const sale = true;
+    const response = await fetch(`${url_ngrok}api/products?filters[sale]=${sale}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllBestsellerProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?bestseller=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[bestseller]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllForBodyProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?forBody=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[forBody]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllProblemSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?problemSkin=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[problemSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllDrySkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?drySkin=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[drySkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllOilySkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?oilySkin=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[oilySkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllSensitiveSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?sensitiveSkin=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[sensitiveSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 export const getAllMatureSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?matureSkin=true`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[matureSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 
-export const recipesApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts}
+export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts}

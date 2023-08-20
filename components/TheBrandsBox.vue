@@ -31,9 +31,35 @@ export default {
 <template>
   <div>
     <p class="title">{{ title }}</p>
-    <ul v-for="(item,index) in brands" :key="index">
+    <ul>
+    <li v-for="(item,index) in brands" :key="index">
         <img :src="item" alt="brand-image"/>
-    </ul>
+    </li>
+  </ul>
     <p class="show_more">{{ text }}</p>
 </div>
 </template>
+<style scoped>
+div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* align-items: center; */
+}
+ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+img{
+  width: 200px;
+  height: 200px;
+}
+p{
+  text-align: center;
+}
+.show_more {
+  text-align: end;
+  padding: 0 20px;
+}
+</style>

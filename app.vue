@@ -1,8 +1,11 @@
+
 <template>
   <div>
- <TheHeader/>
- <TheFooter/>
+ <!-- <TheHeader/>
+<TheListsBox/>
  <TheBrandsBox/>
  <TheAboutBox/>
+ <TheFooter/> -->
+ <NuxtPage />
   </div>
 </template>

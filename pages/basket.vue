@@ -1,4 +1,3 @@
 <template>
-    <p>Корзина</p>
-
+<TheBasket/>
 </template>

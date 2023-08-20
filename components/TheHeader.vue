@@ -19,6 +19,9 @@ export default {
       vk: vk,
       phoneNumber: "+7 (999) 131-32-49",
       router:useRoute(),
+      openPopup:false,
+      popUpList1:['Уход за лицом','Волосы','Макияж','Тело','Наборы',"Миниатюры"],
+      popUpList2:['Демакияж','Очищение','Отшелушивание','Тонизирование','Сыворотки',"Кремы",'Маски','Тканевые маски','Для кожи вокруг глаз','Патчи','Для губ','Точечные средства','SPF-защита от солнца','Гаджеты и аксессуары для лица'],
       navScheme1: [
         {
           title: "Доставка и оплата",
@@ -98,7 +101,7 @@ export default {
       >
         <button
           :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
-          @click="navigateTo(item.navigate)"
+          @click="item.title === 'Каталог' ? openPopup = true : navigateTo(item.navigate)"
         >
           {{ item.title }}
         </button>
@@ -110,6 +113,27 @@ export default {
         />
       </li>
     </ul>
+
+    <Teleport to="body">
+      <div v-if="openPopup" class="modal">
+      <div class="popup_wrapper">
+        <ul class="popup_list">
+      <li v-for="(item, index) in popUpList1" :key="index">
+        <p class="popup_item">{{item}}</p>
+      </li>
+    </ul>
+    <ul class="popup_list">
+      <li v-for="(item, index) in popUpList2" :key="index">
+        <p class="popup_item">{{item}}</p>
+      </li>
+    </ul>
+      </div>
+        <button class="close" @click="openPopup= false">
+          x
+        </button>
+      </div>
+    </Teleport>
+
   </header>
 </template>
 
@@ -120,6 +144,7 @@ export default {
 }
 p {
   font-size: 17px;
+  margin: 0;
 }
 header {
   display: flex;
@@ -129,12 +154,27 @@ header {
 }
 .wrapper,
 .contacts_wrapper,
-.input_wrapper {
+.input_wrapper,
+.popup_wrapper{
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 20px;
+}
+.popup_item{
+  font-size: 10px;
+  margin: 0;
+}
+.popup_list{
+  font-size: 10px;
+  margin: 0;
+  height: 400px;
+}
+.popup_wrapper{
+  gap: 0;
+  height: 400px;
+  width: 300px;
 }
 .wrapper {
   justify-content: space-between;
@@ -154,6 +194,18 @@ img {
   background: var(--color-general);
   padding: 20px;
   width: 80%;
+}
+.popup_list{
+  display: flex;
+  flex-direction: column;
+  background: #efe1e1;
+  text-align: center;
+  width: 30%;
+  height: 300px;
+  font-size: 10px;
+}
+.close{
+padding: 5px;
 }
 ul {
   display: flex;

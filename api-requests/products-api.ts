@@ -98,5 +98,10 @@ export const getAllMatureSkinProducts = async()=>{
     const products = data.data
     return products;
 }
-
-export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts}
+export const getAllProductsFromBasket = async()=>{
+    const response = await fetch(`${url_ngrok}api/products?filters[basket]=true`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+}
+export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket}

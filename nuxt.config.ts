@@ -17,6 +17,18 @@ export default {
       {
         path: '/paymethods',
         component: 'pages/paymethods.vue'
+      },
+      {
+        path: '/contacts',
+        component: 'pages/contacts.vue'
+      },
+      {
+        path: '/new',
+        component: 'pages/new.vue'
+      },
+      {
+        path: '/sale',
+        component: 'pages/sale.vue'
       }
     ]
   }

@@ -35,7 +35,8 @@ ul{
     flex-wrap: wrap;
     padding: 30px;
     width: 70%;
-    margin: 0 auto;
+    /* margin: 0 auto; */
+    /* margin: 0 auto; */
 }
 img{
 width: 300px;

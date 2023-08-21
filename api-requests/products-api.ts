@@ -6,12 +6,7 @@ export const getAllProducts = async()=>{
     const products = data.data
     return products;
 }
-// export const getAllProductsWithCollection = async(sortType:string,page:any)=>{
-//     const response = await fetch(`${url_ngrok}api/products?pagination[page]=${page}&pagination[pageSize]=3&sort=title%3A${sortType}&populate=*`,{method:'GET'});
-//     const data = await response.json();
-//     const products = data
-//     return products;
-// }
+
 export const getAllProductsWithCollection = async()=>{
     const response = await fetch(`${url_ngrok}api/products?populate=*`,{method:'GET'});
     const data = await response.json();
@@ -104,4 +99,45 @@ export const getAllProductsFromBasket = async()=>{
     const products = data.data
     return products;
 }
-export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket}
+
+
+export const addProductToBasket = async (id: string) => {
+    // const recipeId = String(recipe.id);
+    console.log('aknskncs')
+    try {
+      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          data: {
+            basket:true
+          },
+        }),
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+  export const deleteProductFromBasket = async (id: string) => {
+    // const recipeId = String(recipe.id);
+    console.log('aknskncs')
+    try {
+      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          data: {
+            basket:false
+          },
+        }),
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  };
+  
+export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket}

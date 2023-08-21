@@ -16,7 +16,7 @@ export default {
       navScheme1: [
         {
           title: "Доставка и оплата",
-          navigate: "/",
+          navigate: "/paymethods",
         },
         {
           title: "Вопрос-ответ",
@@ -24,7 +24,7 @@ export default {
         },
         {
           title: "Контакты",
-          navigate: "/",
+          navigate: "/contacts",
         },
       ],
 
@@ -36,12 +36,12 @@ export default {
         },
         {
           title: "Новинки",
-          navigate: "/",
+          navigate: "/new",
           image: null,
         },
         {
-          title: "Новинки",
-          navigate: "/",
+          title: "Распродажи",
+          navigate: "/sale",
           image: null,
         },
         {

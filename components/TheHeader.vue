@@ -33,7 +33,7 @@ export default {
         },
         {
           title: "Контакты",
-          navigate: "/",
+          navigate: "/contacts",
         },
       ],
 
@@ -45,12 +45,12 @@ export default {
         },
         {
           title: "Новинки",
-          navigate: "/",
+          navigate: "/new",
           image: null,
         },
         {
           title: "Распродажи",
-          navigate: "/",
+          navigate: "/sale",
           image: null,
         },
         {
@@ -117,12 +117,12 @@ export default {
     <Teleport to="body">
       <div v-if="openPopup" class="modal">
       <div class="popup_wrapper">
-        <ul class="popup_list">
+        <ul class="popup_list" id="popup_list_one">
       <li v-for="(item, index) in popUpList1" :key="index">
-        <p class="popup_item">{{item}}</p>
+        <p class="popup_item" id="popup_list_one_item">{{item}}</p>
       </li>
     </ul>
-    <ul class="popup_list">
+    <ul class="popup_list"  id="popup_list_two">
       <li v-for="(item, index) in popUpList2" :key="index">
         <p class="popup_item">{{item}}</p>
       </li>
@@ -162,20 +162,33 @@ header {
   align-items: center;
   gap: 20px;
 }
-.popup_item{
-  font-size: 10px;
-  margin: 0;
-}
-.popup_list{
-  font-size: 10px;
-  margin: 0;
-  height: 400px;
-}
 .popup_wrapper{
+  position: absolute;
+  left:10%;
+  top:30%;
   gap: 0;
-  height: 400px;
-  width: 300px;
 }
+.popup_item{
+  font-size: 15px;
+  margin: 0;
+}
+
+#popup_list_one{
+   font-size: 20px;
+   min-height: 390px;
+   gap:20px;
+}
+
+#popup_list_one_item{
+   font-size: 20px;
+}
+
+#popup_list_two{
+  background: white;
+  text-align: start; 
+  max-height: 370px;
+}
+
 .wrapper {
   justify-content: space-between;
 }
@@ -199,13 +212,23 @@ img {
   display: flex;
   flex-direction: column;
   background: #efe1e1;
-  text-align: center;
-  width: 30%;
-  height: 300px;
+  text-align: start;
+  gap:10px;
+  font-size: 15px;
+  padding: 20px;
   font-size: 10px;
+  margin: 0;
+  min-height: 300px;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .close{
-padding: 5px;
+padding: 5px 8px;
+position: absolute;
+left: 49%;
+top: 30%;
+background: transparent;
+color: gray;
 }
 ul {
   display: flex;

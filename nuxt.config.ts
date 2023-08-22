@@ -29,7 +29,13 @@ export default {
       {
         path: '/sale',
         component: 'pages/sale.vue'
-      }
+      },
+      {
+        // name:'/product',
+        path: '/:cartId',
+        component: 'pages/product.vue'
+      },
+  
     ]
   }
 };

@@ -78,7 +78,7 @@ export default {
       </li>
     </ul>
     <div class="wrapper">
-      <img class="logo-header" :src="logo" alt="header-logo" />
+      <img class="logo-header" :src="logo" alt="header-logo" @click="navigateTo('/')" />
       <div class="input_wrapper">
         <input class="search_input" type="search" placeholder="Поиск товара" />
         <img :src="search" alt="search" />
@@ -129,7 +129,7 @@ export default {
     </ul>
       </div>
         <button class="close" @click="openPopup= false">
-          x
+          х
         </button>
       </div>
     </Teleport>
@@ -150,7 +150,7 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 10px;
+  /* padding: 10px; */
 }
 .wrapper,
 .contacts_wrapper,
@@ -164,9 +164,19 @@ header {
 }
 .popup_wrapper{
   position: absolute;
-  left:10%;
-  top:30%;
+  left:21%;
+  top:37%;
   gap: 0;
+  z-index: 100;
+}
+.close{
+padding: 5px 8px;
+position: absolute;
+left: 44.7%;
+top: 37%;
+background: transparent;
+color: gray;
+z-index: 100;
 }
 .popup_item{
   font-size: 15px;
@@ -186,14 +196,15 @@ header {
 #popup_list_two{
   background: white;
   text-align: start; 
-  max-height: 370px;
+  max-height: 390px;
+  padding: 0 20px;
 }
 
 .wrapper {
   justify-content: space-between;
 }
 .logo-header {
-  width: 50%;
+  width: 30%;
   height: 83px;
 }
 img {
@@ -206,7 +217,7 @@ img {
 .search_input {
   background: var(--color-general);
   padding: 20px;
-  width: 80%;
+  width: 71%;
 }
 .popup_list{
   display: flex;
@@ -218,18 +229,11 @@ img {
   padding: 20px;
   font-size: 10px;
   margin: 0;
-  min-height: 300px;
+  min-height: 390px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }
-.close{
-padding: 5px 8px;
-position: absolute;
-left: 49%;
-top: 30%;
-background: transparent;
-color: gray;
-}
+
 ul {
   display: flex;
   flex-direction: row;
@@ -275,5 +279,8 @@ button:active,
 }
 .show_more {
   font-size: 14px;
+}
+.title{
+  font-size: 27px;
 }
 </style>

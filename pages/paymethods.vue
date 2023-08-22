@@ -8,7 +8,9 @@ export default{
     data(){
         return{
             methods:[method1,method2,method3,method4],
-            adresses:adresses
+            adresses:adresses,
+            title:'Доставки и оплата',
+            text:'Способы доставки и оплаты',
         }
     }
 }
@@ -16,17 +18,27 @@ export default{
 
 <template>
     <TheHeader/>
+    <div>
+        <p>{{ title }}</p>
+        <span>{{ text }}</span>
     <ul>
         <li v-for="(item, index) in methods" :key="index">
         <img :src="item" alt="method"/>
         </li>
-        <img class="adresses" :src="adresses" alt="adresses"/>
+       
     </ul>
-
+    <img class="adresses" :src="adresses" alt="adresses"/>
+</div>
     <TheFooter/>
 </template>
 
 <style scoped>
+div{
+    display: flex;
+flex-direction: column;
+align-items: center;
+padding: 30px;
+}
 ul{
     display: flex;
     flex-direction: row;
@@ -35,12 +47,19 @@ ul{
     flex-wrap: wrap;
     padding: 30px;
     width: 70%;
-    /* margin: 0 auto; */
-    /* margin: 0 auto; */
+    align-items: center;
+    margin: 0 auto;
 }
 img{
 width: 300px;
 height: 300px;
+}
+p{
+    font-size: 27px;
+    padding-bottom: 47px;
+}
+span{
+    font-size: 21px;
 }
 .adresses{
     width: 300px;

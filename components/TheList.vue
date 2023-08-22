@@ -10,11 +10,17 @@ export default {
     return {
       title: this.titleProps,
       text: `Показать все ${this.titleProps?.toLowerCase()}`,
+      router: useRouter()
     };
   },
   methods: {
     navigateTo(link: any) {
-      this.$router.push(link);
+      if(link === 'Новинки'){
+        this.$router.push('/new');
+      } else if(link === 'Акции'){
+        this.$router.push('/sale');
+      }
+    
     },
   },
   components: { TheCard },
@@ -29,7 +35,7 @@ export default {
         <TheCard :card="item" />
       </li>
     </ul>
-    <p class="show_more">{{ text }}</p>
+    <p v-if="(router.currentRoute.path !== '/new') && !(router.currentRoute.path === '/sale')" class="show_more" @click="navigateTo(title)">{{ text }}</p>
   </div>
 </template>
 

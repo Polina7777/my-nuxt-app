@@ -102,8 +102,6 @@ export const getAllProductsFromBasket = async()=>{
 
 
 export const addProductToBasket = async (id: string) => {
-    // const recipeId = String(recipe.id);
-    console.log('aknskncs')
     try {
       const response = await fetch(`${url_ngrok}api/products/${id}`, {
         headers: {
@@ -121,8 +119,6 @@ export const addProductToBasket = async (id: string) => {
     }
   };
   export const deleteProductFromBasket = async (id: string) => {
-    // const recipeId = String(recipe.id);
-    console.log('aknskncs')
     try {
       const response = await fetch(`${url_ngrok}api/products/${id}`, {
         headers: {

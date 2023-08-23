@@ -56,6 +56,16 @@
     },
     "basket": {
       "type": "boolean"
+    },
+    "basket_count": {
+      "type": "integer",
+      "default": 1
+    },
+    "applying": {
+      "type": "string"
+    },
+    "composition": {
+      "type": "string"
     }
   }
 }

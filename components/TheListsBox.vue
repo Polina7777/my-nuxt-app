@@ -1,6 +1,9 @@
 <script lang="ts">
 import { productsApi } from "../api-requests/products-api";
 export default {
+  props:{
+    searchString:String,
+  },
   created() {
     this.getSaleProducts();
     this.getNewProducts();
@@ -31,6 +34,7 @@ export default {
 </script>
 
 <template>
+  {{ searchString }}
   <div>
     <TheList titleProps="Акции" :itemList="productsListSale" />
     <TheList titleProps="Новинки" :itemList="productsListNew" />

@@ -22,7 +22,5 @@ methods:{
 </script>
 
 <template>
-    {{ 'HELLO, I am PRODUCT!' }}
-    <!-- {{ info }} -->
-    <TheCard v-if="info" :card="info"/>
+    <TheBigCard v-if="info" :card="info"/>
 </template>

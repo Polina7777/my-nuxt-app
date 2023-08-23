@@ -8,6 +8,9 @@ import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 
 export default {
+  props: {
+    value: String,
+  },
   data() {
     return {
       plus: plus,
@@ -18,10 +21,34 @@ export default {
       whatsapp: whatsapp,
       vk: vk,
       phoneNumber: "+7 (999) 131-32-49",
-      router:useRoute(),
-      openPopup:false,
-      popUpList1:['Уход за лицом','Волосы','Макияж','Тело','Наборы',"Миниатюры"],
-      popUpList2:['Демакияж','Очищение','Отшелушивание','Тонизирование','Сыворотки',"Кремы",'Маски','Тканевые маски','Для кожи вокруг глаз','Патчи','Для губ','Точечные средства','SPF-защита от солнца','Гаджеты и аксессуары для лица'],
+      router: useRoute(),
+      openPopup: false,
+      internalValue: this.value,
+      // searchString:ref(''),
+      popUpList1: [
+        "Уход за лицом",
+        "Волосы",
+        "Макияж",
+        "Тело",
+        "Наборы",
+        "Миниатюры",
+      ],
+      popUpList2: [
+        "Демакияж",
+        "Очищение",
+        "Отшелушивание",
+        "Тонизирование",
+        "Сыворотки",
+        "Кремы",
+        "Маски",
+        "Тканевые маски",
+        "Для кожи вокруг глаз",
+        "Патчи",
+        "Для губ",
+        "Точечные средства",
+        "SPF-защита от солнца",
+        "Гаджеты и аксессуары для лица",
+      ],
       navScheme1: [
         {
           title: "Доставка и оплата",
@@ -61,11 +88,23 @@ export default {
       ],
     };
   },
+  // watch: {
+  //   internalValue(newValue) {
+  //     this.$emit("input", newValue);
+  //   },
+  // },
   methods: {
     navigateTo(link: any) {
       console.log(link);
       this.$router.push(link);
     },
+    updateValue(event) {
+      // this.internalValue = event.target.value;
+    //  this.$emit("input", this.internalValue);
+
+    this.$emit("input", event.target.value);
+    },
+  
   },
 };
 </script>
@@ -78,9 +117,19 @@ export default {
       </li>
     </ul>
     <div class="wrapper">
-      <img class="logo-header" :src="logo" alt="header-logo" @click="navigateTo('/')" />
+      <img
+        class="logo-header"
+        :src="logo"
+        alt="header-logo"
+        @click="navigateTo('/')"
+      />
       <div class="input_wrapper">
-        <input class="search_input" type="search" placeholder="Поиск товара" />
+        <input
+          class="search_input"
+         placeholder="Поиск товара"
+         :value="value"
+      
+        />
         <img :src="search" alt="search" />
         <nuxt-link to="basket">
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
@@ -101,7 +150,11 @@ export default {
       >
         <button
           :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
-          @click="item.title === 'Каталог' ? openPopup = true : navigateTo(item.navigate)"
+          @click="
+            item.title === 'Каталог'
+              ? (openPopup = true)
+              : navigateTo(item.navigate)
+          "
         >
           {{ item.title }}
         </button>
@@ -116,24 +169,21 @@ export default {
 
     <Teleport to="body">
       <div v-if="openPopup" class="modal">
-      <div class="popup_wrapper">
-        <ul class="popup_list" id="popup_list_one">
-      <li v-for="(item, index) in popUpList1" :key="index">
-        <p class="popup_item" id="popup_list_one_item">{{item}}</p>
-      </li>
-    </ul>
-    <ul class="popup_list"  id="popup_list_two">
-      <li v-for="(item, index) in popUpList2" :key="index">
-        <p class="popup_item">{{item}}</p>
-      </li>
-    </ul>
-      </div>
-        <button class="close" @click="openPopup= false">
-          х
-        </button>
+        <div class="popup_wrapper">
+          <ul class="popup_list" id="popup_list_one">
+            <li v-for="(item, index) in popUpList1" :key="index">
+              <p class="popup_item" id="popup_list_one_item">{{ item }}</p>
+            </li>
+          </ul>
+          <ul class="popup_list" id="popup_list_two">
+            <li v-for="(item, index) in popUpList2" :key="index">
+              <p class="popup_item">{{ item }}</p>
+            </li>
+          </ul>
+        </div>
+        <button class="close" @click="openPopup = false">х</button>
       </div>
     </Teleport>
-
   </header>
 </template>
 
@@ -150,52 +200,51 @@ header {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* padding: 10px; */
 }
 .wrapper,
 .contacts_wrapper,
 .input_wrapper,
-.popup_wrapper{
+.popup_wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 20px;
 }
-.popup_wrapper{
+.popup_wrapper {
   position: absolute;
-  left:21%;
-  top:37%;
+  left: 21%;
+  top: 37%;
   gap: 0;
   z-index: 100;
 }
-.close{
-padding: 5px 8px;
-position: absolute;
-left: 44.7%;
-top: 37%;
-background: transparent;
-color: gray;
-z-index: 100;
+.close {
+  padding: 5px 8px;
+  position: absolute;
+  left: 44.7%;
+  top: 37%;
+  background: transparent;
+  color: gray;
+  z-index: 100;
 }
-.popup_item{
+.popup_item {
   font-size: 15px;
   margin: 0;
 }
 
-#popup_list_one{
-   font-size: 20px;
-   min-height: 390px;
-   gap:20px;
+#popup_list_one {
+  font-size: 20px;
+  min-height: 390px;
+  gap: 20px;
 }
 
-#popup_list_one_item{
-   font-size: 20px;
+#popup_list_one_item {
+  font-size: 20px;
 }
 
-#popup_list_two{
+#popup_list_two {
   background: white;
-  text-align: start; 
+  text-align: start;
   max-height: 390px;
   padding: 0 20px;
 }
@@ -215,16 +264,18 @@ img {
   width: 50%;
 }
 .search_input {
-  background: var(--color-general);
-  padding: 20px;
+  background:#efe1e1;
+  padding: 7px;
+  border-radius: 10px;
+  border-color: transparent;
   width: 71%;
 }
-.popup_list{
+.popup_list {
   display: flex;
   flex-direction: column;
   background: #efe1e1;
   text-align: start;
-  gap:10px;
+  gap: 10px;
   font-size: 15px;
   padding: 20px;
   font-size: 10px;
@@ -280,7 +331,7 @@ button:active,
 .show_more {
   font-size: 14px;
 }
-.title{
+.title {
   font-size: 27px;
 }
 </style>

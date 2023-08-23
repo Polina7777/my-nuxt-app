@@ -13,6 +13,13 @@ export const getAllProductsWithCollection = async()=>{
     const products = data.data
     return products;
 }
+export const filterProductsBySearchString = async(string)=>{
+  console.log(string)
+  const response = await fetch(`${url_ngrok}api/products?filters[description_small]=${string}`,{method:'GET'});
+  const data = await response.json();
+  const products = data.data
+  return products;
+}
 
 export const getProductsById = async(id:string)=>{
     const response = await fetch(`${url_ngrok}api/products/${id}`,{method:'GET'});
@@ -135,5 +142,22 @@ export const addProductToBasket = async (id: string) => {
       console.log(error)
     }
   };
+  export const changeProductCountInBasket = async (id: string,count:any) => {
+    try {
+      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          data: {
+            basket_count:count,
+          },
+        }),
+      });
+    } catch (error) {
+      console.log(error)
+    }
+  };
   
-export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket}
+export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket, changeProductCountInBasket,filterProductsBySearchString}

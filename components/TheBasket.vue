@@ -19,21 +19,22 @@ export default {
     async getBasketProducts() {
       const products = await productsApi.getAllProductsFromBasket();
       const arr = products.map((item) => {
-        return { product: item, count: 1 };
+        // return { product: item, count: 1 };
+        return { product: item, count: item.attributes.basket_count };
       });
       this.productsFromBasketList = arr;
       this.computeAmount();
     },
-    increaseQuantity(item) {
+   async increaseQuantity(item) {
       item.count++;
+      const changeCount = await productsApi.changeProductCountInBasket(item.product.id, item.count)
       this.computeAmount();
-      // this.computeAmount(count);
     },
-    decreaseQuantity(item) {
+  async  decreaseQuantity(item) {
       if (item.count > 1) {
         item.count--;
+        const changeCount = await productsApi.changeProductCountInBasket(item.product.id, item.count)
         this.computeAmount();
-        // this.computeAmount(count);
       }
     },
     computeAmount() {
@@ -56,10 +57,8 @@ export default {
         return `${priceItem} p.`
     },
     async deleteFromBacket(id) {
-      console.log("delete from backet");
       const deleteProduct = await productsApi.deleteProductFromBasket(id);
       this.getBasketProducts();
-      // this.basket=false;
     },
 
   },
@@ -78,12 +77,14 @@ export default {
       <tr v-for="(item, index) in productsFromBasketList" :key="index">
         <!-- <div class="wrapper"> -->
         <td>
+          <NuxtLink :to="`/${item.product.id}`">
           <div class="product_description">
             <img :src="item.product.attributes.image" />
             <p class="description">
               {{ item.product.attributes.description_small }}
             </p>
           </div>
+        </NuxtLink>
         </td>
         <td class="button_td">
           <div class="count_buttons">

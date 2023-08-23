@@ -49,6 +49,12 @@ export default {
         }, 0);
       });
     },
+    computePrice(item){
+      const priceString = item.product.attributes.price;
+        const priceDigits = priceString.replace(/\D/g, "");
+        const priceItem = priceDigits * item.count;
+        return `${priceItem} p.`
+    },
     async deleteFromBacket(id) {
       console.log("delete from backet");
       const deleteProduct = await productsApi.deleteProductFromBasket(id);
@@ -88,7 +94,7 @@ export default {
           <p @click="deleteFromBacket(item.product.id)">Удалить товар</p>
         </td>
         <td>
-          <p>{{ item.product.attributes.price }}</p>
+          <p>{{computePrice(item) }}</p>
         </td>
 
         <!-- </div> -->

@@ -31,6 +31,10 @@ export default {
         component: 'pages/sale.vue'
       },
       {
+        path: '/questions',
+        component: 'pages/questions.vue'
+      },
+      {
         // name:'/product',
         path: '/:cartId',
         component: 'pages/product.vue'

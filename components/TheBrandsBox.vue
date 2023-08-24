@@ -44,7 +44,6 @@ div{
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* align-items: center; */
 }
 ul{
   display: flex;
@@ -60,6 +59,6 @@ p{
 }
 .show_more {
   text-align: end;
-  padding: 0 20px;
+  padding: 20px;
 }
 </style>

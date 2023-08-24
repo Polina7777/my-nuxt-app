@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       title: this.titleProps,
-      text: `Показать все ${this.titleProps?.toLowerCase()}`,
+      text: this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null,
       router: useRouter()
     };
   },
@@ -49,7 +49,7 @@ export default {
 }
 .show_more{
     text-align: end;
-    padding: 0 20px;
+    padding: 20px;
 }
 ul {
   display: flex;

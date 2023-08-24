@@ -56,7 +56,7 @@ export default {
         },
         {
           title: "Вопрос-ответ",
-          navigate: "/",
+          navigate: "/questions",
         },
         {
           title: "Контакты",
@@ -130,7 +130,7 @@ export default {
          :value="value"
       
         />
-        <img :src="search" alt="search" />
+        <img class="search_img" :src="search" alt="search" />
         <nuxt-link to="basket">
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
         </nuxt-link>
@@ -177,7 +177,7 @@ export default {
           </ul>
           <ul class="popup_list" id="popup_list_two">
             <li v-for="(item, index) in popUpList2" :key="index">
-              <p class="popup_item">{{ item }}</p>
+              <p class="popup_item"  id="popup_list_two_item" >{{ item }}</p>
             </li>
           </ul>
         </div>
@@ -213,19 +213,26 @@ header {
 }
 .popup_wrapper {
   position: absolute;
-  left: 21%;
-  top: 37%;
+  left: 11%;
+  top: 28%;
   gap: 0;
   z-index: 100;
+  border: 1px solid rgb(191, 188, 188);
+  border-top-right-radius:10px ;
+  border-bottom-right-radius:10px ;
 }
 .close {
   padding: 5px 8px;
   position: absolute;
-  left: 44.7%;
-  top: 37%;
+  left: 40.7%;
+  top: 28%;
   background: transparent;
   color: gray;
   z-index: 100;
+}
+.search_img{
+  position: absolute;
+  left: 65%;
 }
 .popup_item {
   font-size: 15px;
@@ -234,18 +241,21 @@ header {
 
 #popup_list_one {
   font-size: 20px;
-  min-height: 390px;
+  min-height: 350px;
   gap: 20px;
 }
 
 #popup_list_one_item {
   font-size: 20px;
 }
+#popup_list_two_item {
+  font-size: 11px;
+}
 
 #popup_list_two {
   background: white;
   text-align: start;
-  max-height: 390px;
+  max-height: 350px;
   padding: 0 20px;
 }
 
@@ -269,6 +279,9 @@ img {
   border-radius: 10px;
   border-color: transparent;
   width: 71%;
+  min-width: 250px;
+  position: relative;
+
 }
 .popup_list {
   display: flex;
@@ -278,9 +291,8 @@ img {
   gap: 10px;
   font-size: 15px;
   padding: 20px;
-  font-size: 10px;
   margin: 0;
-  min-height: 390px;
+  min-height: 350px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
 }

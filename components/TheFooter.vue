@@ -20,7 +20,7 @@ export default {
         },
         {
           title: "Вопрос-ответ",
-          navigate: "/",
+          navigate: "/questions",
         },
         {
           title: "Контакты",

@@ -9,7 +9,7 @@ export default{
 },
 methods:{
  async filterListBySearchString(){
-   const list = await productsApi.filterListBySearchString(this.searchString);
+   const list = await productsApi.filterProductsBySearchString(this.searchString)
    console.log(list)
    this.filteredList = list;
   }
@@ -17,19 +17,17 @@ methods:{
 watch: {
     searchString: async function filter(){
       console.log(this.searchString)
-     this.filterListBySearchString
+     this.filterListBySearchString()
     }
   },
 }
 </script>
 <template>
     <div>
-      {{ fil }}
    <TheHeader :value="searchString" @input="searchString = $event.target.value" />
    <div class="gray"></div>
   <TheListsBox v-if="!searchString" :searchString="searchString"/>
-  {{ searchString }}
-  <TheList v-if="searchString" titleProps=" " :itemList="filteredList"/>
+  <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
    <TheBrandsBox/>
    <TheAboutBox/>
    <TheFooter/>
@@ -38,7 +36,7 @@ watch: {
   <style>
   .gray{
     background: rgb(206, 202, 202);
-    height: 410px;
+    height: 370px;
     width: 100%;
   }
 </style>

@@ -15,7 +15,7 @@ export const getAllProductsWithCollection = async()=>{
 }
 export const filterProductsBySearchString = async(string)=>{
   console.log(string)
-  const response = await fetch(`${url_ngrok}api/products?filters[description_small]=${string}`,{method:'GET'});
+  const response = await fetch(`${url_ngrok}api/products?filters[description_small][$containsi]=${string}`,{method:'GET'});
   const data = await response.json();
   const products = data.data
   return products;

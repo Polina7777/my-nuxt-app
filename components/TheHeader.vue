@@ -24,7 +24,6 @@ export default {
       router: useRoute(),
       openPopup: false,
       internalValue: this.value,
-      // searchString:ref(''),
       popUpList1: [
         "Уход за лицом",
         "Волосы",
@@ -82,7 +81,7 @@ export default {
         },
         {
           title: "Подарочные сертификаты",
-          navigate: "/",
+          navigate: "/giftcard",
           image: null,
         },
       ],
@@ -273,7 +272,7 @@ img {
 .input_wrapper {
   width: 50%;
 }
-.search_input {
+.search_input, input{
   background:#efe1e1;
   padding: 7px;
   border-radius: 10px;
@@ -301,6 +300,7 @@ ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
+  flex-wrap: wrap;
   list-style: none;
   text-decoration: none;
   gap: 20px;
@@ -345,5 +345,11 @@ button:active,
 }
 .title {
   font-size: 27px;
+}
+@media (max-width: 800px) {
+  .wrapper{
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 </style>

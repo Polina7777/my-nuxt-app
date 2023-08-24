@@ -35,6 +35,10 @@ export default {
         component: 'pages/questions.vue'
       },
       {
+        path: '/giftcard',
+        component: 'pages/giftcard.vue'
+      },
+      {
         // name:'/product',
         path: '/:cartId',
         component: 'pages/product.vue'

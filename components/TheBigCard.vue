@@ -46,14 +46,10 @@ export default {
     },
     increaseQuantity(item) {
       item.count++;
-      //   this.computeAmount();
-      // this.computeAmount(count);
     },
     decreaseQuantity(item) {
       if (item.count > 1) {
         item.count--;
-        // this.computeAmount();
-        // this.computeAmount(count);
       }
     },
     showDescription(title) {

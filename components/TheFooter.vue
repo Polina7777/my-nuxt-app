@@ -46,7 +46,7 @@ export default {
         },
         {
           title: "Подарочные сертификаты",
-          navigate: "/",
+          navigate: "/giftcard",
           image: null,
         },
       ],

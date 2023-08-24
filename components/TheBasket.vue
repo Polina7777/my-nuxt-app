@@ -1,5 +1,7 @@
 <script lang="ts">
+import { giftcardApi } from "../api-requests/giftcard-api";
 import { productsApi } from "../api-requests/products-api";
+import giftcard from '../static/images/giftcard.svg';
 export default {
   created() {
     this.getBasketProducts();
@@ -8,6 +10,8 @@ export default {
   data() {
     return {
       productsFromBasketList: [],
+      giftcardsFromBasketList:[],
+      giftcard:giftcard,
       text: "Стоимость",
       string1: "Товары .................................. ",
       string2: "Скидка .................................. ",
@@ -22,7 +26,15 @@ export default {
         // return { product: item, count: 1 };
         return { product: item, count: item.attributes.basket_count };
       });
+      const giftcards = await giftcardApi.getAllGiftCardFromBasket();
+      const arr2 = giftcards.map((item) => {
+        console.log(item)
+        // return { product: item, count: 1 };
+        return { product: item, count: item.attributes.basket_count };
+      });
+
       this.productsFromBasketList = arr;
+      this.giftcardsFromBasketList = arr2;
       this.computeAmount();
     },
    async increaseQuantity(item) {
@@ -39,7 +51,23 @@ export default {
     },
     computeAmount() {
       const prices = [];
-      this.productsFromBasketList.map((item) => {
+      const bigArr = [];
+      bigArr.push(...this.productsFromBasketList);
+      bigArr.push(...this.giftcardsFromBasketList)
+
+    //   this.productsFromBasketList.map((item) => {
+    //     const priceString = item.product.attributes.price;
+    //     const priceDigits = priceString.replace(/\D/g, "");
+    //     const priceItem = priceDigits * item.count;
+    //     prices.push(priceItem);
+    //     console.log(prices);
+    //  this.amount = prices.reduce((accumulator, currentValue) => {
+    //       return accumulator + currentValue;
+    //     }, 0);
+    //   });
+
+   bigArr.map((item) => {
+    console.log(item)
         const priceString = item.product.attributes.price;
         const priceDigits = priceString.replace(/\D/g, "");
         const priceItem = priceDigits * item.count;
@@ -60,6 +88,11 @@ export default {
       const deleteProduct = await productsApi.deleteProductFromBasket(id);
       this.getBasketProducts();
     },
+    async deleteGiftCardFromBacket(id) {
+      const deleteGiftCard = await giftcardApi.deleteGiftCardFromBasket(id);
+      this.getBasketProducts();
+    },
+
 
   },
 };
@@ -99,6 +132,27 @@ export default {
         </td>
 
         <!-- </div> -->
+      </tr>
+      <tr v-for="(item, index) in giftcardsFromBasketList" :key="index">
+        <td>
+          <div class="product_description">
+            <img :src="giftcard" />
+            <p class="description">
+              {{ item.product.attributes.name }}
+            </p>
+          </div>
+         </td>
+         <td class="button_td">
+          <div class="count_buttons">
+            <button @click="decreaseQuantity(item)">-</button>
+            {{ item.count }}
+            <button @click="increaseQuantity(item)">+</button>
+          </div>
+          <p @click="deleteGiftCardFromBacket(item.product.id)">Удалить товар</p>
+        </td>
+        <td>
+          <p>{{computePrice(item) }}</p>
+        </td>
       </tr>
     </tbody>
   </table>

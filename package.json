@@ -12,5 +12,8 @@
     "@nuxt/devtools": "latest",
     "@types/node": "^18.16.1",
     "nuxt": "^3.6.5"
+  },
+  "dependencies": {
+    "vee-validate": "^4.11.3"
   }
 }

@@ -10,6 +10,8 @@ import plus from "../static/images/plus.svg";
 export default {
   props: {
     value: String,
+    // filterPopUp:Function,
+    popUpValue:Object,
   },
   data() {
     return {
@@ -24,29 +26,30 @@ export default {
       router: useRoute(),
       openPopup: false,
       internalValue: this.value,
+      internalPopUpValue:this.popUpValue,
       popUpList1: [
-        "Уход за лицом",
-        "Волосы",
-        "Макияж",
-        "Тело",
-        "Наборы",
-        "Миниатюры",
+        {title:"Уход за лицом",filter:'forFace'},
+        {title:"Волосы",filter:'forHair'},
+        {title:"Макияж",filter:'forMakeUp'},
+        {title:"Тело",filter:'forBody'},
+       {title: "Наборы",filter:'sets'},
+        {title:"Миниатюры",filter:'mini'},
       ],
       popUpList2: [
-        "Демакияж",
-        "Очищение",
-        "Отшелушивание",
-        "Тонизирование",
-        "Сыворотки",
-        "Кремы",
-        "Маски",
-        "Тканевые маски",
-        "Для кожи вокруг глаз",
-        "Патчи",
-        "Для губ",
-        "Точечные средства",
-        "SPF-защита от солнца",
-        "Гаджеты и аксессуары для лица",
+        {title:"Демакияж",filter:'makeUpRemoval'},
+        {title:"Очищение",filter:'cleansing'},
+        {title:"Отшелушивание",filter:'exfoliation'},
+        {title:"Тонизирование",filter:'toning'},
+        {title:"Сыворотки",filter:'serum'},
+        {title:"Кремы",filter:'cream'},
+        {title:"Маски",filter:'mask'},
+        {title:"Тканевые маски",filter:'sheetMask'},
+        {title:"Для кожи вокруг глаз",filter:'eyesCream'},
+        {title:"Патчи",filter:'patches'},
+        {title:"Для губ",filter:'forLips'},
+       {title:"Точечные средства",filter:'pointMeans'},
+        {title:"SPF-защита от солнца",filter:'spf'},
+        {title:"Гаджеты и аксессуары для лица",filter:'accessories'},
       ],
       navScheme1: [
         {
@@ -94,15 +97,21 @@ export default {
   // },
   methods: {
     navigateTo(link: any) {
-      console.log(link);
       this.$router.push(link);
     },
     updateValue(event) {
       // this.internalValue = event.target.value;
     //  this.$emit("input", this.internalValue);
-
     this.$emit("input", event.target.value);
     },
+    updatePopUpValue(data) {
+      this.internalPopUpValue = data;
+    this.$emit("click", this.internalPopUpValue);
+    },
+   popUpOpen(){
+    this.openPopup = true;
+    navigateTo('/');
+    }
   
   },
 };
@@ -151,7 +160,7 @@ export default {
           :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
           @click="
             item.title === 'Каталог'
-              ? (openPopup = true)
+              ? popUpOpen()
               : navigateTo(item.navigate)
           "
         >
@@ -171,12 +180,12 @@ export default {
         <div class="popup_wrapper">
           <ul class="popup_list" id="popup_list_one">
             <li v-for="(item, index) in popUpList1" :key="index">
-              <p class="popup_item" id="popup_list_one_item">{{ item }}</p>
+              <p class="popup_item" id="popup_list_one_item" @click = updatePopUpValue(item)>{{ item.title }}</p>
             </li>
           </ul>
           <ul class="popup_list" id="popup_list_two">
             <li v-for="(item, index) in popUpList2" :key="index">
-              <p class="popup_item"  id="popup_list_two_item" >{{ item }}</p>
+              <p class="popup_item"  id="popup_list_two_item" @click = updatePopUpValue(item) >{{ item.title }}</p>
             </li>
           </ul>
         </div>

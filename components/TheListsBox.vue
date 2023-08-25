@@ -34,7 +34,6 @@ export default {
 </script>
 
 <template>
-  {{ searchString }}
   <div>
     <TheList titleProps="Акции" :itemList="productsListSale" />
     <TheList titleProps="Новинки" :itemList="productsListNew" />

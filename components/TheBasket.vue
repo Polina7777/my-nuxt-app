@@ -23,13 +23,10 @@ export default {
     async getBasketProducts() {
       const products = await productsApi.getAllProductsFromBasket();
       const arr = products.map((item) => {
-        // return { product: item, count: 1 };
         return { product: item, count: item.attributes.basket_count };
       });
       const giftcards = await giftcardApi.getAllGiftCardFromBasket();
       const arr2 = giftcards.map((item) => {
-        console.log(item)
-        // return { product: item, count: 1 };
         return { product: item, count: item.attributes.basket_count };
       });
 
@@ -67,12 +64,10 @@ export default {
     //   });
 
    bigArr.map((item) => {
-    console.log(item)
         const priceString = item.product.attributes.price;
         const priceDigits = priceString.replace(/\D/g, "");
         const priceItem = priceDigits * item.count;
         prices.push(priceItem);
-        console.log(prices);
      this.amount = prices.reduce((accumulator, currentValue) => {
           return accumulator + currentValue;
         }, 0);

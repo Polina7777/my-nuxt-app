@@ -66,6 +66,63 @@
     },
     "composition": {
       "type": "string"
+    },
+    "forHair": {
+      "type": "boolean"
+    },
+    "forFace": {
+      "type": "boolean"
+    },
+    "forMakeUp": {
+      "type": "boolean"
+    },
+    "sets": {
+      "type": "boolean"
+    },
+    "mini": {
+      "type": "boolean"
+    },
+    "makeUpRemoval": {
+      "type": "boolean"
+    },
+    "cleansing": {
+      "type": "boolean"
+    },
+    "exfoliation": {
+      "type": "boolean"
+    },
+    "toning": {
+      "type": "boolean"
+    },
+    "serum": {
+      "type": "boolean"
+    },
+    "cream": {
+      "type": "boolean"
+    },
+    "mask": {
+      "type": "boolean"
+    },
+    "sheetMask": {
+      "type": "boolean"
+    },
+    "eyesCream": {
+      "type": "boolean"
+    },
+    "patches": {
+      "type": "boolean"
+    },
+    "forLips": {
+      "type": "boolean"
+    },
+    "pointMeans": {
+      "type": "boolean"
+    },
+    "spf": {
+      "type": "boolean"
+    },
+    "accessories": {
+      "type": "boolean"
     }
   }
 }

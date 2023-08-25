@@ -4,30 +4,39 @@ export default{
   data(){
   return{
     searchString:'',
+    popUpFilter:{title:'',filter:''},
     filteredList:[],
+    popUpFilterTitle:'',
+    router: useRoute(),
   }
 },
 methods:{
  async filterListBySearchString(){
    const list = await productsApi.filterProductsBySearchString(this.searchString)
-   console.log(list)
+   this.filteredList = list;
+  },
+  async filterListByPopUp(){
+    const list = await productsApi.filterProductsByPopUpFilter(this.popUpFilter.filter);
    this.filteredList = list;
   }
 },
 watch: {
     searchString: async function filter(){
-      console.log(this.searchString)
      this.filterListBySearchString()
+    }, 
+   popUpFilter: async function filterPopUp(){
+     this.filterListByPopUp()
     }
   },
 }
 </script>
 <template>
     <div>
-   <TheHeader :value="searchString" @input="searchString = $event.target.value" />
+   <TheHeader :value="searchString" @input="searchString = $event.target.value" :popUpValue="popUpFilter" @click="(data)=>popUpFilter=data"/>
    <div class="gray"></div>
-  <TheListsBox v-if="!searchString" :searchString="searchString"/>
+  <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
+  <TheList v-if="popUpFilter.title" :title-props="popUpFilter.title" :itemList="filteredList"/>
    <TheBrandsBox/>
    <TheAboutBox/>
    <TheFooter/>

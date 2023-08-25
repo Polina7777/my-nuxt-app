@@ -8,7 +8,6 @@ export default {
   },
   data() {
     return {
-      title: this.titleProps,
       text: this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null,
       router: useRouter()
     };
@@ -29,13 +28,14 @@ export default {
 
 <template>
   <div class="list_wrapper">
-    <p class="title">{{ title }}</p>
-    <ul>
+    <p class="title">{{ titleProps }}</p>
+    <ul v-if="itemList?.length">
       <li v-for="(item, index) in itemList" :key="index">
         <TheCard :card="item" />
       </li>
     </ul>
-    <p v-if="(router.currentRoute.path !== '/new') && !(router.currentRoute.path === '/sale')" class="show_more" @click="navigateTo(title)">{{ text }}</p>
+    <p v-if="(router.currentRoute.path !== '/new') && !(router.currentRoute.path === '/sale') && itemList?.length" class="show_more" @click="navigateTo(title)">{{ text }}</p>
+    <p v-if="!itemList?.length" class="no-result" > No result!</p>
   </div>
 </template>
 
@@ -43,6 +43,7 @@ export default {
 .list_wrapper {
   display: flex;
   flex-direction: column;
+  min-height: 400px;
 }
 .title{
     text-align: center;
@@ -62,5 +63,11 @@ li{
     border: 1.7px solid #DADEDF;
     border-radius: 10px;
 
+}
+.no-result{
+  text-align: center;
+font-size: 27px;
+color: #B49696;
+margin: auto;
 }
 </style>

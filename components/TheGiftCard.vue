@@ -2,9 +2,6 @@
 import { giftcardApi } from "../api-requests/giftcard-api";
 import giftcard from "../static/images/giftcard.svg";
 export default {
-  //   created() {
-  //     this.getSaleProducts();
-  //   },
   data() {
     return {
       giftcard: giftcard,

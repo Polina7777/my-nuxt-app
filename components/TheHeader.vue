@@ -105,6 +105,7 @@ export default {
     this.$emit("input", event.target.value);
     },
     updatePopUpValue(data) {
+      this.openPopup =false;
       this.internalPopUpValue = data;
     this.$emit("click", this.internalPopUpValue);
     },
@@ -174,7 +175,7 @@ export default {
         />
       </li>
     </ul>
-
+    <div v-if="openPopup" class="gray"></div>
     <Teleport to="body">
       <div v-if="openPopup" class="modal">
         <div class="popup_wrapper">
@@ -315,6 +316,9 @@ ul {
   gap: 20px;
   align-items: center;
   padding: 0;
+}
+li:hover, a:hover{
+  color: #b49696;
 }
 a {
   text-decoration: none;

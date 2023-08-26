@@ -38,6 +38,10 @@ export default {
         path: '/giftcard',
         component: 'pages/giftcard.vue'
       },
+      { 
+        path: '/ordering',
+        component: 'pages/ordering.vue'
+      },
       {
         // name:'/product',
         path: '/:cartId',

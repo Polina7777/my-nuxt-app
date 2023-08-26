@@ -21,6 +21,7 @@ export const getGiftCardById = async(id:string)=>{
 }
 
 export const createNewGiftCard = async (info:any) => {
+  const newPrice = `${info.count * 500 }p.`
     try {
       const response = await fetch(`${url_ngrok}api/giftcards/`, {
         headers: {
@@ -31,7 +32,7 @@ export const createNewGiftCard = async (info:any) => {
           data: {
            basket_count:info.count,
            basket:true,
-           price:'500p.',
+           price:newPrice,
            name:info.name.name,
            for:info.name.type,
            adress:info.adress.adress,

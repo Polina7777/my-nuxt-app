@@ -87,6 +87,9 @@ export default {
       const deleteGiftCard = await giftcardApi.deleteGiftCardFromBasket(id);
       this.getBasketProducts();
     },
+    navigateTo(link: any) {
+      this.$router.push(link);
+    },
 
 
   },
@@ -151,14 +154,8 @@ export default {
       </tr>
     </tbody>
   </table>
-  <div class="amount_box">
-    <p class="title">{{ text }}</p>
-    <div>
-      <p>{{`${string1} ${amount} p.`}}</p>
-      <p>{{`${string2}    0 p.`}}</p>
-      <p>{{ `${string3} ${amount} p.` }}</p>
-    </div>
-  </div>
+  <ThePriceBox :amount="amount"/>
+  <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">Оформить заказ</button>
 </template>
 
 <style scoped>
@@ -184,7 +181,7 @@ th {
   padding: 41px;
   text-align: center;
 }
-.count_buttons {
+.count_buttons{
   display: flex;
   flex-direction: row;
   background: #efe1e1;
@@ -199,6 +196,13 @@ th {
   gap: 20px;
   align-items: center;
   padding: 50px 0;
+}
+.ordering{
+  background: #efe1e1;
+  margin: 20px;
+}
+.ordering:hover{
+  background: #B49696;
 }
 .product_description {
   display: flex;

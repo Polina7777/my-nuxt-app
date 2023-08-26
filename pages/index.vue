@@ -33,7 +33,6 @@ watch: {
 <template>
     <div>
    <TheHeader :value="searchString" @input="searchString = $event.target.value" :popUpValue="popUpFilter" @click="(data)=>popUpFilter=data"/>
-   <div class="gray"></div>
   <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="popUpFilter.title" :itemList="filteredList"/>

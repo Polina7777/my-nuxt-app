@@ -14,7 +14,7 @@ export const getOrderById = async(id:string)=>{
     return order;
 }
 
-export const createNewOrder = async (orderData:any) => {
+export const createNewOrder = async (orderData:any,price:any) => {
     try {
       const response = await fetch(`${url_ngrok}api/orders/`, {
         headers: {
@@ -27,9 +27,9 @@ export const createNewOrder = async (orderData:any) => {
             phone:orderData.phone,
             email:orderData.email,
             comment:orderData.comment,
-            delivery:orderData.delivery.type,
-            pay:orderData.pay.type,
-            price:orderData.price
+            delivery:orderData.delivery,
+            pay:orderData.pay,
+            price:String(price)
           },
         }),
       });

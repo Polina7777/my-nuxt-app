@@ -1,3 +1,3 @@
 <template>
-    <TheOrdering/>
+    <TheOrdering3/>
 </template>

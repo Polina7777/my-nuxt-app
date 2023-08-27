@@ -14,6 +14,7 @@
     "nuxt": "^3.6.5"
   },
   "dependencies": {
+    "@vee-validate/yup": "^4.11.3",
     "vee-validate": "^4.11.3"
   }
 }

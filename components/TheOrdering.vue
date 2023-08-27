@@ -1,19 +1,19 @@
 <script>
 import { ordersApi } from "../api-requests/orders-api";
+import { useForm } from 'vee-validate';
+import * as yup from 'yup';
+
 // import { useForm } from "vee-validate";
 export default {
 // created(){
 // this.amountFunction()
 // },
+
   data() {
     return {
       selectedOptionPay: null,
       selectedOptionDelivery: null,
       amount: ref(0),
-      // name: defineInputBinds("name"),
-      // phone: defineInputBinds("phone"),
-      // email: defineInputBinds("email"),
-      // comment: defineInputBinds("comment"),
       orderingData:{
         name:'',
         phone:'',
@@ -46,21 +46,11 @@ pay:[
 { type: "Оплата онлайн" },
   { type: "Оплата при получении" },
 ],
-// const { defineInputBinds, handleSubmit, errors } = useForm({
-//   validationSchema: {
-//     name: required,
-//     phone: required,
-//     email: required,
-//     selectedOptionPay: required,
-//     selectedOptionDelivery: required,
-//   },
-// });
+
     };
+    
   },
   methods: {
-    // required(value) {
-    //   return value ? true : "This field is required";
-    // },
     async order(){
       console.log(this.orderingData);
       const order = await ordersApi.createNewOrder(this.orderingData);
@@ -84,17 +74,8 @@ pay:[
   },
 };
 
-// Create the form
 
 
-// Define fields
-// const name = defineInputBinds("name");
-// const phone = defineInputBinds("phone");
-// const email = defineInputBinds("email");
-// const comment = defineInputBinds("comment");
-
-// Submit handler
-// 
 
 </script>
 
@@ -107,7 +88,7 @@ pay:[
     <input v-model="orderingData.phone" placeholder="Телефон" />
     <!-- <span>{{ errors.phone }}</span> -->
 
-    <input  v-model="orderingData.email" placeholder="E-mail" />
+    <input  v-model="orderingData.email" placeholder="E-mail"  type="email"/>
     <!-- <span>{{ errors.email }}</span> -->
 
     <input class="comment_input"  v-model="orderingData.comment" placeholder="Комментарий" />
@@ -180,7 +161,7 @@ ul {
   align-items: flex-start;
 }
 p {
-  padding: 20px;
+  padding: 21px;
 }
 button {
   background: #efe1e1;

@@ -44,7 +44,7 @@ ul{
     align-items: start;
     flex-wrap: wrap;
     padding: 30px;
-    margin: 0 auto;
+    /* margin: 0 auto; */
 }
 img{
 width: 300px;

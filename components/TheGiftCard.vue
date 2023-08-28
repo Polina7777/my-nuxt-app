@@ -57,13 +57,7 @@ export default {
     },
     async addToBacket() {
       const giftcard = await giftcardApi.createNewGiftCard(this.giftCardInfo);
-      // const addedGiftCard = await giftcardApi.addGiftCardToBasket(giftcard.id);
-      // const changeCount = await giftcardApi.changeGiftCardCount(
-      //   giftcard.id,
-      //   this.giftCardInfo.count
-      // );
       this.$router.push('/');
-      //   this.basket = true;
     },
   },
 };
@@ -262,5 +256,11 @@ button {
 .button:hover,
 .button:active {
   background: #efe1e1;
+}
+@media (max-width: 550px) {
+  .info_wrapper{
+    align-items: center;
+    width: 95%;
+  }
 }
 </style>

@@ -199,8 +199,8 @@ export default {
 <style>
 * {
   box-sizing: border-box;
-  font-size: 17px;
 }
+
 p {
   font-size: 17px;
   margin: 0;
@@ -241,7 +241,7 @@ header {
 }
 .search_img{
   position: absolute;
-  left: 65%;
+  left: 75%;
 }
 .popup_item {
   font-size: 15px;
@@ -273,6 +273,7 @@ header {
 }
 .logo-header {
   width: 30%;
+  min-width: 200px;
   height: 83px;
 }
 img {
@@ -281,6 +282,7 @@ img {
 }
 .input_wrapper {
   width: 50%;
+  position: relative;
 }
 .search_input, input{
   background:#efe1e1;
@@ -289,7 +291,6 @@ img {
   border-color: transparent;
   width: 71%;
   min-width: 250px;
-  position: relative;
 
 }
 .popup_list {
@@ -315,11 +316,15 @@ ul {
   text-decoration: none;
   gap: 20px;
   align-items: center;
-  padding: 0;
+  padding: 0 10px;
+}
+li{
+  text-align: center;
 }
 li:hover, a:hover{
   color: #b49696;
 }
+
 a {
   text-decoration: none;
   color: var(--text-color);
@@ -363,6 +368,16 @@ button:active,
   .wrapper{
     flex-wrap: wrap;
     justify-content: center;
-  }
+  }  
+}
+@media (max-width:500px) {
+  p,a {
+  font-size: 14px;
+}
+.title{
+  font-size: 21px;
+}
+  
 }
 </style>
+ 

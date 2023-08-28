@@ -71,5 +71,19 @@ font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans
   font-size: 17px;
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+@media (max-width: 490px) {
+  .info{
+  display: flex;
+  flex-wrap: wrap;
+gap:30px;
+}
+.wrapper{
+  padding: 20px;
 
+}
+.text1,.text2{
+  font-size: 11px;
+font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+}
 </style>

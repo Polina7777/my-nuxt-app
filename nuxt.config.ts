@@ -42,6 +42,10 @@ export default {
         path: '/ordering',
         component: 'pages/ordering.vue'
       },
+      { 
+        path: '/pay',
+        component: 'pages/pay.vue'
+      },
       {
         // name:'/product',
         path: '/:cartId',

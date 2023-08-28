@@ -1,6 +1,16 @@
 <script>
 import { productsApi } from "../api-requests/products-api";
+
 export default{
+  // layout (context) {
+  //   return 'default'
+  // },
+
+  layout: 'custom',
+  // name: 'index',
+
+
+
   data(){
   return{
     searchString:'',
@@ -32,6 +42,7 @@ watch: {
 </script>
 <template>
     <div>
+      <NuxtLayout name="custom">
    <TheHeader :value="searchString" @input="searchString = $event.target.value" :popUpValue="popUpFilter" @click="(data)=>popUpFilter=data"/>
   <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
@@ -39,6 +50,7 @@ watch: {
    <TheBrandsBox/>
    <TheAboutBox/>
    <TheFooter/>
+  </NuxtLayout>
     </div>
   </template>
   <style>

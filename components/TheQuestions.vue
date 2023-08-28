@@ -148,4 +148,17 @@ li{
   text-align: center;
   padding: 37px;
 }
+@media (max-width:700px) {
+  .question_list {
+  margin: auto;
+  max-width: 90%;
+}
+.title{
+  text-align: center;
+  padding: 31px;
+}
+.question {
+  font-size: 17px;
+}
+}
 </style>

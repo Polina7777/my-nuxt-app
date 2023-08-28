@@ -21,7 +21,6 @@ const delivery1 = "Курьером до двери";
 const delivery2 = "Пункт выдачи";
 const delivery3 = "Почта России";
 const delivery4 = "Самовывоз";
-let amount= 0;
 const route = useRoute();
 const router = useRouter()
 const schema = {
@@ -48,14 +47,6 @@ const schema = {
   },
   delivery: (value) => {
     if (value) {
-    //   if(value === delivery2 || value === delivery3 ){
-    //     amount = 350;
-    //   }else if(value === delivery1 ){
-    //     amount = 100;
-    //   }
-    //   else{
-    //     amount = 0;
-    //   }
       return true;
     }
     return 'You must choose a delivery method';
@@ -85,16 +76,32 @@ async function onSubmit(values) {
   console.log(JSON.stringify(values, null, 2));
  const price = (values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number(route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number(route.query.amount) + Number(100): Number(route.query.amount);
  console.log(price)
-  const order = await ordersApi.createNewOrder(values,price);
- router.push('/basket');
+ // const order = await ordersApi.createNewOrder(values,price);
+ console.log(values)
+  if(values.pay === "Оплата онлайн"){
+    console.log('accassasc')
+    // @click="navigateTo(`/ordering?amount=${price}`)
+    router.push(`/pay`);
+  }
+  }
+  function payByCard(values){
+    console.log('dsvv')
+    if(values.pay === "Оплата онлайн"){
+    // @click="navigateTo(`/ordering?amount=${price}`)
+    router.push(`/pay`);
+  }
+ //router.push('/basket');
+
 }
 
 </script>
 <template>
+
     <div class="form_wrapper">
 
         <p class="title">{{ title }}</p>
       <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }">
+        {{ values }}
         <div class="field_box">
         <Field name="name" type="text" :validation-schema="schema" class="input"  placeholder="ФИО"/>
       <ErrorMessage name="name"  class="error_text"/>
@@ -151,9 +158,9 @@ async function onSubmit(values) {
       </ul>
     </div>
     <ThePriceBox :amount="(values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number($route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number($route.query.amount) + Number(100): Number($route.query.amount)" />
-    <button  class="ordering">Оформить заказ</button>
+   
       </Form>
-
+      <button class="ordering" >Оформить заказ</button>
     </div>
   </template>
   
@@ -166,7 +173,7 @@ async function onSubmit(values) {
 .field_box{
     display: flex;
     flex-direction: column;
-    gap:10px;
+    gap: 5px;
 }
 .error_text{
     padding-left: 21px;
@@ -241,6 +248,7 @@ ul {
   text-decoration: none;
   align-items: self-start;
   gap: 20px;
+  margin: 17px 20px;
   padding: 0;
 }
 li{

@@ -22,9 +22,9 @@ export default{
 
 <template>
    <TheHeader/>
-   <!-- <div> -->
+   <div class="list_box">
    <TheList titleProps="Новинки" :itemList="productsListNew" />
-<!-- </div> -->
+</div>
    <TheFooter/>
   </template>
     

@@ -28,6 +28,8 @@ export default {
 </template>
 <style>
 .list_box{
+  /* height: 100vh; */
+  min-height: 527px;
 margin: auto;
 }
 </style>

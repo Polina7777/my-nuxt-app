@@ -101,7 +101,7 @@ export default {
     <nuxt-link :to="`/${this.card.id}`">
       <img :src="card.attributes.image" alt="card-image" />
     </nuxt-link>
-    <div>
+    <div class="info_box">
       <p class="description_small">{{ card.attributes.description_small }}</p>
       <p>{{ card.attributes.price }}</p>
 
@@ -151,13 +151,12 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  /* width: 200px;
-  height: 250px; */
   gap: 30px;
   margin: 0 auto;
   width: 71%;
   padding: 30px;
 }
+
 .count_buttons,
 .buttton {
   display: flex;
@@ -210,5 +209,30 @@ button {
   padding: 15px 25px;
   background: #efe1e1;
   color: white;
+}
+@media (max-width: 1000px) {
+  .card_wrapper {
+
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 0 auto;
+  width: 87%;
+  padding: 0;
+  align-items: center;
+}
+.info_box{
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+}
+img {
+  width: 200px;
+  height: 200px;
+}
+.description_small{
+  font-size: 17px;
+}
 }
 </style>

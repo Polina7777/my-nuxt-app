@@ -96,7 +96,7 @@ export default {
 };
 </script>
 <template>
-  <table class="card-table">
+  <!-- <table class="card-table">
     <thead>
       <tr>
         <th>Корзина</th>
@@ -106,7 +106,6 @@ export default {
     </thead>
     <tbody>
       <tr v-for="(item, index) in productsFromBasketList" :key="index">
-        <!-- <div class="wrapper"> -->
         <td>
           <NuxtLink :to="`/${item.product.id}`">
           <div class="product_description">
@@ -129,7 +128,6 @@ export default {
           <p>{{computePrice(item) }}</p>
         </td>
 
-        <!-- </div> -->
       </tr>
       <tr v-for="(item, index) in giftcardsFromBasketList" :key="index">
         <td>
@@ -153,7 +151,53 @@ export default {
         </td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  <div class="archive">
+    <p class="basket_title">Корзина</p>
+        <p class="hide">Количество</p>
+        <p class="hide">Цена</p>
+        </div>
+  <div  v-for="(item, index) in productsFromBasketList" :key="index" class="archive">
+    <NuxtLink :to="`/${item.product.id}`">
+          <div class="product_description">
+            <img :src="item.product.attributes.image" />
+            <p class="description">
+              {{ item.product.attributes.description_small }}
+            </p>
+          </div>
+        </NuxtLink>
+        <div class="button_td">
+          <div class="count_buttons">
+            <button @click="decreaseQuantity(item)">-</button>
+            {{ item.count }}
+            <button @click="increaseQuantity(item)">+</button>
+          </div>
+          <p @click="deleteFromBacket(item.product.id)">Удалить товар</p>
+        </div>
+        <p>{{computePrice(item) }}</p>
+      </div>
+
+
+      <div v-for="(item, index) in giftcardsFromBasketList" :key="index" class="archive">
+      
+          <div class="product_description">
+            <img :src="giftcard" />
+            <p class="description">
+              {{ item.product.attributes.name }}
+            </p>
+          </div>
+         <div class="button_td">
+          <div class="count_buttons">
+            <button @click="decreaseQuantity(item)">-</button>
+            {{ item.count }}
+            <button @click="increaseQuantity(item)">+</button>
+          </div>
+          <p @click="deleteGiftCardFromBacket(item.product.id)">Удалить товар</p>
+  </div>
+          <p>{{computePrice(item) }}</p>
+        </div>
+
+
   <ThePriceBox :amount="amount"/>
   <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">Оформить заказ</button>
 </template>
@@ -187,7 +231,7 @@ th {
   background: #efe1e1;
   align-items: center;
   border-radius: 17px;
-  width: 60%;
+  /* width: 60%; */
 }
 .button_td {
   display: flex;
@@ -206,7 +250,10 @@ th {
 }
 .product_description {
   display: flex;
-  flex-direction: row;
+  /* flex-direction: row; */
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   gap: 10px;
   flex-wrap: wrap;
 }
@@ -228,4 +275,39 @@ p {
   padding: 20px;
   margin: auto;
 }
+
+
+
+
+
+.archive {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-gap: 17px;
+  grid-auto-flow: dense;
+}
+
+
+@media (max-width: 700px) {
+  .archive {
+    display: flex;
+    flex-direction: column;
+    border:1px solid #b4969646;
+    border-radius: 10px;
+    margin: 10px 0;
+ 
+  }
+  .button_td{
+    padding: 0;
+  }
+  .hide{
+    display: none;
+    border:none
+  }
+  .basket_title{
+    font-size: 21px;
+  }
+  
+}
+
 </style>

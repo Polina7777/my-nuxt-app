@@ -46,6 +46,10 @@ export default {
         path: '/pay',
         component: 'pages/pay.vue'
       },
+      { 
+        path: '/grid',
+        component: 'pages/grid.vue'
+      },
       {
         // name:'/product',
         path: '/:cartId',

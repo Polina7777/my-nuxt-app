@@ -1,18 +1,20 @@
 <script setup>
 import { Form, Field, ErrorMessage } from "vee-validate";
-
+import { ordersApi } from "../api-requests/orders-api";
 
      const title = "Оплата картой";
     const subtitle = "К оплате";
+    const route = useRoute();
+const router = useRouter()
      const schema = {
         number: (value) => {
           if (!value) {
             return "This field is required";
           }
           const regex = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|3[47][0-9]{13}|6(?:011|5[0-9][0-9])[0-9]{12}|(?:2131|1800|35\d{3})\d{11})$/;
-          if (!regex.test(value)) {
-            return "Invalid number";
-          }
+          // if (!regex.test(value)) {
+          //   return "Invalid number";
+          // }
           return true;
         },
         date: (value) => {
@@ -39,9 +41,10 @@ import { Form, Field, ErrorMessage } from "vee-validate";
       };
 
 
- function onSubmit(values) {
+ async function onSubmit(values) {
   console.log(JSON.stringify(values, null, 2));
-//   const order = await ordersApi.createNewOrder(values,price);
+  const id= route.query.id
+  const paidOnlineField = await ordersApi.payByCardOnlineFields(id,values)
  router.push('/');
 }
 </script>
@@ -50,7 +53,7 @@ import { Form, Field, ErrorMessage } from "vee-validate";
   <Form :validation-schema="schema" @submit="onSubmit" v-slot="{ values }">
     <div class="card_pay">
       <p class="title">{{ title }}</p>
-      <!-- <p>{{ `${subtitle} ${$route.query.amount}` }}</p> -->
+      <p>{{ `${subtitle} ${$route.query.amount} p.` }}</p>
       <Field
         name="number"
         :validation-schema="schema"

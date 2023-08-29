@@ -32,6 +32,19 @@
     },
     "price": {
       "type": "string"
+    },
+    "paid_online": {
+      "type": "boolean",
+      "default": false
+    },
+    "card_number": {
+      "type": "string"
+    },
+    "card_date": {
+      "type": "string"
+    },
+    "card_code": {
+      "type": "string"
     }
   }
 }

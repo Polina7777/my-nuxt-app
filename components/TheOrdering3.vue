@@ -73,26 +73,14 @@ const schema = {
 };
 
 async function onSubmit(values) {
-  console.log(JSON.stringify(values, null, 2));
+//console.log(JSON.stringify(values, null, 2));
  const price = (values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number(route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number(route.query.amount) + Number(100): Number(route.query.amount);
- console.log(price)
- // const order = await ordersApi.createNewOrder(values,price);
- console.log(values)
+ const order = await ordersApi.createNewOrder(values,price);
+ console.log(order)
   if(values.pay === "Оплата онлайн"){
-    console.log('accassasc')
-    // @click="navigateTo(`/ordering?amount=${price}`)
-    router.push(`/pay`);
+    router.push(`/pay?amount=${price}&id=${order.id}`);
   }
   }
-  function payByCard(values){
-    console.log('dsvv')
-    if(values.pay === "Оплата онлайн"){
-    // @click="navigateTo(`/ordering?amount=${price}`)
-    router.push(`/pay`);
-  }
- //router.push('/basket');
-
-}
 
 </script>
 <template>
@@ -159,8 +147,9 @@ async function onSubmit(values) {
     </div>
     <ThePriceBox :amount="(values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number($route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number($route.query.amount) + Number(100): Number($route.query.amount)" />
    
-      </Form>
-      <button class="ordering" >Оформить заказ</button>
+    
+      <button class="ordering">Оформить заказ</button>
+    </Form>
     </div>
   </template>
   

@@ -33,11 +33,36 @@ export const createNewOrder = async (orderData:any,price:any) => {
           },
         }),
       });
+      const data = await response.json();
+      const order = data.data
+      return order;
     } catch (error) {
       console.log(error)
     }
   };
-
+  export const payByCardOnlineFields = async (id: string,values:any) => {
+    try {
+      const response = await fetch(`${url_ngrok}api/orders/${id}`, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "PUT",
+        body: JSON.stringify({
+          data: {
+           paid_online: true,
+           card_number:values.number,
+           card_date:values.date,
+           card_code:values.code,
+          },
+        }),
+      });
+      const data = await response.json();
+      const orderField = data.data
+      return orderField;
+    } catch (error) {
+      console.log(error)
+    }
+  };
   export const deleteOrderById = async (id: string) => {
     try {
       const response = await fetch(`${url_ngrok}api/orders/${id}`, {
@@ -51,4 +76,4 @@ export const createNewOrder = async (orderData:any,price:any) => {
     }
   };
 
-export const ordersApi = {getAllOrders,getOrderById, createNewOrder, deleteOrderById}
+export const ordersApi = {getAllOrders,getOrderById, createNewOrder, deleteOrderById,payByCardOnlineFields}

@@ -96,62 +96,7 @@ export default {
 };
 </script>
 <template>
-  <!-- <table class="card-table">
-    <thead>
-      <tr>
-        <th>Корзина</th>
-        <th>Количество</th>
-        <th>Цена</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(item, index) in productsFromBasketList" :key="index">
-        <td>
-          <NuxtLink :to="`/${item.product.id}`">
-          <div class="product_description">
-            <img :src="item.product.attributes.image" />
-            <p class="description">
-              {{ item.product.attributes.description_small }}
-            </p>
-          </div>
-        </NuxtLink>
-        </td>
-        <td class="button_td">
-          <div class="count_buttons">
-            <button @click="decreaseQuantity(item)">-</button>
-            {{ item.count }}
-            <button @click="increaseQuantity(item)">+</button>
-          </div>
-          <p @click="deleteFromBacket(item.product.id)">Удалить товар</p>
-        </td>
-        <td>
-          <p>{{computePrice(item) }}</p>
-        </td>
-
-      </tr>
-      <tr v-for="(item, index) in giftcardsFromBasketList" :key="index">
-        <td>
-          <div class="product_description">
-            <img :src="giftcard" />
-            <p class="description">
-              {{ item.product.attributes.name }}
-            </p>
-          </div>
-         </td>
-         <td class="button_td">
-          <div class="count_buttons">
-            <button @click="decreaseQuantity(item)">-</button>
-            {{ item.count }}
-            <button @click="increaseQuantity(item)">+</button>
-          </div>
-          <p @click="deleteGiftCardFromBacket(item.product.id)">Удалить товар</p>
-        </td>
-        <td>
-          <p>{{computePrice(item) }}</p>
-        </td>
-      </tr>
-    </tbody>
-  </table> -->
+   <div class="card-wrapper">
   <div class="archive">
     <p class="basket_title">Корзина</p>
         <p class="hide">Количество</p>
@@ -200,6 +145,7 @@ export default {
 
   <ThePriceBox :amount="amount"/>
   <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">Оформить заказ</button>
+  </div>
 </template>
 
 <style scoped>
@@ -208,6 +154,7 @@ div {
   flex-direction: column;
   gap: 10px;
 }
+
 .amount_box{
   padding: 20px;
 }
@@ -243,7 +190,9 @@ th {
 }
 .ordering{
   background: #efe1e1;
-  margin: 20px;
+  margin: 20px auto;
+  width: 30%;
+  min-width: 210px;
 }
 .ordering:hover{
   background: #B49696;

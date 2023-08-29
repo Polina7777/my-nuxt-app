@@ -173,17 +173,14 @@ async function onSubmit(values) {
 }
 .ordering{
  background: #efe1e1;
-  margin: 20px;
+  margin: 20px auto;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  align-items: center;
   border: none;
   border-radius: 19px;
   color: white;
   align-self: center;
   padding: 20px 25px;
-  font-size: 21px;
   }
 
 .ordering:hover{

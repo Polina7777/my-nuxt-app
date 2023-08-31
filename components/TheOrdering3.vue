@@ -84,12 +84,9 @@ async function onSubmit(values) {
 
 </script>
 <template>
-
     <div class="form_wrapper">
-
         <p class="title">{{ title }}</p>
       <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }">
-        {{ values }}
         <div class="field_box">
         <Field name="name" type="text" :validation-schema="schema" class="input"  placeholder="ФИО"/>
       <ErrorMessage name="name"  class="error_text"/>

@@ -81,7 +81,7 @@ export default {
 </script>
 
 <template>
-  <TheHeader />
+  <!-- <TheHeader /> -->
   <div class="question_list">
     <p class="title">{{ title }}</p>
     <ul>
@@ -107,7 +107,7 @@ export default {
       </li>
     </ul>
   </div>
-  <TheFooter />
+  <!-- <TheFooter /> -->
 </template>
 <style scoped>
 .question_list {

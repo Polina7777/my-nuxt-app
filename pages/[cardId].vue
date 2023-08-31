@@ -22,5 +22,8 @@ methods:{
 </script>
 
 <template>
+  <NuxtLayout  name="custom">
+    <TheHeader/>
     <TheBigCard v-if="info" :card="info"/>
+  </NuxtLayout>
 </template>

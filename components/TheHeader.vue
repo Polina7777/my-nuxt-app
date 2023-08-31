@@ -13,8 +13,15 @@ export default {
     // filterPopUp:Function,
     popUpValue:Object,
   },
+  mounted() {
+    const widthDevice = window.innerWidth
+    if (widthDevice < 610) {
+      this.mobileVersion = true
+    }
+  },
   data() {
     return {
+      mobileVersion:false,
       plus: plus,
       logo: logo,
       search: search,
@@ -119,13 +126,13 @@ export default {
 </script>
 
 <template>
-  <header>
+  <header v-if="!mobileVersion">
     <ul>
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
       </li>
     </ul>
-    <div class="wrapper">
+    <div class="wrapper header-wrapper">
       <img
         class="logo-header"
         :src="logo"
@@ -151,7 +158,83 @@ export default {
         <img :src="vk" alt="vk" />
       </div>
     </div>
+    <ul class="navigation">
+      <li
+        v-for="(item, index) in navScheme2"
+        :key="index"
+        :class="item.image ? 'plus_button' : null"
+      >
+        <button
+          :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
+          @click="
+            item.title === 'Каталог'
+              ? popUpOpen()
+              : navigateTo(item.navigate)
+          "
+        >
+          {{ item.title }}
+        </button>
+        <img
+          class="plus"
+          v-if="item.image"
+          :src="item.image"
+          alt="item-image"
+        />
+      </li>
+    </ul>
+    <div v-if="openPopup" class="gray"></div>
+    <Teleport to="body">
+      <div v-if="openPopup" class="modal">
+        <div class="popup_wrapper">
+          <ul class="popup_list" id="popup_list_one">
+            <li v-for="(item, index) in popUpList1" :key="index">
+              <p class="popup_item" id="popup_list_one_item" @click = updatePopUpValue(item)>{{ item.title }}</p>
+            </li>
+          </ul>
+          <ul class="popup_list" id="popup_list_two">
+            <li v-for="(item, index) in popUpList2" :key="index">
+              <p class="popup_item"  id="popup_list_two_item" @click = updatePopUpValue(item) >{{ item.title }}</p>
+            </li>
+          </ul>
+        </div>
+        <button class="close" @click="openPopup = false">х</button>
+      </div>
+    </Teleport>
+  </header>
+  <header v-if="mobileVersion">
     <ul>
+      <li v-for="(item, index) in navScheme1" :key="index">
+        <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
+      </li>
+    </ul>
+    <img
+        class="logo-header"
+        :src="logo"
+        alt="header-logo"
+        @click="navigateTo('/')"
+      />
+    <div class="wrapper header-wrapper">
+ 
+      <div class="input_wrapper">
+        <input
+          class="search_input"
+         placeholder="Поиск товара"
+         :value="value"
+      
+        />
+        <img class="search_img" :src="search" alt="search" />
+        <nuxt-link to="basket">
+          <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
+        </nuxt-link>
+      </div>
+      <!-- <div class="contacts_wrapper">
+        <img :src="phone" alt="phone" />
+        <p>{{ phoneNumber }}</p>
+        <img :src="whatsapp" alt="whatsapp" />
+        <img :src="vk" alt="vk" />
+      </div> -->
+    </div>
+    <ul class="navigation">
       <li
         v-for="(item, index) in navScheme2"
         :key="index"
@@ -200,7 +283,9 @@ export default {
 * {
   box-sizing: border-box;
 }
-
+header{
+  align-items: center;
+}
 p {
   font-size: 17px;
   margin: 0;
@@ -210,6 +295,10 @@ header {
   flex-direction: column;
   gap: 10px;
 }
+.header-wrapper{
+  width: 87%;
+}
+
 .wrapper,
 .contacts_wrapper,
 .input_wrapper,
@@ -218,7 +307,7 @@ header {
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 10px;
 }
 .popup_wrapper {
   position: absolute;
@@ -364,20 +453,39 @@ button:active,
 .title {
   font-size: 27px;
 }
+
 @media (max-width: 800px) {
   .wrapper{
     flex-wrap: wrap;
     justify-content: center;
   }  
 }
-@media (max-width:500px) {
+@media (max-width: 883px) {
+  .navigation{
+  flex-wrap: nowrap;
+justify-content: flex-start;
+gap: 0;
+overflow: scroll;
+width: 90%;
+}
+}
+@media (max-width:610px) {
   p,a {
   font-size: 14px;
 }
 .title{
   font-size: 21px;
 }
+.navigation{
+  flex-wrap: nowrap;
+justify-content: flex-start;
+gap: 0;
+overflow: scroll;
+width: 90%;
+}
+
   
 }
+
 </style>
  

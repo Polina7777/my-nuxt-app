@@ -30,16 +30,10 @@ export default {
   methods: {
     increaseQuantity() {
       this.giftCardInfo.count++;
-      //   item.count++;
-      //     this.computeAmount();
-      //   this.computeAmount(count);
     },
     decreaseQuantity() {
-      if (item.count > 1) {
-        this.giftCardInfo.count++;
-        // item.count--;
-        // this.computeAmount();
-        // this.computeAmount(count);
+      if (this.giftCardInfo.count > 1) {
+        this.giftCardInfo.count--;
       }
     },
     showDescription(index) {
@@ -64,7 +58,7 @@ export default {
 </script>
 
 <template>
-  <TheHeader />
+  <!-- <TheHeader /> -->
   <div class="giftcard_wrapper">
     <p class="title">{{ title }}</p>
     <div class="wrapper">
@@ -143,7 +137,7 @@ export default {
       </div>
     </div>
   </div>
-  <TheFooter />
+  <!-- <TheFooter /> -->
 </template>
 <style scoped>
 .box {
@@ -159,7 +153,6 @@ img {
 }
 .giftcard_wrapper {
   margin: auto;
-  /* max-width: 57%; */
   padding: 30px;
 }
 .wrapper{
@@ -187,15 +180,11 @@ input {
   margin: 10px;
 }
 .subtextClicked {
-  /* max-height: 30px; */
   padding: 10px 20px;
   margin: 10px;
   border-bottom: 1px solid grey;
 }
-/* .subtext:hover, .subtext:active{
-    padding: 10px 20px;
-   border-bottom: 1px solid grey;
-} */
+
 .wide {
   min-height: 170px;
   max-width: 430px;

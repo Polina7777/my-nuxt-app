@@ -23,7 +23,6 @@ export default {
       <p>{{ `${string3} ${amount} p.` }}</p>
     </div>
   </div>
-  <!-- <button> Оформить заказ </button> -->
 </template>
 
 <style scoped>

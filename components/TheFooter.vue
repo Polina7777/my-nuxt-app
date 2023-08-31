@@ -5,6 +5,12 @@ import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 export default {
+  mounted() {
+    const widthDevice = window.innerWidth
+    if (widthDevice < 500) {
+      this.mobileVersion = true
+    }
+  },
   data() {
     return {
       plus: plus,
@@ -13,6 +19,7 @@ export default {
       whatsapp: whatsapp,
       vk: vk,
       phoneNumber: "+7 (999) 131-32-49",
+      mobileVersion:false,
       navScheme1: [
         {
           title: "Доставка и оплата",
@@ -61,7 +68,24 @@ export default {
 </script>
 
 <template>
-  <footer>
+  <footer v-if="!mobileVersion">
+    <ul>
+      <li v-for="(item, index) in navScheme2" :key="index">
+        <NuxtLink :to="item.navigate">{{ item.title }} </NuxtLink>
+      </li>
+    </ul>
+    <ul>
+      <li v-for="(item, index) in navScheme1" :key="index">
+        <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
+      </li>
+    </ul>
+    <div class="contacts_wrapper">
+      <p>{{ phoneNumber }}</p>
+      <img :src="whatsapp" alt="whatsapp" />
+      <img :src="vk" alt="vk" />
+    </div>
+  </footer>
+  <footer v-if="mobileVersion">
     <ul>
       <li v-for="(item, index) in navScheme2" :key="index">
         <NuxtLink :to="item.navigate">{{ item.title }} </NuxtLink>
@@ -91,5 +115,22 @@ ul,
 .contacts_wrapper {
   display: flex;
   flex-direction: column;
+}
+@media (max-width:570px) {
+  ul{
+    display: flex;
+    flex-direction: row;
+  }
+  footer {
+  background-color: #efe1e1;
+  display:block;
+  flex-direction: row;
+  padding: 10px;
+}
+
+.contacts_wrapper {
+  flex-direction: row;
+}
+  
 }
 </style>

@@ -61,4 +61,12 @@ p{
   text-align: end;
   padding: 20px;
 }
+@media (max-width: 610px) {
+  ul {
+    flex-wrap: nowrap;
+overflow-y: scroll;
+justify-content: flex-start;
+}
+}
+
 </style>

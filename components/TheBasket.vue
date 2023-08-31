@@ -97,12 +97,12 @@ export default {
 </script>
 <template>
    <div class="card-wrapper">
-  <div class="archive">
+  <div class="grid-box">
     <p class="basket_title">Корзина</p>
         <p class="hide">Количество</p>
         <p class="hide">Цена</p>
         </div>
-  <div  v-for="(item, index) in productsFromBasketList" :key="index" class="archive">
+  <div  v-for="(item, index) in productsFromBasketList" :key="index" class="grid-box">
     <NuxtLink :to="`/${item.product.id}`">
           <div class="product_description">
             <img :src="item.product.attributes.image" />
@@ -123,7 +123,7 @@ export default {
       </div>
 
 
-      <div v-for="(item, index) in giftcardsFromBasketList" :key="index" class="archive">
+      <div v-for="(item, index) in giftcardsFromBasketList" :key="index" class="grid-box">
       
           <div class="product_description">
             <img :src="giftcard" />
@@ -178,7 +178,9 @@ th {
   background: #efe1e1;
   align-items: center;
   border-radius: 17px;
-  /* width: 60%; */
+}
+.card-wrapper{
+  padding: 21px;
 }
 .button_td {
   display: flex;
@@ -229,7 +231,7 @@ p {
 
 
 
-.archive {
+.grid-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   grid-gap: 17px;
@@ -238,7 +240,7 @@ p {
 
 
 @media (max-width: 700px) {
-  .archive {
+  .grid-box {
     display: flex;
     flex-direction: column;
     border:1px solid #b4969646;

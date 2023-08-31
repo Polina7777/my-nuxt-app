@@ -24,12 +24,9 @@ export default {
   <div class="wrapper">
     <p class="title">{{ title }}</p>
     <div class="info">
-   
-   
     <div class="text_wrapper">
       <img :src="logo" alt="logo" />
       <p class="text1">{{ text1 }}</p>
-    
     </div>
     <p class="text2">{{ text2 }}</p>
   </div>
@@ -85,5 +82,18 @@ gap:30px;
   font-size: 11px;
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
+}
+
+@media (max-width:610px) {
+.wrapper{
+  padding: 30px;
+  overflow: scroll;
+}
+.text_wrapper, .text2{
+  display: flex;
+flex-direction: column;
+min-width: 300px;
+}
+  
 }
 </style>

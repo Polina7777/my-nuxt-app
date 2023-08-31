@@ -72,6 +72,7 @@ background: #caa9a9;
 background: #dee7cf;
 }
 .article:nth-child(7n + 2) {
+  grid-column: 1 / -3;
   background: #cfe7df;
 }
 

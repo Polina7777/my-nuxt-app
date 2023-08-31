@@ -15,17 +15,17 @@ export default{
 </script>
 
 <template>
-    <TheHeader/>
+    <!-- <TheHeader/> -->
     <div>
     <p class="contacts_title">{{ title }}</p>
     <p class="contacts_text">{{ text }}</p>
     <ul>
         <li v-for="(item, index) in contacts" :key="index">
-        <img :src="item" alt="method"/>
+        <img :src="item" alt="method"   :class="index === contacts.length-1 ? 'small' : null"/>
         </li>
     </ul>
   </div>
-    <TheFooter/>
+    <!-- <TheFooter/> -->
 </template>
 
 <style scoped>
@@ -44,7 +44,6 @@ ul{
     align-items: start;
     flex-wrap: wrap;
     padding: 30px;
-    /* margin: 0 auto; */
 }
 img{
 width: 300px;
@@ -56,10 +55,20 @@ height: 300px;
 }
 .contacts_text{
     background:#EFE1E1;
-    /* width: 87%; */
     border-radius: 10px;
     padding: 10px 15px;
     font-size: 15px;
+
+}
+.small{
+    height: 150px;
+}
+@media (max-width: 570px) {
+    ul{
+width: 90%;
+align-items: center;
+    padding: 10px;
+}
 
 }
 </style>

@@ -49,7 +49,6 @@ watch: {
   <TheList v-if="popUpFilter.title" :title-props="popUpFilter.title" :itemList="filteredList"/>
    <TheBrandsBox/>
    <TheAboutBox/>
-   <TheFooter/>
   </NuxtLayout>
     </div>
   </template>

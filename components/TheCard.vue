@@ -34,7 +34,7 @@ export default {
 
 <template>
   <div class="card_wrapper">
-    <nuxt-link :to="`/${this.card.id}`">
+    <nuxt-link :to="`/${this.card.id}`" class="card_link">
     <img :src="card.attributes.image" alt="card-image" />
     <p class="description_small">{{ card.attributes.description_small }}</p>
     <p>{{ card.attributes.price }}</p>
@@ -52,6 +52,11 @@ export default {
   width: 200px;
   height: 250px;
   align-items: center;
+}
+.card_link{
+  display: flex;
+flex-direction: column;
+align-items: center;
 }
 p {
   font-size: 10px;

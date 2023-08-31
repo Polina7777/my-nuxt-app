@@ -66,37 +66,12 @@ export default {
         this.showTitle2Description = false;
       }
     },
-    // computeAmount() {
-    //   const prices = [];
-    //   this.productsFromBasketList.map((item) => {
-    //     const priceString = item.product.attributes.price;
-    //     const priceDigits = priceString.replace(/\D/g, "");
-    //     const priceItem = priceDigits * item.count;
-    //     prices.push(priceItem);
-    //     console.log(prices);
-    //  this.amount = prices.reduce((accumulator, currentValue) => {
-    //       return accumulator + currentValue;
-    //     }, 0);
-    //   });
-    // },
-    // computePrice(item){
-    //   const priceString = item.product.attributes.price;
-    //     const priceDigits = priceString.replace(/\D/g, "");
-    //     const priceItem = priceDigits * item.count;
-    //     return `${priceItem} p.`
-    // },
-    // async deleteFromBacket(id) {
-    //   console.log("delete from backet");
-    //   const deleteProduct = await productsApi.deleteProductFromBasket(id);
-    //   this.getBasketProducts();
-    //   // this.basket=false;
-    // },
   },
 };
 </script>
 
 <template>
-  <TheHeader />
+  <!-- <TheHeader /> -->
   <div class="card_wrapper">
     <nuxt-link :to="`/${this.card.id}`">
       <img :src="card.attributes.image" alt="card-image" />
@@ -143,7 +118,7 @@ export default {
     </div>
   </div>
   <TheList titleProps="Похожие товары" :itemList="sameProductsList" />
-  <TheFooter />
+  <!-- <TheFooter /> -->
 </template>
 
 <style scoped>
@@ -233,6 +208,11 @@ img {
 }
 .description_small{
   font-size: 17px;
+}
+}
+@media (max-width: 610px) {
+  .card_wrapper {
+  width: 97%;
 }
 }
 </style>

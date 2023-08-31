@@ -20,11 +20,13 @@ export default {
 </script>
 
 <template>
-  <TheHeader />
+  <NuxtLayout name="custom">
+    <TheHeader/>
   <div class="list_box">
     <TheList titleProps="Распродажи" :itemList="productsListSale" />
   </div>
-  <TheFooter />
+  </NuxtLayout>
+  <!-- <TheFooter /> -->
 </template>
 <style>
 .list_box{

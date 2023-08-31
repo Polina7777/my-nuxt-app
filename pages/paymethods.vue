@@ -17,19 +17,21 @@ export default{
 </script>
 
 <template>
-    <TheHeader/>
+   
+    <NuxtLayout name="custom">
+        <TheHeader/>
     <div>
         <p>{{ title }}</p>
         <span>{{ text }}</span>
-    <ul>
+    <ul class="grid-box">
         <li v-for="(item, index) in methods" :key="index">
         <img :src="item" alt="method"/>
         </li>
-       
     </ul>
     <img class="adresses" :src="adresses" alt="adresses"/>
 </div>
-    <TheFooter/>
+    <!-- <TheFooter/> -->
+    </NuxtLayout>
 </template>
 
 <style scoped>
@@ -45,7 +47,7 @@ ul{
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
-    padding: 30px;
+    /* padding: 30px; */
     width: 70%;
     align-items: center;
     margin: 0 auto;
@@ -64,6 +66,33 @@ span{
 .adresses{
     width: 300px;
 height: 100px;
+
+}
+@media (max-width:610px) {
+
+.grid-box{
+    display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 17px;
+  grid-auto-flow: dense;
+    gap:0;
+    padding: 0;
+    width: 100%;
+} 
+
+div{
+padding: 10px;
+}
+img{
+width: 200px;
+height: 200px;
+}
+p{
+    font-size: 17px;
+}
+span{
+    font-size: 15px; 
+}
 
 }
 </style>

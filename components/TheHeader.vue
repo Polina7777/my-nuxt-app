@@ -6,11 +6,11 @@ import phone from "../static/images/phone.svg";
 import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
-
+import burger from "../static/images/burger.svg";
+import { data } from  "../static/data";
 export default {
   props: {
     value: String,
-    // filterPopUp:Function,
     popUpValue:Object,
   },
   mounted() {
@@ -21,6 +21,10 @@ export default {
   },
   data() {
     return {
+      popUpList1:data.popUpList1,
+      popUpList2:data.popUpList2,
+      navScheme1:data.navScheme1,
+      navScheme2:data.navScheme2,
       mobileVersion:false,
       plus: plus,
       logo: logo,
@@ -29,79 +33,15 @@ export default {
       phone: phone,
       whatsapp: whatsapp,
       vk: vk,
+      burger:burger,
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
       openPopup: false,
+      showMobileMenu:false,
       internalValue: this.value,
       internalPopUpValue:this.popUpValue,
-      popUpList1: [
-        {title:"Уход за лицом",filter:'forFace'},
-        {title:"Волосы",filter:'forHair'},
-        {title:"Макияж",filter:'forMakeUp'},
-        {title:"Тело",filter:'forBody'},
-       {title: "Наборы",filter:'sets'},
-        {title:"Миниатюры",filter:'mini'},
-      ],
-      popUpList2: [
-        {title:"Демакияж",filter:'makeUpRemoval'},
-        {title:"Очищение",filter:'cleansing'},
-        {title:"Отшелушивание",filter:'exfoliation'},
-        {title:"Тонизирование",filter:'toning'},
-        {title:"Сыворотки",filter:'serum'},
-        {title:"Кремы",filter:'cream'},
-        {title:"Маски",filter:'mask'},
-        {title:"Тканевые маски",filter:'sheetMask'},
-        {title:"Для кожи вокруг глаз",filter:'eyesCream'},
-        {title:"Патчи",filter:'patches'},
-        {title:"Для губ",filter:'forLips'},
-       {title:"Точечные средства",filter:'pointMeans'},
-        {title:"SPF-защита от солнца",filter:'spf'},
-        {title:"Гаджеты и аксессуары для лица",filter:'accessories'},
-      ],
-      navScheme1: [
-        {
-          title: "Доставка и оплата",
-          navigate: "/paymethods",
-        },
-        {
-          title: "Вопрос-ответ",
-          navigate: "/questions",
-        },
-        {
-          title: "Контакты",
-          navigate: "/contacts",
-        },
-      ],
-
-      navScheme2: [
-        {
-          title: "Каталог",
-          navigate: "/",
-          image: plus,
-        },
-        {
-          title: "Новинки",
-          navigate: "/new",
-          image: null,
-        },
-        {
-          title: "Распродажи",
-          navigate: "/sale",
-          image: null,
-        },
-        {
-          title: "Подарочные сертификаты",
-          navigate: "/giftcard",
-          image: null,
-        },
-      ],
-    };
+    }
   },
-  // watch: {
-  //   internalValue(newValue) {
-  //     this.$emit("input", newValue);
-  //   },
-  // },
   methods: {
     navigateTo(link: any) {
       this.$router.push(link);
@@ -112,13 +52,17 @@ export default {
     this.$emit("input", event.target.value);
     },
     updatePopUpValue(data) {
-      this.openPopup =false;
+      this.openPopup = false;
+      this.showMobileMenu=false;
       this.internalPopUpValue = data;
     this.$emit("click", this.internalPopUpValue);
     },
    popUpOpen(){
     this.openPopup = true;
     navigateTo('/');
+    },
+    mobileMenuOpen(){
+      this.showMobileMenu = true;
     }
   
   },
@@ -153,7 +97,7 @@ export default {
       </div>
       <div class="contacts_wrapper">
         <img :src="phone" alt="phone" />
-        <p>{{ phoneNumber }}</p>
+        <p class="phone">{{ phoneNumber }}</p>
         <img :src="whatsapp" alt="whatsapp" />
         <img :src="vk" alt="vk" />
       </div>
@@ -202,11 +146,19 @@ export default {
     </Teleport>
   </header>
   <header v-if="mobileVersion">
-    <ul>
-      <li v-for="(item, index) in navScheme1" :key="index">
-        <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
-      </li>
-    </ul>
+    <img
+        class="burger"
+        :src="burger"
+        alt="burger"
+        @click="mobileMenuOpen"
+      />
+      <Teleport to="body">
+      <TheMobileMenu
+        :showMobileMenu="showMobileMenu"
+        :updatePopUpValue="updatePopUpValue"
+        @close="showMobileMenu = false"
+      />
+      </Teleport>
     <img
         class="logo-header"
         :src="logo"
@@ -227,55 +179,9 @@ export default {
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
         </nuxt-link>
       </div>
-      <!-- <div class="contacts_wrapper">
-        <img :src="phone" alt="phone" />
-        <p>{{ phoneNumber }}</p>
-        <img :src="whatsapp" alt="whatsapp" />
-        <img :src="vk" alt="vk" />
-      </div> -->
+
     </div>
-    <ul class="navigation">
-      <li
-        v-for="(item, index) in navScheme2"
-        :key="index"
-        :class="item.image ? 'plus_button' : null"
-      >
-        <button
-          :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
-          @click="
-            item.title === 'Каталог'
-              ? popUpOpen()
-              : navigateTo(item.navigate)
-          "
-        >
-          {{ item.title }}
-        </button>
-        <img
-          class="plus"
-          v-if="item.image"
-          :src="item.image"
-          alt="item-image"
-        />
-      </li>
-    </ul>
-    <div v-if="openPopup" class="gray"></div>
-    <Teleport to="body">
-      <div v-if="openPopup" class="modal">
-        <div class="popup_wrapper">
-          <ul class="popup_list" id="popup_list_one">
-            <li v-for="(item, index) in popUpList1" :key="index">
-              <p class="popup_item" id="popup_list_one_item" @click = updatePopUpValue(item)>{{ item.title }}</p>
-            </li>
-          </ul>
-          <ul class="popup_list" id="popup_list_two">
-            <li v-for="(item, index) in popUpList2" :key="index">
-              <p class="popup_item"  id="popup_list_two_item" @click = updatePopUpValue(item) >{{ item.title }}</p>
-            </li>
-          </ul>
-        </div>
-        <button class="close" @click="openPopup = false">х</button>
-      </div>
-    </Teleport>
+
   </header>
 </template>
 
@@ -284,21 +190,27 @@ export default {
   box-sizing: border-box;
 }
 header{
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   align-items: center;
+  position: relative;
 }
 p {
   font-size: 17px;
   margin: 0;
 }
-header {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
 .header-wrapper{
   width: 87%;
 }
-
+.burger{
+width: 50px;
+height: 50px;
+position: absolute;
+z-index: 1000px;
+left: 21px;
+top:21px;
+}
 .wrapper,
 .contacts_wrapper,
 .input_wrapper,
@@ -327,6 +239,9 @@ header {
   background: transparent;
   color: gray;
   z-index: 100;
+}
+.phone{
+  min-width: 140px;
 }
 .search_img{
   position: absolute;
@@ -364,6 +279,7 @@ header {
   width: 30%;
   min-width: 200px;
   height: 83px;
+  padding-right: 10px;
 }
 img {
   width: 21px;
@@ -483,7 +399,9 @@ gap: 0;
 overflow: scroll;
 width: 90%;
 }
-
+.search_img{
+ display: none;
+}
   
 }
 

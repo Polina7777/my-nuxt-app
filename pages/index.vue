@@ -18,6 +18,7 @@ export default{
     filteredList:[],
     popUpFilterTitle:'',
     router: useRoute(),
+    filterName:''
   }
 },
 methods:{
@@ -26,6 +27,7 @@ methods:{
    this.filteredList = list;
   },
   async filterListByPopUp(){
+    this.filterName = this.popUpFilter.title
     const list = await productsApi.filterProductsByPopUpFilter(this.popUpFilter.filter);
    this.filteredList = list;
   }
@@ -46,7 +48,7 @@ watch: {
    <TheHeader :value="searchString" @input="searchString = $event.target.value" :popUpValue="popUpFilter" @click="(data)=>popUpFilter=data"/>
   <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
-  <TheList v-if="popUpFilter.title" :title-props="popUpFilter.title" :itemList="filteredList"/>
+  <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
    <TheBrandsBox/>
    <TheAboutBox/>
   </NuxtLayout>

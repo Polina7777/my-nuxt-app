@@ -226,7 +226,9 @@ p {
   padding: 20px;
   margin: auto;
 }
-
+.description{
+  font-size: 14px;
+}
 
 
 
@@ -243,11 +245,18 @@ p {
   .grid-box {
     display: flex;
     flex-direction: column;
-    border:1px solid #b4969646;
+    border:1px solid #b4969620;
     border-radius: 10px;
     margin: 10px 0;
  
   }
+  img {
+  width: 140px;
+  height: 130px;
+}
+.description{
+  font-size: 12px;
+}
   .button_td{
     padding: 0;
   }

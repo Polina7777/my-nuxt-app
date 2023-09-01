@@ -64,6 +64,9 @@ height: 300px;
     height: 150px;
 }
 @media (max-width: 570px) {
+    div{
+    padding: 10px;
+}
     ul{
 width: 90%;
 align-items: center;

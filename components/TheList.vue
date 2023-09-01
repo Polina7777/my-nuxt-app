@@ -6,7 +6,9 @@ export default {
     titleProps: String,
     itemList: Array,
   },
-
+created(){
+  this.text=this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null
+},
   data() {
     return {
       text: this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null,
@@ -56,6 +58,7 @@ export default {
 ul {
   display: flex;
   flex-direction: row;
+
  /* flex-wrap: wrap; */
 }
 li{
@@ -84,10 +87,6 @@ justify-content: flex-start;
 }
 
 .no-scroll{
- /* display: grid;
- grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  /* grid-gap: 21px; */
-  /* grid-auto-flow: dense;  */
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;

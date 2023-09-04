@@ -1,13 +1,81 @@
 
 import plus from "../static/images/plus.svg";
+export const hair =[
+  {title:"Очищение",filter:'cleansing'},
+  {title:"Отшелушивание",filter:'exfoliation'},
+  {title:"Сыворотки",filter:'serum'},
+  {title:"Кремы",filter:'cream'},
+  {title:"Маски",filter:'mask'},
+]
+export const body = [
+  {title:"Очищение",filter:'cleansing'},
+  {title:"Отшелушивание",filter:'exfoliation'},
+  {title:"Тонизирование",filter:'toning'},
+  {title:"Сыворотки",filter:'serum'},
+  {title:"Кремы",filter:'cream'},
+  {title:"SPF-защита от солнца",filter:'spf'},
+]
+export const makeUp = [
+  {title:"Для губ",filter:'forLips'},
+  {title:"Для глаз",filter:'forEyes'},
+  {title:"Для лица",filter:'forFace'},
+]
+export const sets =[
+  {title:"Демакияж",filter:'makeUpRemoval'},
+  {title:"Очищение",filter:'cleansing'},
+  {title:"Отшелушивание",filter:'exfoliation'},
+  {title:"Тонизирование",filter:'toning'},
+  {title:"Сыворотки",filter:'serum'},
+  {title:"Кремы",filter:'cream'},
+  {title:"Маски",filter:'mask'},
+  {title:"Тканевые маски",filter:'sheetMask'},
+  {title:"Для кожи вокруг глаз",filter:'eyesCream'},
+  {title:"Патчи",filter:'patches'},
+  {title:"Для губ",filter:'forLips'},
+ {title:"Точечные средства",filter:'pointMeans'},
+  {title:"SPF-защита от солнца",filter:'spf'},
+  {title:"Гаджеты и аксессуары для лица",filter:'accessories'},
+]
+export const mini =[
+  {title:"Демакияж",filter:'makeUpRemoval'},
+  {title:"Очищение",filter:'cleansing'},
+  {title:"Отшелушивание",filter:'exfoliation'},
+  {title:"Тонизирование",filter:'toning'},
+  {title:"Сыворотки",filter:'serum'},
+  {title:"Кремы",filter:'cream'},
+  {title:"Маски",filter:'mask'},
+  {title:"Тканевые маски",filter:'sheetMask'},
+  {title:"Для кожи вокруг глаз",filter:'eyesCream'},
+  {title:"Патчи",filter:'patches'},
+  {title:"Для губ",filter:'forLips'},
+ {title:"Точечные средства",filter:'pointMeans'},
+  {title:"SPF-защита от солнца",filter:'spf'},
+  {title:"Гаджеты и аксессуары для лица",filter:'accessories'},
+]
+export const face =[
+  {title:"Демакияж",filter:'makeUpRemoval'},
+  {title:"Очищение",filter:'cleansing'},
+  {title:"Отшелушивание",filter:'exfoliation'},
+  {title:"Тонизирование",filter:'toning'},
+  {title:"Сыворотки",filter:'serum'},
+  {title:"Кремы",filter:'cream'},
+  {title:"Маски",filter:'mask'},
+  {title:"Тканевые маски",filter:'sheetMask'},
+  {title:"Для кожи вокруг глаз",filter:'eyesCream'},
+  {title:"Патчи",filter:'patches'},
+  {title:"Точечные средства",filter:'pointMeans'},
+  {title:"SPF-защита от солнца",filter:'spf'},
+  {title:"Гаджеты и аксессуары для лица",filter:'accessories'},
+]
 export const  popUpList1= [
-    {title:"Уход за лицом",filter:'forFace'},
-    {title:"Волосы",filter:'forHair'},
-    {title:"Макияж",filter:'forMakeUp'},
-    {title:"Тело",filter:'forBody'},
-   {title: "Наборы",filter:'sets'},
-    {title:"Миниатюры",filter:'mini'},
+    {title:"Уход за лицом",filter:'forFace',popup: face},
+    {title:"Волосы",filter:'forHair',popup: hair},
+    {title:"Макияж",filter:'forMakeUp',popup: makeUp},
+    {title:"Тело",filter:'forBody',popup: body},
+   {title: "Наборы",filter:'sets',popup: sets},
+    {title:"Миниатюры",filter:'mini',popup: mini},
   ];
+
 
  export const popUpList2= [
     {title:"Демакияж",filter:'makeUpRemoval'},
@@ -96,4 +164,4 @@ export const  popUpList1= [
       class:'orange'
     },
   ];
-  export const data = {popUpList1,popUpList2,navScheme1,navScheme2,delivery}
+  export const data = {popUpList1,popUpList2,navScheme1,navScheme2,delivery,face,hair,body,makeUp,sets,mini}

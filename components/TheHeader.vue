@@ -42,7 +42,8 @@ export default {
       showMobileMenu: false,
       internalValue: this.value,
       internalPopUpValue: this.popUpValue,
-    };
+      clickPopUpValue:{title:'',open:false},
+  }
   },
   methods: {
     navigateTo(link: any) {
@@ -55,10 +56,26 @@ export default {
       this.openPopup = false;
       this.showMobileMenu = false;
       this.internalPopUpValue = data;
+      console.log(this.internalPopUpValue)
       this.$emit("click", this.internalPopUpValue);
     },
+    updateClickPopUpValue(data) {
+      // this.openPopup = false;
+      // this.showMobileMenu = false;
+      // this.internalPopUpValue = data;
+      // this.$emit("click", this.internalPopUpValue);
+      console.log(data)
+      if(!this.clickPopUpValue.open){
+        this.clickPopUpValue.title=data;
+      this.clickPopUpValue.open = true;
+      }else{
+        this.clickPopUpValue.title='';
+      this.clickPopUpValue.open = false;
+      }
+   
+    },
     popUpOpen() {
-      navigateTo("/");
+      // navigateTo("/");
       this.openPopup = !this.openPopup;
      
     },
@@ -125,36 +142,38 @@ export default {
     </ul>
     <div v-if="openPopup" class="gray"></div>
     <Teleport to="body">
-      <div v-if="openPopup" class="modal">
-        <div class="popup_wrapper">
-          <ul class="popup_list" id="popup_list_one">
+      <!-- <div v-if="openPopup" class="modal">
+        <div class="popup_wrapper"> -->
+          <!-- <ul class="popup_list" id="popup_list_one">
             <li v-for="(item, index) in popUpList1" :key="index">
               <p
                 class="popup_item"
                 id="popup_list_one_item"
-                @click="updatePopUpValue(item)"
+                @click="updateClickPopUpValue(item.title)"
               >
                 {{ item.title }}
               </p>
-            </li>
-          </ul>
-          <ul class="popup_list" id="popup_list_two">
-            <li v-for="(item, index) in popUpList2" :key="index">
+              <ul v-if="clickPopUpValue.title === item.title && clickPopUpValue.open===true" class="popup_list" id="popup_list_two">
+            <li v-for="(item2, index2) in item.popup" :key="index2">
               <p
                 class="popup_item"
                 id="popup_list_two_item"
-                @click="updatePopUpValue(item)"
+                @click="updatePopUpValue(item2)"
               >
-                {{ item.title }}
+                {{ item2.title }}
               </p>
             </li>
           </ul>
-        </div>
-      </div>
+            </li>
+            
+          </ul> -->
+          <ThePopUpMenu  :openPopup="openPopup" @close="openPopup = false" :updatePopUpValue="updatePopUpValue"/>
+        <!-- </div> -->
+      <!-- </div> -->
     </Teleport>
   </header>
   <header v-if="mobileVersion">
-    <img class="burger" :src="burger" alt="burger" @click="mobileMenuOpen" />
+    <img class="burger" :src="burger" alt="burger" @click="mobileMenuOpen"  :updatePopUpValue="updatePopUpValue"/>
     <Teleport to="body">
       <TheMobileMenu
         :showMobileMenu="showMobileMenu"
@@ -243,6 +262,11 @@ p {
   color: gray;
   z-index: 100;
 }
+.gray{
+  background: #ffffff;
+height: 200px;
+}
+
 .phone {
   min-width: 140px;
 }
@@ -256,8 +280,9 @@ p {
   font-size: 15px;
   margin: 0;
 }
-
+/* 
 #popup_list_one {
+  position: relative;
   font-size: 20px;
   min-height: 350px;
   gap: 20px;
@@ -269,13 +294,25 @@ p {
 #popup_list_two_item {
   font-size: 11px;
 }
+#popup_list_two_item:hover {
+  color: #b49696;
+}
 
 #popup_list_two {
+  position: absolute;
+  left: 155px;
+  top:0px;
+  color: black;
   background: white;
   text-align: start;
   max-height: 350px;
   padding: 0 20px;
+  width: 170px;
+  max-width: 170px;
 }
+#popup_list_two:hover {
+  color: black;
+} */
 
 .wrapper {
   justify-content: space-between;
@@ -303,8 +340,8 @@ input {
   border-color: transparent;
   width: 90%;
   min-width: 300px;
-}
-.popup_list {
+ }
+/* .popup_list {
   display: flex;
   flex-direction: column;
   background: #efe1e1;
@@ -316,7 +353,7 @@ input {
   min-height: 350px;
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
-}
+}  */
 
 ul {
   display: flex;

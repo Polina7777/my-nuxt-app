@@ -74,4 +74,11 @@ align-items: center;
 }
 
 }
+@media (max-width: 350px) {
+img{
+    width: 250px;
+    height: 300px;
+}
+
+}
 </style>

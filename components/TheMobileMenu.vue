@@ -86,7 +86,7 @@ export default {
         <div v-if="openPopup && item.title ==='Каталог'" class="popUp_box">
           <ul class="popup_list" id="popup_list">
             <li v-for="(item, index) in popUpList" :key="index">
-              <p class="popup_item" @click = updatePopUpValue(item) >{{ item.title }}</p>
+              <p class="popup_item" @click = "updatePopUpValue? updatePopUpValue(item):null ">{{ item.title }}</p>
             </li>
           </ul> 
         </div>

@@ -116,7 +116,7 @@ ul,
   display: flex;
   flex-direction: column;
 }
-@media (max-width:570px) {
+@media (max-width:700px) {
   ul{
     display: flex;
     flex-direction: row;

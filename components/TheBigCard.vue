@@ -129,7 +129,7 @@ export default {
   gap: 30px;
   margin: 0 auto;
   width: 71%;
-  padding: 30px;
+  padding-top: 70px;
 }
 
 .count_buttons,
@@ -150,6 +150,8 @@ export default {
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
+    min-width: 300px;
 }
 .box_button, .box_button:hover, .box_button:active {
     background: transparent;
@@ -165,6 +167,7 @@ export default {
 .description_small {
   width: 80%;
   font-size: 23px;
+  /* text-align: center; */
 }
 .title,
 p {
@@ -174,6 +177,7 @@ p {
 .description {
   width: 80%;
   font-size: 15px;
+  /* text-align: center; */
 }
 
 img {
@@ -187,13 +191,12 @@ button {
 }
 @media (max-width: 1000px) {
   .card_wrapper {
-
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
   margin: 0 auto;
   width: 87%;
-  padding: 0;
+  padding-top: 70px;
   align-items: center;
 }
 .info_box{
@@ -213,6 +216,9 @@ img {
 @media (max-width: 610px) {
   .card_wrapper {
   width: 97%;
+}
+.description,.description_small{
+  text-align: center;
 }
 }
 </style>

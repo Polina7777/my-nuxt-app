@@ -15,8 +15,8 @@ const pay=[
 const title = "Оформление заказа";
 const subtitle1 = "Ваши данные";
 const subtitle2 = "Ваш заказ";
-const subtitle3 = "Способ оплаты";
-const subtitle4 = "Способ доставки";
+const subtitle3 = "Способ оплаты:";
+const subtitle4 = "Способ доставки:";
 const delivery1 = "Курьером до двери";
 const delivery2 = "Пункт выдачи";
 const delivery3 = "Почта России";
@@ -73,12 +73,13 @@ const schema = {
 };
 
 async function onSubmit(values) {
-//console.log(JSON.stringify(values, null, 2));
+
  const price = (values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number(route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number(route.query.amount) + Number(100): Number(route.query.amount);
  const order = await ordersApi.createNewOrder(values,price);
- console.log(order)
   if(values.pay === "Оплата онлайн"){
     router.push(`/pay?amount=${price}&id=${order.id}`);
+  }else{
+    router.push('/');
   }
   }
 
@@ -86,7 +87,7 @@ async function onSubmit(values) {
 <template>
     <div class="form_wrapper">
         <p class="title">{{ title }}</p>
-      <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }">
+      <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }" class="form">
         <div class="field_box">
         <Field name="name" type="text" :validation-schema="schema" class="input"  placeholder="ФИО"/>
       <ErrorMessage name="name"  class="error_text"/>
@@ -103,7 +104,7 @@ async function onSubmit(values) {
       <Field name="comment" type="text" :validation-schema="schema" class="comment_input" placeholder="Комментарий" />
       <ErrorMessage name="comment" class="error_text" />
     </div>
-
+<div class="radio_wrapper">
         <div>
       <p>{{ subtitle4}}</p>
        <ul >
@@ -142,6 +143,7 @@ async function onSubmit(values) {
         </div>
       </ul>
     </div>
+  </div>
     <ThePriceBox :amount="(values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number($route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number($route.query.amount) + Number(100): Number($route.query.amount)" />
    
     
@@ -154,12 +156,41 @@ async function onSubmit(values) {
 .form_wrapper{
     display: flex;
     flex-direction: column;
+    justify-content: center;
+align-items: center;
     padding: 20px;
+    width: 100%;
 }
+.form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+
+}
+div{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  text-align: -webkit-center;
+}
+/* .radio_wrapper{
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+width: 70%;
+} */
+/* div{
+  width: 80%;
+} */
 .field_box{
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 5px;
+    width: 100%;
 }
 .error_text{
     padding-left: 21px;
@@ -186,7 +217,7 @@ async function onSubmit(values) {
 .radio_inputs {
   display: flex;
   flex-direction: column;
-  min-width: 200px;
+  min-width: 300px;
 }
 label {
   display: flex;
@@ -199,7 +230,7 @@ label {
   padding: 11px;
   border-radius: 10px;
   border-color: transparent;
-  width: 71%;
+  width: 80%;
   min-width: 250px;
   position: relative;
 }
@@ -210,7 +241,7 @@ label {
   padding: 7px;
   border-radius: 10px;
   border-color: transparent;
-  width: 71%;
+  width: 80%;
   min-width: 250px;
   position: relative;
 }
@@ -238,7 +269,8 @@ li{
     border: 2px solid #b49696;
     background: #efe1e1;
     border-radius: 7px;
-    width: 270px;
+    width: 300px;
+    min-width: 250px;
     padding: 11px;
     color: white;
     font-size: 17px;
@@ -253,10 +285,43 @@ a {
   color: var(--text-color);
 }
 
-
-
 button:hover,
 button:active {
   background: #b49696;
+}
+@media (max-width: 350px) {
+  div{
+    width: 100%;
+  }
+  
+  .form_wrapper{
+    padding: 10px;
+  }
+.form{
+  width: 100%;
+}
+.radio_inputs {
+  display: flex;
+  flex-direction: column;
+  min-width: 250px;
+}
+li{
+    border: 2px solid #b49696;
+    background: #efe1e1;
+    border-radius: 7px;
+    width: 250px;
+    padding: 11px;
+    color: white;
+    font-size: 17px;
+
+}
+.title{
+  padding-top: 20px;
+  font-size: 21px;
+}
+.input{
+min-width: 250px;
+width: 250px;
+}
 }
 </style>

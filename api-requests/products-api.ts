@@ -14,13 +14,13 @@ export const getAllProductsWithCollection = async()=>{
     return products;
 }
 export const filterProductsBySearchString = async(string)=>{
+  console.log(string)
   const response = await fetch(`${url_ngrok}api/products?filters[description_small][$containsi]=${string}`,{method:'GET'});
   const data = await response.json();
   const products = data.data
   return products;
 }
 export const filterProductsByPopUpFilter = async(string)=>{
-  console.log(string)
   const response = await fetch(`${url_ngrok}api/products?filters[${string}]=true`,{method:'GET'});
   const data = await response.json();
   const products = data.data
@@ -51,21 +51,22 @@ export const sortProductsDESC = async()=>{
     const product = data.data
     return product;
 }
-export const getAllNewProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[new]=true`,{method:'GET'});
+export const getAllNewProducts = async(string)=>{
+    const response = await fetch(`${url_ngrok}api/products?filters[new]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
+    console.log(products)
     return products;
 }
-export const getAllSaleProducts = async()=>{
+export const getAllSaleProducts = async(string)=>{
     const sale = true;
-    const response = await fetch(`${url_ngrok}api/products?filters[sale]=${sale}`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?filters[sale]=${sale}&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllBestsellerProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[bestseller]=true`,{method:'GET'});
+export const getAllBestsellerProducts = async(string)=>{
+    const response = await fetch(`${url_ngrok}api/products?filters[bestseller]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;

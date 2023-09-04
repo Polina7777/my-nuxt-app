@@ -6,7 +6,10 @@ export default {
     titleProps: String,
     itemList: Array,
   },
-created(){
+// created(){
+//   this.text=this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null
+// },
+beforeUpdate() {
   this.text=this.titleProps?`Показать все ${this.titleProps?.toLowerCase()}`: null
 },
   data() {
@@ -44,9 +47,12 @@ created(){
 
 <style scoped>
 .list_wrapper {
+  /* padding-top: 35px; */
   display: flex;
   flex-direction: column;
+  /* min-height: 630px; */
   min-height: 400px;
+  margin: auto;
 }
 .title{
     text-align: center;
@@ -75,10 +81,19 @@ color: #B49696;
 margin: auto;
 }
 
+/* @media (max-width: 890px) {
+  ul {
+    flex-wrap: nowrap;
+overflow: scroll;
+justify-content: flex-start;
+}
+} */
+
 @media (max-width: 610px) {
   .list_wrapper{
     padding: 21px;
-
+    width: 95%;
+    /* min-height: 615px; */
   }
   ul {
     flex-wrap: nowrap;

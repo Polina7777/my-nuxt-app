@@ -2,6 +2,12 @@
 import logo from "../static/images/logo.svg";
 
 export default {
+  mounted() {
+    const widthDevice = window.innerWidth;
+    if (widthDevice < 650) {
+      this.mobileVersion = true;
+    }
+  },
   data() {
     return {
       title: "О магазине",
@@ -9,7 +15,9 @@ export default {
         "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.",
       text2:
         "Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
+        text3: "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
       logo: logo,
+      mobileVersion:false,
     };
   },
   methods: {
@@ -23,12 +31,20 @@ export default {
 <template>
   <div class="wrapper">
     <p class="title">{{ title }}</p>
-    <div class="info">
+    <div v-if="!mobileVersion" class="info">
     <div class="text_wrapper">
       <img :src="logo" alt="logo" />
       <p class="text1">{{ text1 }}</p>
     </div>
     <p class="text2">{{ text2 }}</p>
+  </div>
+  <div v-if="mobileVersion" class="info">
+    <div class="text_wrapper-mobile">
+      <img :src="logo" alt="logo" />
+      <p class="text">{{ text1 }}</p>
+          <p class="text">{{ text2 }}</p>
+    </div>
+    <!-- <p class="text2">{{ text2 }}</p> -->
   </div>
   </div>
 </template>
@@ -51,10 +67,15 @@ width: 40%;
   flex-direction: row;
 justify-content: center;
 align-items: center;
+white-space: break-spaces;
+width: 70%;
 gap:70px;
 }
+.text{
+  width: 90%;
+}
 .text2{
-  padding-top:20px;
+  padding-top:83px;
 }
 img{
   width: 80%;
@@ -80,20 +101,55 @@ gap:30px;
 }
 .text1,.text2{
   font-size: 11px;
+}
+}
+.text_wrapper-mobile{
+  width: 90%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+@media (max-width:1130px) {
+.info{
+  width: 80%;
+}
+}
+@media (max-width:900px) {
+  .wrapper{
+    padding:20px 0 30px;
+  }
+.info{
+  width: 95%;
+}
+.text1,.text2{
+  font-size: 14px;
 font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 }
-
 @media (max-width:610px) {
 .wrapper{
   padding: 30px;
   overflow: scroll;
+  background: linear-gradient(48.24deg, #B49696 79.26%, #CFB9B9 97.15%, #D5C0C0 86.56%, #EFE1E1 177%);
 }
 .text_wrapper, .text2{
   display: flex;
 flex-direction: column;
-min-width: 300px;
+/* min-width: 300px; */
 }
-  
+ 
+}
+@media (max-width: 350px) {
+  .wrapper{
+    padding: 10px;
+  }
+  .info{
+    width: 100%;
+  }
+  img{
+    height: 80px;
+  }
 }
 </style>

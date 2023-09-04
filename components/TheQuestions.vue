@@ -135,7 +135,7 @@ li{
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  gap: 30vw;
+  gap: 10vw;
 }
 .box_button,
 .box_button:hover,
@@ -159,6 +159,11 @@ li{
 }
 .question {
   font-size: 17px;
+}
+}
+@media (max-width:400px) {
+  .box {
+  gap: 0;
 }
 }
 </style>

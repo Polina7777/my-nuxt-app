@@ -29,7 +29,9 @@ export default {
   },
   methods: {
     increaseQuantity() {
-      this.giftCardInfo.count++;
+      if(this.giftCardInfo){
+        this.giftCardInfo.count++;
+      }
     },
     decreaseQuantity() {
       if (this.giftCardInfo.count > 1) {
@@ -67,14 +69,14 @@ export default {
         <p class="title">{{ text1 }}</p>
         <div class="count_buttons">
           <button @click="decreaseQuantity()">-</button>
-          {{ giftCardInfo.count }}
+          {{giftCardInfo? giftCardInfo.count : 0 }}
           <button @click="increaseQuantity()">+</button>
         </div>
         <p class="title">{{ text2 }}</p>
         <div class="subtext_wrapper">
           <p
             :class="
-              this.giftCardInfo.name.type === subtext1
+              giftCardInfo.name.type === subtext1
                 ? 'subtextClicked'
                 : 'subtext'
             "
@@ -83,7 +85,7 @@ export default {
             {{ subtext1 }}
           </p>
           <p     :class="
-              this.giftCardInfo.name.type === subtext2
+              giftCardInfo.name.type === subtext2
                 ? 'subtextClicked'
                 : 'subtext'
             " @click="subtitleClick(subtext2)">{{ subtext2 }}</p>
@@ -97,14 +99,14 @@ export default {
         <div class="inputs_wrapper">
           <div class="subtext_wrapper">
             <p     :class="
-              this.giftCardInfo.adress.type === subtext3
+            giftCardInfo.adress.type === subtext3
                 ? 'subtextClicked'
                 : 'subtext'
             " @click="subtitleClick(subtext3)">
               {{ subtext3 }}
             </p>
             <p     :class="
-              this.giftCardInfo.adress.type === subtext4
+             giftCardInfo.adress.type === subtext4
                 ? 'subtextClicked'
                 : 'subtext'
             " @click="subtitleClick(subtext4)">
@@ -156,11 +158,17 @@ img {
   padding: 30px;
 }
 .wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 70px;
     align-items: flex-start;
+    padding-top: 50px;
 }
 input {
-  max-width: 430px;
-  min-width: 270px;
+padding: 10px;
+  min-width: 400px;
 }
 .inputs_wrapper {
   display: flex;
@@ -188,12 +196,15 @@ input {
 .wide {
   min-height: 170px;
   max-width: 430px;
-  min-width: 270px;
+  /* min-width: 500px; */
   text-align: start;
 }
 .info_wrapper {
-  text-align: center;
-  width: 63%;
+  display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap:17px;
 }
 ul {
   display: flex;
@@ -216,9 +227,11 @@ li {
   color: black;
   font-size: 27px;
 }
+
 .title {
   text-align: center;
-  padding: 27px;
+  padding: 11px;
+  padding-bottom: 10px;
 }
 .basket_button {
   margin: 20px auto;
@@ -245,6 +258,28 @@ button {
 .button:hover,
 .button:active {
   background: #efe1e1;
+}
+@media (max-width: 690px) {
+  .giftcard_wrapper {
+  margin: auto;
+  padding: 10px;
+}
+  .inputs_wrapper{
+    width: 100%;
+  }
+  .info_wrapper{
+    align-items: center;
+    width: 95%;
+  }
+  input,.wide{
+    width: 90%;
+  }
+  .wide{
+min-width: 90%;
+  }
+  .wrapper{
+    gap: 21px;
+  }
 }
 @media (max-width: 550px) {
   .info_wrapper{

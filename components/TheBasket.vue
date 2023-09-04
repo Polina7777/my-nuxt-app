@@ -97,7 +97,7 @@ export default {
 </script>
 <template>
    <div class="card-wrapper">
-  <div class="grid-box">
+  <div class="grid-box no-border">
     <p class="basket_title">Корзина</p>
         <p class="hide">Количество</p>
         <p class="hide">Цена</p>
@@ -230,14 +230,12 @@ p {
   font-size: 14px;
 }
 
-
-
-
 .grid-box {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   grid-gap: 17px;
   grid-auto-flow: dense;
+  padding-top: 20px;
 }
 
 
@@ -245,10 +243,14 @@ p {
   .grid-box {
     display: flex;
     flex-direction: column;
-    border:1px solid #b4969620;
+    border:3px solid #b4969620;
     border-radius: 10px;
     margin: 10px 0;
- 
+  }
+
+.no-border{
+    font-size: 21px;
+    border:none;
   }
   img {
   width: 140px;
@@ -266,6 +268,7 @@ p {
   }
   .basket_title{
     font-size: 21px;
+    border-color: white;
   }
   
 }

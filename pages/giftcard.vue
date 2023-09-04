@@ -1,8 +1,8 @@
 <template>
     <NuxtLayout name="custom">
         <TheHeader/>
-    <div>
+    <!-- <div> -->
         <TheGiftCard/>
-    </div>
+    <!-- </div> -->
     </NuxtLayout>
 </template>

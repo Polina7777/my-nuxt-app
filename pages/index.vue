@@ -34,6 +34,7 @@ methods:{
 },
 watch: {
     searchString: async function filter(){
+      console.log(this.searchString)
      this.filterListBySearchString()
     }, 
    popUpFilter: async function filterPopUp(){
@@ -45,7 +46,8 @@ watch: {
 <template>
     <div>
       <NuxtLayout name="custom">
-   <TheHeader :value="searchString" @input="searchString = $event.target.value" :popUpValue="popUpFilter" @click="(data)=>popUpFilter=data"/>
+   <TheHeader :value="searchString"
+:popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data" />
   <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
@@ -61,3 +63,7 @@ watch: {
     width: 100%;
   }
 </style>
+<!-- :value="searchString"
+:popUpValue="popUpFilter" -->
+<!-- @click="(data)=>popUpFilter=data"
+@input="searchString = $event.target.value" -->

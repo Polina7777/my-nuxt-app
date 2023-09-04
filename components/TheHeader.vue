@@ -7,25 +7,27 @@ import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 import burger from "../static/images/burger.svg";
-import { data } from  "../static/data";
+import { data } from "../static/data";
 export default {
   props: {
     value: String,
-    popUpValue:Object,
+    popUpValue: Object,
   },
+  emits:
+["input","click"],
   mounted() {
-    const widthDevice = window.innerWidth
-    if (widthDevice < 610) {
-      this.mobileVersion = true
+    const widthDevice = window.innerWidth;
+    if (widthDevice < 650) {
+      this.mobileVersion = true;
     }
   },
   data() {
     return {
-      popUpList1:data.popUpList1,
-      popUpList2:data.popUpList2,
-      navScheme1:data.navScheme1,
-      navScheme2:data.navScheme2,
-      mobileVersion:false,
+      popUpList1: data.popUpList1,
+      popUpList2: data.popUpList2,
+      navScheme1: data.navScheme1,
+      navScheme2: data.navScheme2,
+      mobileVersion: false,
       plus: plus,
       logo: logo,
       search: search,
@@ -33,50 +35,47 @@ export default {
       phone: phone,
       whatsapp: whatsapp,
       vk: vk,
-      burger:burger,
+      burger: burger,
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
       openPopup: false,
-      showMobileMenu:false,
+      showMobileMenu: false,
       internalValue: this.value,
-      internalPopUpValue:this.popUpValue,
-    }
+      internalPopUpValue: this.popUpValue,
+    };
   },
   methods: {
     navigateTo(link: any) {
       this.$router.push(link);
     },
     updateValue(event) {
-      // this.internalValue = event.target.value;
-    //  this.$emit("input", this.internalValue);
-    this.$emit("input", event.target.value);
+      this.$emit("input", event.target.value);
     },
     updatePopUpValue(data) {
       this.openPopup = false;
-      this.showMobileMenu=false;
+      this.showMobileMenu = false;
       this.internalPopUpValue = data;
-    this.$emit("click", this.internalPopUpValue);
+      this.$emit("click", this.internalPopUpValue);
     },
-   popUpOpen(){
-    this.openPopup = true;
-    navigateTo('/');
+    popUpOpen() {
+      navigateTo("/");
+      this.openPopup = !this.openPopup;
+     
     },
-    mobileMenuOpen(){
+    mobileMenuOpen() {
       this.showMobileMenu = true;
-    }
-  
+    },
   },
 };
 </script>
-
 <template>
   <header v-if="!mobileVersion">
-    <ul>
+    <ul  class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
       </li>
     </ul>
-    <div class="wrapper header-wrapper">
+    <div class="header-wrapper">
       <img
         class="logo-header"
         :src="logo"
@@ -86,9 +85,9 @@ export default {
       <div class="input_wrapper">
         <input
           class="search_input"
-         placeholder="Поиск товара"
-         :value="value"
-      
+          placeholder="Поиск товара"
+          :value="value"
+       @input="updateValue"
         />
         <img class="search_img" :src="search" alt="search" />
         <nuxt-link to="basket">
@@ -111,9 +110,7 @@ export default {
         <button
           :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
           @click="
-            item.title === 'Каталог'
-              ? popUpOpen()
-              : navigateTo(item.navigate)
+            item.title === 'Каталог' ? popUpOpen() : navigateTo(item.navigate)
           "
         >
           {{ item.title }}
@@ -132,64 +129,62 @@ export default {
         <div class="popup_wrapper">
           <ul class="popup_list" id="popup_list_one">
             <li v-for="(item, index) in popUpList1" :key="index">
-              <p class="popup_item" id="popup_list_one_item" @click = updatePopUpValue(item)>{{ item.title }}</p>
+              <p
+                class="popup_item"
+                id="popup_list_one_item"
+                @click="updatePopUpValue(item)"
+              >
+                {{ item.title }}
+              </p>
             </li>
           </ul>
           <ul class="popup_list" id="popup_list_two">
             <li v-for="(item, index) in popUpList2" :key="index">
-              <p class="popup_item"  id="popup_list_two_item" @click = updatePopUpValue(item) >{{ item.title }}</p>
+              <p
+                class="popup_item"
+                id="popup_list_two_item"
+                @click="updatePopUpValue(item)"
+              >
+                {{ item.title }}
+              </p>
             </li>
           </ul>
         </div>
-        <button class="close" @click="openPopup = false">х</button>
       </div>
     </Teleport>
   </header>
   <header v-if="mobileVersion">
-    <img
-        class="burger"
-        :src="burger"
-        alt="burger"
-        @click="mobileMenuOpen"
-      />
-      <Teleport to="body">
+    <img class="burger" :src="burger" alt="burger" @click="mobileMenuOpen" />
+    <Teleport to="body">
       <TheMobileMenu
         :showMobileMenu="showMobileMenu"
         :updatePopUpValue="updatePopUpValue"
         @close="showMobileMenu = false"
       />
-      </Teleport>
+    </Teleport>
     <img
-        class="logo-header"
-        :src="logo"
-        alt="header-logo"
-        @click="navigateTo('/')"
-      />
+      class="logo-header"
+      :src="logo"
+      alt="header-logo"
+      @click="navigateTo('/')"
+    />
     <div class="wrapper header-wrapper">
- 
       <div class="input_wrapper">
-        <input
-          class="search_input"
-         placeholder="Поиск товара"
-         :value="value"
-      
-        />
+        <input class="search_input" placeholder="Поиск товара" :value="value" />
         <img class="search_img" :src="search" alt="search" />
         <nuxt-link to="basket">
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
         </nuxt-link>
       </div>
-
     </div>
-
   </header>
 </template>
 
-<style>
+<style scoped>
 * {
   box-sizing: border-box;
 }
-header{
+header {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -200,16 +195,24 @@ p {
   font-size: 17px;
   margin: 0;
 }
-.header-wrapper{
-  width: 87%;
+.header-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  /* width: 70%; */
 }
-.burger{
-width: 50px;
-height: 50px;
-position: absolute;
-z-index: 1000px;
-left: 21px;
-top:21px;
+/* .nav{
+  font-size: 17px;
+} */
+.burger {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  z-index: 210px;
+  left: 15px;
+  top: 9px;
 }
 .wrapper,
 .contacts_wrapper,
@@ -228,8 +231,8 @@ top:21px;
   gap: 0;
   z-index: 100;
   border: 1px solid rgb(191, 188, 188);
-  border-top-right-radius:10px ;
-  border-bottom-right-radius:10px ;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 .close {
   padding: 5px 8px;
@@ -240,12 +243,14 @@ top:21px;
   color: gray;
   z-index: 100;
 }
-.phone{
+.phone {
   min-width: 140px;
 }
-.search_img{
+.search_img {
   position: absolute;
-  left: 75%;
+  /* margin: 10px; */
+  left: 79%;
+  /* left: 390px; */
 }
 .popup_item {
   font-size: 15px;
@@ -277,26 +282,27 @@ top:21px;
 }
 .logo-header {
   width: 30%;
-  min-width: 200px;
+  min-width: 300px;
   height: 83px;
-  padding-right: 10px;
+  padding: 0 20px;
 }
 img {
   width: 21px;
   height: 21px;
 }
 .input_wrapper {
-  width: 50%;
+  width: 40%;
+  min-width: 300px;
   position: relative;
 }
-.search_input, input{
-  background:#efe1e1;
-  padding: 7px;
+.search_input,
+input {
+  background: #efe1e1;
+  padding: 10px;
   border-radius: 10px;
   border-color: transparent;
-  width: 71%;
-  min-width: 250px;
-
+  width: 90%;
+  min-width: 300px;
 }
 .popup_list {
   display: flex;
@@ -323,10 +329,11 @@ ul {
   align-items: center;
   padding: 0 10px;
 }
-li{
+li {
   text-align: center;
 }
-li:hover, a:hover{
+li:hover,
+a:hover {
   color: #b49696;
 }
 
@@ -369,41 +376,110 @@ button:active,
 .title {
   font-size: 27px;
 }
-
-@media (max-width: 800px) {
-  .wrapper{
+@media (max-width: 1100px) {
+  .header-wrapper {
     flex-wrap: wrap;
     justify-content: center;
-  }  
+    width: 100%;
+  }
+  .search_img {
+    left: 83%;
+  }
 }
-@media (max-width: 883px) {
-  .navigation{
-  flex-wrap: nowrap;
-justify-content: flex-start;
-gap: 0;
-overflow: scroll;
-width: 90%;
+@media (max-width: 890px) {
+  .navigation {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    overflow: scroll;
+    width: 90%;
+  }
+}
+@media (max-width: 1728px) {
+  .search_img {
+    left: 86%;
+  }
+  .popup_wrapper {
+  left: 21%;
+  top: 28%;
 }
 }
-@media (max-width:610px) {
-  p,a {
-  font-size: 14px;
+@media (max-width: 1450px) {
+  .search_img {
+    left: 84%;
+  }
+  .popup_wrapper {
+  left: 19%;
+  top: 28%;
 }
-.title{
-  font-size: 21px;
 }
-.navigation{
-  flex-wrap: nowrap;
-justify-content: flex-start;
-gap: 0;
-overflow: scroll;
-width: 90%;
+@media (max-width: 1350px) {
+  .popup_wrapper {
+  left: 17%;
+  top: 28%;
 }
-.search_img{
- display: none;
 }
-  
+@media (max-width: 1150px) {
+  .search_img {
+    left: 84%;
+  }
+  .popup_wrapper {
+  left: 14%;
+  top: 28%;
 }
-
+}
+@media (max-width: 955px) {
+  .search_img {
+    left: 82%;
+  }
+  .popup_wrapper {
+  left: 7%;
+  top: 31%;
+}
+}
+@media (max-width: 710px) {
+  .search_img {
+    left: 79%;
+  }
+}
+@media (max-width: 610px) {
+  p,
+  a {
+    font-size: 14px;
+  }
+  .title {
+    font-size: 21px;
+  }
+  .navigation {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    gap: 0;
+    overflow: scroll;
+    width: 90%;
+  }
+  .input_wrapper {
+    width: 90%;
+    /* min-width: 300px; */
+    position: relative;
+  }
+  .search_img {
+    display: none;
+  }
+  .logo-header {
+    width: 41%;
+    min-width: 230px;
+    height: 83px;
+    padding: 0 20px;
+  }
+}
+@media (max-width: 350px) {
+ .search_input{
+  min-width: 250px;
+ }
+ .burger{
+  width: 67px;
+  height: 67px;
+  padding-right: 41px;
+ }
+}
 </style>
- 

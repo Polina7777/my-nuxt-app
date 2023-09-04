@@ -1,8 +1,4 @@
 <script lang="ts">
-import method1 from "../static/images/method1.svg";
-import method2 from "../static/images/method2.svg";
-import method3 from "../static/images/method3.svg";
-import method4 from "../static/images/method4.svg";
 import price from "../static/images/price.svg";
 import termin from "../static/images/termin.svg";
 import payment_type from "../static/images/payment_type.svg";
@@ -11,7 +7,6 @@ import { data } from "../static/data";
 export default {
   data() {
     return {
-      // methods:[method1,method2,method3,method4],
       methods: data.delivery,
       priceImg: price,
       termin: termin,
@@ -28,9 +23,9 @@ export default {
 <template>
   <NuxtLayout name="custom">
     <TheHeader />
-    <div>
+    <div class="delivery_wrapper">
       <p>{{ title }}</p>
-      <span>{{ text }}</span>
+      <span class="sub_title">{{ text }}</span>
       <ul class="grid-box">
         <li v-for="(item, index) in methods" :key="index" :class="item.class">
           <span class="item_title">{{ item.title }}</span>
@@ -47,7 +42,6 @@ export default {
             <img :src="payment_type" alt="payment_type" />
             <span>{{ item.payment_type }}</span>
           </div>
-          <!-- <img :src="item" alt="method" :class="index>1?'smaller':null"/> -->
         </li>
       </ul>
       <img class="adresses" :src="adresses" alt="adresses" />
@@ -63,15 +57,11 @@ div {
   align-items: center;
   padding: 30px;
 }
-/* .grid-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 17px;
-    grid-auto-flow: dense;
-    gap: 10px;
-    padding: 0;
-    width: 100%;
-  } */
+.sub_title{
+  font-size: 21px;
+  padding-bottom: 20px;
+  text-align: center;
+}
 .info {
   display: flex;
   flex-direction: row;
@@ -84,25 +74,16 @@ li {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* justify-content: space-evenly; */
   align-items: center;
-  /* max-width: 396px; */
-
   width: 396px;
   min-width: 290px;
   height: 401px;
   gap: 15px;
   margin: 10px;
 }
-.sub_price{
-    padding-left: 40px;
-}
 .item_title {
   font-size: 24px;
   padding-bottom: 30px;
-}
-p {
-  font-family: Comfortaa;
 }
 .blue {
   background: #d7f1f4;
@@ -147,22 +128,58 @@ span {
   width: 300px;
   height: 100px;
 }
+
 .grid-box {
 padding-top: 20px;
   }
-  @media (max-width:610px) {
+  @media (max-width: 400px) {
+    .delivery_wrapper{
+padding: 40px 0 0 0;
+    }
+  p{
+    font-size: 21px;
+  }  
+  .sub_title{
+    font-size: 17px;
+  }
+  .item_title{
+    font-size: 21px;
+  }
+  }
+  li{
+    padding-top:0 ;
+    padding-bottom: 0;
+    height: 270px;
+  }
+  @media (max-width:940px) {
+    div {
+  padding: 0px;
+}
     .grid-box {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    grid-gap: 17px;
+    grid-gap: 11px;
     grid-auto-flow: dense;
     gap: 10px;
-    padding: 0;
     width: 100%;
   }
   li{
-    width: 90%;
+    width: 95%;
   }
+  }
+  @media (min-width:1385px) {
+    .grid-box{
+      width: 70%;
+    }
+    
+  }
+  @media (min-width:350px) {
+   span{
+    font-size: 12px;
+   }
+   .item_title{
+    font-size: 15px;
+   }
   }
 /* @media (max-width: 610px) { */
   /* .grid-box {

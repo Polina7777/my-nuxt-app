@@ -15,7 +15,6 @@ export default {
       makeUp: data.makeUp,
       sets: data.sets,
       mini: data.mini,
-
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
       popUpList: [...data.popUpList1, ...data.popUpList2],
@@ -23,100 +22,44 @@ export default {
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
       changedValue: {},
-      //   openPopup: false,
     };
   },
   methods: {
-    updateClickPopUpValue(data) {
-      console.log(data);
-    //   if (!this.clickPopUpValue.open) {
+    updateClickPopUpValue(data:string) {
         this.clickPopUpValue.title = data;
         this.clickPopUpValue.open = true;
-    //   } else {
-        //     this.clickPopUpValue.title='';
-        //   this.clickPopUpValue.open = false;
-    //   }
     },
-    leavePopUpItem(event) {
-        console.log(event)
+    leavePopUpItem(event:MouseEvent) {
         if(event.x < 200){
-    //   setTimeout(() => {
         this.clickPopUpValue.title = "";
         this.clickPopUpValue.open = false;
-    //   }, 100);
     }
-      //     this.clickPopUpValue.title='';
-      //   this.clickPopUpValue.open = false;
     },
-    // updateData(item) {
-    //   //     {title:"Уход за лицом",filter:'forFace',popup: face},
-    //   //     {title:"Волосы",filter:'forHair',popup: hair},
-    //   //     {title:"Макияж",filter:'forMakeUp',popup: makeUp},
-    //   //     {title:"Тело",filter:'forBody',popup: body},
-    //   //    {title: "Наборы",filter:'sets',popup: sets},
-    //   //     {title:"Миниатюры",filter:'mini',popup: mini},
-    //   this.clickPopUpValue.open = true;
-    //   console.log(item)
-    //   switch (item.title) {
-    //     case "Уход за лицом":
-    //       this.changedValue = this.face;
+}
+}
 
-    //     case "Волосы":
-    //       this.changedValue = this.hair;
-    //     case "Макияж":
-    //       this.changedValue = this.makeUp;
-
-    //     case "Тело":
-    //       this.changedValue = this.body;
-
-    //     case "Наборы":
-    //       this.changedValue = this.sets;
-    //     case "Миниатюры":
-    //       this.changedValue = this.mini;
-    //   }
-    // },
-  },
-  //   watch: {
-  //     changedValue : async function(){
-  //     //  this.filterListBySearchString()
-  // this.changedValue = this.changedValue
-  // console.log(this.changedValue)
-  //     },
-
-  //   },
-};
-// @mouseenter="updateClickPopUpValue(item.title)"
-//                 @mouseleave="leavePopUpItem"
-// @mouseenter="clickPopUpValue.open = true"
 </script>
 <template>
   <Transition name="modal">
-    <div v-if="openPopup" class="modal-mask">
+    <div v-if="openPopup" class="modal-mask" @click="$emit('close')">
       <div class="modal-container">
         <div class="modal-header">
-          <!-- <button class="modal-default-button" @click="$emit('close')">X</button> -->
           <slot name="header"> </slot>
         </div>
         <div class="modal-body">
           <slot name="body">
-            <!-- <button class="modal-default-button" @click="$emit('close')">X</button> -->
             <ul class="popup_list" id="popup_list_one">
               <li v-for="(item, index) in popUpList1" :key="index">
                 <p
                   class="popup_item"
                   @mouseenter="updateClickPopUpValue(item.title)"
                   @mouseleave="leavePopUpItem"
+                  id="popup_list_one_item"
                 >
                   {{ item.title }}
                 </p>
-                <ul v-if="clickPopUpValue.title === item.title && clickPopUpValue.open===true" class="popup_list" id="popup_list_two" >
-                <!-- <ul
-                  v-if="clickPopUpValue.open === true"
-                  class="popup_list"
-                  id="popup_list_two"
-                > -->
+                <ul v-if="clickPopUpValue.title === item.title && clickPopUpValue.open===true && updatePopUpValue" class="popup_list" id="popup_list_two" >
                   <li v-for="(item2, index2) in item.popup" :key="index2">
-                  <!-- <li v-for="(item2, index2) in changedValue" :key="index2"> -->
                     <p
                       class="popup_item"
                       id="popup_list_two_item"
@@ -126,14 +69,8 @@ export default {
                     </p>
                   </li>
                 </ul>
-                <ul v-if="clickPopUpValue.title === ''" class="popup_list" id="popup_list_two" >
-                <!-- <ul
-                  v-if="clickPopUpValue.open === true"
-                  class="popup_list"
-                  id="popup_list_two"
-                > -->
+                <ul v-if="clickPopUpValue.title === '' && updatePopUpValue" class="popup_list" id="popup_list_two" >
                   <li v-for="(item2, index2) in face" :key="index2">
-                  <!-- <li v-for="(item2, index2) in changedValue" :key="index2"> -->
                     <p
                       class="popup_item"
                       id="popup_list_two_item"
@@ -175,19 +112,6 @@ export default {
   margin: 0 5px;
   z-index: 1000;
 }
-/* .modal-container {
-  min-width: 210px;
-  padding: 10px;
-background-color: #d7b5b5;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  border: 2px solid #b49696;
-  border-radius: 10px;
-  color: black;
-  overflow: scroll;
-} */
-
 .popup_wrapper {
   display: flex;
   flex-direction: row;
@@ -202,11 +126,6 @@ background-color: #d7b5b5;
   top: 25%;
   gap: 0;
   z-index: 1000;
-  /* width: 30%; */
-  /* border: 1px solid rgb(191, 188, 188); */
-  /* background: #b49696; */
-  /* border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px; */
 }
 .close {
   padding: 5px 8px;
@@ -217,24 +136,28 @@ background-color: #d7b5b5;
   color: gray;
   z-index: 100;
 }
+li{
+  text-align: start;
+}
 
 #popup_list_one {
   position: relative;
   font-size: 20px;
-  min-height: 350px;
+  min-height: 410px;
   gap: 20px;
   color: white;
-  width: 100%;
+  max-width: 320px;
+  min-width: 250px;
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
 }
 
 #popup_list_one_item {
-  font-size: 20px;
+  font-size: 25px;
 }
 #popup_list_two_item {
   color: black;
-  font-size: 12px;
+  font-size: 15px;
 }
 #popup_list_two_item:hover {
   color: #b49696;
@@ -256,24 +179,28 @@ text-align: start;
   text-align: start;
   gap: 10px;
   font-size: 15px;
-  padding: 20px;
+  padding: 10px;
   margin: 0;
   min-width: 170px;
-  min-height: 350px;
-  /* border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px; */
+  min-height: 410px;
 }
 #popup_list_two {
+  display: flex;
+flex-direction: column;
+justify-content: space-evenly;
+align-items: flex-start;
+
   position: absolute;
-  left: 170px;
+  left: 250px;
   top: 0px;
   color: black;
   background: white;
   text-align: start;
-  max-height: 350px;
-  padding: 0 20px;
-  width: 170px;
-  max-width: 170px;
+  min-height:410px;
+  padding: 10px 10px 10px 20px;
+  max-width: 320px;
+  min-width: 250px;
+  width:100%;
 }
 .modal-default-button {
   padding: 5px 8px;
@@ -299,8 +226,6 @@ a {
   flex-direction: column;
   justify-content: center;
   gap: 10px;
-  /* border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px; */
 }
 
 .modal-default-button {
@@ -345,5 +270,23 @@ button {
 button:hover {
   background-color: transparent;
   color: #efe1e1;
+}
+@media (max-width: 937px) {
+  .modal-container {
+  position: absolute;
+  left: 8%;
+  top: 29%;
+  gap: 0;
+  z-index: 1000;
+}
+}
+@media (max-width: 888px) {
+  .modal-container {
+  position: absolute;
+  left: 8%;
+  top: 31%;
+  gap: 0;
+  z-index: 1000;
+}
 }
 </style>

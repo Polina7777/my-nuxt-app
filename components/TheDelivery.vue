@@ -46,7 +46,6 @@ export default {
       </ul>
       <img class="adresses" :src="adresses" alt="adresses" />
     </div>
-    <!-- <TheFooter/> -->
   </NuxtLayout>
 </template>
 
@@ -111,7 +110,6 @@ ul {
   align-items: center;
   margin: 0 auto;
   padding: 10px;
-  /* width:70%; */
 }
 img {
   width: 27px;
@@ -119,7 +117,7 @@ img {
 }
 p {
   font-size: 27px;
-  padding-bottom: 47px;
+  padding:30px 0  47px;
 }
 span {
   font-size: 19px;
@@ -181,28 +179,5 @@ padding: 40px 0 0 0;
     font-size: 15px;
    }
   }
-/* @media (max-width: 610px) { */
-  /* .grid-box {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    grid-gap: 17px;
-    grid-auto-flow: dense;
-    gap: 0;
-    padding: 0;
-    width: 100%;
-  } */
-
-  /* div { */
-    /* padding: 10px;
-  }
-
-  p {
-    font-size: 17px;
-    padding-bottom: 27px;
-  }
-  span {
-    font-size: 15px; */
-  /* } */
-/* } */
 
 </style>

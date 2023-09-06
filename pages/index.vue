@@ -2,15 +2,7 @@
 import { productsApi } from "../api-requests/products-api";
 
 export default{
-  // layout (context) {
-  //   return 'default'
-  // },
-
   layout: 'custom',
-  // name: 'index',
-
-
-
   data(){
   return{
     searchString:'',
@@ -63,7 +55,3 @@ watch: {
     width: 100%;
   }
 </style>
-<!-- :value="searchString"
-:popUpValue="popUpFilter" -->
-<!-- @click="(data)=>popUpFilter=data"
-@input="searchString = $event.target.value" -->

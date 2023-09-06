@@ -18,15 +18,15 @@ export default {
   },
   methods: {
     async getSaleProducts() {
-      const saleProducts = await productsApi.getAllSaleProducts(this.searchString);
+      const saleProducts = await productsApi.getAllSaleProducts(this.searchString as string);
       this.productsListSale = saleProducts
     },
     async getNewProducts() {
-      const newProducts = await productsApi.getAllNewProducts(this.searchString);
+      const newProducts = await productsApi.getAllNewProducts(this.searchString as string);
       this.productsListNew = newProducts;
     },
     async getBestsellerProducts() {
-      const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString);
+      const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString as string);
       this.productsListBestseller = bestsellerProducts;
     },
   },

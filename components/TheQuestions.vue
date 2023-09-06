@@ -1,9 +1,5 @@
 <script>
-import { productsApi } from "../api-requests/products-api";
 export default {
-  //   created() {
-  //     this.getSaleProducts();
-  //   },
   data() {
     return {
       route: useRoute(),
@@ -56,32 +52,16 @@ export default {
   },
   methods: {
     showDescription(index) {
-      // this.showQuestion = index;
-      // this.hideQuestion = "";
       this.questions[index].show = true;
-      //   if (title === this.title1) {
-      //     this.showTitle1Description = true;
-      //   } else if (title === this.title2) {
-      //     this.showTitle2Description = true;
-      //   }
     },
     hideDescription(index) {
-      // this.hideQuestion = index;
-      // this.showQuestion = "";
       this.questions[index].show = false;
-
-      //   if (title === this.title1) {
-      //     this.showTitle1Description = false;
-      //   } else if (title === this.title2) {
-      //     this.showTitle2Description = false;
-      //   }
     },
   },
 };
 </script>
 
 <template>
-  <!-- <TheHeader /> -->
   <div class="question_list">
     <p class="title">{{ title }}</p>
     <ul>
@@ -107,7 +87,6 @@ export default {
       </li>
     </ul>
   </div>
-  <!-- <TheFooter /> -->
 </template>
 <style scoped>
 .question_list {

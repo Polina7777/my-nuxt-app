@@ -69,11 +69,6 @@ export const createNewGiftCard = async (info:any) => {
           "Content-Type": "application/json",
         },
         method: "DELETE",
-        // body: JSON.stringify({
-        //   data: {
-        //     basket:false
-        //   },
-        // }),
       });
     } catch (error) {
       console.log(error)

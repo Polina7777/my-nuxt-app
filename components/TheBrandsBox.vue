@@ -11,12 +11,6 @@ export default {
     return {
     title:'Представленные бренды',
     text:'Показать все бренды',
-     brand1:brand1,
-     brand2:brand2,
-     brand3:brand3,
-     brand4:brand4,
-     brand5:brand5,
-     brand6:brand6,
     brands:[ brand1,brand2,brand3,brand4,brand5,brand6],
     };
   },

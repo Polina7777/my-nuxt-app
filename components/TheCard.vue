@@ -8,23 +8,20 @@ export default {
     return {
       addText: "В корзину",
       deleteText: "Добавлено",
-      // basket: ref(false)
-      basket: ref(this.card.attributes.basket)
+      basket: ref(this.card?.attributes.basket)
     };
   },
 
   methods: {
     async addToBacket() {
-      console.log("add to basket");
       const addedProduct = await productsApi.addProductToBasket(
-        this.card.id
+        this.card?.id
       );
       this.basket=true;
     },
     async deleteFromBacket() {
-      console.log("delete from backet");
       const deleteProduct = await productsApi.deleteProductFromBasket(
-        this.card.id
+        this.card?.id
       );
       this.basket=false;
     },
@@ -34,10 +31,10 @@ export default {
 
 <template>
   <div class="card_wrapper">
-    <nuxt-link :to="`/${this.card.id}`" class="card_link">
-    <img :src="card.attributes.image" alt="card-image" />
-    <p class="description_small">{{ card.attributes.description_small }}</p>
-    <p>{{ card.attributes.price }}</p>
+    <nuxt-link :to="`/${card?.id}`" class="card_link">
+    <img :src="card?.attributes.image" alt="card-image" />
+    <p class="description_small">{{ card?.attributes.description_small }}</p>
+    <p>{{ card?.attributes.price }}</p>
   </nuxt-link>
     <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
     <button v-if="basket" @click="deleteFromBacket">{{ deleteText }}</button>

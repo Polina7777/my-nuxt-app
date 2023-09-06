@@ -8,13 +8,13 @@ import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 import burger from "../static/images/burger.svg";
 import { data } from "../static/data";
+import { IClickPopUpValue } from "static/interfaces";
 export default {
   props: {
     value: String,
     popUpValue: Object,
   },
-  emits:
-["input","click"],
+  emits: ["input", "click"],
   mounted() {
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
@@ -42,42 +42,35 @@ export default {
       showMobileMenu: false,
       internalValue: this.value,
       internalPopUpValue: this.popUpValue,
-      clickPopUpValue:{title:'',open:false},
-  }
+      clickPopUpValue: { title: "", open: false },
+    };
   },
   methods: {
-    navigateTo(link: any) {
+    navigateTo(link: string) {
       this.$router.push(link);
     },
-    updateValue(event) {
+    updateValue(event:any) {
       this.$emit("input", event.target.value);
     },
-    updatePopUpValue(data) {
+    updatePopUpValue(data:IClickPopUpValue) {
       this.openPopup = false;
       this.showMobileMenu = false;
       this.internalPopUpValue = data;
-      console.log(this.internalPopUpValue)
+      console.log(this.internalPopUpValue);
       this.$emit("click", this.internalPopUpValue);
     },
-    updateClickPopUpValue(data) {
-      // this.openPopup = false;
-      // this.showMobileMenu = false;
-      // this.internalPopUpValue = data;
-      // this.$emit("click", this.internalPopUpValue);
-      console.log(data)
-      if(!this.clickPopUpValue.open){
-        this.clickPopUpValue.title=data;
-      this.clickPopUpValue.open = true;
-      }else{
-        this.clickPopUpValue.title='';
-      this.clickPopUpValue.open = false;
+    updateClickPopUpValue(data: string) {
+      if (!this.clickPopUpValue.open) {
+        this.clickPopUpValue.title = data;
+        this.clickPopUpValue.open = true;
+      } else {
+        this.clickPopUpValue.title = "";
+        this.clickPopUpValue.open = false;
       }
-   
     },
     popUpOpen() {
-      // navigateTo("/");
+      navigateTo("/");
       this.openPopup = !this.openPopup;
-     
     },
     mobileMenuOpen() {
       this.showMobileMenu = true;
@@ -87,7 +80,7 @@ export default {
 </script>
 <template>
   <header v-if="!mobileVersion">
-    <ul  class="nav">
+    <ul class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
       </li>
@@ -104,7 +97,7 @@ export default {
           class="search_input"
           placeholder="Поиск товара"
           :value="value"
-       @input="updateValue"
+          @input="updateValue"
         />
         <img class="search_img" :src="search" alt="search" />
         <nuxt-link to="basket">
@@ -140,40 +133,22 @@ export default {
         />
       </li>
     </ul>
-    <div v-if="openPopup" class="gray"></div>
     <Teleport to="body">
-      <!-- <div v-if="openPopup" class="modal">
-        <div class="popup_wrapper"> -->
-          <!-- <ul class="popup_list" id="popup_list_one">
-            <li v-for="(item, index) in popUpList1" :key="index">
-              <p
-                class="popup_item"
-                id="popup_list_one_item"
-                @click="updateClickPopUpValue(item.title)"
-              >
-                {{ item.title }}
-              </p>
-              <ul v-if="clickPopUpValue.title === item.title && clickPopUpValue.open===true" class="popup_list" id="popup_list_two">
-            <li v-for="(item2, index2) in item.popup" :key="index2">
-              <p
-                class="popup_item"
-                id="popup_list_two_item"
-                @click="updatePopUpValue(item2)"
-              >
-                {{ item2.title }}
-              </p>
-            </li>
-          </ul>
-            </li>
-            
-          </ul> -->
-          <ThePopUpMenu  :openPopup="openPopup" @close="openPopup = false" :updatePopUpValue="updatePopUpValue"/>
-        <!-- </div> -->
-      <!-- </div> -->
+      <ThePopUpMenu
+        :openPopup="openPopup"
+        @close="openPopup = false"
+        :updatePopUpValue="updatePopUpValue"
+      />
     </Teleport>
   </header>
   <header v-if="mobileVersion">
-    <img class="burger" :src="burger" alt="burger" @click="mobileMenuOpen"  :updatePopUpValue="updatePopUpValue"/>
+    <img
+      class="burger"
+      :src="burger"
+      alt="burger"
+      @click="mobileMenuOpen"
+      :updatePopUpValue="updatePopUpValue"
+    />
     <Teleport to="body">
       <TheMobileMenu
         :showMobileMenu="showMobileMenu"
@@ -220,11 +195,7 @@ p {
   justify-content: center;
   align-items: center;
   gap: 10px;
-  /* width: 70%; */
 }
-/* .nav{
-  font-size: 17px;
-} */
 .burger {
   width: 50px;
   height: 50px;
@@ -262,9 +233,9 @@ p {
   color: gray;
   z-index: 100;
 }
-.gray{
+.gray {
   background: #ffffff;
-height: 200px;
+  height: 200px;
 }
 
 .phone {
@@ -272,48 +243,12 @@ height: 200px;
 }
 .search_img {
   position: absolute;
-  /* margin: 10px; */
   left: 79%;
-  /* left: 390px; */
 }
 .popup_item {
   font-size: 15px;
   margin: 0;
 }
-/* 
-#popup_list_one {
-  position: relative;
-  font-size: 20px;
-  min-height: 350px;
-  gap: 20px;
-}
-
-#popup_list_one_item {
-  font-size: 20px;
-}
-#popup_list_two_item {
-  font-size: 11px;
-}
-#popup_list_two_item:hover {
-  color: #b49696;
-}
-
-#popup_list_two {
-  position: absolute;
-  left: 155px;
-  top:0px;
-  color: black;
-  background: white;
-  text-align: start;
-  max-height: 350px;
-  padding: 0 20px;
-  width: 170px;
-  max-width: 170px;
-}
-#popup_list_two:hover {
-  color: black;
-} */
-
 .wrapper {
   justify-content: space-between;
 }
@@ -340,20 +275,7 @@ input {
   border-color: transparent;
   width: 90%;
   min-width: 300px;
- }
-/* .popup_list {
-  display: flex;
-  flex-direction: column;
-  background: #efe1e1;
-  text-align: start;
-  gap: 10px;
-  font-size: 15px;
-  padding: 20px;
-  margin: 0;
-  min-height: 350px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}  */
+}
 
 ul {
   display: flex;
@@ -383,6 +305,7 @@ button,
   padding: 15px 40px;
   font-size: 17px;
   border-radius: 20px;
+  z-index: 100000;
   border: none;
 }
 .button {
@@ -392,6 +315,7 @@ button,
   background-color: #efe1e1;
   color: white;
   padding-right: 60px;
+  z-index: 9999;
 }
 button:active,
 .popup_button {
@@ -437,42 +361,42 @@ button:active,
     left: 86%;
   }
   .popup_wrapper {
-  left: 21%;
-  top: 28%;
-}
+    left: 21%;
+    top: 28%;
+  }
 }
 @media (max-width: 1450px) {
   .search_img {
     left: 84%;
   }
   .popup_wrapper {
-  left: 19%;
-  top: 28%;
-}
+    left: 19%;
+    top: 28%;
+  }
 }
 @media (max-width: 1350px) {
   .popup_wrapper {
-  left: 17%;
-  top: 28%;
-}
+    left: 17%;
+    top: 28%;
+  }
 }
 @media (max-width: 1150px) {
   .search_img {
     left: 84%;
   }
   .popup_wrapper {
-  left: 14%;
-  top: 28%;
-}
+    left: 14%;
+    top: 28%;
+  }
 }
 @media (max-width: 955px) {
   .search_img {
     left: 82%;
   }
   .popup_wrapper {
-  left: 7%;
-  top: 31%;
-}
+    left: 7%;
+    top: 31%;
+  }
 }
 @media (max-width: 710px) {
   .search_img {
@@ -496,7 +420,6 @@ button:active,
   }
   .input_wrapper {
     width: 90%;
-    /* min-width: 300px; */
     position: relative;
   }
   .search_img {
@@ -510,13 +433,13 @@ button:active,
   }
 }
 @media (max-width: 350px) {
- .search_input{
-  min-width: 250px;
- }
- .burger{
-  width: 67px;
-  height: 67px;
-  padding-right: 41px;
- }
+  .search_input {
+    min-width: 250px;
+  }
+  .burger {
+    width: 67px;
+    height: 67px;
+    padding-right: 41px;
+  }
 }
 </style>

@@ -15,20 +15,14 @@ export default {
   methods: {
     async getSaleProducts() {
       const saleProducts = await productsApi.getAllSaleProducts(this.searchString);
-      console.log(saleProducts)
       this.productsListSale = saleProducts;
     },
-  //   async filterListBySearchString(){
-  //  const list = await productsApi.filterProductsBySearchString(this.searchString);
-  //  this.productsListSale = list;
-  // },
   },
   watch: {
-    searchString: async function filter(){
-    //  this.filterListBySearchString()
+    searchString: async function (){
     this.getSaleProducts(this.searchString)
     }, 
-   popUpFilter: async function filterPopUp(){
+   popUpFilter: async function (){
      this.filterListByPopUp()
     }
   },
@@ -42,12 +36,9 @@ export default {
     <TheList titleProps="Распродажи" :itemList="productsListSale" />
   </div>
   </NuxtLayout>
-  <!-- <TheFooter /> -->
 </template>
 <style>
 .list_box{
-  /* height: 100vh; */
-  /* min-height: 527px; */
   min-height: 67vh;
 margin: auto;
 }

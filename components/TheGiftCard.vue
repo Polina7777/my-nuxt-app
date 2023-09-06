@@ -29,7 +29,7 @@ export default {
   },
   methods: {
     increaseQuantity() {
-      if(this.giftCardInfo){
+      if (this.giftCardInfo) {
         this.giftCardInfo.count++;
       }
     },
@@ -53,14 +53,13 @@ export default {
     },
     async addToBacket() {
       const giftcard = await giftcardApi.createNewGiftCard(this.giftCardInfo);
-      this.$router.push('/');
+      this.$router.push("/");
     },
   },
 };
 </script>
 
 <template>
-  <!-- <TheHeader /> -->
   <div class="giftcard_wrapper">
     <p class="title">{{ title }}</p>
     <div class="wrapper">
@@ -69,26 +68,27 @@ export default {
         <p class="title">{{ text1 }}</p>
         <div class="count_buttons">
           <button @click="decreaseQuantity()">-</button>
-          {{giftCardInfo? giftCardInfo.count : 0 }}
+          {{ giftCardInfo ? giftCardInfo.count : 0 }}
           <button @click="increaseQuantity()">+</button>
         </div>
         <p class="title">{{ text2 }}</p>
         <div class="subtext_wrapper">
           <p
             :class="
-              giftCardInfo.name.type === subtext1
-                ? 'subtextClicked'
-                : 'subtext'
+              giftCardInfo.name.type === subtext1 ? 'subtextClicked' : 'subtext'
             "
             @click="subtitleClick(subtext1)"
           >
             {{ subtext1 }}
           </p>
-          <p     :class="
-              giftCardInfo.name.type === subtext2
-                ? 'subtextClicked'
-                : 'subtext'
-            " @click="subtitleClick(subtext2)">{{ subtext2 }}</p>
+          <p
+            :class="
+              giftCardInfo.name.type === subtext2 ? 'subtextClicked' : 'subtext'
+            "
+            @click="subtitleClick(subtext2)"
+          >
+            {{ subtext2 }}
+          </p>
         </div>
         <input
           type="text"
@@ -98,18 +98,24 @@ export default {
         <p class="title">{{ text3 }}</p>
         <div class="inputs_wrapper">
           <div class="subtext_wrapper">
-            <p     :class="
-            giftCardInfo.adress.type === subtext3
-                ? 'subtextClicked'
-                : 'subtext'
-            " @click="subtitleClick(subtext3)">
+            <p
+              :class="
+                giftCardInfo.adress.type === subtext3
+                  ? 'subtextClicked'
+                  : 'subtext'
+              "
+              @click="subtitleClick(subtext3)"
+            >
               {{ subtext3 }}
             </p>
-            <p     :class="
-             giftCardInfo.adress.type === subtext4
-                ? 'subtextClicked'
-                : 'subtext'
-            " @click="subtitleClick(subtext4)">
+            <p
+              :class="
+                giftCardInfo.adress.type === subtext4
+                  ? 'subtextClicked'
+                  : 'subtext'
+              "
+              @click="subtitleClick(subtext4)"
+            >
               {{ subtext4 }}
             </p>
           </div>
@@ -139,7 +145,6 @@ export default {
       </div>
     </div>
   </div>
-  <!-- <TheFooter /> -->
 </template>
 <style scoped>
 .box {
@@ -157,17 +162,17 @@ img {
   margin: auto;
   padding: 30px;
 }
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   gap: 70px;
-    align-items: flex-start;
-    padding-top: 50px;
+  align-items: flex-start;
+  padding-top: 50px;
 }
 input {
-padding: 10px;
+  padding: 10px;
   min-width: 400px;
 }
 .inputs_wrapper {
@@ -196,15 +201,14 @@ padding: 10px;
 .wide {
   min-height: 170px;
   max-width: 430px;
-  /* min-width: 500px; */
   text-align: start;
 }
 .info_wrapper {
   display: flex;
-flex-direction: column;
-justify-content: center;
-align-items: center;
-gap:17px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 17px;
 }
 ul {
   display: flex;
@@ -261,28 +265,29 @@ button {
 }
 @media (max-width: 690px) {
   .giftcard_wrapper {
-  margin: auto;
-  padding: 10px;
-}
-  .inputs_wrapper{
+    margin: auto;
+    padding: 10px;
+  }
+  .inputs_wrapper {
     width: 100%;
   }
-  .info_wrapper{
+  .info_wrapper {
     align-items: center;
     width: 95%;
   }
-  input,.wide{
+  input,
+  .wide {
     width: 90%;
   }
-  .wide{
-min-width: 90%;
+  .wide {
+    min-width: 90%;
   }
-  .wrapper{
+  .wrapper {
     gap: 21px;
   }
 }
 @media (max-width: 550px) {
-  .info_wrapper{
+  .info_wrapper {
     align-items: center;
     width: 95%;
   }

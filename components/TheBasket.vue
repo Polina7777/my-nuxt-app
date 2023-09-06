@@ -2,6 +2,7 @@
 import { giftcardApi } from "../api-requests/giftcard-api";
 import { productsApi } from "../api-requests/products-api";
 import giftcard from '../static/images/giftcard.svg';
+import { IBasketCard, ICard, } from "../static/interfaces";
 export default {
   created() {
     this.getBasketProducts();
@@ -9,8 +10,8 @@ export default {
   },
   data() {
     return {
-      productsFromBasketList: [],
-      giftcardsFromBasketList:[],
+      productsFromBasketList: <IBasketCard[]>[],
+      giftcardsFromBasketList:<IBasketCard[]>[],
       giftcard:giftcard,
       text: "Стоимость",
       string1: "Товары .................................. ",
@@ -22,11 +23,11 @@ export default {
   methods: {
     async getBasketProducts() {
       const products = await productsApi.getAllProductsFromBasket();
-      const arr = products.map((item) => {
+      const arr = products.map((item:ICard) => {
         return { product: item, count: item.attributes.basket_count };
       });
       const giftcards = await giftcardApi.getAllGiftCardFromBasket();
-      const arr2 = giftcards.map((item) => {
+      const arr2 = giftcards.map((item: { attributes: { basket_count: any; }; }) => {
         return { product: item, count: item.attributes.basket_count };
       });
 
@@ -34,12 +35,12 @@ export default {
       this.giftcardsFromBasketList = arr2;
       this.computeAmount();
     },
-   async increaseQuantity(item) {
+   async increaseQuantity(item:IBasketCard) {
       item.count++;
       const changeCount = await productsApi.changeProductCountInBasket(item.product.id, item.count)
       this.computeAmount();
     },
-  async  decreaseQuantity(item) {
+  async  decreaseQuantity(item:IBasketCard) {
       if (item.count > 1) {
         item.count--;
         const changeCount = await productsApi.changeProductCountInBasket(item.product.id, item.count)
@@ -47,23 +48,12 @@ export default {
       }
     },
     computeAmount() {
-      const prices = [];
-      const bigArr = [];
+      const prices: number[] = [];
+      const bigArr: IBasketCard[] = [];
       bigArr.push(...this.productsFromBasketList);
       bigArr.push(...this.giftcardsFromBasketList)
 
-    //   this.productsFromBasketList.map((item) => {
-    //     const priceString = item.product.attributes.price;
-    //     const priceDigits = priceString.replace(/\D/g, "");
-    //     const priceItem = priceDigits * item.count;
-    //     prices.push(priceItem);
-    //     console.log(prices);
-    //  this.amount = prices.reduce((accumulator, currentValue) => {
-    //       return accumulator + currentValue;
-    //     }, 0);
-    //   });
-
-   bigArr.map((item) => {
+   bigArr.map((item:IBasketCard) => {
         const priceString = item.product.attributes.price;
         const priceDigits = priceString.replace(/\D/g, "");
         const priceItem = priceDigits * item.count;
@@ -73,17 +63,17 @@ export default {
         }, 0);
       });
     },
-    computePrice(item){
+    computePrice(item:IBasketCard){
       const priceString = item.product.attributes.price;
         const priceDigits = priceString.replace(/\D/g, "");
         const priceItem = priceDigits * item.count;
         return `${priceItem} p.`
     },
-    async deleteFromBacket(id) {
+    async deleteFromBacket(id:string) {
       const deleteProduct = await productsApi.deleteProductFromBasket(id);
       this.getBasketProducts();
     },
-    async deleteGiftCardFromBacket(id) {
+    async deleteGiftCardFromBacket(id:string) {
       const deleteGiftCard = await giftcardApi.deleteGiftCardFromBasket(id);
       this.getBasketProducts();
     },

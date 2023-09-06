@@ -4,6 +4,7 @@ import phone from "../static/images/phone.svg";
 import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
+import { data } from "../static/data";
 export default {
   mounted() {
     const widthDevice = window.innerWidth
@@ -20,43 +21,8 @@ export default {
       vk: vk,
       phoneNumber: "+7 (999) 131-32-49",
       mobileVersion:false,
-      navScheme1: [
-        {
-          title: "Доставка и оплата",
-          navigate: "/paymethods",
-        },
-        {
-          title: "Вопрос-ответ",
-          navigate: "/questions",
-        },
-        {
-          title: "Контакты",
-          navigate: "/contacts",
-        },
-      ],
-
-      navScheme2: [
-        {
-          title: "Каталог",
-          navigate: "/",
-          image: plus,
-        },
-        {
-          title: "Новинки",
-          navigate: "/new",
-          image: null,
-        },
-        {
-          title: "Распродажи",
-          navigate: "/sale",
-          image: null,
-        },
-        {
-          title: "Подарочные сертификаты",
-          navigate: "/giftcard",
-          image: null,
-        },
-      ],
+      navScheme1: data.navScheme1,
+      navScheme2: data.navScheme2,
     };
   },
   methods: {

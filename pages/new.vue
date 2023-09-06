@@ -23,7 +23,6 @@ export default{
     },
     watch: {
     searchString: async function filter(){
-    //  this.filterListBySearchString()
     this.getNewProducts(this.searchString)
     }, 
    popUpFilter: async function filterPopUp(){
@@ -46,8 +45,6 @@ export default{
 
   <style>
 .list_box{
-  /* height: 100vh; */
-  /* min-height: 527px; */
   min-height: 67vh;
 margin: auto;
 }

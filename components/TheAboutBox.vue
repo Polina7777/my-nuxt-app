@@ -15,9 +15,10 @@ export default {
         "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.",
       text2:
         "Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
-        text3: "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
+      text3:
+        "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
       logo: logo,
-      mobileVersion:false,
+      mobileVersion: false,
     };
   },
   methods: {
@@ -32,78 +33,89 @@ export default {
   <div class="wrapper">
     <p class="title">{{ title }}</p>
     <div v-if="!mobileVersion" class="info">
-    <div class="text_wrapper">
-      <img :src="logo" alt="logo" />
-      <p class="text1">{{ text1 }}</p>
+      <div class="text_wrapper">
+        <img :src="logo" alt="logo" />
+        <p class="text1">{{ text1 }}</p>
+      </div>
+      <p class="text2">{{ text2 }}</p>
     </div>
-    <p class="text2">{{ text2 }}</p>
-  </div>
-  <div v-if="mobileVersion" class="info">
-    <div class="text_wrapper-mobile">
-      <img :src="logo" alt="logo" />
-      <p class="text">{{ text1 }}</p>
-          <p class="text">{{ text2 }}</p>
+    <div v-if="mobileVersion" class="info">
+      <div class="text_wrapper-mobile">
+        <img :src="logo" alt="logo" />
+        <p class="text">{{ text1 }}</p>
+        <p class="text">{{ text2 }}</p>
+      </div>
     </div>
-    <!-- <p class="text2">{{ text2 }}</p> -->
-  </div>
   </div>
 </template>
 
 <style scoped>
-.wrapper{
+.wrapper {
   display: flex;
   flex-direction: column;
   color: white;
-  background: linear-gradient(93.24deg, #B49696 39.26%, #CFB9B9 67.15%, #D5C0C0 76.56%, #EFE1E1 100%);
+  background: linear-gradient(
+    93.24deg,
+    #b49696 39.26%,
+    #cfb9b9 67.15%,
+    #d5c0c0 76.56%,
+    #efe1e1 100%
+  );
   padding: 70px;
 }
-.text_wrapper,.text2{
-display: flex;
-flex-direction: column;
-width: 40%;
+.text_wrapper,
+.text2 {
+  display: flex;
+  flex-direction: column;
+  width: 40%;
 }
-.info{
+.info {
   display: flex;
   flex-direction: row;
-justify-content: center;
-align-items: center;
-white-space: break-spaces;
-width: 70%;
-gap:70px;
+  justify-content: center;
+  align-items: center;
+  white-space: break-spaces;
+  width: 70%;
+  gap: 70px;
 }
-.text{
+.text {
   width: 90%;
 }
-.text2{
-  padding-top:83px;
+.text2 {
+  padding-top: 83px;
 }
-img{
+img {
   width: 80%;
   height: 140px;
 }
-.title,.text1,.text2{
+.title,
+.text1,
+.text2 {
   font-size: 21px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
-.text1,.text2{
+.text1,
+.text2 {
   font-size: 17px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 @media (max-width: 490px) {
-  .info{
-  display: flex;
-  flex-wrap: wrap;
-gap:30px;
+  .info {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+  }
+  .wrapper {
+    padding: 20px;
+  }
+  .text1,
+  .text2 {
+    font-size: 11px;
+  }
 }
-.wrapper{
-  padding: 20px;
-
-}
-.text1,.text2{
-  font-size: 11px;
-}
-}
-.text_wrapper-mobile{
+.text_wrapper-mobile {
   width: 90%;
   display: flex;
   flex-direction: column;
@@ -111,44 +123,51 @@ gap:30px;
   justify-content: center;
   align-items: center;
 }
-@media (max-width:1130px) {
-.info{
-  width: 80%;
-}
-}
-@media (max-width:900px) {
-  .wrapper{
-    padding:20px 0 30px;
+@media (max-width: 1130px) {
+  .info {
+    width: 80%;
   }
-.info{
-  width: 95%;
 }
-.text1,.text2{
-  font-size: 14px;
-font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+@media (max-width: 900px) {
+  .wrapper {
+    padding: 20px 0 30px;
+  }
+  .info {
+    width: 95%;
+  }
+  .text1,
+  .text2 {
+    font-size: 14px;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
 }
-}
-@media (max-width:610px) {
-.wrapper{
-  padding: 30px;
-  overflow: scroll;
-  background: linear-gradient(48.24deg, #B49696 79.26%, #CFB9B9 97.15%, #D5C0C0 86.56%, #EFE1E1 177%);
-}
-.text_wrapper, .text2{
-  display: flex;
-flex-direction: column;
-/* min-width: 300px; */
-}
- 
+@media (max-width: 610px) {
+  .wrapper {
+    padding: 30px;
+    overflow: scroll;
+    background: linear-gradient(
+      48.24deg,
+      #b49696 79.26%,
+      #cfb9b9 97.15%,
+      #d5c0c0 86.56%,
+      #efe1e1 177%
+    );
+  }
+  .text_wrapper,
+  .text2 {
+    display: flex;
+    flex-direction: column;
+  }
 }
 @media (max-width: 350px) {
-  .wrapper{
+  .wrapper {
     padding: 10px;
   }
-  .info{
+  .info {
     width: 100%;
   }
-  img{
+  img {
     height: 80px;
   }
 }

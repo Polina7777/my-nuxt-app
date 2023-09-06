@@ -13,8 +13,6 @@ const pay=[
   { type: "Оплата при получении" },
 ];
 const title = "Оформление заказа";
-const subtitle1 = "Ваши данные";
-const subtitle2 = "Ваш заказ";
 const subtitle3 = "Способ оплаты:";
 const subtitle4 = "Способ доставки:";
 const delivery1 = "Курьером до двери";
@@ -24,7 +22,7 @@ const delivery4 = "Самовывоз";
 const route = useRoute();
 const router = useRouter()
 const schema = {
-    name: (value) => {
+    name: (value:string) => {
         if (!value) {
         return 'This field is required';
       }
@@ -34,7 +32,7 @@ const schema = {
       }
       return true
   },
-  phone: (value) => {
+  phone: (value:string) => {
 
     if (!value) {
         return 'This field is required';
@@ -45,22 +43,22 @@ const schema = {
       }
       return true
   },
-  delivery: (value) => {
+  delivery: (value:string) => {
     if (value) {
       return true;
     }
     return 'You must choose a delivery method';
   },
- pay: (value) => {
+ pay: (value:string) => {
     if (value) {
       return true;
     }
     return 'You must choose a payment method';
   },
-  comment: (value) => {
+  comment: () => {
     return true;
   },
-  email:(value)=>{
+  email:(value:string)=>{
     if (!value) {
         return 'This field is required';
       }
@@ -72,8 +70,7 @@ const schema = {
   }
 };
 
-async function onSubmit(values) {
-
+async function onSubmit(values:any) {
  const price = (values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number(route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number(route.query.amount) + Number(100): Number(route.query.amount);
  const order = await ordersApi.createNewOrder(values,price);
   if(values.pay === "Оплата онлайн"){
@@ -176,15 +173,7 @@ div{
   align-items: start;
   text-align: -webkit-center;
 }
-/* .radio_wrapper{
-display: flex;
-flex-direction: row;
-justify-content: space-between;
-width: 70%;
-} */
-/* div{
-  width: 80%;
-} */
+
 .field_box{
     display: flex;
     flex-direction: column;

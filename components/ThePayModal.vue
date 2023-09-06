@@ -42,7 +42,6 @@ const router = useRouter()
 
 
  async function onSubmit(values) {
-  console.log(JSON.stringify(values, null, 2));
   const id= route.query.id
   const paidOnlineField = await ordersApi.payByCardOnlineFields(id,values)
  router.push('/');
@@ -61,7 +60,6 @@ const router = useRouter()
         placeholder="Номер карты"
       />
       <ErrorMessage name="number" class="error_text" />
-      <!-- <input class="number" placeholder="Номер карты" /> -->
       <div class="card_info">
         <div class="field_box">
         <Field
@@ -81,8 +79,6 @@ const router = useRouter()
         />
         <ErrorMessage name="code" class="error_text" />
         </div>
-        <!-- <input placeholder="MM/YY" />
-      <input placeholder="CVC/CVV" /> -->
       </div>
       <button>Оплатить</button>
     </div>
@@ -106,7 +102,6 @@ const router = useRouter()
 .card_info {
   display: flex;
   flex-direction: row;
-  /* flex-wrap: wrap; */
   gap: 20px;
 }
 .input {

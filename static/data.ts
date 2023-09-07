@@ -8,7 +8,6 @@ export const hair =[
   {title:"Маски",filter:'mask'},
   {title:"SPF-защита от солнца",filter:'spf'},
   {title:"Профессиональный уход",filter:'professional_care'},
-  {title:"SPF-защита от солнца",filter:'spf'},
   {title:"Гаджеты и аксессуары для волос",filter:'accessories'},
 ]
 export const body = [
@@ -19,7 +18,7 @@ export const body = [
   {title:"Кремы",filter:'cream'},
   {title:"Автозагар",filter:'self-tanning'},
   {title:"Щетки и массажеры",filter:'brushes_massagers'},
-  {title:"Скрабы и обертывания",filter:'scrubs'},
+  {title:"Скрабы",filter:'scrubs'},
   {title:"Обертывания",filter:'wraps'},
   {title:"SPF-защита от солнца",filter:'spf'},
 ]
@@ -28,7 +27,6 @@ export const makeUp = [
   {title:"Для глаз",filter:'forEyes'},
   {title:"Для лица",filter:'forFace'},
   {title:"Для бровей",filter:'forBrows'},
-  {title:"Палетки",filter:'palletes'},
   {title:"Кисти",filter:'brushes'},
   {title:"Палетки",filter:'palletes'},
   {title:"Спонжи",filter:'sponges'},

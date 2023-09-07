@@ -24,8 +24,10 @@ export default {
   <NuxtLayout name="custom">
     <TheHeader />
     <div class="delivery_wrapper">
-      <p>{{ title }}</p>
-      <span class="sub_title">{{ text }}</span>
+      <!-- <p>{{ title }}</p> -->
+      <p>{{ $t('deliveryTitle') }}</p>
+      <!-- <span class="sub_title">{{ text }}</span> -->
+      <span class="sub_title">{{ $t('deliveryText')  }}</span>
       <ul class="grid-box">
         <li v-for="(item, index) in methods" :key="index" :class="item.class">
           <span class="item_title">{{ item.title }}</span>

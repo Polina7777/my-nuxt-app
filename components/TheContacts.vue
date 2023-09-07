@@ -15,8 +15,10 @@ export default {
 
 <template>
   <div>
-    <p class="contacts_title">{{ title }}</p>
-    <p class="contacts_text">{{ text }}</p>
+    <!-- <p class="contacts_title">{{ title }}</p>
+    <p class="contacts_text">{{ text }}</p> -->
+    <p class="contacts_title">{{ $t('contactsTitle') }}</p>
+    <p class="contacts_text">{{ $t('contactsText') }}</p>
     <ul>
       <li v-for="(item, index) in contacts" :key="index">
         <img

@@ -61,17 +61,20 @@ export default {
 
 <template>
   <div class="giftcard_wrapper">
-    <p class="title">{{ title }}</p>
+    <p class="title">{{ $t('giftcardTitle') }}</p>
+    <!-- <p class="title">{{ title }}</p> -->
     <div class="wrapper">
       <img :src="giftcard" alt="giftcard" />
       <div class="info_wrapper">
-        <p class="title">{{ text1 }}</p>
+        <p class="title">{{ $t('giftcardInputTitle1') }}</p>
+        <!-- <p class="title">{{ text1 }}</p> -->
         <div class="count_buttons">
           <button @click="decreaseQuantity()">-</button>
           {{ giftCardInfo ? giftCardInfo.count : 0 }}
           <button @click="increaseQuantity()">+</button>
         </div>
-        <p class="title">{{ text2 }}</p>
+        <p class="title">{{ $t('giftcardInputTitle2') }}</p>
+        <!-- <p class="title">{{ text2 }}</p> -->
         <div class="subtext_wrapper">
           <p
             :class="
@@ -79,7 +82,8 @@ export default {
             "
             @click="subtitleClick(subtext1)"
           >
-            {{ subtext1 }}
+            <!-- {{ subtext1 }} -->
+            {{ $t('giftcardInputSubtext1') }}
           </p>
           <p
             :class="
@@ -87,15 +91,17 @@ export default {
             "
             @click="subtitleClick(subtext2)"
           >
-            {{ subtext2 }}
+            <!-- {{ subtext2 }} -->
+            {{ $t('giftcardInputSubtext2')}}
           </p>
         </div>
         <input
           type="text"
-          :placeholder="inputPlaseholder1"
+          :placeholder="$t('giftcardInputPlaceholder1')"
           v-model="giftCardInfo.name.name"
         />
-        <p class="title">{{ text3 }}</p>
+        <p class="title">{{ $t('giftcardInputTitle3') }}</p>
+        <!-- <p class="title">{{ text3 }}</p> -->
         <div class="inputs_wrapper">
           <div class="subtext_wrapper">
             <p
@@ -106,7 +112,8 @@ export default {
               "
               @click="subtitleClick(subtext3)"
             >
-              {{ subtext3 }}
+              <!-- {{ subtext3 }} -->
+              {{ $t('giftcardInputSubtext3') }}
             </p>
             <p
               :class="
@@ -116,31 +123,34 @@ export default {
               "
               @click="subtitleClick(subtext4)"
             >
-              {{ subtext4 }}
+              <!-- {{ subtext4 }} -->
+              {{ $t('giftcardInputSubtext4') }}
             </p>
           </div>
           <input
             type="email"
             v-if="giftCardInfo.adress.type === subtext3"
-            :placeholder="subtext3"
+            :placeholder="$t('giftcardInputSubtext3')"
             v-model="giftCardInfo.adress.adress"
           />
           <input
             type="text"
             v-if="giftCardInfo.adress.type === subtext4"
-            :placeholder="subtext4"
+            :placeholder="$t('giftcardInputSubtext4')"
             v-model="giftCardInfo.adress.adress"
           />
         </div>
-        <p class="title">{{ text4 }}</p>
+        <p class="title">{{ $t('giftcardInputTitle4') }}</p>
+        <!-- <p class="title">{{ text4 }}</p> -->
         <input
           class="wide"
           type="text"
-          :placeholder="inputPlaseholder2"
+          :placeholder="$t('giftcardInputPlaceholder2')" 
           v-model="giftCardInfo.giftcardText"
         />
         <button class="basket_button" @click="addToBacket">
-          {{ addText }}
+          <!-- {{ addText }} -->
+          {{ $t('giftCardAdd') }}
         </button>
       </div>
     </div>

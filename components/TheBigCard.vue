@@ -10,7 +10,9 @@ export default {
   },
   data() {
     return {
-      addText: "В корзину",
+     
+  
+       addText: "В корзину",
       deleteText: "Добавлено",
       title: "Описание",
       title1: "Применение",
@@ -89,23 +91,27 @@ export default {
         <button @click="increaseQuantity(cardNew)">+</button>
       </div>
 
-      <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
-      <button v-if="basket" @click="deleteFromBacket">{{ deleteText }}</button>
-      <p class="title">{{ title }}</p>
+      <button v-if="!basket" @click="addToBacket">{{ $t('bigCardAdd') }}</button>
+      <button v-if="basket" @click="deleteFromBacket">{{  $t('bigCardDelete')}}</button>
+      <!-- <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
+      <button v-if="basket" @click="deleteFromBacket">{{deleteText}}</button> -->
+      <!-- <p class="title">{{ title }}</p> -->
+      <p class="title">{{ $t('bigCardTitle1') }}</p>
       <p class="description">{{ card?.attributes.description }}</p>
       <div class="box">
-        <p class="title">{{ title1 }}</p>
+        <!-- <p class="title">{{ title1 }}</p> -->
+        <p class="title">{{ $t('bigCardTitle2') }}</p>
         <button
           class="box_button"
           v-if="showTitle1Description"
-          @click="hideDescription(title1)"
+          @click="hideDescription($t('bigCardTitle2'))"
         >
           -
         </button>
         <button
           class="box_button"
           v-if="!showTitle1Description"
-          @click="showDescription(title1)"
+          @click="showDescription($t('bigCardTitle2'))"
         >
           +
         </button>
@@ -115,18 +121,19 @@ export default {
       </p>
 
       <div class="box">
-        <p class="title">{{ title2 }}</p>
+        <!-- <p class="title">{{ title2 }}</p> -->
+        <p class="title">{{$t('bigCardTitle3') }}</p>
         <button
           class="box_button"
           v-if="showTitle2Description"
-          @click="hideDescription(title2)"
+          @click="hideDescription($t('bigCardTitle3'))"
         >
           -
         </button>
         <button
           class="box_button"
           v-if="!showTitle2Description"
-          @click="showDescription(title2)"
+          @click="showDescription($t('bigCardTitle3'))"
         >
           +
         </button>
@@ -136,7 +143,7 @@ export default {
       </p>
     </div>
   </div>
-  <TheList titleProps="Похожие товары" :itemList="sameProductsList" />
+  <TheList :titleProps=" $t('bigCardOther')" :itemList="sameProductsList" />
 </template>
 
 <style scoped>

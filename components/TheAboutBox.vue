@@ -31,19 +31,24 @@ export default {
 
 <template>
   <div class="wrapper">
-    <p class="title">{{ title }}</p>
+    <!-- <p class="title">{{ title }}</p> -->
+    <p class="title">{{ $t('aboutBoxTitle') }}</p>
     <div v-if="!mobileVersion" class="info">
       <div class="text_wrapper">
         <img :src="logo" alt="logo" />
-        <p class="text1">{{ text1 }}</p>
+        <!-- <p class="text1">{{ text1 }}</p> -->
+        <p class="text1">{{ $t('aboutBoxText1') }}</p>
       </div>
-      <p class="text2">{{ text2 }}</p>
+      <!-- <p class="text2">{{ text2 }}</p> -->
+      <p class="text1">{{ $t('aboutBoxText2') }}</p>
     </div>
     <div v-if="mobileVersion" class="info">
       <div class="text_wrapper-mobile">
         <img :src="logo" alt="logo" />
-        <p class="text">{{ text1 }}</p>
-        <p class="text">{{ text2 }}</p>
+        <!-- <p class="text">{{ text1 }}</p>
+        <p class="text">{{ text2 }}</p> -->
+        <p class="text1">{{ $t('aboutBoxText1') }}</p>
+        <p class="text1">{{ $t('aboutBoxText2') }}</p>
       </div>
     </div>
   </div>

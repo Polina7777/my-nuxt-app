@@ -13,10 +13,6 @@ export default {
       productsFromBasketList: <IBasketCard[]>[],
       giftcardsFromBasketList:<IBasketCard[]>[],
       giftcard:giftcard,
-      text: "Стоимость",
-      string1: "Товары .................................. ",
-      string2: "Скидка .................................. ",
-      string3: "Итого ................................... ",
       amount: ref(),
     };
   },
@@ -84,13 +80,17 @@ export default {
 
   },
 };
+
 </script>
 <template>
    <div class="card-wrapper">
   <div class="grid-box no-border">
-    <p class="basket_title">Корзина</p>
-        <p class="hide">Количество</p>
-        <p class="hide">Цена</p>
+    <!-- <p class="basket_title">Корзина</p> -->
+    <p class="basket_title">{{ $t('basketTabel1') }}</p>
+        <!-- <p class="hide">Количество</p> -->
+        <p class="hide">{{ $t('basketTabel2') }}</p>
+        <!-- <p class="hide">Цена</p> -->
+        <p class="hide">{{ $t('basketTabel3') }}</p>
         </div>
   <div  v-for="(item, index) in productsFromBasketList" :key="index" class="grid-box">
     <NuxtLink :to="`/${item.product.id}`">
@@ -107,7 +107,8 @@ export default {
             {{ item.count }}
             <button @click="increaseQuantity(item)">+</button>
           </div>
-          <p @click="deleteFromBacket(item.product.id)">Удалить товар</p>
+          <!-- <p @click="deleteFromBacket(item.product.id)">Удалить товар</p> -->
+          <p @click="deleteFromBacket(item.product.id)">{{ $t('basketDelete') }}</p>
         </div>
         <p>{{computePrice(item) }}</p>
       </div>
@@ -127,14 +128,16 @@ export default {
             {{ item.count }}
             <button @click="increaseQuantity(item)">+</button>
           </div>
-          <p @click="deleteGiftCardFromBacket(item.product.id)">Удалить товар</p>
+          <!-- <p @click="deleteGiftCardFromBacket(item.product.id)">Удалить товар</p> -->
+          <p @click="deleteGiftCardFromBacket(item.product.id)">{{ $t('basketDelete') }}</p>
   </div>
           <p>{{computePrice(item) }}</p>
         </div>
 
 
   <ThePriceBox :amount="amount"/>
-  <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">Оформить заказ</button>
+  <!-- <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">Оформить заказ</button> -->
+  <button class="ordering" @click="navigateTo(`/ordering?amount=${amount}`)">{{ $t('basketOrder') }}</button>
   </div>
 </template>
 

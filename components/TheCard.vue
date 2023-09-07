@@ -6,8 +6,8 @@ export default {
   },
   data() {
     return {
-      addText: "В корзину",
-      deleteText: "Добавлено",
+      // addText: "В корзину",
+      // deleteText: "Добавлено",
       basket: ref(this.card?.attributes.basket)
     };
   },
@@ -36,8 +36,10 @@ export default {
     <p class="description_small">{{ card?.attributes.description_small }}</p>
     <p>{{ card?.attributes.price }}</p>
   </nuxt-link>
-    <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
-    <button v-if="basket" @click="deleteFromBacket">{{ deleteText }}</button>
+    <!-- <button v-if="!basket" @click="addToBacket">{{ addText }}</button> -->
+    <button v-if="!basket" @click="addToBacket">{{ $t('cardAdd') }}</button>
+    <!-- <button v-if="basket" @click="deleteFromBacket">{{ deleteText }}</button> -->
+    <button v-if="basket" @click="deleteFromBacket">{{ $t('cardDelete') }}</button>
   </div>
 </template>
 

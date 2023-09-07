@@ -24,13 +24,15 @@ export default {
 
 <template>
   <div>
-    <p class="title">{{ title }}</p>
+    <!-- <p class="title">{{ title }}</p> -->
+    <p class="title">{{ $t('brandBoxTitle')}}</p>
     <ul>
     <li v-for="(item,index) in brands" :key="index">
         <img :src="item" alt="brand-image"/>
     </li>
   </ul>
-    <p class="show_more">{{ text }}</p>
+    <!-- <p class="show_more">{{ text }}</p> -->
+    <p class="show_more">{{ $t('brandBoxText') }}</p>
 </div>
 </template>
 <style scoped>

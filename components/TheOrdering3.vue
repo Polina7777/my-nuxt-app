@@ -8,6 +8,12 @@ const delivery = [
   { type:  "Почта России", price: 350 },
   { type: "Самовывоз", price: 0 },
 ];
+// const delivery = [
+//   { type: $t('orderingDeliveryType1'), price: 100 },
+//   { type:  $t('orderingDeliveryType2'), price: 350 },
+//   { type:   $t('orderingDeliveryType3'), price: 350 },
+//   { type:  $t('orderingDeliveryType4'), price: 0 },
+//];
 const pay=[
 { type: "Оплата онлайн" },
   { type: "Оплата при получении" },
@@ -83,14 +89,15 @@ async function onSubmit(values:any) {
 </script>
 <template>
     <div class="form_wrapper">
-        <p class="title">{{ title }}</p>
+        <!-- <p class="title">{{ title }}</p> -->
+        <p class="title">{{ $t('orderingTitle')}}</p>
       <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }" class="form">
         <div class="field_box">
-        <Field name="name" type="text" :validation-schema="schema" class="input"  placeholder="ФИО"/>
+        <Field name="name" type="text" :validation-schema="schema" class="input"  :placeholder="$t('orderingName')"/>
       <ErrorMessage name="name"  class="error_text"/>
     </div>
     <div class="field_box">
-        <Field name="phone" :validation-schema="schema" class="input" placeholder="Телефон"/>
+        <Field name="phone" :validation-schema="schema" class="input" :placeholder="$t('orderingPhone')"/>
       <ErrorMessage name="phone" class="error_text"/>
     </div>
       <div class="field_box">
@@ -98,12 +105,13 @@ async function onSubmit(values:any) {
       <ErrorMessage name="email" class="error_text" />
     </div>
       <div class="field_box">
-      <Field name="comment" type="text" :validation-schema="schema" class="comment_input" placeholder="Комментарий" />
+      <Field name="comment" type="text" :validation-schema="schema" class="comment_input" :placeholder="$t('orderingCommments')" />
       <ErrorMessage name="comment" class="error_text" />
     </div>
 <div class="radio_wrapper">
         <div>
-      <p>{{ subtitle4}}</p>
+      <!-- <p>{{ subtitle4}}</p> -->
+      <p>{{ $t('orderingSubTitle4')}}</p>
        <ul >
         <div class="field_box">
         <li class="radio_inputs" v-for="(item, index) in delivery"  :key="index">
@@ -122,7 +130,8 @@ async function onSubmit(values:any) {
       </ul>
     </div>
     <div >
-      <p>{{ subtitle3 }}</p>
+      <!-- <p>{{ subtitle3 }}</p> -->
+      <p>{{  $t('orderingSubTitle3') }}</p>
       <ul >
         <div class="field_box">
         <li class="radio_inputs" v-for="(item, index) in pay" :key="index">
@@ -142,9 +151,8 @@ async function onSubmit(values:any) {
     </div>
   </div>
     <ThePriceBox :amount="(values.delivery === delivery2 || values.delivery  === delivery3  ) ? Number($route.query.amount) + Number(350) : (values.delivery === delivery1) ? Number($route.query.amount) + Number(100): Number($route.query.amount)" />
-   
-    
-      <button class="ordering">Оформить заказ</button>
+      <!-- <button class="ordering">Оформить заказ</button> -->
+      <button class="ordering"> {{ $t('orderingTitle') }}</button>
     </Form>
     </div>
   </template>

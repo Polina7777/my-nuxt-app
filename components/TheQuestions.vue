@@ -5,6 +5,11 @@ export default {
       route: useRoute(),
       title:'Популярные вопросы',
       questions: [
+        // {
+        //   question: `${$t('question1')}`,
+        //   answer: `${$t('question1Answer')}`,
+        //   show: false,
+        // },
         {
           question: "Какие способы доставки доступны?",
           answer:
@@ -63,7 +68,8 @@ export default {
 
 <template>
   <div class="question_list">
-    <p class="title">{{ title }}</p>
+    <!-- <p class="title">{{ title }}</p> -->
+    <p class="title">{{ $t('questionTitle') }}</p>
     <ul>
       <li v-for="(item, index) in questions" :key="index">
         <div class="box">

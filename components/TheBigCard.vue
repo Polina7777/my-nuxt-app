@@ -104,14 +104,14 @@ export default {
         <button
           class="box_button"
           v-if="showTitle1Description"
-          @click="hideDescription($t('bigCardTitle2'))"
+          @click="hideDescription(title1)"
         >
           -
         </button>
         <button
           class="box_button"
           v-if="!showTitle1Description"
-          @click="showDescription($t('bigCardTitle2'))"
+          @click="showDescription(title1)"
         >
           +
         </button>
@@ -126,14 +126,14 @@ export default {
         <button
           class="box_button"
           v-if="showTitle2Description"
-          @click="hideDescription($t('bigCardTitle3'))"
+          @click="hideDescription(title2)"
         >
           -
         </button>
         <button
           class="box_button"
           v-if="!showTitle2Description"
-          @click="showDescription($t('bigCardTitle3'))"
+          @click="showDescription(title2)"
         >
           +
         </button>

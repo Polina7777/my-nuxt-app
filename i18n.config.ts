@@ -2,7 +2,7 @@ import en from './locales/en.json';
 import ru from './locales/ru.json'
 export default defineI18nConfig(() => ({
     legacy: false,
-    locale: 'en',
+    locale: 'ru',
     messages: {
       en: en,
      ru: ru

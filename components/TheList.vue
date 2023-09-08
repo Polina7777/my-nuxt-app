@@ -9,13 +9,13 @@ export default {
 
   beforeUpdate() {
     this.text = this.titleProps
-      ? `Показать все ${this.titleProps?.toLowerCase()}`
+      ? `${this.$t('showAll')} ${this.titleProps?.toLowerCase()}`
       : null;
   },
   data() {
     return {
       text: this.titleProps
-        ? `Показать все ${this.titleProps?.toLowerCase()}`
+        ? `${this.$t('showAll')} ${this.titleProps?.toLowerCase()}`
         : null,
       router: useRouter(),
     };

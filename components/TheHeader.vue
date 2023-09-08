@@ -9,12 +9,60 @@ import plus from "../static/images/plus.svg";
 import burger from "../static/images/burger.svg";
 import { data } from "../static/data";
 import { IClickPopUpValue } from "static/interfaces";
+import ThePopUpMenu from "@/components/ThePopUpMenu.vue";
+import TheLanguageButton from "@/components/TheLanguageButton.vue";
 export default {
   props: {
     value: String,
     popUpValue: Object,
   },
   emits: ["input", "click"],
+  components: { ThePopUpMenu,TheLanguageButton},
+  beforeUpdate() {
+    this.navScheme1= [
+    {
+      // title: "Доставка и оплата",
+      title: this.$t('navScheme1Title1'),
+      navigate: "/paymethods",
+    },
+    {
+      // title: "Вопрос-ответ",
+      title: this.$t('navScheme1Title2'),
+      navigate: "/questions",
+    },
+    {
+      // title: "Контакты",
+      title: this.$t('navScheme1Title3'),
+      navigate: "/contacts",
+    },
+  ],
+ this.navScheme2=[
+    {
+      // title: "Каталог",
+      title: this.$t('navScheme2Title1'),
+      navigate: "/",
+      image: plus,
+    },
+    {
+      // title: "Новинки",
+      title: this.$t('navScheme2Title2'),
+      navigate: "/new",
+      image: null,
+    },
+    {
+      // title: "Распродажи",
+      title: this.$t('navScheme2Title3'),
+      navigate: "/sale",
+      image: null,
+    },
+    {
+      // title: "Подарочные сертификаты",
+      title: this.$t('navScheme2Title4'),
+      navigate: "/giftcard",
+      image: null,
+    },
+  ]   
+  },
   mounted() {
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
@@ -25,8 +73,51 @@ export default {
     return {
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
-      navScheme1: data.navScheme1,
-      navScheme2: data.navScheme2,
+      // navScheme1: data.navScheme1,
+      // navScheme2: data.navScheme2,
+     navScheme1: [
+    {
+      // title: "Доставка и оплата",
+      title: this.$t('navScheme1Title1'),
+      navigate: "/paymethods",
+    },
+    {
+      // title: "Вопрос-ответ",
+      title: this.$t('navScheme1Title2'),
+      navigate: "/questions",
+    },
+    {
+      // title: "Контакты",
+      title: this.$t('navScheme1Title3'),
+      navigate: "/contacts",
+    },
+  ],
+ navScheme2:[
+    {
+      // title: "Каталог",
+      title: this.$t('navScheme2Title1'),
+      navigate: "/",
+      image: plus,
+    },
+    {
+      // title: "Новинки",
+      title: this.$t('navScheme2Title2'),
+      navigate: "/new",
+      image: null,
+    },
+    {
+      // title: "Распродажи",
+      title: this.$t('navScheme2Title3'),
+      navigate: "/sale",
+      image: null,
+    },
+    {
+      // title: "Подарочные сертификаты",
+      title: this.$t('navScheme2Title4'),
+      navigate: "/giftcard",
+      image: null,
+    },
+  ],
       mobileVersion: false,
       plus: plus,
       logo: logo,
@@ -80,6 +171,7 @@ export default {
 </script>
 <template>
   <header v-if="!mobileVersion">
+    <TheLanguageButton/>
     <ul class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
@@ -95,7 +187,7 @@ export default {
       <div class="input_wrapper">
         <input
           class="search_input"
-          placeholder="Поиск товара"
+          :placeholder="$t('searchInputPlaceholder')"
           :value="value"
           @input="updateValue"
         />
@@ -118,7 +210,7 @@ export default {
         :class="item.image ? 'plus_button' : null"
       >
         <button
-          :class="item.title === 'Каталог' ? 'popup_button' : 'button '"
+          :class="item.title === 'Каталог' || item.title === 'Catalog' ? 'popup_button' : 'button'"
           @click="
             item.title === 'Каталог' ? popUpOpen() : navigateTo(item.navigate)
           "
@@ -305,11 +397,12 @@ button,
   padding: 15px 40px;
   font-size: 17px;
   border-radius: 20px;
-  z-index: 100000;
+  /* z-index: 100000; */
   border: none;
 }
 .button {
   background-color: white;
+  color: black;
 }
 .popup_button {
   background-color: #efe1e1;

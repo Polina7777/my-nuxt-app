@@ -6,11 +6,57 @@ import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 import { data } from "../static/data";
 export default {
+
   mounted() {
     const widthDevice = window.innerWidth
     if (widthDevice < 500) {
       this.mobileVersion = true
     }
+  },
+  beforeUpdate() {
+    this.navScheme1 = [
+    {
+      // title: "Доставка и оплата",
+      title: this.$t('navScheme1Title1'),
+      navigate: "/paymethods",
+    },
+    {
+      // title: "Вопрос-ответ",
+      title: this.$t('navScheme1Title2'),
+      navigate: "/questions",
+    },
+    {
+      // title: "Контакты",
+      title: this.$t('navScheme1Title3'),
+      navigate: "/contacts",
+    },
+  ],
+ this.navScheme2 = [
+    {
+      // title: "Каталог",
+      title: this.$t('navScheme2Title1'),
+      navigate: "/",
+      image: plus,
+    },
+    {
+      // title: "Новинки",
+      title: this.$t('navScheme2Title2'),
+      navigate: "/new",
+      image: null,
+    },
+    {
+      // title: "Распродажи",
+      title: this.$t('navScheme2Title3'),
+      navigate: "/sale",
+      image: null,
+    },
+    {
+      // title: "Подарочные сертификаты",
+      title: this.$t('navScheme2Title4'),
+      navigate: "/giftcard",
+      image: null,
+    },
+  ]
   },
   data() {
     return {
@@ -21,8 +67,51 @@ export default {
       vk: vk,
       phoneNumber: "+7 (999) 131-32-49",
       mobileVersion:false,
-      navScheme1: data.navScheme1,
-      navScheme2: data.navScheme2,
+      // navScheme1: data.navScheme1,
+      // navScheme2: data.navScheme2,
+      navScheme1: [
+    {
+      // title: "Доставка и оплата",
+      title: this.$t('navScheme1Title1'),
+      navigate: "/paymethods",
+    },
+    {
+      // title: "Вопрос-ответ",
+      title: this.$t('navScheme1Title2'),
+      navigate: "/questions",
+    },
+    {
+      // title: "Контакты",
+      title: this.$t('navScheme1Title3'),
+      navigate: "/contacts",
+    },
+  ],
+ navScheme2:[
+    {
+      // title: "Каталог",
+      title: this.$t('navScheme2Title1'),
+      navigate: "/",
+      image: plus,
+    },
+    {
+      // title: "Новинки",
+      title: this.$t('navScheme2Title2'),
+      navigate: "/new",
+      image: null,
+    },
+    {
+      // title: "Распродажи",
+      title: this.$t('navScheme2Title3'),
+      navigate: "/sale",
+      image: null,
+    },
+    {
+      // title: "Подарочные сертификаты",
+      title: this.$t('navScheme2Title4'),
+      navigate: "/giftcard",
+      image: null,
+    },
+  ],
     };
   },
   methods: {

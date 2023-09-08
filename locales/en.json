@@ -1,5 +1,6 @@
 
 {
+    "searchInputPlaceholder":"Search...",
     "aboutBoxTitle":"About Us",
     "aboutBoxFullText":"KameLAb is a multi-brand online cosmetics store. We offer you a large selection of brands, among which you will definitely find what you need. We cooperate with official distributors, so you can be sure of the quality and originality of the products presented on the site. You can always get a free consultation on choosing care from our specialists. Thank you for choosing us!",
     "aboutBoxText1":"KameLAb is a multi-brand online cosmetics store. We offer you a large selection of brands, among which you will definitely find what you need. We cooperate with official distributors, so you can be sure of the quality and originality of the products presented on the site. You can always get a free consultation on choosing care from our specialists. Thank you for choosing us!",
@@ -43,6 +44,7 @@
     "listsTitle1":"Promotions",
     "listsTitle2":"New",
     "listsTitle3":"Bestsellers",
+    "showAll":"Show all",
     "orderingDeliveryType1":"Courier to your door",
     "orderingDeliveryType2":"Pickup point",
     "orderingDeliveryType3":"Post of Russia",
@@ -150,25 +152,29 @@
         "title":"SDEK pick-up point",
         "sub_price":"Free for orders over RUR 3,000.",
        "termin":"1-3 working days",
-       "payment_type":"Online payment"
+       "payment_type":"Online payment",
+       "price":"350 р."
     },
     "type2":{
         "title":"Post of Russia",
         "sub_price":"Free for orders over RUR 3,000.",
        "termin":"10-14 working days",
-       "payment_type":"Online payment"
+       "payment_type":"Online payment",
+       "price":"350 р."
     },
     "type3":{
         "title":"Pickup",
         "sub_price":"",
         "termin":"1-3 working days",
-       "payment_type":"Payment online/on receipt"
+       "payment_type":"Payment online/on receipt",
+       "price":"350 р."
     },
     "type4":{
         "title":"By courier to your door",
         "sub_price":"Free for orders over RUR 1,000.",
         "termin":"1-3 working days",
-       "payment_type":"Online payment"
+       "payment_type":"Online payment",
+       "price":"350 р."
     }
 }
 

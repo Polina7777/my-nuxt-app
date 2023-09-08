@@ -7,7 +7,43 @@ import { data } from "../static/data";
 export default {
   data() {
     return {
-      methods: data.delivery,
+    delivery :[
+    {
+      // title: "Пункт выдачи СДЭК",
+      title: this.$t('delivery.type1.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type1.sub_price'),
+      termin:this.$t('delivery.type1.termin'),
+      payment_type:this.$t('delivery.type1.payment_type'),
+      class:'green'
+    },
+    {
+      title: this.$t('delivery.type2.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type2.sub_price'),
+      termin:this.$t('delivery.type2.termin'),
+      payment_type:this.$t('delivery.type2.payment_type'),
+      class:'blue'
+    },
+    {
+      title: this.$t('delivery.type3.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type3.sub_price'),
+      termin:this.$t('delivery.type3.termin'),
+      payment_type:this.$t('delivery.type3.payment_type'),
+      class:'purple'
+    },
+    {
+      title: this.$t('delivery.type4.title'),
+      price:'100 р.',
+      sub_price:this.$t('delivery.type4.sub_price'),
+      termin:this.$t('delivery.type4.termin'),
+      payment_type:this.$t('delivery.type4.payment_type'),
+      class:'orange'
+    },
+  ],
+      // methods: data.delivery,
+      //  methods:this.delivery,
       priceImg: price,
       termin: termin,
       payment_type: payment_type,
@@ -29,7 +65,8 @@ export default {
       <!-- <span class="sub_title">{{ text }}</span> -->
       <span class="sub_title">{{ $t('deliveryText')  }}</span>
       <ul class="grid-box">
-        <li v-for="(item, index) in methods" :key="index" :class="item.class">
+        <li v-for="(item, index) in delivery" :key="index" :class="item.class">
+        <!-- <li v-for="(item, index) in methods" :key="index" :class="item.class"> -->
           <span class="item_title">{{ item.title }}</span>
           <div class="info">
             <img :src="priceImg" alt="price" />

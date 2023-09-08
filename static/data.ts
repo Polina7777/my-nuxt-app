@@ -1,4 +1,3 @@
-
 import plus from "../static/images/plus.svg";
 export const hair =[
   {title:"Очищение",filter:'cleansing'},
@@ -110,6 +109,7 @@ export const  popUpList1= [
       title: "Доставка и оплата",
       navigate: "/paymethods",
     },
+
     {
       title: "Вопрос-ответ",
       navigate: "/questions",

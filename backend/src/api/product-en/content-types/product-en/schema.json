@@ -1,0 +1,127 @@
+{
+  "kind": "collectionType",
+  "collectionName": "product_ens",
+  "info": {
+    "singularName": "product-en",
+    "pluralName": "product-ens",
+    "displayName": "productEn",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "description_small": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "price": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
+    "new": {
+      "type": "boolean"
+    },
+    "sale": {
+      "type": "boolean"
+    },
+    "bestseller": {
+      "type": "boolean"
+    },
+    "matureSkin": {
+      "type": "boolean"
+    },
+    "sensitiveSkin": {
+      "type": "boolean"
+    },
+    "oilySkin": {
+      "type": "boolean"
+    },
+    "drySkin": {
+      "type": "boolean"
+    },
+    "problemSkin": {
+      "type": "boolean"
+    },
+    "forBody": {
+      "type": "boolean"
+    },
+    "basket": {
+      "type": "boolean"
+    },
+    "basket_count": {
+      "type": "integer"
+    },
+    "applying": {
+      "type": "string"
+    },
+    "composition": {
+      "type": "string"
+    },
+    "forHair": {
+      "type": "boolean"
+    },
+    "forFace": {
+      "type": "boolean"
+    },
+    "forMakeUp": {
+      "type": "boolean"
+    },
+    "sets": {
+      "type": "boolean"
+    },
+    "mini": {
+      "type": "boolean"
+    },
+    "makeUpRemoval": {
+      "type": "boolean"
+    },
+    "cleansing": {
+      "type": "boolean"
+    },
+    "exfoliation": {
+      "type": "boolean"
+    },
+    "toning": {
+      "type": "boolean"
+    },
+    "serum": {
+      "type": "boolean"
+    },
+    "cream": {
+      "type": "boolean"
+    },
+    "mask": {
+      "type": "boolean"
+    },
+    "sheetMask": {
+      "type": "boolean"
+    },
+    "eyesCream": {
+      "type": "boolean"
+    },
+    "patches": {
+      "type": "boolean"
+    },
+    "forLips": {
+      "type": "boolean"
+    },
+    "pointMeans": {
+      "type": "boolean"
+    },
+    "spf": {
+      "type": "boolean"
+    },
+    "accessories": {
+      "type": "boolean"
+    }
+  }
+}

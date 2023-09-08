@@ -68,7 +68,7 @@ export default {
   );
   padding: 70px;
 }
-.text_wrapper,
+/* .text_wrapper, */
 .text2 {
   display: flex;
   flex-direction: column;

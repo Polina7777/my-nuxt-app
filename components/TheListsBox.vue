@@ -48,12 +48,14 @@ beforeUpdate(){
         const newProducts = await productsApi.getAllNewProducts(
           this.searchString as string
         );
+        console.log(newProducts)
         this.productsListNew = newProducts;
       } else {
         console.log(this.$i18n.locale);
         const newProducts = await productsEnApi.getAllNewProductsEn(
           this.searchString as string
         );
+        console.log(newProducts)
         this.productsListNew = newProducts;
       }
       // const newProducts = await productsApi.getAllNewProducts(this.searchString as string);
@@ -96,8 +98,8 @@ beforeUpdate(){
 
 <template>
   <div>
-    <TheList :titleProps="$t('listsTitle2')" :itemList="productsListSale" />
-    <TheList :titleProps="$t('listsTitle1')" :itemList="productsListNew" />
+    <TheList :titleProps="$t('listsTitle1')" :itemList="productsListSale" />
+    <TheList :titleProps="$t('listsTitle2')" :itemList="productsListNew" />
     <TheList :titleProps="$t('listsTitle3')" :itemList="productsListBestseller" />
     <!-- <TheList titleProps="Акции" :itemList="productsListSale" />
     <TheList titleProps="Новинки" :itemList="productsListNew" />

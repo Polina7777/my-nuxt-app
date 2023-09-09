@@ -18,6 +18,8 @@ export default {
         ? `${this.$t('showAll')} ${this.titleProps?.toLowerCase()}`
         : null,
       router: useRouter(),
+      currentLocal:this.$i18n.locale
+      // itemsList: this.itemList || []
     };
   },
   methods: {
@@ -34,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <div class="list_wrapper">
+  <div class="list_wrapper" :key="currentLocal">
     <p class="title">{{ titleProps }}</p>
     <ul
       v-if="itemList?.length"
@@ -60,7 +62,8 @@ export default {
     >
       {{ text }}
     </p>
-    <p v-if="!itemList?.length" class="no-result">No result!</p>
+    <p v-show="!itemList?.length" class="no-result">No result!</p>
+    <!-- <p v-else class="no-result">No result!</p> -->
   </div>
 </template>
 

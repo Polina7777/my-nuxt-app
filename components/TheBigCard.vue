@@ -1,5 +1,6 @@
 <script lang="ts">
 import { productsApi } from "../api-requests/products-api";
+import { productsEnApi } from "../api-requests/products-api-en";
 import { IBasketCard } from "../static/interfaces";
 export default {
   props: {
@@ -8,26 +9,37 @@ export default {
   created() {
     this.getTheSameProductsList();
   },
+  beforeUpdate(){
+  this.currentLocale =  this.$i18n.locale
+},
+// beforeMount() {
+//   this.currentLocale =  this.$i18n.locale
+// },
   data() {
     return {
-     
-  
        addText: "В корзину",
       deleteText: "Добавлено",
       title: "Описание",
       title1: "Применение",
       showTitle1Description: ref(false),
+      // showTitle1Description: false,
       title2: "Состав",
       showTitle2Description: ref(false),
-      sameProductsList: [],
+      // showTitle2Description:false,
+      sameProductsList: ref([]),
       basket: ref(this.card?.attributes.basket),
       cardNew: ref({ product: this.card, count: 1 }),
+      //  basket: this.card?.attributes.basket,
+      // cardNew: { product: this.card, count: 1 },
+      currentLocale: this.$i18n.locale,
+      // isMounted:ref(false)
     };
   },
 
   methods: {
     async addToBacket() {
-      const addedProduct = await productsApi.addProductToBasket(
+      if (this.$i18n.locale === "ru") {
+        const addedProduct = await productsApi.addProductToBasket(
         this.cardNew.product?.id
       );
       const changeCount = await productsApi.changeProductCountInBasket(
@@ -35,9 +47,21 @@ export default {
         this.cardNew.count
       );
       this.basket = true;
+      } else {
+        const addedProduct = await productsEnApi.addProductEnToBasket(
+        this.cardNew.product?.id
+      );
+      const changeCount = await productsEnApi.changeProductEnCountInBasket(
+        this.cardNew.product?.id,
+        this.cardNew.count
+      );
+      this.basket = true;
+      }
+    
     },
     async deleteFromBacket() {
-      const deleteProduct = await productsApi.deleteProductFromBasket(
+      if (this.$i18n.locale === "ru") {
+        const deleteProduct = await productsApi.deleteProductFromBasket(
         this.cardNew.product?.id
       );
       const changeCount = await productsApi.changeProductCountInBasket(
@@ -45,11 +69,39 @@ export default {
         this.cardNew.count
       );
       this.basket = false;
+      } else {
+        const deleteProduct = await productsEnApi.deleteProductEnFromBasket(
+        this.cardNew.product?.id
+      );
+      const changeCount = await productsEnApi.changeProductEnCountInBasket(
+        this.cardNew.product?.id,
+        this.cardNew.count
+      );
+      this.basket = false;
+      }
+
+  
     },
     async getTheSameProductsList() {
-      const list = await productsApi.getAllMatureSkinProducts();
+
+      if (this.$i18n.locale === "ru") {
+        const list = await productsApi.getAllMatureSkinProducts();
       this.sameProductsList = list;
+      } else {
+        const list = await productsEnApi.getAllMatureSkinProductsEn();
+      this.sameProductsList = list;
+      }
+     
     },
+    async getCardData(){
+    if (this.$i18n.locale === "ru") {
+      const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id);
+   this.info = cardInfo;
+      } else {
+        const cardInfo = await productsEnApi.getProductsEnById(this.cardNew.product?.id);
+   this.info = cardInfo;
+      }
+   },
     increaseQuantity(item:IBasketCard) {
       item.count++;
     },
@@ -72,6 +124,14 @@ export default {
         this.showTitle2Description = false;
       }
     },
+  },
+  watch: {
+    currentLocale: async function(){
+ this.getTheSameProductsList();
+ this.getCardData()
+    }, 
+
+  
   },
 };
 </script>

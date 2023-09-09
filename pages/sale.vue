@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 import { productsApi } from "../api-requests/products-api";
 import { productsEnApi } from "../api-requests/products-api-en";
 export default {
@@ -16,16 +16,15 @@ export default {
       searchString:'',
     popUpFilter:{title:'',filter:''},
     currentLocale: this.$i18n.locale,
+    titleProps:this.$t('listsTitle1')
     };
   },
   methods: {
     async getSaleProducts() {
   if(this.$i18n.locale === 'ru'){
-    console.log(this.$i18n.locale)
     const saleProducts = await productsApi.getAllSaleProducts(this.searchString);
       this.productsListSale = saleProducts;
   }else{
-    console.log(this.$i18n.locale)
     const saleProducts = await productsEnApi.getAllSaleProductsEn(this.searchString);
       this.productsListSale = saleProducts;
   }
@@ -51,7 +50,7 @@ export default {
   <NuxtLayout name="custom">
     <TheHeader :value="searchString" :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
   <div class="list_box">
-    <TheList :titleProps="$t('listsTitle1')" :itemList="productsListSale" />
+    <TheList :titleProps="titleProps" :itemList="productsListSale" />
     <!-- <TheList titleProps="Распродажи" :itemList="productsListSale" /> -->
   </div>
   </NuxtLayout>

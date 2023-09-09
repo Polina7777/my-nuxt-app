@@ -145,6 +145,16 @@
     "navScheme2Title2":"Новинки",
     "navScheme2Title3":"Распродажи",
     "navScheme2Title4":"Подарочные сертификаты",
+    "authTitle":"Авторизация",
+    "authEmail":"Email",
+    "authPassword":"Пароль",
+    "regTitle":"Регистрация",
+    "regName":"Имя",
+    "regSurname":"Фамилия",
+    "regEmail":"Email",
+    "regPassword":"Пароль",
+    "regConfirmPassword":"Подтвердите пароль",
+    
 "delivery":{
     "type1":{
         "title":"Пункт выдачи СДЭК",

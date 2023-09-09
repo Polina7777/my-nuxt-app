@@ -1,5 +1,6 @@
 <script lang="ts">
 import { productsApi } from "../api-requests/products-api";
+import { productsEnApi } from "../api-requests/products-api-en";
 export default {
   props: {
     card: Object,
@@ -8,10 +9,20 @@ export default {
     return {
       // addText: "В корзину",
       // deleteText: "Добавлено",
-      basket: ref(this.card?.attributes.basket)
+      cardData:ref(null),
+      basket: ref(this.card?.attributes.basket),
+      currentLocale: this.$i18n.locale, // Сохраняем текущий язык в data компонента
     };
   },
-
+  created() {
+      this.getCardInfoById()
+  },
+  beforeUpdate(){
+  this.currentLocale =  this.$i18n.locale
+},
+beforeMount() {
+  this.currentLocale =  this.$i18n.locale
+},
   methods: {
     async addToBacket() {
       const addedProduct = await productsApi.addProductToBasket(
@@ -25,7 +36,21 @@ export default {
       );
       this.basket=false;
     },
+    async getCardInfoById() {
+      if (this.$i18n.locale === "ru") {
+        const product = await productsApi.getProductsById(this.card?.id );
+         this.cardData = product;
+      } else {
+        const product = await productsEnApi.getProductsEnById(this.card?.id);
+       this.cardData = product
+      }
+    },
   },
+  watch: {
+    currentLocale: async function(){
+this.getCardInfoById()
+    }, 
+}
 };
 </script>
 
@@ -36,6 +61,11 @@ export default {
     <p class="description_small">{{ card?.attributes.description_small }}</p>
     <p>{{ card?.attributes.price }}</p>
   </nuxt-link>
+  <!-- <nuxt-link :to="`/${cardData?.id}`" class="card_link">
+    <img :src="cardData?.attributes.image" alt="card-image" />
+    <p class="description_small">{{ cardData?.attributes.description_small }}</p>
+    <p>{{ cardData?.attributes.price }}</p>
+  </nuxt-link> -->
     <!-- <button v-if="!basket" @click="addToBacket">{{ addText }}</button> -->
     <button v-if="!basket" @click="addToBacket">{{ $t('cardAdd') }}</button>
     <!-- <button v-if="basket" @click="deleteFromBacket">{{ deleteText }}</button> -->

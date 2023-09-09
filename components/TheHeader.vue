@@ -73,6 +73,8 @@ export default {
     return {
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
+      openAuthModal:false,
+      openRegModal:false,
       // navScheme1: data.navScheme1,
       // navScheme2: data.navScheme2,
      navScheme1: [
@@ -171,7 +173,23 @@ export default {
 </script>
 <template>
   <header v-if="!mobileVersion">
+    <div class="header_buttons">
     <TheLanguageButton/>
+    <button class="sign" @click="openAuthModal = true">Sign In</button>
+    <button class="sign" @click="openRegModal = true">Sign Up</button>
+    <Teleport to="body">
+      <TheAuthModal
+        :openAuthModal="openAuthModal"
+        @close="openAuthModal = false"
+      />
+    </Teleport>
+    <Teleport to="body">
+      <TheRegisterModal
+        :openRegModal="openRegModal"
+        @close="openRegModal = false"
+      />
+    </Teleport>
+  </div>
     <ul class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
@@ -325,9 +343,11 @@ p {
   color: gray;
   z-index: 100;
 }
-.gray {
-  background: #ffffff;
-  height: 200px;
+.header_buttons{
+  display: flex;
+  flex-direction: row;
+  align-self: end;
+  gap:10px;
 }
 
 .phone {
@@ -353,6 +373,12 @@ p {
 img {
   width: 21px;
   height: 21px;
+}
+.sign{
+  font-size: 15px;
+  padding: 7px 17px;
+  background-color: #efe1e1;
+  color: white;
 }
 .input_wrapper {
   width: 40%;
@@ -411,6 +437,8 @@ button,
   z-index: 9999;
 }
 button:active,
+.sign:active,
+.sign:hover,
 .popup_button {
   background-color: #b49696;
 }

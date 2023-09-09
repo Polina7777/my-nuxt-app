@@ -65,7 +65,15 @@
     "questionTitle":"FAQ",
     "question1":"What delivery methods are available?",
     "questionAnswer1":"SDEK and Post of Russia delivery services are available for selection, depending on the locality.",
-
+    "authTitle":"Authorization",
+    "authEmail":"Email",
+    "authPassword":"Password",
+    "regTitle":"Registration",
+    "regName":"Name",
+    "regSurname":"Surname",
+    "regEmail":"Email",
+    "regPassword":"Password",
+    "regConfirmPassword":"Confirm password",
     "popupListHair":{
         "cleansing":"Cleansing",
         "exfoliation":"Exfoliation",

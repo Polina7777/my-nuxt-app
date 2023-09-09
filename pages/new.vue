@@ -1,14 +1,25 @@
-<script>
+<script lang="ts">
 import { productsApi } from "../api-requests/products-api";
 import { productsEnApi } from "../api-requests/products-api-en";
+
 export default {
-  created() {
-    this.getNewProducts();
+emits: ["input", "click"],
+created() {
+  // this.currentLocale =  this.$i18n.locale
+     this.getNewProducts();
   },
-//   beforeUpdate(){
+//     beforeUpdate(){
 //   this.currentLocale =  this.$i18n.locale
-//   console.log(this.currentLocale)
 // },
+// beforeMount() {
+//   // this.currentLocale =  this.$i18n.locale
+//     this.getNewProducts()
+// },
+computed:{
+  currentLocal(){
+return  this.$i18n.locale;
+  }
+},
   data() {
     return {
       route: useRoute(),
@@ -18,7 +29,8 @@ export default {
       popUpFilter: { title: "", filter: "" },
       router: useRoute(),
       filterName: "",
-      currentLocale: this.$i18n.locale,
+      // currentLocale: this.$i18n.locale,
+      titleProps:this.$t('listsTitle2')
     };
   },
   methods: {
@@ -36,23 +48,24 @@ export default {
         this.productsListNew = newProducts;
       }
     },
-    watch: {
+ 
+  },
+  watch: {
       searchString: async function filter() {
-        this.getNewProducts(this.searchString);
+        this.getNewProducts();
       },
       popUpFilter: async function filterPopUp() {
         this.filterListByPopUp();
       },
     //   currentLocale: async function(){
-    //   console.log(this.currentLocale)
-    //   this,getAllNewProducts()
+    //   this.getAllNewProducts();
     // },
     },
-  },
 };
 </script>
 
 <template>
+  <div :key="currentLocal">
   <NuxtLayout name="custom">
     <TheHeader
       :value="searchString"
@@ -61,10 +74,11 @@ export default {
       @click="(data) => (popUpFilter = data)"
     />
     <div class="list_box">
-      <TheList :titleProps="$t('listsTitle2')" :itemList="productsListNew" />
+      <TheList :titleProps="titleProps" :itemList="productsListNew" />
       <!-- <TheList titleProps="Новинки" :itemList="productsListNew" /> -->
     </div>
   </NuxtLayout>
+</div>
 </template>
 
 <style>

@@ -1,23 +1,38 @@
 <script>
 import { productsApi } from "../api-requests/products-api";
+import { productsEnApi } from "../api-requests/products-api-en";
 export default{
     created() {
   this.getCardData()
-
   },
+  beforeUpdate(){
+  this.currentLocale =  this.$i18n.locale
+},
     data(){
     return{
-        info:ref(),
-        route:useRoute()
+        info:null,
+        route:useRoute(),
+        currentLocale: this.$i18n.locale,
     }
 },
 methods:{
   async getCardData(){
-   const cardInfo = await productsApi.getProductsById(this.route.params.cardId);
+    if (this.$i18n.locale === "ru") {
+      const cardInfo = await productsApi.getProductsById(this.route.params.cardId);
    this.info = cardInfo;
-   console.log(this.info)
+      } else {
+        const cardInfo = await productsEnApi.getProductsEnById(this.route.params.cardId);
+   this.info = cardInfo;
+      }
    }
-}
+},
+watch: {
+    currentLocale: async function(){
+   this.getCardData()
+    }, 
+
+  
+  },
 }
 </script>
 

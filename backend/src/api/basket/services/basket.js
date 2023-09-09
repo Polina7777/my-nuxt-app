@@ -1,9 +1,9 @@
 'use strict';
 
 /**
- * question service
+ * basket service
  */
 
 const { createCoreService } = require('@strapi/strapi').factories;
 
-module.exports = createCoreService('api::question.question');
+module.exports = createCoreService('api::basket.basket');

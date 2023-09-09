@@ -1,11 +1,11 @@
 <script>
 export default {
-  beforeMount(){
-this.language='ru'
-  },
+//   beforeMount(){
+// this.language='ru'
+//   },
   data(){
     return{
-    language:''
+    language:this.$i18n.locale 
     }
   },
   methods: {
@@ -19,19 +19,23 @@ this.language='ru'
 
 <template>
     <div>
-      <button v-if="language === 'en'" @click="changeLanguage('ru')">RU</button>
-      <button v-if="language === 'ru'" @click="changeLanguage('en')">EN</button>
+      <button class="lang_button" v-if="language === 'en'" @click="changeLanguage('ru')">RU</button>
+      <button class="lang_button" v-if="language === 'ru'" @click="changeLanguage('en')">EN</button>
+      <!-- <button  @click="changeLanguage('ru')">RU</button>
+      <button  @click="changeLanguage('en')">EN</button> -->
     </div>
   </template>
   
 <style>
-button{
+.lang_button{
+  font-size: 14px;
+  padding: 10px 35px;
+  text-align: center;
   background-color: #efe1e1;
   color: white;
-  padding-right: 60px;
-  z-index: 9999;
+  z-index: 1000;
 }
-button:active {
+.lang_button:active, .lang_button:hover {
   background-color: #b49696;
 }
 </style>

@@ -1,23 +1,66 @@
-<!-- <script lang="ts" setup>
-</script>
-<template>
-  <div id="app-layout">
-    <TheHeader/>
-    <main>
-      layout
-   <slot/>
-    </main>
-    <TheFooter/>
-  </div>
-</template> -->
-<script lang="ts">
 
+<script >
+
+export default{
+  props:{
+    currentLoc:String,
+  },
+  updated() {
+  this.currentLocale = this.$i18n.locale
+},
+data(){
+  return{
+    currentLocale:this.$i18n.locale
+  }
+},
+watch: {
+    currentLocale: async function(){
+      console.log(this.currentLocale)
+     this.navScheme1=[
+    {
+      title: this.$t('navScheme1Title1'),
+      navigate: "/paymethods",
+    },
+    {
+      title: this.$t('navScheme1Title2'),
+      navigate: "/questions",
+    },
+    {
+      title: this.$t('navScheme1Title3'),
+      navigate: "/contacts",
+    },
+  ]
+ this.navScheme2=[
+    {
+      title: this.$t('navScheme2Title1'),
+      navigate: "/",
+      image: plus,
+    },
+    {
+      title: this.$t('navScheme2Title2'),
+      navigate: "/new",
+      image: null,
+    },
+    {
+      title: this.$t('navScheme2Title3'),
+      navigate: "/sale",
+      image: null,
+    },
+    {
+      title: this.$t('navScheme2Title4'),
+      navigate: "/giftcard",
+      image: null,
+    },
+  ]
+    }
+  },
+}
 </script>
 <template>
-  <div>
+  <div >
     <slot />
   </div>
-  <TheFooter/>
+  <TheFooter :currentLoc="currentLoc"/>
 </template>
 <style>
 * {

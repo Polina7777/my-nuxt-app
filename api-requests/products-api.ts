@@ -32,6 +32,12 @@ export const getProductsById = async(id:string)=>{
     const product = data.data
     return product;
 }
+export const getProductsBySmallDescription = async(title:string)=>{
+  const response = await fetch(`${url_ngrok}api/products?filters[description_small][$containsi]=${title}`,{method:'GET'});
+  const data = await response.json();
+  const product = data.data
+  return product;
+}
 export const getProductsByIdWithCollection = async(id:string)=>{
     const response = await fetch(`${url_ngrok}api/products/${id}?populate=*`,{method:'GET'});
     const data = await response.json();
@@ -165,4 +171,4 @@ export const addProductToBasket = async (id: string) => {
     }
   };
   
-export const productsApi = {getAllProducts,getProductsById,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket, changeProductCountInBasket,filterProductsBySearchString, filterProductsByPopUpFilter}
+export const productsApi = {getAllProducts,getProductsById,getProductsBySmallDescription,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket, changeProductCountInBasket,filterProductsBySearchString, filterProductsByPopUpFilter}

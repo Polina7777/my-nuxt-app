@@ -2,13 +2,21 @@
 import { productsApi } from "../api-requests/products-api";
 import { productsEnApi } from "../api-requests/products-api-en";
 export default {
+  emits: ["input", "click"],
   created() {
     this.getSaleProducts();
   },
-//   beforeUpdate(){
-//   this.currentLocale =  this.$i18n.locale
-//   console.log(this.currentLocale)
-// },
+  updated() {
+  this.currentLocale = this.$i18n.locale
+},
+beforeUpdate() {
+      this.currentLocal = this.$i18n.locale
+  },
+  computed:{
+  currentLocal(){
+return  this.$i18n.locale;
+  }
+},
   data() {
     return {
       route: useRoute(),
@@ -38,22 +46,24 @@ export default {
    popUpFilter: async function (){
      this.filterListByPopUp()
     },
-    // currentLocale: async function(){
-    //   console.log(this.currentLocale)
-    //   this.getSaleProducts()
-    // }, 
+    currentLocale: async function(){
+      this.getSaleProducts();
+    },
   },
 };
 </script>
 
 <template>
-  <NuxtLayout name="custom">
+  <div :key="currentLocal">
+  <!-- <NuxtLayout name="custom"> -->
     <TheHeader :value="searchString" :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
   <div class="list_box">
     <TheList :titleProps="titleProps" :itemList="productsListSale" />
     <!-- <TheList titleProps="Распродажи" :itemList="productsListSale" /> -->
   </div>
-  </NuxtLayout>
+  <TheFooter/>
+  <!-- </NuxtLayout> -->
+</div>
 </template>
 <style>
 .list_box{

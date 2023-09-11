@@ -6,7 +6,9 @@ export default {
     titleProps: String,
     itemList: Array,
   },
-
+  updated() {
+  this.currentLocale = this.$i18n.locale
+},
   beforeUpdate() {
     this.text = this.titleProps
       ? `${this.$t('showAll')} ${this.titleProps?.toLowerCase()}`
@@ -18,8 +20,7 @@ export default {
         ? `${this.$t('showAll')} ${this.titleProps?.toLowerCase()}`
         : null,
       router: useRouter(),
-      currentLocal:this.$i18n.locale
-      // itemsList: this.itemList || []
+      currentLocale:this.$i18n.locale,
     };
   },
   methods: {
@@ -31,15 +32,18 @@ export default {
       }
     },
   },
+  // watch: {
+  //   currentLocale: async function(){
+  //   }, 
+  // },
   components: { TheCard },
 };
 </script>
-
+<!-- v-if="itemList?.length" -->
 <template>
-  <div class="list_wrapper" :key="currentLocal">
+  <div class="list_wrapper" :key="currentLocale">
     <p class="title">{{ titleProps }}</p>
-    <ul
-      v-if="itemList?.length"
+    <ul v-if="itemList?.length"
       :class="
         router.currentRoute.path === '/new' ||
         router.currentRoute.path === '/sale'

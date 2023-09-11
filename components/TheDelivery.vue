@@ -5,8 +5,13 @@ import payment_type from "../static/images/payment_type.svg";
 import adresses from "../static/images/adresses.svg";
 import { data } from "../static/data";
 export default {
+
+updated() {
+  this.currentLocale = this.$i18n.locale
+},
   data() {
     return {
+     currentLocale:this.$i18n.locale,
     delivery :[
     {
       // title: "Пункт выдачи СДЭК",
@@ -42,8 +47,6 @@ export default {
       class:'orange'
     },
   ],
-      // methods: data.delivery,
-      //  methods:this.delivery,
       priceImg: price,
       termin: termin,
       payment_type: payment_type,
@@ -53,13 +56,51 @@ export default {
       text: "Способы доставки и оплаты",
     };
   },
+  watch: {
+    currentLocale: async function(){
+          this.delivery = [
+    {
+      title: this.$t('delivery.type1.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type1.sub_price'),
+      termin:this.$t('delivery.type1.termin'),
+      payment_type:this.$t('delivery.type1.payment_type'),
+      class:'green'
+    },
+    {
+      title: this.$t('delivery.type2.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type2.sub_price'),
+      termin:this.$t('delivery.type2.termin'),
+      payment_type:this.$t('delivery.type2.payment_type'),
+      class:'blue'
+    },
+    {
+      title: this.$t('delivery.type3.title'),
+      price:'350 р.',
+      sub_price:this.$t('delivery.type3.sub_price'),
+      termin:this.$t('delivery.type3.termin'),
+      payment_type:this.$t('delivery.type3.payment_type'),
+      class:'purple'
+    },
+    {
+      title: this.$t('delivery.type4.title'),
+      price:'100 р.',
+      sub_price:this.$t('delivery.type4.sub_price'),
+      termin:this.$t('delivery.type4.termin'),
+      payment_type:this.$t('delivery.type4.payment_type'),
+      class:'orange'
+    },
+  ]
+    }, 
+  },
 };
+
 </script>
 
 <template>
-  <NuxtLayout name="custom">
-    <TheHeader />
-    <div class="delivery_wrapper">
+
+    <div class="delivery_wrapper" >
       <!-- <p>{{ title }}</p> -->
       <p>{{ $t('deliveryTitle') }}</p>
       <!-- <span class="sub_title">{{ text }}</span> -->
@@ -85,7 +126,7 @@ export default {
       </ul>
       <img class="adresses" :src="adresses" alt="adresses" />
     </div>
-  </NuxtLayout>
+
 </template>
 
 <style scoped>

@@ -217,7 +217,13 @@ button:hover {
   background-color: transparent;
   color: #efe1e1;
 }
-@media (max-width: 937px) {
+@media (max-width: 640px) {
+  .modal-container{
+width: 70%;
+}
+  
+}
+/* @media (max-width: 937px) {
   .modal-container {
   position: absolute;
   left: 8%;
@@ -234,7 +240,7 @@ button:hover {
   gap: 0;
   z-index: 1000;
 }
-}
+} */
 </style>
 
 <!-- <style scoped>

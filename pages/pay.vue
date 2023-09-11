@@ -1,6 +1,7 @@
 <template>
-        <NuxtLayout name="custom">
+        <!-- <NuxtLayout name="custom"> -->
             <TheHeader/>
     <ThePayModal/>
-    </NuxtLayout>
+    <TheFooter/>
+    <!-- </NuxtLayout> -->
 </template>

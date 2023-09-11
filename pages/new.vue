@@ -5,16 +5,14 @@ import { productsEnApi } from "../api-requests/products-api-en";
 export default {
 emits: ["input", "click"],
 created() {
-  // this.currentLocale =  this.$i18n.locale
      this.getNewProducts();
   },
-//     beforeUpdate(){
-//   this.currentLocale =  this.$i18n.locale
-// },
-// beforeMount() {
-//   // this.currentLocale =  this.$i18n.locale
-//     this.getNewProducts()
-// },
+  updated() {
+  this.currentLocale = this.$i18n.locale
+},
+  beforeUpdate() {
+      this.currentLocal = this.$i18n.locale
+  },
 computed:{
   currentLocal(){
 return  this.$i18n.locale;
@@ -29,7 +27,7 @@ return  this.$i18n.locale;
       popUpFilter: { title: "", filter: "" },
       router: useRoute(),
       filterName: "",
-      // currentLocale: this.$i18n.locale,
+      currentLocale: this.$i18n.locale,
       titleProps:this.$t('listsTitle2')
     };
   },
@@ -57,16 +55,16 @@ return  this.$i18n.locale;
       popUpFilter: async function filterPopUp() {
         this.filterListByPopUp();
       },
-    //   currentLocale: async function(){
-    //   this.getAllNewProducts();
-    // },
+      currentLocale: async function(){
+      this.getNewProducts();
+    },
     },
 };
 </script>
 
 <template>
   <div :key="currentLocal">
-  <NuxtLayout name="custom">
+  <!-- <NuxtLayout name="custom"> -->
     <TheHeader
       :value="searchString"
       :popUpValue="popUpFilter"
@@ -77,7 +75,8 @@ return  this.$i18n.locale;
       <TheList :titleProps="titleProps" :itemList="productsListNew" />
       <!-- <TheList titleProps="Новинки" :itemList="productsListNew" /> -->
     </div>
-  </NuxtLayout>
+    <TheFooter/>
+  <!-- </NuxtLayout> -->
 </div>
 </template>
 

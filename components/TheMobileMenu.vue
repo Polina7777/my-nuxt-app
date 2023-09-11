@@ -10,7 +10,9 @@ import { data } from "../static/data";
 export default {
   props: {
     showMobileMenu: Boolean,
+    isLoggedIn:Boolean,
     updatePopUpValue: Function,
+    signOut:Function,
   },
   data() {
     return {
@@ -29,6 +31,8 @@ export default {
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
       openPopup: false,
+      openAuthModal:false,
+      openRegModal:false
     };
   },
   methods: {
@@ -51,6 +55,24 @@ export default {
           </button>
           <slot name="header">
             <img class="logo" :src="logo" alt="logo" @click="navigateTo('/')" />
+            <div class="header_buttons">
+    <!-- <TheLanguageButton/> -->
+    <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">Sign In</button>
+    <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">Sign Up</button>
+    <button class="sign" v-show="isLoggedIn" @click="signOut">Sign Out</button>
+    <Teleport to="body">
+      <TheAuthModal
+        :openAuthModal="openAuthModal"
+        @close="openAuthModal = false"
+      />
+    </Teleport>
+    <Teleport to="body">
+      <TheRegisterModal
+        :openRegModal="openRegModal"
+        @close="openRegModal = false"
+      />
+    </Teleport>
+  </div>
           </slot>
         </div>
         <div class="modal-body">
@@ -230,5 +252,8 @@ button:hover {
 }
 .popup_item:hover {
   color: #efe1e1;
+}
+.sign{
+  padding: 21px;
 }
 </style>

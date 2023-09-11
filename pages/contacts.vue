@@ -1,6 +1,7 @@
 <template>
-         <NuxtLayout name="custom">
+         <!-- <NuxtLayout name="custom"> -->
             <TheHeader/>
     <TheContacts/>
-</NuxtLayout>
+    <TheFooter/>
+<!-- </NuxtLayout> -->
 </template>

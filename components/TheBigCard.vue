@@ -33,6 +33,8 @@ export default {
       // cardNew: { product: this.card, count: 1 },
       currentLocale: this.$i18n.locale,
       // isMounted:ref(false)
+       route:useRoute(),
+       router:useRouter(),
     };
   },
 
@@ -95,13 +97,27 @@ export default {
     },
     async getCardData(){
     if (this.$i18n.locale === "ru") {
+      console.log(this.cardNew.product?.id)
       const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id);
    this.info = cardInfo;
       } else {
         const cardInfo = await productsEnApi.getProductsEnById(this.cardNew.product?.id);
    this.info = cardInfo;
+  // console.log(this.cardNew.product?.id)
+  // const cardInfo = await productsEnApi.getProductsEnByRuId(this.route.params.cardId);
+  //  this.info = cardInfo;
       }
+  // if (this.$i18n.locale === "ru") {
+  //   console.log(this.route.query.title)
+  //     const cardInfo = await productsApi.getProductsBySmallDescription(this.route.query.title);
+  //  this.info = cardInfo;
+  //     } else {
+  //       console.log(this.route.query.title)
+  //       const cardInfo = await productsEnApi.getProductsEnBySmallDescription(this.route.query.title);
+  //  this.info = cardInfo;
+  //     }
    },
+ 
     increaseQuantity(item:IBasketCard) {
       item.count++;
     },
@@ -125,18 +141,17 @@ export default {
       }
     },
   },
-  watch: {
-    currentLocale: async function(){
- this.getTheSameProductsList();
- this.getCardData()
-    }, 
-
-  
-  },
+//   watch: {
+//     currentLocale: async function(){
+//  this.getTheSameProductsList();
+//  this.getCardData()
+//     }, 
+//   },
 };
 </script>
 
 <template>
+
   <div class="card_wrapper">
     <nuxt-link :to="`/${card?.id}`">
       <img :src="card?.attributes.image" alt="card-image" />

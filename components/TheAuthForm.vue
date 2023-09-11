@@ -8,54 +8,7 @@ const route = useRoute();
 const router = useRouter();
 let error=false;
 let user= null;
-// const schema = {
-//     name: (value:string) => {
-//         if (!value) {
-//         return 'This field is required';
-//       }
-//      const regex =  /^[A-Za-zА-Яа-яЁё\s]+$/u;
-//       if (!regex.test(value)) {
-//         return 'This field must be a alphabet type';
-//       }
-//       return true
-//   },
-//   phone: (value:string) => {
 
-//     if (!value) {
-//         return 'This field is required';
-//       }
-//      const regex = /^\d+$/;
-//       if (!regex.test(value)) {
-//         return 'This field must be a numeric type';
-//       }
-//       return true
-//   },
-//   delivery: (value:string) => {
-//     if (value) {
-//       return true;
-//     }
-//     return 'You must choose a delivery method';
-//   },
-//  pay: (value:string) => {
-//     if (value) {
-//       return true;
-//     }
-//     return 'You must choose a payment method';
-//   },
-//   comment: () => {
-//     return true;
-//   },
-//   email:(value:string)=>{
-//     if (!value) {
-//         return 'This field is required';
-//       }
-//       const regex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i;
-//       if (!regex.test(value)) {
-//         return 'This field must be a valid email';
-//       }
-//       return true
-//   }
-// };
 const schema = {
   password: (value:string) => {
 
@@ -82,13 +35,14 @@ const schema = {
   }
 };
 async function onSubmit(values:any) {
-login(values)
+  login(values)
   }
 
   async function login(data:any) {             
   try {
   const res = await userApi.loginUser(data.email,data.password)
-  if (res.data){
+  console.log(res)
+  if (res.jwt){
     localStorage.setItem('jwt', res.jwt)
      localStorage.setItem('userData', JSON.stringify(res.user))
   router.push('/')
@@ -97,12 +51,14 @@ login(values)
     //   user:res.user
     // })
   } else {
-    alert(res.error.message)
+    if(res.error){
+      alert(res.error.message)
+    }
+  
   }
    } catch(error) {
     console.log(error)
       error = true
-      //  this.password = ''
          }
        };
   async function userBearer(jwt:string,user:any){
@@ -119,7 +75,7 @@ login(values)
 <template>
     <div class="form_wrapper">
         <p class="title">{{ $t('authTitle')}}</p>
-      <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }" class="form">
+        <Form :validation-schema="schema" @submit="onSubmit"  v-slot="{ values }" class="form">
         <div class="field_box">
         <Field name="email" type="text" :validation-schema="schema" class="input"  :placeholder="$t('authEmail')"/>
       <ErrorMessage name="email"  class="error_text"/>
@@ -128,7 +84,7 @@ login(values)
         <Field name="password" :validation-schema="schema" class="input" :placeholder="$t('authPassword')"/>
       <ErrorMessage name="password" class="error_text"/>
     </div>
-      <button class="ordering"> {{ $t('authTitle') }}</button>
+    <button type="submit" class="ordering"> {{ $t('authTitle') }}</button>
     </Form>
     </div>
   </template>

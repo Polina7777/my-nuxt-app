@@ -1,4 +1,5 @@
 <script lang="ts">
+import { favoritesApi } from "../api-requests/favorites-api";
 import { productsApi } from "../api-requests/products-api";
 import { productsEnApi } from "../api-requests/products-api-en";
 export default {
@@ -45,6 +46,62 @@ beforeMount() {
        this.cardData = product
       }
     },
+    navigateTo(link: any) {
+      this.$router.push(link);
+    },
+    likeClick(){
+    console.log(this.info)
+    if (!this.info) return;
+    const checkResult = this.checkIsFavorite(this.info);
+    if (checkResult) {
+      this.deleteFavorite();
+    } else {
+     this.addNewFavorite();
+    }
+  },
+  async getUsersFavoritesList() {
+
+    if (this.userData && this.info) {
+      try {
+        const favorites = await favoritesApi.getFavorites(this.userData?.favorite.id);
+        const check = favorites?.find((item:any) => this.info?.id === item.id);
+        check ? this.likeClicked=true : this.likeClicked=false;
+        this.favoritesList = favorites;
+        this.checkComplite = true;
+      } catch (err) {
+        this.error=true
+      }
+    }
+  },
+ async addNewFavorite(){
+    if (this.userData) {
+      try {
+        const favorite = await favoritesApi.setFavorite(
+         this.userData.favorite.id,
+          this.info
+        );
+        this.likeClicked = true;
+        this.getUsersFavoritesList();
+      } catch (err) {
+        console.log(err, "error");
+      }
+    }
+  },
+  async  deleteFavorite(){
+    try {
+      if (this.userData) {
+        const favorite = await favoritesApi.deleteFavorite(
+         this.userData.favorite.id,
+          this.info
+        );
+      }
+      this.likeClicked = false;
+      this.getUsersFavoritesList();
+    } catch (err) {
+    this.error=true
+    }
+  },
+  //   },
   },
   watch: {
     currentLocale: async function(){
@@ -53,10 +110,11 @@ this.getCardInfoById()
 }
 };
 </script>
-
+<!-- @click="navigateTo(`/${card?.id}?title=${card?.attributes.description_small}`)" -->
+<!-- :to="`/${card?.id}`" -->
 <template>
   <div class="card_wrapper">
-    <nuxt-link :to="`/${card?.id}`" class="card_link">
+    <nuxt-link  :to="`/${card?.id}`" class="card_link">
     <img :src="card?.attributes.image" alt="card-image" />
     <p class="description_small">{{ card?.attributes.description_small }}</p>
     <p>{{ card?.attributes.price }}</p>

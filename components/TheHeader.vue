@@ -64,6 +64,7 @@ export default {
   ]   
   },
   mounted() {
+    this.authListener()
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
@@ -136,6 +137,7 @@ export default {
       internalValue: this.value,
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
+      isLoggedIn:false
     };
   },
   methods: {
@@ -168,6 +170,21 @@ export default {
     mobileMenuOpen() {
       this.showMobileMenu = true;
     },
+    authListener() {
+      const user = localStorage.getItem('jwt')
+      console.log(user)
+      if (!user) {
+        return (this.isLoggedIn = false)
+      } else {
+        return (this.isLoggedIn = true)
+      }
+    },
+    signOut() {
+      this.$router.push('/')
+     localStorage.removeItem('jwt')
+    localStorage.removeItem('userData')
+      return (this.userData = null)
+    },
   },
 };
 </script>
@@ -175,8 +192,9 @@ export default {
   <header v-if="!mobileVersion">
     <div class="header_buttons">
     <TheLanguageButton/>
-    <button class="sign" @click="openAuthModal = true">Sign In</button>
-    <button class="sign" @click="openRegModal = true">Sign Up</button>
+    <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">Sign In</button>
+    <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">Sign Up</button>
+    <button class="sign" v-show="isLoggedIn" @click="signOut()">Sign Out</button>
     <Teleport to="body">
       <TheAuthModal
         :openAuthModal="openAuthModal"
@@ -259,10 +277,13 @@ export default {
       @click="mobileMenuOpen"
       :updatePopUpValue="updatePopUpValue"
     />
+    <TheLanguageButton/>
     <Teleport to="body">
       <TheMobileMenu
         :showMobileMenu="showMobileMenu"
         :updatePopUpValue="updatePopUpValue"
+        :isLoggedIn="isLoggedIn"
+        :signOut="signOut"
         @close="showMobileMenu = false"
       />
     </Teleport>

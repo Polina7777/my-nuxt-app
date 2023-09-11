@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { userApi } from "../api-requests/user-api";
+import { favoritesApi } from "../api-requests/favorites-api";
 import { ordersApi } from "../api-requests/orders-api";
 import { Form, Field, ErrorMessage } from "vee-validate";
 
 const route = useRoute();
 const router = useRouter();
-
+let user = null;
 const schema = {
   name: (value: string) => {
     if (!value) {
@@ -60,7 +61,8 @@ const schema = {
 };
 
 async function onSubmit(values: any) {
-register(values)
+  console.log('reg',values)
+ register(values);
 };
 
 async function register(data){
@@ -70,22 +72,17 @@ async function register(data){
      if(res.jwt){ 
      localStorage.setItem('jwt', res.jwt);
      localStorage.setItem('userData', JSON.stringify(res.user));
-     router.push('/')
+     router.push("/");
   //  this.user({
   //     jwt:res.jwt,
   //     user:res.user
   //   })
      }else if(res.error){
     alert(res.error.message)
-    // this.name = '';
-    //  this.surname = '';
-    //  this.email = '';
-    //  this.password = '';
      }
     }
     catch (err) {
       console.log(err);
-      //  this.password = ''
     }
 };
 </script>
@@ -137,7 +134,7 @@ async function register(data){
         />
         <ErrorMessage name="password" class="error_text" />
       </div>
-      <div class="field_box">
+      <!-- <div class="field_box">
         <Field
           name="confirm_password"
           :validation-schema="schema"
@@ -145,8 +142,8 @@ async function register(data){
           :placeholder="$t('regConfirmPassword')"
         />
         <ErrorMessage name="confirm_password" class="error_text" />
-      </div>
-      <button class="ordering">{{ $t("regTitle") }}</button>
+      </div> -->
+      <button @click="onSubmit(values)" class="ordering">{{ $t("regTitle") }}</button>
     </Form>
   </div>
 </template>
@@ -159,6 +156,7 @@ async function register(data){
   align-items: center;
   padding: 20px 0 20px 20px;
   width: 100%;
+  overflow: scroll;
 }
 .form {
   display: flex;

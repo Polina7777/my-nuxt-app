@@ -12,6 +12,7 @@ export default {
     vueI18n: './i18n.config.ts' // if you are using custom path, default 
   },
   router: {
+    // middleware: 'i18n',
     routes: [
       {
         path: '/',

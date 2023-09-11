@@ -4,5 +4,6 @@
     <!-- <div> -->
         <TheGiftCard/>
     <!-- </div> -->
+    <!-- <TheFooter/> -->
     </NuxtLayout>
 </template>

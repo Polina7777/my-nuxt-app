@@ -28,9 +28,25 @@ export const filterProductsEnByPopUpFilter = async(string:string)=>{
 
 export const getProductsEnById = async(id:string)=>{
     const response = await fetch(`${url_ngrok}api/product-ens/${id}`,{method:'GET'});
+      // const response = await fetch(`${url_ngrok}api/product-ens/?filters[ruId]=${id}`,{method:'GET'});
+     console.log(response)
     const data = await response.json();
     const product = data.data
     return product;
+}
+export const getProductsEnByRuId = async(id:string)=>{
+  // const response = await fetch(`${url_ngrok}api/product-ens/${id}`,{method:'GET'});
+   const response = await fetch(`${url_ngrok}api/product-ens/?filters[ruId]=${id}`,{method:'GET'});
+   console.log(response)
+  const data = await response.json();
+  const product = data.data
+  return product;
+}
+export const getProductsEnBySmallDescription = async(title:string)=>{
+  const response = await fetch(`${url_ngrok}api/product-ens?filters[description_small][$containsi]=${title}`,{method:'GET'});
+  const data = await response.json();
+  const product = data.data
+  return product;
 }
 export const getProductsEnByIdWithCollection = async(id:string)=>{
     const response = await fetch(`${url_ngrok}api/product-ens/${id}?populate=*`,{method:'GET'});
@@ -166,4 +182,4 @@ export const addProductEnToBasket = async (id: string) => {
     }
   };
   
-export const productsEnApi = {getAllProductsEn,getProductsEnById,getProductsEnByIdWithCollection,getAllProductsEnWithCollection,sortProductsEnASC, sortProductsEnDESC,getAllBestsellerProductsEn,getAllDrySkinProductsEn,getAllForBodyProductsEn,getAllMatureSkinProductsEn, getAllNewProductsEn,getAllOilySkinProductsEn,getAllProblemSkinProductsEn,getAllSaleProductsEn,getAllSensitiveSkinProductsEn,getAllProductsEnFromBasket,addProductEnToBasket,deleteProductEnFromBasket, changeProductEnCountInBasket,filterProductsEnBySearchString, filterProductsEnByPopUpFilter}
+export const productsEnApi = {getAllProductsEn,getProductsEnById,getProductsEnByRuId,getProductsEnBySmallDescription,getProductsEnByIdWithCollection,getAllProductsEnWithCollection,sortProductsEnASC, sortProductsEnDESC,getAllBestsellerProductsEn,getAllDrySkinProductsEn,getAllForBodyProductsEn,getAllMatureSkinProductsEn, getAllNewProductsEn,getAllOilySkinProductsEn,getAllProblemSkinProductsEn,getAllSaleProductsEn,getAllSensitiveSkinProductsEn,getAllProductsEnFromBasket,addProductEnToBasket,deleteProductEnFromBasket, changeProductEnCountInBasket,filterProductsEnBySearchString, filterProductsEnByPopUpFilter}

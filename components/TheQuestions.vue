@@ -1,27 +1,13 @@
 <script>
 export default {
-//   questions :[
-// {
-//           question: this.$i18n.t('question1'),
-//           answer:
-//             "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-//           show: false,
-//         },
-// ],
-  mounted(){
-// questions =[
-// {
-//           question: this.$i18n.t('question1'),
-//           answer:
-//             "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-//           show: false,
-//         },
-// ]
-  },
+updated() {
+  this.currentLocale = this.$i18n.locale
+},
   data() {
     return {
       route: useRoute(),
-      title:'Популярные вопросы',
+      currentLocale:this.$i18n.locale,
+      // title:'Популярные вопросы',
       questions: [
         {
           question:this.$t('question1'),
@@ -58,48 +44,6 @@ export default {
           answer: this.$t('questionAnswer1'),
           show: false,
         },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //   show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //   show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //     show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //     show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //     show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //     show: false,
-        // },
-        // {
-        //   question: "Какие способы доставки доступны?",
-        //   answer:
-        //     "Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта.",
-        //     show: false,
-        // },
       ],
     };
   },
@@ -110,6 +54,47 @@ export default {
     hideDescription(index) {
       this.questions[index].show = false;
     },
+  },
+  watch: {
+    currentLocale: async function(){
+this.questions=[
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+        {
+          question:this.$t('question1'),
+          answer: this.$t('questionAnswer1'),
+          show: false,
+        },
+      ]
+    }, 
   },
 };
 </script>

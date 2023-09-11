@@ -26,7 +26,7 @@ const delivery2 = "Пункт выдачи";
 const delivery3 = "Почта России";
 const delivery4 = "Самовывоз";
 const route = useRoute();
-const router = useRouter()
+const router = useRouter();
 const schema = {
     name: (value:string) => {
         if (!value) {

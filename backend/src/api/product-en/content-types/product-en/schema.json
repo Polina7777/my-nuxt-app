@@ -122,6 +122,9 @@
     },
     "accessories": {
       "type": "boolean"
+    },
+    "ruId": {
+      "type": "integer"
     }
   }
 }

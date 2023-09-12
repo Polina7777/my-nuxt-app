@@ -39,8 +39,31 @@ export const setFavoritesCollectionForUser = async (id: string, collection: any,
     }
     return data
 };
+export const setBasketCollectionForUser = async (id: string, collection: any,token: any) => {
+  const collectionId = String(collection.id);
+    console.log(token,'token')
+    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          basket: {
+            connect: [collectionId],
+          },
+        },
+      }),
+    });
+    const data = await response.json();
+    if(data.error){
+      return data.error
+    }
+    return data
+};
 
-export const registerUser = async (name: any,surname: any,email: any,password: any,collectionId:any) => {
+export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any) => {
   const username = `${name} ${surname}`
   const response = await fetch(`${url_ngrok}api/auth/local/register`, {
     headers:{
@@ -52,7 +75,9 @@ export const registerUser = async (name: any,surname: any,email: any,password: a
                 username:username,
                 email:email,
                 password:password,
-                favorite: collectionId,
+                favorite: collectionFavId,
+                basket:collectionBasketId,
+                giftcard:collectionGiftCardId
             }),
   });
   const data = await response.json();

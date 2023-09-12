@@ -17,54 +17,54 @@ export default {
     popUpValue: Object,
   },
   emits: ["input", "click"],
-  components: { ThePopUpMenu,TheLanguageButton},
+  components: { ThePopUpMenu, TheLanguageButton },
   beforeUpdate() {
-    this.navScheme1= [
-    {
-      // title: "Доставка и оплата",
-      title: this.$t('navScheme1Title1'),
-      navigate: "/paymethods",
-    },
-    {
-      // title: "Вопрос-ответ",
-      title: this.$t('navScheme1Title2'),
-      navigate: "/questions",
-    },
-    {
-      // title: "Контакты",
-      title: this.$t('navScheme1Title3'),
-      navigate: "/contacts",
-    },
-  ],
- this.navScheme2=[
-    {
-      // title: "Каталог",
-      title: this.$t('navScheme2Title1'),
-      navigate: "/",
-      image: plus,
-    },
-    {
-      // title: "Новинки",
-      title: this.$t('navScheme2Title2'),
-      navigate: "/new",
-      image: null,
-    },
-    {
-      // title: "Распродажи",
-      title: this.$t('navScheme2Title3'),
-      navigate: "/sale",
-      image: null,
-    },
-    {
-      // title: "Подарочные сертификаты",
-      title: this.$t('navScheme2Title4'),
-      navigate: "/giftcard",
-      image: null,
-    },
-  ]   
+    (this.navScheme1 = [
+      {
+        // title: "Доставка и оплата",
+        title: this.$t("navScheme1Title1"),
+        navigate: "/paymethods",
+      },
+      {
+        // title: "Вопрос-ответ",
+        title: this.$t("navScheme1Title2"),
+        navigate: "/questions",
+      },
+      {
+        // title: "Контакты",
+        title: this.$t("navScheme1Title3"),
+        navigate: "/contacts",
+      },
+    ]),
+      (this.navScheme2 = [
+        {
+          // title: "Каталог",
+          title: this.$t("navScheme2Title1"),
+          navigate: "/",
+          image: plus,
+        },
+        {
+          // title: "Новинки",
+          title: this.$t("navScheme2Title2"),
+          navigate: "/new",
+          image: null,
+        },
+        {
+          // title: "Распродажи",
+          title: this.$t("navScheme2Title3"),
+          navigate: "/sale",
+          image: null,
+        },
+        {
+          // title: "Подарочные сертификаты",
+          title: this.$t("navScheme2Title4"),
+          navigate: "/giftcard",
+          image: null,
+        },
+      ]);
   },
   mounted() {
-    this.authListener()
+    this.authListener();
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
@@ -74,53 +74,53 @@ export default {
     return {
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
-      openAuthModal:false,
-      openRegModal:false,
+      openAuthModal: false,
+      openRegModal: false,
       // navScheme1: data.navScheme1,
       // navScheme2: data.navScheme2,
-     navScheme1: [
-    {
-      // title: "Доставка и оплата",
-      title: this.$t('navScheme1Title1'),
-      navigate: "/paymethods",
-    },
-    {
-      // title: "Вопрос-ответ",
-      title: this.$t('navScheme1Title2'),
-      navigate: "/questions",
-    },
-    {
-      // title: "Контакты",
-      title: this.$t('navScheme1Title3'),
-      navigate: "/contacts",
-    },
-  ],
- navScheme2:[
-    {
-      // title: "Каталог",
-      title: this.$t('navScheme2Title1'),
-      navigate: "/",
-      image: plus,
-    },
-    {
-      // title: "Новинки",
-      title: this.$t('navScheme2Title2'),
-      navigate: "/new",
-      image: null,
-    },
-    {
-      // title: "Распродажи",
-      title: this.$t('navScheme2Title3'),
-      navigate: "/sale",
-      image: null,
-    },
-    {
-      // title: "Подарочные сертификаты",
-      title: this.$t('navScheme2Title4'),
-      navigate: "/giftcard",
-      image: null,
-    },
-  ],
+      navScheme1: [
+        {
+          // title: "Доставка и оплата",
+          title: this.$t("navScheme1Title1"),
+          navigate: "/paymethods",
+        },
+        {
+          // title: "Вопрос-ответ",
+          title: this.$t("navScheme1Title2"),
+          navigate: "/questions",
+        },
+        {
+          // title: "Контакты",
+          title: this.$t("navScheme1Title3"),
+          navigate: "/contacts",
+        },
+      ],
+      navScheme2: [
+        {
+          // title: "Каталог",
+          title: this.$t("navScheme2Title1"),
+          navigate: "/",
+          image: plus,
+        },
+        {
+          // title: "Новинки",
+          title: this.$t("navScheme2Title2"),
+          navigate: "/new",
+          image: null,
+        },
+        {
+          // title: "Распродажи",
+          title: this.$t("navScheme2Title3"),
+          navigate: "/sale",
+          image: null,
+        },
+        {
+          // title: "Подарочные сертификаты",
+          title: this.$t("navScheme2Title4"),
+          navigate: "/giftcard",
+          image: null,
+        },
+      ],
       mobileVersion: false,
       plus: plus,
       logo: logo,
@@ -137,17 +137,17 @@ export default {
       internalValue: this.value,
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
-      isLoggedIn:false
+      isLoggedIn: false,
     };
   },
   methods: {
     navigateTo(link: string) {
       this.$router.push(link);
     },
-    updateValue(event:any) {
+    updateValue(event: any) {
       this.$emit("input", event.target.value);
     },
-    updatePopUpValue(data:IClickPopUpValue) {
+    updatePopUpValue(data: IClickPopUpValue) {
       this.openPopup = false;
       this.showMobileMenu = false;
       this.internalPopUpValue = data;
@@ -171,19 +171,19 @@ export default {
       this.showMobileMenu = true;
     },
     authListener() {
-      const user = localStorage.getItem('jwt')
-      console.log(user)
+      const user = localStorage.getItem("jwt");
+      console.log(user);
       if (!user) {
-        return (this.isLoggedIn = false)
+        return (this.isLoggedIn = false);
       } else {
-        return (this.isLoggedIn = true)
+        return (this.isLoggedIn = true);
       }
     },
     signOut() {
-      this.$router.push('/')
-     localStorage.removeItem('jwt')
-    localStorage.removeItem('userData')
-      return (this.userData = null)
+      this.$router.push("/");
+      localStorage.removeItem("jwt");
+      localStorage.removeItem("userData");
+      return (this.userData = null);
     },
   },
 };
@@ -191,23 +191,38 @@ export default {
 <template>
   <header v-if="!mobileVersion">
     <div class="header_buttons">
-    <TheLanguageButton/>
-    <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">Sign In</button>
-    <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">Sign Up</button>
-    <button class="sign" v-show="isLoggedIn" @click="signOut()">Sign Out</button>
-    <Teleport to="body">
-      <TheAuthModal
-        :openAuthModal="openAuthModal"
-        @close="openAuthModal = false"
-      />
-    </Teleport>
-    <Teleport to="body">
-      <TheRegisterModal
-        :openRegModal="openRegModal"
-        @close="openRegModal = false"
-      />
-    </Teleport>
-  </div>
+      <TheLanguageButton />
+      <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">
+        Sign In
+      </button>
+      <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">
+        Sign Up
+      </button>
+      <button class="sign" v-show="isLoggedIn" @click="signOut()">
+        Sign Out
+      </button>
+      <nuxt-link>
+        <button class="profile" v-show="isLoggedIn" @click="navigateTo('/user')">
+          Profile
+        </button></nuxt-link>
+        <!-- <nuxt-link to="favorites"> -->
+          <button class="fav_button" @click="navigateTo('/favorites')">
+        <img class="like"  src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"/>
+      </button>
+        <!-- </nuxt-link> -->
+      <Teleport to="body">
+        <TheAuthModal
+          :openAuthModal="openAuthModal"
+          @close="openAuthModal = false"
+        />
+      </Teleport>
+      <Teleport to="body">
+        <TheRegisterModal
+          :openRegModal="openRegModal"
+          @close="openRegModal = false"
+        />
+      </Teleport>
+    </div>
     <ul class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
@@ -231,6 +246,7 @@ export default {
         <nuxt-link to="basket">
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
         </nuxt-link>
+      
       </div>
       <div class="contacts_wrapper">
         <img :src="phone" alt="phone" />
@@ -246,7 +262,11 @@ export default {
         :class="item.image ? 'plus_button' : null"
       >
         <button
-          :class="item.title === 'Каталог' || item.title === 'Catalog' ? 'popup_button' : 'button'"
+          :class="
+            item.title === 'Каталог' || item.title === 'Catalog'
+              ? 'popup_button'
+              : 'button'
+          "
           @click="
             item.title === 'Каталог' ? popUpOpen() : navigateTo(item.navigate)
           "
@@ -277,7 +297,7 @@ export default {
       @click="mobileMenuOpen"
       :updatePopUpValue="updatePopUpValue"
     />
-    <TheLanguageButton/>
+    <TheLanguageButton />
     <Teleport to="body">
       <TheMobileMenu
         :showMobileMenu="showMobileMenu"
@@ -299,6 +319,9 @@ export default {
         <img class="search_img" :src="search" alt="search" />
         <nuxt-link to="basket">
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
+        </nuxt-link>
+        <nuxt-link to="favorites">
+        <img class="like"  src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"/>
         </nuxt-link>
       </div>
     </div>
@@ -364,11 +387,11 @@ p {
   color: gray;
   z-index: 100;
 }
-.header_buttons{
+.header_buttons {
   display: flex;
   flex-direction: row;
   align-self: end;
-  gap:10px;
+  gap: 10px;
 }
 
 .phone {
@@ -395,11 +418,18 @@ img {
   width: 21px;
   height: 21px;
 }
-.sign{
+.sign,.profile, .fav_button{
   font-size: 15px;
   padding: 7px 17px;
   background-color: #efe1e1;
   color: white;
+}
+.fav_button{
+  padding: 7px 33px;
+}
+
+.profile{
+  padding: 10px 25px;
 }
 .input_wrapper {
   width: 40%;

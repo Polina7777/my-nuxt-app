@@ -55,7 +55,7 @@ export default {
     </div>
     <div v-if="mobileVersion" class="info">
       <div class="text_wrapper-mobile">
-        <img :src="logo" alt="logo" />->
+        <img :src="logo" alt="logo" />
         <p class="text1">{{ $t('aboutBoxText1') }}</p>
         <p class="text1">{{ $t('aboutBoxText2') }}</p>
       </div>

@@ -1,11 +1,14 @@
 <script lang="ts">
+import { basketsApi } from "../api-requests/basket-api";
 import { giftcardApi } from "../api-requests/giftcard-api";
 import { productsApi } from "../api-requests/products-api";
 import giftcard from '../static/images/giftcard.svg';
 import { IBasketCard, ICard, } from "../static/interfaces";
+import { userApi } from "../api-requests/user-api";
 export default {
   created() {
-    this.getBasketProducts();
+    this.getUser();
+
 
   },
   data() {
@@ -13,16 +16,27 @@ export default {
       productsFromBasketList: <IBasketCard[]>[],
       giftcardsFromBasketList:<IBasketCard[]>[],
       giftcard:giftcard,
+      userData:null,
       amount: ref(),
     };
   },
   methods: {
+    async getUser(){
+      this.userInfo = JSON.parse(localStorage.getItem('userData') as string)
+  const user = await userApi.getUsersById(this.userInfo.id);
+
+  this.userData = user;
+  this.getBasketProducts();
+    },
     async getBasketProducts() {
-      const products = await productsApi.getAllProductsFromBasket();
+      if (this.userData) {
+        console.log(this.userData)
+      const products =  await basketsApi.getBasketProducts(this.userData?.basket.id);
+      // const products = await productsApi.getAllProductsFromBasket();
       const arr = products.map((item:ICard) => {
         return { product: item, count: item.attributes.basket_count };
-      });
-      const giftcards = await giftcardApi.getAllGiftCardFromBasket();
+      });;
+       const giftcards = await giftcardApi.getAllGiftCardFromBasket();
       const arr2 = giftcards.map((item: { attributes: { basket_count: any; }; }) => {
         return { product: item, count: item.attributes.basket_count };
       });
@@ -30,7 +44,24 @@ export default {
       this.productsFromBasketList = arr;
       this.giftcardsFromBasketList = arr2;
       this.computeAmount();
+    }
     },
+    async getUserBasketList() {
+
+if (this.userData && this.info) {
+  try {
+    const basketProducts = await basketsApi.getBasketProducts(this.userData?.basket.id);
+    this.productsFromBasketList = basketProducts;
+    // const check = basketProducts?.find((item:any) => this.info?.id === item.id);
+    // check ? this.productAdded=true : this.productAdded=false;
+    // this.basketList = basketProducts;
+    // this.checkComplite = true;
+  } catch (err) {
+    this.error=true
+  }
+}
+},
+
    async increaseQuantity(item:IBasketCard) {
       item.count++;
       const changeCount = await productsApi.changeProductCountInBasket(item.product.id, item.count)

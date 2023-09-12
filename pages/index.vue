@@ -58,10 +58,10 @@ watch: {
       <!-- <NuxtLayout name="custom" :currentLoc="this.$i18n.locale"> -->
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data" />
-  <!-- <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
+  <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
-   <TheBrandsBox/> -->
+   <TheBrandsBox/>
    <TheAboutBox/>
    <TheFooter :currentLoc="this.$i18n.locale"/>
   <!-- </NuxtLayout > -->

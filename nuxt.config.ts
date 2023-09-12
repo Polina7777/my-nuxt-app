@@ -23,6 +23,10 @@ export default {
         component: 'pages/basket.vue'
       },
       {
+        path: '/favorites',
+        component: 'pages/favorites.vue'
+      },
+      {
         path: '/paymethods',
         component: 'pages/paymethods.vue'
       },
@@ -37,6 +41,10 @@ export default {
       {
         path: '/sale',
         component: 'pages/sale.vue'
+      },
+      {
+        path: '/profile',
+        component: 'pages/user.vue'
       },
       {
         path: '/questions',

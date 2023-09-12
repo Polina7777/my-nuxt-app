@@ -19,7 +19,43 @@ export const getGiftCardById = async(id:string)=>{
     const giftcard = data.data
     return giftcard;
 }
-
+export const createGiftCardCollection = async () => {
+  const response = await fetch(`${url_ngrok}api/giftcards`, {
+    headers:{
+      "Content-Type": "application/json",
+      },
+    method: "POST",
+    body: JSON.stringify({
+      data: {
+        products: {
+        },
+      },
+    }),
+  });
+  const data = await response.json();
+  const collection = data.data
+ return collection
+};
+export const setBasketGiftCard = async (id: string, giftcard: any) => {
+  const giftcardId = String(giftcard.id);
+  try {
+    const response = await fetch(`${url_ngrok}api/baskets/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          products: {
+            connect: [giftcardId],
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const createNewGiftCard = async (info:any) => {
   const newPrice = `${info.count * 500 }p.`
     try {
@@ -41,6 +77,9 @@ export const createNewGiftCard = async (info:any) => {
           },
         }),
       });
+      const data = await response.json();
+      const giftcard = data.data;
+     return giftcard;
     } catch (error) {
       console.log(error)
     }
@@ -75,4 +114,4 @@ export const createNewGiftCard = async (info:any) => {
     }
   };
 
-export const giftcardApi = {getAllGiftCard,getAllGiftCardFromBasket, getGiftCardById, createNewGiftCard, changeGiftCardCount, deleteGiftCardFromBasket}
+export const giftcardApi = {getAllGiftCard,setBasketGiftCard,createGiftCardCollection,getAllGiftCardFromBasket, getGiftCardById, createNewGiftCard, changeGiftCardCount, deleteGiftCardFromBasket}

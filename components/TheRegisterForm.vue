@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { userApi } from "../api-requests/user-api";
 import { favoritesApi } from "../api-requests/favorites-api";
+import { basketsApi } from "../api-requests/basket-api";
 import { ordersApi } from "../api-requests/orders-api";
 import { Form, Field, ErrorMessage } from "vee-validate";
+import { giftcardApi } from "../api-requests/giftcard-api";
 
 const route = useRoute();
 const router = useRouter();
@@ -65,14 +67,16 @@ async function onSubmit(values: any) {
  register(values);
 };
 
-async function register(data){
+async function register(data:any){
       try {
-     const collection = await favoritesApi.createFavoritesCollection()
-     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collection.id)
+     const collectionFav = await favoritesApi.createFavoritesCollection();
+     const collectionBasket = await basketsApi.createBasketCollection();
+     const collectionGiftCard = await giftcardApi.createGiftCardCollection();
+     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id)
      if(res.jwt){ 
      localStorage.setItem('jwt', res.jwt);
      localStorage.setItem('userData', JSON.stringify(res.user));
-     router.push("/");
+     router.push('/');
   //  this.user({
   //     jwt:res.jwt,
   //     user:res.user
@@ -154,16 +158,15 @@ async function register(data){
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px 0 20px 20px;
+  padding: 20px 0 20px;
   width: 100%;
-  overflow: scroll;
 }
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 90%;
+  width: 80%;
 }
 div {
   display: flex;

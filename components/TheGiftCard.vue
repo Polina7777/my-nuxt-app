@@ -1,7 +1,11 @@
 <script>
 import { giftcardApi } from "../api-requests/giftcard-api";
+import { userApi } from "../api-requests/user-api";
 import giftcard from "../static/images/giftcard.svg";
 export default {
+  created(){
+    this.getUser();
+  },
   data() {
     return {
       giftcard: giftcard,
@@ -25,6 +29,7 @@ export default {
         adress: { type: "E-mail", adress: "" },
         giftcardText: "",
       },
+      userData:null,
     };
   },
   methods: {
@@ -51,8 +56,16 @@ export default {
         this.giftCardInfo.name.type = subtext;
       }
     },
+    async getUser(){
+      this.userInfo = JSON.parse(localStorage.getItem('userData'))
+  const user = await userApi.getUsersById(this.userInfo.id);
+  this.userData = user;
+    },
     async addToBacket() {
+      console.log(this.userInfo)
       const giftcard = await giftcardApi.createNewGiftCard(this.giftCardInfo);
+      console.log(giftcard)
+      const addGiftCardToBasket = await giftcardApi.setBasketGiftCard(this.userData.basket.id,giftcard.id)
       this.$router.push("/");
     },
   },

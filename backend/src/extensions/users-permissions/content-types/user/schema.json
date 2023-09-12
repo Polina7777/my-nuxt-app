@@ -80,6 +80,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::giftcard.giftcard"
+    },
+    "basket": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::basket.basket"
     }
   }
 }

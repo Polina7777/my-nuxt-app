@@ -60,6 +60,10 @@ export default {
     <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">Sign In</button>
     <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">Sign Up</button>
     <button class="sign" v-show="isLoggedIn" @click="signOut">Sign Out</button>
+    <nuxt-link>
+        <button class="sign" v-show="isLoggedIn" @click="navigateTo('/user')">
+          Profile
+        </button></nuxt-link>
     <Teleport to="body">
       <TheAuthModal
         :openAuthModal="openAuthModal"

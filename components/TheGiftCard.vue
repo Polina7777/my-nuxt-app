@@ -1,4 +1,5 @@
 <script>
+import { basketsApi } from "../api-requests/basket-api";
 import { giftcardApi } from "../api-requests/giftcard-api";
 import { userApi } from "../api-requests/user-api";
 import giftcard from "../static/images/giftcard.svg";
@@ -64,8 +65,13 @@ export default {
     async addToBacket() {
       console.log(this.userInfo)
       const giftcard = await giftcardApi.createNewGiftCard(this.giftCardInfo);
-      console.log(giftcard)
-      const addGiftCardToBasket = await giftcardApi.setBasketGiftCard(this.userData.basket.id,giftcard.id)
+      console.log(giftcard.id)
+      console.log(this.userData)
+      if(giftcard){
+        const addGiftCardToCollection = await giftcardApi.setGiftCardToCollection(this.userData.giftcard_collection.id, giftcard)
+      const addGiftCardToBasket = await basketsApi.setBasketGiftCard(this.userData.basket.id,giftcard)
+      }
+ 
       this.$router.push("/");
     },
   },

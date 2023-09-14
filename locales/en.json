@@ -57,6 +57,8 @@
     "orderingName":"Name",
     "orderingPhone":"Phone",
     "orderingComments":"Comments",
+    "orderAccepted":"Your order is accepted!",
+    "order":"Order",
     "payTitle":"Payment by card",
     "paySubTitle":"Payable",
     "payCardNumber":"Card number",

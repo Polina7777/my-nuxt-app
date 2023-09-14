@@ -72,11 +72,14 @@ async function register(data:any){
      const collectionFav = await favoritesApi.createFavoritesCollection();
      const collectionBasket = await basketsApi.createBasketCollection();
      const collectionGiftCard = await giftcardApi.createGiftCardCollection();
-     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id)
+     const collectionOrder = await ordersApi.createOrdersCollection();
+     console.log(collectionGiftCard);
+     console.log(collectionOrder);
+     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
      if(res.jwt){ 
      localStorage.setItem('jwt', res.jwt);
      localStorage.setItem('userData', JSON.stringify(res.user));
-     router.push('/');
+    router.push("/");
   //  this.user({
   //     jwt:res.jwt,
   //     user:res.user

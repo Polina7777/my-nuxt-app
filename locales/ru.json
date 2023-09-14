@@ -57,6 +57,8 @@
     "orderingName":"ФИО",
     "orderingPhone":"Телефон",
     "orderingComments":"Комментарий",
+    "orderAccepted":"Ваш заказ принят!",
+    "order":"Заказ",
     "payTitle":"Оплата картой",
     "paySubTitle":"К оплате",
     "payCardNumber":"Номер карты",

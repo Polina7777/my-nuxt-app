@@ -76,15 +76,20 @@
       "relation": "oneToOne",
       "target": "api::favorite.favorite"
     },
-    "giftcards": {
+    "giftcard_collection": {
       "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::giftcard.giftcard"
+      "relation": "oneToOne",
+      "target": "api::giftcard-collection.giftcard-collection"
     },
     "basket": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::basket.basket"
+    },
+    "order_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::order-collection.order-collection"
     }
   }
 }

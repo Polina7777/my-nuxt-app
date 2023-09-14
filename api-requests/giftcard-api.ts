@@ -20,7 +20,56 @@ export const getGiftCardById = async(id:string)=>{
     return giftcard;
 }
 export const createGiftCardCollection = async () => {
-  const response = await fetch(`${url_ngrok}api/giftcards`, {
+  const response = await fetch(`${url_ngrok}api/giftcard-collections`, {
+    headers:{
+      "Content-Type": "application/json",
+      },
+    method: "POST",
+    body: JSON.stringify({
+      data: {
+        giftcards: {
+        },
+      },
+    }),
+  });
+  const data = await response.json();
+  const collection = data.data
+ return collection
+};
+
+
+export const setGiftCardToCollection = async (id: string, giftcard: any) => {
+  const giftcardId = giftcard.id;
+  console.log(giftcardId)
+  try {
+    const response = await fetch(`${url_ngrok}api/giftcard-collections/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: { 
+          giftcards: {
+            connect: [giftcardId],
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getBasketGiftCards = async (id: string) => {
+  const response = await fetch(`${url_ngrok}api/baskets/${id}?populate=*`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  const basketProducts = data.data.attributes.products.data;
+  return basketProducts;
+};
+export const createBasketCollection = async () => {
+  const response = await fetch(`${url_ngrok}api/baskets`, {
     headers:{
       "Content-Type": "application/json",
       },
@@ -36,6 +85,7 @@ export const createGiftCardCollection = async () => {
   const collection = data.data
  return collection
 };
+
 export const setBasketGiftCard = async (id: string, giftcard: any) => {
   const giftcardId = String(giftcard.id);
   try {
@@ -46,7 +96,10 @@ export const setBasketGiftCard = async (id: string, giftcard: any) => {
       method: "PUT",
       body: JSON.stringify({
         data: {
-          products: {
+          // products: {
+          //   connect: [giftcardId],
+          // },
+          giftcards: {
             connect: [giftcardId],
           },
         },
@@ -114,4 +167,4 @@ export const createNewGiftCard = async (info:any) => {
     }
   };
 
-export const giftcardApi = {getAllGiftCard,setBasketGiftCard,createGiftCardCollection,getAllGiftCardFromBasket, getGiftCardById, createNewGiftCard, changeGiftCardCount, deleteGiftCardFromBasket}
+export const giftcardApi = {getAllGiftCard,getBasketGiftCards,setGiftCardToCollection,setBasketGiftCard,createGiftCardCollection,getAllGiftCardFromBasket, getGiftCardById, createNewGiftCard, changeGiftCardCount, deleteGiftCardFromBasket}

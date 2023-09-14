@@ -45,6 +45,21 @@
     },
     "card_code": {
       "type": "string"
+    },
+    "products": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product.product"
+    },
+    "product_ens": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::product-en.product-en"
+    },
+    "giftcards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::giftcard.giftcard"
     }
   }
 }

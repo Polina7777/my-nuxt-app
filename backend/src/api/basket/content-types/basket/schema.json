@@ -4,7 +4,8 @@
   "info": {
     "singularName": "basket",
     "pluralName": "baskets",
-    "displayName": "basket"
+    "displayName": "basket",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -20,6 +21,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::product-en.product-en"
+    },
+    "giftcards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::giftcard.giftcard"
     }
   }
 }

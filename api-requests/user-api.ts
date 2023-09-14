@@ -39,6 +39,52 @@ export const setFavoritesCollectionForUser = async (id: string, collection: any,
     }
     return data
 };
+export const setGiftCardCollectionForUser = async (id: string, collection: any,token: any) => {
+  const collectionId = String(collection.id);
+    console.log(token,'token')
+    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          giftcard: {
+            connect: [collectionId],
+          },
+        },
+      }),
+    });
+    const data = await response.json();
+    if(data.error){
+      return data.error
+    }
+    return data
+};
+export const setOrderCollectionForUser = async (id: string, collection: any,token: any) => {
+  const collectionId = String(collection.id);
+    console.log(token,'token')
+    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          order: {
+            connect: [collectionId],
+          },
+        },
+      }),
+    });
+    const data = await response.json();
+    if(data.error){
+      return data.error
+    }
+    return data
+};
 export const setBasketCollectionForUser = async (id: string, collection: any,token: any) => {
   const collectionId = String(collection.id);
     console.log(token,'token')
@@ -63,7 +109,7 @@ export const setBasketCollectionForUser = async (id: string, collection: any,tok
     return data
 };
 
-export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any) => {
+export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any) => {
   const username = `${name} ${surname}`
   const response = await fetch(`${url_ngrok}api/auth/local/register`, {
     headers:{
@@ -71,13 +117,15 @@ export const registerUser = async (name: any,surname: any,email: any,password: a
              },
     method: "POST",
     body: JSON.stringify({
-                name:surname,
+                name:name,
+                surname:surname,
                 username:username,
                 email:email,
                 password:password,
                 favorite: collectionFavId,
                 basket:collectionBasketId,
-                giftcard:collectionGiftCardId
+                giftcard_collection:collectionGiftCardId,
+                order_collection:collectionOrderId
             }),
   });
   const data = await response.json();

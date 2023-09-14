@@ -1,0 +1,20 @@
+{
+  "kind": "collectionType",
+  "collectionName": "giftcard_collections",
+  "info": {
+    "singularName": "giftcard-collection",
+    "pluralName": "giftcard-collections",
+    "displayName": "giftcard_collection"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "giftcards": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::giftcard.giftcard"
+    }
+  }
+}

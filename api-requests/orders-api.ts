@@ -14,6 +14,72 @@ export const getOrderById = async(id:string)=>{
     return order;
 }
 
+export const setOrder = async (id: string, order: any) => {
+  const orderId = order.id;
+  try {
+    const response = await fetch(`${url_ngrok}api/order-collections/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          orders: {
+            connect: [orderId],
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const deleteOrder = async (id: string, order:any) => {
+  const orderId = String(order.id);
+  try {
+    const response = await fetch(`${url_ngrok}api/order-collections/${id}`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          orders: {
+            disconnect: [orderId],
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error)
+  }
+};
+export const createOrdersCollection = async () => {
+  const response = await fetch(`${url_ngrok}api/order-collections`, {
+    headers:{
+      "Content-Type": "application/json",
+      },
+    method: "POST",
+    body: JSON.stringify({
+      data: {
+        orders: {
+        },
+      },
+    }),
+  });
+  const data = await response.json();
+  const collection = data.data
+ return collection
+};
+
+export const getOrdersCollectionById = async (id: string) => {
+  const response = await fetch(`${url_ngrok}api/order-collections/${id}?populate=*`, {
+    method: "GET",
+  });
+  const data = await response.json();
+  const orders = data.data.attributes.orders.data;
+  return orders;
+};
 export const createNewOrder = async (orderData:any,price:any) => {
     try {
       const response = await fetch(`${url_ngrok}api/orders/`, {
@@ -76,4 +142,4 @@ export const createNewOrder = async (orderData:any,price:any) => {
     }
   };
 
-export const ordersApi = {getAllOrders,getOrderById, createNewOrder, deleteOrderById,payByCardOnlineFields}
+export const ordersApi = {getAllOrders,getOrdersCollectionById,setOrder,deleteOrder,createOrdersCollection,getOrderById, createNewOrder, deleteOrderById,payByCardOnlineFields}

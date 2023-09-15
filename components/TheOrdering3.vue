@@ -94,11 +94,6 @@ const price =
     openTextModal=true
     setTimeout(()=>{router.push("/");},3700)
   }
-
-  // setTimeout(async ()=>{
-  //   openTextModal = false
-  // },7000);
-
 }
 
 </script>

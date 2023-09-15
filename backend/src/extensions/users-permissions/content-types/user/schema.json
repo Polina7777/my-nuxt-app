@@ -90,6 +90,14 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::order-collection.order-collection"
+    },
+    "dateOfBirth": {
+      "type": "string"
+    },
+    "adresses": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::adress.adress"
     }
   }
 }

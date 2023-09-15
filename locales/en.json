@@ -73,6 +73,7 @@
     "regTitle":"Registration",
     "regName":"Name",
     "regSurname":"Surname",
+    "regDateOfBirth":"Date of birth",
     "regEmail":"Email",
     "regPassword":"Password",
     "regConfirmPassword":"Confirm password",

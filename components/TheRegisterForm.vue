@@ -30,6 +30,16 @@ const schema = {
     }
     return true;
   },
+  dateOfBirth: (value: string) => {
+    if (!value) {
+      return "This field is required";
+    }
+    // const regex = /^[A-Za-zА-Яа-яЁё\s]+$/u;
+    // if (!regex.test(value)) {
+    //   return "This field must be a alphabet type";
+    // }
+    return true;
+  },
   password: (value: string) => {
     if (!value) {
       return "This field is required";
@@ -121,6 +131,15 @@ async function register(data:any){
           :placeholder="$t('regSurname')"
         />
         <ErrorMessage name="surname" class="error_text" />
+      </div>
+      <div class="field_box">
+        <Field
+          name="dateOfBirth"
+          :validation-schema="schema"
+          class="input"
+          :placeholder="$t('regDateOfBirth')"
+        />
+        <ErrorMessage name="dateOfBirth" class="error_text" />
       </div>
       <div class="field_box">
         <Field

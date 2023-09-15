@@ -153,6 +153,7 @@
     "regTitle":"Регистрация",
     "regName":"Имя",
     "regSurname":"Фамилия",
+    "regDateOfBirth":"Дата рождения",
     "regEmail":"Email",
     "regPassword":"Пароль",
     "regConfirmPassword":"Подтвердите пароль",

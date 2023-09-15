@@ -132,6 +132,23 @@ export const registerUser = async (name: any,surname: any,email: any,password: a
   const user = data;
   return user;
 };
+
+export const changeUserData = async (id:string,field:string,info:string) => {
+const  dynamicFieldName = `${field}`
+  const requestData = {
+  [dynamicFieldName]:info
+  }
+  const response = await fetch(`${url_ngrok}api/users/${id}`, {
+    headers:{
+           "Content-Type": "application/json",
+             },
+    method: "PUT",
+    body: JSON.stringify(requestData),
+  });
+  const data = await response.json();
+  const changedData = data;
+  return changedData;
+};
 export const loginUser = async (email: any,password: any) => {
   const response = await fetch(`${url_ngrok}api/auth/local`, {
     headers:{
@@ -161,4 +178,4 @@ export const userBearer = async (jwt: any,user: { id: any; })=>{
   return data;
 }
 
-export const userApi = { getUsers, getUsersById,setFavoritesCollectionForUser ,registerUser,loginUser,userBearer};
+export const userApi = { getUsers,changeUserData, getUsersById,setFavoritesCollectionForUser ,registerUser,loginUser,userBearer};

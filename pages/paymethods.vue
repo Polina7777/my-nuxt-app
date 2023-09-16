@@ -12,10 +12,10 @@ export default{
 
 <template>
     <div>
-      <!-- <NuxtLayout name="custom"> -->
+      <NuxtLayout name="custom">
         <TheHeader />
     <TheDelivery/>
-    <TheFooter/>
-<!-- </NuxtLayout> -->
+    <!-- <TheFooter/> -->
+</NuxtLayout>
 </div>
 </template>

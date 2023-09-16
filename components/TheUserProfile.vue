@@ -9,20 +9,29 @@ export default {
   created() {
     this.getUser();
     this.showUserInfo = true;
+    
   },
+  beforeUpdate() {
+    this.currentLocale = this.$i18n.locale;
+  },
+  beforeMount() {
+    this.currentLocale = this.$i18n.locale;
+  },
+
   data() {
     return {
       ok: ok,
       pen: pen,
       userData: JSON.parse(localStorage.getItem("userData")),
+      currentLocale: this.$i18n.locale,
       ordersList: [],
       openOrderModal: false,
       modalOrderList: [],
       showUserInfo: true,
       showAdressInfo: false,
       showUserInfo: false,
-      showOrders: false,
-      showReviews: false,
+      showOrdersInfo: false,
+      showReviewsInfo: false,
       userNameChange: false,
       emailChange: false,
       dateOfBirthChange: false,
@@ -32,15 +41,7 @@ export default {
     };
   },
   methods: {
-    //         async getUser(){
-    //       this.userInfo = JSON.parse(localStorage.getItem('userData'))
-    //   const user = await userApi.getUsersById(this.userInfo.id);
-    //   this.userData = user;
-    //   console.log(this.userData)
-    //     },
-
     async getOrders(id) {
-      // const orders = await ordersApi.getOrders(id);
       const orders = await ordersApi.getOrdersCollectionById(id);
       this.ordersList = orders;
     },
@@ -49,15 +50,14 @@ export default {
       const user = await userApi.getUsersById(this.userInfo.id);
       this.userData = user;
       this.userInfo = [
-        // {label:"Username",data:this.userData.username,change:false,field:"username"},
         {
-          label: "Name",
+          label: this.$t("profile.name"),
           data: this.userData.name,
           change: false,
           field: "name",
         },
         {
-          label: "Surname",
+          label: this.$t("profile.surname"),
           data: this.userData.surname,
           change: false,
           field: "surname",
@@ -69,7 +69,7 @@ export default {
           field: "email",
         },
         {
-          label: "Date of Birth",
+          label: this.$t("profile.dateOfBirth"),
           data: this.userData.dateOfBirth,
           change: false,
           field: "dateOfBirth",
@@ -77,25 +77,25 @@ export default {
       ];
       this.userAdress = [
         {
-          label: "Adress",
+          label: this.$t("profile.adress"),
           data: this.userData.adresses[0].adress,
           change: false,
           field: "adress",
         },
         {
-          label: "City",
+          label: this.$t("profile.city"),
           data: this.userData.adresses[0].city,
           change: false,
           field: "city",
         },
         {
-          label: "Postcode",
+          label: this.$t("profile.postcode"),
           data: this.userData.adresses[0].postcode,
           change: false,
           field: "postcode",
         },
         {
-          label: "Country",
+          label: this.$t("profile.country"),
           data: this.userData.adresses[0].country,
           change: false,
           field: "country",
@@ -130,21 +130,20 @@ export default {
       console.log(changedData);
     },
     async changeInput(item, value) {
-      item.change = true;
+        item.change = true;
       this.changedData = value;
     },
-    // async getModalOrderList() {
-    //   this.userInfo = JSON.parse(localStorage.getItem("userData"));
-    //   const user = await userApi.getUsersById(this.userInfo.id);
-    //   this.userData = user;
-    //   console.log(this.userData);
-    //   this.getOrders(this.userData.order_collection.id)
-    // },
+  },
+  watch: {
+    currentLocale: async function () {
+      this.getUser();
+    },
   },
 };
 </script>
 
 <template>
+  <div class="profile_box">
   <div class="profile_wrapper">
     <p class="title">{{ $t("profile.title") }}</p>
     <div class="hello_wrapper">
@@ -157,56 +156,58 @@ export default {
       />
     </div>
     <div class="buttons_wrapper">
-      <button
+      <button :class="showUserInfo?'show':null"
         @click="
           {
             showUserInfo = !showUserInfo;
             showAdressInfo = false;
-            showOrders = false;
-            showReviews = false;
+            showOrdersInfo = false;
+            showReviewsInfo = false;
           }
         "
       >
-        Мои данные
+      {{ $t("profile.myDetails") }}
       </button>
-      <button
+      <button :class="showAdressInfo?'show':null"
         @click="
           {
             showAdressInfo = !showAdressInfo;
             showUserInfo = false;
-            showOrders = false;
-            showReviews = false;
+            showOrdersInfo = false;
+            showReviewsInfo = false;
           }
         "
       >
-        Мои адреса
+      {{ $t("profile.myAdresses") }}
       </button>
       <button
+      :class="showOrdersInfo?'show':null"
         @click="
           {
-            showOrders = !showOrders;
+            showOrdersInfo = !showOrdersInfo;
             showUserInfo = false;
             showAdressInfo = false;
-            showReviews = false;
+            showReviewsInfo = false;
           }
         "
       >
-        Мои покупки
+      {{ $t("profile.myOrders") }}
       </button>
       <button
+      :class="showReviewsInfo?'show':null"
         @click="
           {
-            showReviews = !showReviews;
+            showReviewsInfo = !showReviewsInfo;
             showUserInfo = false;
             showAdressInfo = false;
-            showOrders = false;
+            showOrdersInfo = false;
           }
         "
       >
-        Мои отзывы
+      {{ $t("profile.myReviews") }}
       </button>
     </div>
-    <p v-show="showUserInfo" class="subtitle">Мои данные</p>
+    <p v-show="showUserInfo" class="subtitle">{{ $t("profile.myDetails") }}</p>
     <div class="info_wrapper adress_info" v-show="showUserInfo">
       <div v-for="(item, index) in userInfo" :key="index" class="user_item">
         <label>{{ item.label }}</label>
@@ -214,7 +215,7 @@ export default {
         <div class="input_wrapper">
           <input
             :placeholder="item.data"
-            @change="(event) => changeInput(item, event.target.value)"
+            @input="(event) => changeInput(item, event.target.value)"
           />
           <img
             v-show="item.change && changedData"
@@ -226,7 +227,7 @@ export default {
       </div>
     </div>
     <!-- </div> -->
-    <p v-show="showAdressInfo" class="subtitle">Мои адреса</p>
+    <p v-show="showAdressInfo" class="subtitle">{{ $t("profile.myAdresses") }}</p>
     <div class="info_wrapper adress_info" v-show="showAdressInfo">
       <div
         v-for="(item, index) in userAdress"
@@ -239,6 +240,7 @@ export default {
           <input
             :placeholder="item.data"
             @change="(event) => changeInput(item, event.target.value)"
+
           />
           <img
             v-show="item.change && changedData"
@@ -250,8 +252,8 @@ export default {
       </div>
       <p v-if="!userData.adresses">"Add adress"</p>
     </div>
-    <p v-show="showOrders" class="subtitle">Мои покупки</p>
-    <div class="grid_wrapper info_wrapper" v-show="showOrders">
+    <p v-show="showOrdersInfo" class="subtitle">{{ $t("profile.myOrders") }}</p>
+    <div class="grid_wrapper info_wrapper" v-show="showOrdersInfo">
       <p class="orders">{{ $t("profile.orders") }}</p>
       <p class="status">{{ $t("profile.status") }}</p>
     </div>
@@ -259,7 +261,7 @@ export default {
       v-for="(item, index) in ordersList"
       :key="index"
       class="grid_wrapper info_wrapper"
-      v-show="showOrders"
+      v-show="showOrdersInfo"
     >
       <div class="order_info">
         <p>Name: {{ item.attributes.name }}</p>
@@ -287,10 +289,11 @@ export default {
       <p class="order_status">В обработке</p>
     </div>
 
-    <div class="info_wrapper" v-show="showReviews">
-      <p v-show="showReviews" class="subtitle">Мои отзывы</p>
+    <div class="info_wrapper" v-show="showReviewsInfo">
+      <p v-show="showReviewsInfo" class="subtitle">{{ $t("profile.myReviews") }}</p>
     </div>
   </div>
+</div>
 </template>
 <style scoped>
 .profile_wrapper {
@@ -304,8 +307,38 @@ export default {
   border-radius: 20px;
   color: white;
   width: 80%;
-  padding: 20px;
-  margin: auto;
+  padding: 20px 20px 40px;
+  margin: 5% auto;
+}
+.dark-mode .profile_wrapper{
+  background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69);
+}
+.dark-mode .info_wrapper{
+  background-color: rgb(109, 132, 132);
+ border: 2px solid rgb(42, 69, 69);
+ color:rgb(216, 227, 227);
+}
+.dark-mode .order_info, .dark-mode .order_status{
+  background-color: rgb(109, 132, 132);
+ color:rgb(216, 227, 227);
+}
+.dark-mode input{
+ background-color: rgb(216, 227, 227);
+}
+.dark-mode button{
+  background-color: transparent;
+}
+.dark-mode .order_button{
+  background-color: rgb(94, 111, 111);
+}
+.dark-mode button:active,
+.dark-mode button:hover
+{
+  background-color: rgb(13, 121, 121);
+}
+.profile_box{
+  min-height: 570px;
 }
 .input_wrapper {
   width: 100%;

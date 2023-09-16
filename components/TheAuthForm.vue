@@ -98,6 +98,7 @@ align-items: center;
     padding: 20px 0 20px 20px;
     width: 100%;
 }
+
 .form{
   display: flex;
   flex-direction: column;
@@ -143,7 +144,19 @@ div{
 .ordering:hover{
   background: #B49696;
 }
-
+.dark-mode .title{
+  color: rgb(216, 227, 227);
+}
+.dark-mode button{
+  background-color:  rgb(15, 60, 60);
+}
+.dark-mode button:active,
+.dark-mode button:hover {
+  background-color: rgb(13, 121, 121);
+}
+.dark-mode input{
+ background-color: rgb(216, 227, 227);
+}
 label {
   display: flex;
   flex-direction: row;

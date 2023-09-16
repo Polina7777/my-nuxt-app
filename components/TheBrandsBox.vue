@@ -41,6 +41,9 @@ div{
   flex-direction: column;
   justify-content: center;
 }
+.dark-mode .title, .dark-mode .show_more{
+  color: rgb(216, 227, 227);
+}
 ul{
   display: flex;
   flex-direction: row;

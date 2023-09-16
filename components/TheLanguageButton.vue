@@ -36,6 +36,19 @@ export default {
   color: white;
   z-index: 1000;
 }
+.dark-mode .lang_button {
+  background-color: rgb(6, 89, 89);
+    color: #ffffff;
+    font-size: 14px;
+  padding: 10px 35px;
+}
+.dark-mode .lang_button:hover,
+.dark-mode .lang_button:active{
+  background-color: rgb(13, 121, 121);
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px 35px;
+}
 .lang_button:active, .lang_button:hover {
   background-color: #b49696;
 }

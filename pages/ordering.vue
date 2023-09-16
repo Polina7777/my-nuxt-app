@@ -1,8 +1,8 @@
 <template>
-    <!-- <NuxtLayout name="custom"> -->
+    <NuxtLayout name="custom">
          <TheHeader/>
     <TheOrdering3/>
-    <TheFooter/>
-    <!-- </NuxtLayout> -->
+    <!-- <TheFooter/> -->
+    </NuxtLayout>
     <!-- <TheFooter/> -->
 </template>

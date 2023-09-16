@@ -34,6 +34,9 @@ const props = defineProps({
   align-items: center;
   transition: opacity 0.3s ease;
 }
+.dark-mode .modal-mask{
+  background-color:  rgba(35, 59, 59, 0.295);
+}
 #show-modal {
   padding: 5px 10px;
   height: 35px;
@@ -66,6 +69,15 @@ const props = defineProps({
 .modal-container{
   width: 50%;
 }
+.dark-mode .modal-container{
+ background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69);
+
+}
+.dark-mode .modal-default-button{
+  background-color: transparent;
+  color: rgb(103, 152, 152);
+}
 .close {
   padding: 5px 8px;
   position: absolute;
@@ -79,68 +91,8 @@ li{
   text-align: start;
 }
 
-#popup_list_one {
-  position: relative;
-  font-size: 20px;
-  min-height: 410px;
-  gap: 20px;
-  color: white;
-  max-width: 320px;
-  min-width: 250px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
 
-#popup_list_one_item {
-  font-size: 25px;
-}
-#popup_list_two_item {
-  color: black;
-  font-size: 15px;
-}
-#popup_list_two_item:hover {
-  color: #b49696;
-}
-.popup_item {
-  font-size: 15px;
-  margin: 0;
-}
-.popup_button {
-  background-color: #b49696;
-}
-.popup_list {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-text-align: start;
-  background: #d7b5b5;
-  text-align: start;
-  gap: 10px;
-  font-size: 15px;
-  padding: 10px;
-  margin: 0;
-  min-width: 170px;
-  min-height: 410px;
-}
-#popup_list_two {
-  display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-align-items: flex-start;
 
-  position: absolute;
-  left: 250px;
-  top: 0px;
-  color: black;
-  background: white;
-  text-align: start;
-  min-height:410px;
-  padding: 10px 10px 10px 20px;
-  max-width: 320px;
-  min-width: 250px;
-  width:100%;
-}
 .modal-default-button {
   padding: 5px 8px;
   background: #ffffff;

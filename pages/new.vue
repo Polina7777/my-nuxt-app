@@ -64,7 +64,7 @@ return  this.$i18n.locale;
 
 <template>
   <div :key="currentLocal">
-  <!-- <NuxtLayout name="custom"> -->
+  <NuxtLayout name="custom">
     <TheHeader
       :value="searchString"
       :popUpValue="popUpFilter"
@@ -75,8 +75,8 @@ return  this.$i18n.locale;
       <TheList :titleProps="titleProps" :itemList="productsListNew" />
       <!-- <TheList titleProps="Новинки" :itemList="productsListNew" /> -->
     </div>
-    <TheFooter/>
-  <!-- </NuxtLayout> -->
+    <!-- <TheFooter/> -->
+  </NuxtLayout>
 </div>
 </template>
 

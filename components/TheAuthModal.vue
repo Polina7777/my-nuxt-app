@@ -40,6 +40,18 @@ const props = defineProps({
   align-items: center;
   transition: opacity 0.3s ease;
 }
+.dark-mode .modal-mask{
+  background-color:  rgba(35, 59, 59, 0.295);
+}
+.dark-mode .modal-container{
+ background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69);
+
+}
+.dark-mode .modal-default-button{
+  background-color: transparent;
+  color: rgb(103, 152, 152);
+}
 #show-modal {
   padding: 5px 10px;
   height: 35px;

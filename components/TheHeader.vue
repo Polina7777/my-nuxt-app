@@ -11,13 +11,15 @@ import { data } from "../static/data";
 import { IClickPopUpValue } from "static/interfaces";
 import ThePopUpMenu from "@/components/ThePopUpMenu.vue";
 import TheLanguageButton from "@/components/TheLanguageButton.vue";
+import  TheThemeButton  from "@/components/TheThemeButton.vue";
+import  TheColorMode  from "@/components/TheColorMode.vue";
 export default {
   props: {
     value: String,
     popUpValue: Object,
   },
   emits: ["input", "click"],
-  components: { ThePopUpMenu, TheLanguageButton },
+  components: { ThePopUpMenu, TheLanguageButton, TheThemeButton, TheColorMode },
   beforeUpdate() {
     (this.navScheme1 = [
       {
@@ -65,27 +67,27 @@ export default {
   },
   mounted() {
     this.authListener();
+    this.theme = localStorage.getItem('theme') as string
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
     }
   },
+
+  
   data() {
     return {
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
       openAuthModal: false,
       openRegModal: false,
-      // navScheme1: data.navScheme1,
-      // navScheme2: data.navScheme2,
+
       navScheme1: [
         {
-          // title: "Доставка и оплата",
           title: this.$t("navScheme1Title1"),
           navigate: "/paymethods",
         },
         {
-          // title: "Вопрос-ответ",
           title: this.$t("navScheme1Title2"),
           navigate: "/questions",
         },
@@ -97,25 +99,21 @@ export default {
       ],
       navScheme2: [
         {
-          // title: "Каталог",
           title: this.$t("navScheme2Title1"),
           navigate: "/",
           image: plus,
         },
         {
-          // title: "Новинки",
           title: this.$t("navScheme2Title2"),
           navigate: "/new",
           image: null,
         },
         {
-          // title: "Распродажи",
           title: this.$t("navScheme2Title3"),
           navigate: "/sale",
           image: null,
         },
         {
-          // title: "Подарочные сертификаты",
           title: this.$t("navScheme2Title4"),
           navigate: "/giftcard",
           image: null,
@@ -138,6 +136,7 @@ export default {
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
       isLoggedIn: false,
+      theme:'light'
     };
   },
   methods: {
@@ -189,7 +188,7 @@ export default {
 };
 </script>
 <template>
-  <header v-if="!mobileVersion">
+  <header v-if="!mobileVersion" :class="theme === 'dark'?'dark':null">
     <div class="header_buttons">
       <TheLanguageButton />
       <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">
@@ -209,6 +208,8 @@ export default {
           <button class="fav_button" @click="navigateTo('/favorites')">
         <img class="like"  src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"/>
       </button>
+      <!-- <TheThemeButton/> -->
+      <TheColorMode/>
         <!-- </nuxt-link> -->
       <Teleport to="body">
         <TheAuthModal
@@ -332,6 +333,7 @@ export default {
 * {
   box-sizing: border-box;
 }
+
 header {
   display: flex;
   flex-direction: column;
@@ -393,7 +395,15 @@ p {
   align-self: end;
   gap: 10px;
 }
-
+.dark-mode .profile:hover,
+.dark-mode .profile:active
+.dark-mode .fav_button:active,
+.dark-mode .fav_button:hover{
+  background-color: rgb(13, 121, 121);
+    color: #ffffff;
+    font-size: 15px;
+    /* padding: 10px 25px; */
+}
 .phone {
   min-width: 140px;
 }
@@ -418,17 +428,41 @@ img {
   width: 21px;
   height: 21px;
 }
+.dark-mode input{
+ background-color: rgb(187, 198, 198);
+}
 .sign,.profile, .fav_button{
   font-size: 15px;
   padding: 7px 17px;
   background-color: #efe1e1;
   color: white;
+  height: 40px;
+  align-items: center;
+
+}
+  .dark-mode .sign, .dark-mode .fav_button, .dark-mode .profile{ 
+    background-color: rgb(6, 89, 89);
+    color: #ffffff;
+    font-size: 15px;
+  padding: 7px 17px;
+  height: 40px;
+  align-items: center;
+   }
+   .dark-mode .fav_button{
+  padding: 7px 33px;
+}
+.dark-mode .fav_button:hover,
+.dark-mode .fav_button:active{
+  padding: 7px 33px;
 }
 .fav_button{
   padding: 7px 33px;
 }
 
 .profile{
+  padding: 10px 25px;
+}
+.dark-mode .profile {
   padding: 10px 25px;
 }
 .input_wrapper {
@@ -474,13 +508,19 @@ button,
   padding: 15px 40px;
   font-size: 17px;
   border-radius: 20px;
-  /* z-index: 100000; */
   border: none;
 }
 .button {
   background-color: white;
   color: black;
+  align-items: center;
 }
+.dark-mode .button {
+  background-color: rgb(6, 89, 89);
+  color: rgb(255, 255, 255);
+  align-items: center;
+}
+
 .popup_button {
   background-color: #efe1e1;
   color: white;
@@ -492,6 +532,25 @@ button:active,
 .sign:hover,
 .popup_button {
   background-color: #b49696;
+}
+.dark-mode .popup_button {
+  background-color:  rgb(58, 169, 169);;
+}
+.dark-mode a{
+  color: rgb(216, 227, 227);
+}
+.dark-mode a:hover,
+.dark-mode a:active
+{
+  color: rgb(181, 221, 221);
+}
+.dark-mode button:active,
+.dark-mode .sign:active,
+.dark-mode .sign:hover,
+.dark-mode .profile:active,
+.dark-mode .profile:hover
+.dark-mode .popup_button {
+  background-color: rgb(13, 121, 121);
 }
 .plus_button {
   position: relative;

@@ -1,9 +1,9 @@
 <template>
     <!-- <TheHeader/> -->
-    <!-- <NuxtLayout name="custom"> -->
+    <NuxtLayout name="custom">
 <TheHeader/>
 <TheBasket/>
-<TheFooter/>
-<!-- </NuxtLayout> -->
+<!-- <TheFooter/> -->
+</NuxtLayout>
 <!-- <TheFooter/> -->
 </template>

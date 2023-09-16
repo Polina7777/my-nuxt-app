@@ -62,6 +62,9 @@ export default {
   min-height: 400px;
   margin: auto;
 }
+.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
+  color: rgb(216, 227, 227);
+}
 .title {
   text-align: center;
 }
@@ -78,6 +81,17 @@ li {
   display: flex;
 flex-direction: column;
 justify-content: center;
+width: 210px;
+height: 210px;
+  text-align: center;
+  border: 1.7px solid #dadedf;
+  border-radius: 10px;
+}
+.dark-mode li {
+  display: flex;
+flex-direction: column;
+justify-content: center;
+background-color: white;
 width: 210px;
 height: 210px;
   text-align: center;

@@ -233,7 +233,7 @@ export default {
 }
 
 .count_buttons,
-.buttton {
+.button {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -255,16 +255,25 @@ export default {
 }
 .box_button,
 .box_button:hover,
-.box_button:active {
+.box_button:active,
+.dark-mode .box_button,
+.dark-mode .box_button:hover,
+.dark-mode .box_button:active{
   background: transparent;
   color: black;
   font-size: 27px;
 }
-.count_buttons:hover,
+/* .count_buttons:hover,
 .count_buttons:active,
 .button:hover,
 .button:active {
-  background: #efe1e1;
+  background:  rgb(6, 89, 89);
+} */
+.dark-mode .count_buttons:hover,
+.dark-mode .count_buttons:active,
+.dark-mode button:hover,
+.dark-mode button:active {
+  background: rgb(13, 121, 121);
 }
 .description_small {
   width: 80%;
@@ -284,6 +293,17 @@ img {
   width: 300px;
   height: 300px;
 }
+.dark-mode button, .dark-mode .count_buttons{
+  background-color:   rgb(13, 121, 121);
+}
+ .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
+  background: rgb(13, 121, 121);
+}
+/* .dark-mode button:active,
+.dark-mode button:hover {
+  background-color: rgb(13, 121, 121);
+  padding: 15px 25px;
+} */
 button {
   padding: 15px 25px;
   background: #efe1e1;

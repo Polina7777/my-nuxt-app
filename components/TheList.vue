@@ -8,6 +8,10 @@ export default {
   },
   updated() {
   this.currentLocale = this.$i18n.locale
+  this.theme = localStorage.getItem('theme') as string
+},
+mounted() {
+  this.theme = localStorage.getItem('theme') as string
 },
   beforeUpdate() {
     this.text = this.titleProps
@@ -21,6 +25,7 @@ export default {
         : null,
       router: useRouter(),
       currentLocale:this.$i18n.locale,
+      theme:'light',
     };
   },
   methods: {
@@ -32,16 +37,11 @@ export default {
       }
     },
   },
-  // watch: {
-  //   currentLocale: async function(){
-  //   }, 
-  // },
   components: { TheCard },
 };
 </script>
-<!-- v-if="itemList?.length" -->
 <template>
-  <div class="list_wrapper" :key="currentLocale">
+  <div :class="`list_wrapper ${theme}`" :key="currentLocale">
     <p class="title">{{ titleProps }}</p>
     <ul v-if="itemList?.length"
       :class="
@@ -67,7 +67,6 @@ export default {
       {{ text }}
     </p>
     <p v-show="!itemList?.length" class="no-result">No result!</p>
-    <!-- <p v-else class="no-result">No result!</p> -->
   </div>
 </template>
 
@@ -78,6 +77,10 @@ export default {
   flex-direction: column;
   min-height: 400px;
   margin: auto;
+  width: 100%;
+}
+.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
+  color: rgb(216, 227, 227);
 }
 .title {
   text-align: center;
@@ -93,8 +96,9 @@ ul {
 li {
   text-align: center;
   padding: 10px;
-  border: 1.7px solid #dadedf;
+  border: 1.7px solid #d9ddde;
   border-radius: 10px;
+  background-color: white;
 }
 .no-result {
   text-align: center;

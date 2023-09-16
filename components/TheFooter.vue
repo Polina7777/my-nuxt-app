@@ -240,6 +240,16 @@ footer {
   flex-direction: row;
   justify-content: space-around;
 }
+.dark-mode footer{
+  background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69);
+}
+.dark-mode ul,
+.dark-mode .contacts_wrapper {
+  display: flex;
+  flex-direction: column;
+  color: rgb(216, 227, 227);
+}
 ul,
 .contacts_wrapper {
   display: flex;

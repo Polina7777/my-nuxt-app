@@ -1,10 +1,10 @@
 
 <template>
-      <!-- <NuxtLayout name="custom"> -->
+      <NuxtLayout name="custom">
         <TheHeader/>
   <div>
 <TheQuestions/>
   </div>
-  <TheFooter/>
-  <!-- </NuxtLayout> -->
+  <!-- <TheFooter/> -->
+  </NuxtLayout>
 </template>

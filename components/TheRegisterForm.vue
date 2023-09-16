@@ -190,6 +190,9 @@ async function register(data:any){
   align-items: center;
   width: 80%;
 }
+.dark-mode .title{
+  color: rgb(216, 227, 227);
+}
 div {
   display: flex;
   flex-direction: column;
@@ -197,7 +200,16 @@ div {
   align-items: start;
   text-align: -webkit-center;
 }
-
+.dark-mode button{
+  background-color:  rgb(15, 60, 60);
+}
+.dark-mode button:active,
+.dark-mode button:hover {
+  background-color: rgb(13, 121, 121);
+}
+.dark-mode input{
+ background-color: rgb(216, 227, 227);
+}
 .field_box {
   display: flex;
   flex-direction: column;

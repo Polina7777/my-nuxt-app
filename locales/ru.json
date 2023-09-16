@@ -192,6 +192,19 @@
     "title":"Профиль",
     "orders":"Заказы",
     "status":"Статус",
-    "hello":"Привет"
+    "hello":"Привет",
+    "myDetails":"Мои даннные",
+    "myOrders":"Мои покупки",
+    "myReviews":"Мои отзывы",
+    "myAdresses":"Мои адреса",
+    "name":"Имя",
+    "surname":"Фамилия",
+    "dateOfBirth":"Дата рождения",
+    "adress":"Адрес",
+    "city":"Город",
+    "postcode":"Почтовый индекс",
+    "country":"Страна",
+    "addAdress":"Добавить адрес"
+
 }
 }

@@ -136,6 +136,9 @@ div {
   align-items: center;
   padding: 30px;
 }
+.dark-mode p, .dark-mode .sub_title{
+  color: rgb(216, 227, 227);
+}
 .sub_title{
   font-size: 21px;
   padding-bottom: 20px;

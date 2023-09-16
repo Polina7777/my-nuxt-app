@@ -193,6 +193,24 @@
         "status":"Status",
         "hello":"Hello"
     }
+},
+"profile":{
+    "title":"Profile",
+    "orders":"Orders",
+    "status":"Status",
+    "hello":"Hello",
+    "myDetails":"My Details",
+    "myOrders":"My Orders",
+    "myReviews":"My Reviews",
+    "myAdresses":"My Adresses",
+    "name":"Name",
+    "surname":"Surname",
+    "dateOfBirth":"Date of Birth",
+    "adress":"Adress",
+    "city":"City",
+    "postcode":"Postcode",
+    "country":"Сountry",
+    "addAdress":"Add Adress"
 }
 
 }

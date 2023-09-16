@@ -55,7 +55,7 @@ watch: {
 </script>
 <template>
     <div>
-      <!-- <NuxtLayout name="custom" :currentLoc="this.$i18n.locale"> -->
+      <NuxtLayout name="custom" :currentLoc="this.$i18n.locale">
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data" />
   <TheListsBox v-if="!searchString && !popUpFilter.title" :searchString="searchString"/>
@@ -63,8 +63,8 @@ watch: {
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
    <TheBrandsBox/>
    <TheAboutBox/>
-   <TheFooter :currentLoc="this.$i18n.locale"/>
-  <!-- </NuxtLayout > -->
+   <!-- <TheFooter :currentLoc="this.$i18n.locale"/> -->
+  </NuxtLayout >
     </div>
   </template>
   <style>

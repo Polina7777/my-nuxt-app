@@ -65,8 +65,17 @@ const props = defineProps({
   gap: 0;
   z-index: 1000;
 }
-.modal-container{
-  /* width: 90%; */
+.dark-mode .modal-container{
+ background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69);
+
+}
+.dark-mode .modal-mask{
+  background-color:  rgba(35, 59, 59, 0.295);
+}
+.dark-mode .modal-default-button{
+  background-color: transparent;
+  color: rgb(103, 152, 152);
 }
 .close {
   padding: 5px 8px;

@@ -11,8 +11,6 @@ export default {
   },
   data() {
     return {
-      // addText: "В корзину",
-      // deleteText: "Добавлено",
       router: useRouter(),
       cardData: ref(null),
       basket: ref(this.card?.attributes.basket),
@@ -29,15 +27,9 @@ export default {
 
   created() {
      this.getUser()
-    // this.getCardInfoById();
-    // this.getUsersFavoritesList();
-    // this.getUserBasketList();
   },
   mounted() {
     this.getUser();
-    //  this.getUsersFavoritesList()
-    // console.log(this.favoritesList)
-    // this.checkIsFavorite(this.card)
   },
   beforeUpdate() {
     this.currentLocale = this.$i18n.locale;
@@ -279,6 +271,7 @@ export default {
   width: 200px;
   height: 250px;
   align-items: center;
+
 }
 .card_link {
   display: flex;
@@ -302,13 +295,25 @@ button {
   background: #efe1e1;
   color: white;
 }
+.dark-mode button{
+  background-color:  rgb(6, 89, 89);
+}
+.dark-mode button:active,
+.dark-mode button:hover {
+  background-color: rgb(13, 121, 121);
+}
+.dark-mode 
 button:active,
 button:hover {
   background-color: #b49696;
 }
+
 .button_like,
 .button_like:hover,
-.button_like:active {
+.button_like:active,
+.dark-mode .button_like,
+.dark-mode .button_like:hover,
+.dark-mode .button_like:active {
   background: transparent;
   padding: 0;
   align-self: end;

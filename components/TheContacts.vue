@@ -15,8 +15,6 @@ export default {
 
 <template>
   <div>
-    <!-- <p class="contacts_title">{{ title }}</p>
-    <p class="contacts_text">{{ text }}</p> -->
     <p class="contacts_title">{{ $t('contactsTitle') }}</p>
     <p class="contacts_text">{{ $t('contactsText') }}</p>
     <ul>
@@ -48,6 +46,13 @@ ul {
   flex-wrap: wrap;
   padding: 30px;
 }
+.dark-mode p{
+  color: rgb(216, 227, 227);
+}
+.dark-mode .contacts_text{
+ background-color: rgb(13, 121, 121);
+}
+
 img {
   width: 300px;
   height: 300px;

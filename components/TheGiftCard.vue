@@ -191,6 +191,23 @@ img {
   margin: auto;
   padding: 30px;
 }
+.dark-mode input{
+ background-color: rgb(216, 227, 227);
+}
+.dark-mode p{
+  color: rgb(216, 227, 227);
+}
+.dark-mode button,.dark-mode .count_buttons{
+  background-color:  rgb(6, 89, 89);
+}
+.dark-mode button:active,
+.dark-mode button:hover{
+  background-color: rgb(13, 121, 121);
+}
+.dark-mode .count_buttons:active,
+.dark-mode .count_buttons:hover{
+  background-color: rgb(13, 121, 121);
+}
 .wrapper {
   display: flex;
   flex-direction: row;

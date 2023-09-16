@@ -50,7 +50,7 @@ watch: {
   <NuxtLayout  name="custom">
     <TheHeader/>
     <TheBigCard v-if="info" :card="info"/>
-    <TheFooter/>
+    <!-- <TheFooter/> -->
   </NuxtLayout>
 </div>
 </template>

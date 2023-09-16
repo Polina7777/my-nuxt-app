@@ -55,14 +55,14 @@ return  this.$i18n.locale;
 
 <template>
   <div :key="currentLocal">
-  <!-- <NuxtLayout name="custom"> -->
+  <NuxtLayout name="custom">
     <TheHeader :value="searchString" :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
   <div class="list_box">
     <TheList :titleProps="titleProps" :itemList="productsListSale" />
     <!-- <TheList titleProps="Распродажи" :itemList="productsListSale" /> -->
   </div>
-  <TheFooter/>
-  <!-- </NuxtLayout> -->
+  <!-- <TheFooter/> -->
+  </NuxtLayout>
 </div>
 </template>
 <style>

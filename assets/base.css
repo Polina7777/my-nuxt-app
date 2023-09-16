@@ -6,6 +6,9 @@
     --gradient-color: linear-gradient(93.24deg, #B49696 0.26%, #CFB9B9 46.15%, #D5C0C0 56.56%, #EFE1E1 100%);
     --frame-color:#DADEDF;
     --text-color:black;
+    --color-general-dark: rgba(13, 9, 29, 0.69);
+    --dark-background: darkslategray;
+    --dark-button:background-color: #283233;
   }
   
   /* semantic color variables for this project */

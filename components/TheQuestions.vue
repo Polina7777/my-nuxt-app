@@ -139,6 +139,14 @@ ul {
 li{
   border-bottom: 1px solid  rgb(176, 174, 174);
 }
+.dark-mode p, .dark-mode .title, .dark-mode button{
+  color: rgb(216, 227, 227);
+}
+.dark-mode button:active,
+.dark-mode button:hover
+{
+  color: rgb(254, 255, 255);
+}
 .question {
   font-size: 21px;
   padding: 20px;

@@ -37,10 +37,11 @@ img{
 }
 .dark-mode body {
   /* background-color: #091a28; */
-  background-color: rgb(35, 59, 59);
-  color: #000000;
+  /* background-color: rgb(35, 59, 59);
+  color: #000000; */
   /* font-weight: 500; */
   /* color: #ebf4f1; */
+  background-color:  rgb(85, 85, 85);
 }
 
 /* .dark-mode button, */
@@ -58,20 +59,24 @@ align-items: center;
 }
 .dark-mode .mode {
   align-items: center;
-  background-color: rgb(6, 89, 89);
+  /* background-color: rgb(6, 89, 89); */
+  background-color: rgb(168, 138, 134);
+
   color: #ffffff;
   padding: 7.7px 33px;
 }
 .dark-mode .mode:hover,
 .dark-mode .mode:active {
   align-items: center;
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  /* background-color: rgba(254, 190, 190, 0.42); */
+  background-color: rgb(131, 110, 107);
   color: #ffffff;
   padding: 7.7px 33px;
 }
 .mode:active,
 .mode:hover {
-  background-color: #b49696;
+  background-color: rgb(131, 110, 107);
   padding: 7.7px 33px;
 }
 </style>

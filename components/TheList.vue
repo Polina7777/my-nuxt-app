@@ -80,7 +80,7 @@ mounted() {
   width: 100%;
 }
 .dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
-  color: rgb(216, 227, 227);
+  color: #b49696;
 }
 .title {
   text-align: center;
@@ -96,7 +96,7 @@ ul {
 li {
   text-align: center;
   padding: 10px;
-  border: 1.7px solid #d9ddde;
+  border: 1.7px solid  #b49696;
   border-radius: 10px;
   background-color: white;
 }

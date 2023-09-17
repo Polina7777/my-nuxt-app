@@ -191,7 +191,8 @@ async function register(data:any){
   width: 80%;
 }
 .dark-mode .title{
-  color: rgb(216, 227, 227);
+color: rgb(90, 68, 64);
+  /* color: rgb(216, 227, 227); */
 }
 div {
   display: flex;
@@ -201,14 +202,20 @@ div {
   text-align: -webkit-center;
 }
 .dark-mode button{
-  background-color:  rgb(15, 60, 60);
+  /* background-color:  rgb(15, 60, 60); */
+  background-color:rgb(90, 68, 64);
 }
 .dark-mode button:active,
 .dark-mode button:hover {
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  background-color: rgb(131, 110, 107);
 }
 .dark-mode input{
- background-color: rgb(216, 227, 227);
+  background-color: rgb(123, 111, 108);
+ /* background-color: rgb(216, 227, 227); */
+}
+.dark-mode input::placeholder{
+color:  rgb(54, 43, 41);
 }
 .field_box {
   display: flex;

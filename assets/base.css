@@ -9,6 +9,11 @@
     --color-general-dark: rgba(13, 9, 29, 0.69);
     --dark-background: darkslategray;
     --dark-button:background-color: #283233;
+
+
+  --dark:background-color: rgb(85, 85, 85);
+  --button:background-color: rgba(186, 186, 186, 0.42);
+  background-color: rgba(254, 190, 190, 0.42);
   }
   
   /* semantic color variables for this project */

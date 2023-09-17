@@ -47,10 +47,11 @@ ul {
   padding: 30px;
 }
 .dark-mode p{
-  color: rgb(216, 227, 227);
+  color:rgb(190, 170, 166);
 }
 .dark-mode .contacts_text{
- background-color: rgb(13, 121, 121);
+  background-color: rgb(168, 138, 134);;
+  color:rgb(75, 66, 65);
 }
 
 img {

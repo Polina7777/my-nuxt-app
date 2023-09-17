@@ -251,13 +251,6 @@ export default {
       <p class="description_small">{{ card?.attributes.description_small }}</p>
       <p>{{ card?.attributes.price }}</p>
     </nuxt-link>
-    <!-- <nuxt-link :to="`/${cardData?.id}`" class="card_link">
-    <img :src="cardData?.attributes.image" alt="card-image" />
-    <p class="description_small">{{ cardData?.attributes.description_small }}</p>
-    <p>{{ cardData?.attributes.price }}</p>
-  </nuxt-link> -->
-    <!-- <button v-if="!basket" @click="addToBacket">{{ $t('cardAdd') }}</button>
-    <button v-if="basket" @click="deleteFromBacket">{{ $t('cardDelete') }}</button> -->
     <button v-if="!productAdded && router.currentRoute.path !== '/user' " @click="basketClick">{{ $t("cardAdd") }}</button>
     <button v-if="productAdded && router.currentRoute.path !== '/user' " @click="basketClick">{{ $t("cardDelete") }}</button>
   </div>
@@ -296,11 +289,14 @@ button {
   color: white;
 }
 .dark-mode button{
-  background-color:  rgb(6, 89, 89);
+  /* background-color:  rgb(6, 89, 89); */
+  background-color: rgb(168, 138, 134);
 }
 .dark-mode button:active,
 .dark-mode button:hover {
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  background-color: rgb(131, 110, 107);
+  /* background-color: rgba(254, 190, 190, 0.42); */
 }
 .dark-mode 
 button:active,

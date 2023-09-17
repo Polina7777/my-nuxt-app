@@ -137,7 +137,7 @@ div {
   padding: 30px;
 }
 .dark-mode p, .dark-mode .sub_title{
-  color: rgb(216, 227, 227);
+  color:rgb(219, 204, 201);
 }
 .sub_title{
   font-size: 21px;

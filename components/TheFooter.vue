@@ -241,14 +241,15 @@ footer {
   justify-content: space-around;
 }
 .dark-mode footer{
-  background-color: rgb(57, 85, 85);
- border: 2px solid rgb(42, 69, 69);
+  /* background-color: rgb(57, 85, 85);
+ border: 2px solid rgb(42, 69, 69); */
+ background-color: rgb(131, 110, 107);
 }
 .dark-mode ul,
 .dark-mode .contacts_wrapper {
   display: flex;
   flex-direction: column;
-  color: rgb(216, 227, 227);
+  color: rgb(218, 197, 189);
 }
 ul,
 .contacts_wrapper {

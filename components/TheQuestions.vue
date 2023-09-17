@@ -137,15 +137,15 @@ ul {
   flex-direction: column;
 }
 li{
-  border-bottom: 1px solid  rgb(176, 174, 174);
+  border-bottom: 1px solid rgb(221, 204, 201);
 }
 .dark-mode p, .dark-mode .title, .dark-mode button{
-  color: rgb(216, 227, 227);
+  color:rgb(190, 170, 166);
 }
 .dark-mode button:active,
 .dark-mode button:hover
 {
-  color: rgb(254, 255, 255);
+  color:rgb(221, 204, 201);
 }
 .question {
   font-size: 21px;

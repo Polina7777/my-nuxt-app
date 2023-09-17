@@ -233,6 +233,38 @@ th {
 .card-wrapper {
   padding: 21px;
 }
+.dark-mode .card-wrapper{
+  color: #d1c4c4;
+}
+.box_button,
+.box_button:hover,
+.box_button:active,
+.dark-mode .box_button,
+.dark-mode .box_button:hover,
+.dark-mode .box_button:active{
+  background: transparent;
+color:rgb(90, 68, 64);
+  font-size: 27px;
+}
+.dark-mode button, .dark-mode .count_buttons{
+  background-color: rgb(131, 110, 107);
+  color: #d1c4c4;
+}
+ .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
+  background-color:rgb(90, 68, 64);
+}
+/* .count_buttons:hover,
+.count_buttons:active,
+.button:hover,
+.button:active {
+  background:  rgb(6, 89, 89);
+} */
+.dark-mode .count_buttons:hover,
+.dark-mode .count_buttons:active,
+.dark-mode button:hover,
+.dark-mode button:active {
+  background-color: rgb(131, 110, 107);
+}
 .button_td {
   display: flex;
   flex-direction: column;

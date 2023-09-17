@@ -192,21 +192,28 @@ img {
   padding: 30px;
 }
 .dark-mode input{
- background-color: rgb(216, 227, 227);
+ background-color:  rgb(168, 138, 134);
+  color: #efe1e1;
+ /* background-color: rgb(216, 227, 227); */
 }
 .dark-mode p{
-  color: rgb(216, 227, 227);
+  /* color: rgb(216, 227, 227); */
+color:  rgb(168, 138, 134);
 }
 .dark-mode button,.dark-mode .count_buttons{
-  background-color:  rgb(6, 89, 89);
+  /* background-color:  rgb(6, 89, 89); */
+  background-color: rgb(131, 110, 107);
 }
 .dark-mode button:active,
 .dark-mode button:hover{
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+
+  background-color:rgb(90, 68, 64);
 }
 .dark-mode .count_buttons:active,
 .dark-mode .count_buttons:hover{
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  background-color: rgb(131, 110, 107);
 }
 .wrapper {
   display: flex;

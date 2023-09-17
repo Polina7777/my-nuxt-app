@@ -230,6 +230,7 @@ export default {
   margin: 0 auto;
   width: 71%;
   padding-top: 70px;
+  color: rgb(218, 197, 189);
 }
 
 .count_buttons,
@@ -260,7 +261,7 @@ export default {
 .dark-mode .box_button:hover,
 .dark-mode .box_button:active{
   background: transparent;
-  color: black;
+color:rgb(90, 68, 64);
   font-size: 27px;
 }
 /* .count_buttons:hover,
@@ -273,7 +274,7 @@ export default {
 .dark-mode .count_buttons:active,
 .dark-mode button:hover,
 .dark-mode button:active {
-  background: rgb(13, 121, 121);
+  background-color: rgb(131, 110, 107);
 }
 .description_small {
   width: 80%;
@@ -294,10 +295,10 @@ img {
   height: 300px;
 }
 .dark-mode button, .dark-mode .count_buttons{
-  background-color:   rgb(13, 121, 121);
+  background-color: rgb(131, 110, 107);
 }
  .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
-  background: rgb(13, 121, 121);
+  background-color:rgb(90, 68, 64);
 }
 /* .dark-mode button:active,
 .dark-mode button:hover {

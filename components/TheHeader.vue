@@ -399,7 +399,8 @@ p {
 .dark-mode .profile:active
 .dark-mode .fav_button:active,
 .dark-mode .fav_button:hover{
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  background-color:rgb(168, 138, 134);
     color: #ffffff;
     font-size: 15px;
     /* padding: 10px 25px; */
@@ -429,7 +430,11 @@ img {
   height: 21px;
 }
 .dark-mode input{
- background-color: rgb(187, 198, 198);
+ background-color:  rgb(168, 138, 134);
+
+}
+.dark-mode input::placeholder{
+color:  rgb(54, 43, 41);
 }
 .sign,.profile, .fav_button{
   font-size: 15px;
@@ -441,7 +446,8 @@ img {
 
 }
   .dark-mode .sign, .dark-mode .fav_button, .dark-mode .profile{ 
-    background-color: rgb(6, 89, 89);
+    /* background-color: rgb(6, 89, 89); */
+    background-color: rgb(168, 138, 134);
     color: #ffffff;
     font-size: 15px;
   padding: 7px 17px;
@@ -454,6 +460,7 @@ img {
 .dark-mode .fav_button:hover,
 .dark-mode .fav_button:active{
   padding: 7px 33px;
+  background-color: rgb(131, 110, 107);
 }
 .fav_button{
   padding: 7px 33px;
@@ -516,9 +523,13 @@ button,
   align-items: center;
 }
 .dark-mode .button {
-  background-color: rgb(6, 89, 89);
+  /* background-color: rgb(6, 89, 89); */
+  background-color: rgb(168, 138, 134);
   color: rgb(255, 255, 255);
   align-items: center;
+}
+.dark-mode .button:hover, .dark-mode .button:active{
+  background-color: rgb(131, 110, 107);
 }
 
 .popup_button {
@@ -531,18 +542,19 @@ button:active,
 .sign:active,
 .sign:hover,
 .popup_button {
-  background-color: #b49696;
+  background-color: rgb(131, 110, 107);
 }
 .dark-mode .popup_button {
-  background-color:  rgb(58, 169, 169);;
+  /* background-color:  rgb(58, 169, 169); */
+  background-color: rgb(131, 110, 107);
 }
 .dark-mode a{
-  color: rgb(216, 227, 227);
+  color: rgb(224, 201, 193);
 }
 .dark-mode a:hover,
 .dark-mode a:active
 {
-  color: rgb(181, 221, 221);
+  color: rgb(234, 207, 204);
 }
 .dark-mode button:active,
 .dark-mode .sign:active,
@@ -550,7 +562,9 @@ button:active,
 .dark-mode .profile:active,
 .dark-mode .profile:hover
 .dark-mode .popup_button {
-  background-color: rgb(13, 121, 121);
+  /* background-color: rgb(13, 121, 121); */
+  /* background-color: rgb(168, 138, 134); */
+  background-color: rgb(131, 110, 107);
 }
 .plus_button {
   position: relative;

@@ -41,9 +41,7 @@ div{
   flex-direction: column;
   justify-content: center;
 }
-.dark-mode .title, .dark-mode .show_more{
-  color: rgb(216, 227, 227);
-}
+
 ul{
   display: flex;
   flex-direction: row;
@@ -60,6 +58,12 @@ p{
   text-align: end;
   padding: 20px;
 }
+/*DarkMode*/
+.dark-mode .title, .dark-mode .show_more{
+  /* color: rgb(216, 227, 227); */
+  color: rgb(103, 101, 101);
+}
+/*DarkMode*/
 @media (max-width: 610px) {
   ul {
     flex-wrap: nowrap;

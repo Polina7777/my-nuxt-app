@@ -130,15 +130,40 @@ updated() {
 </template>
 
 <style scoped>
+/*DarkMode*/
+.dark-mode p, .dark-mode .sub_title{
+  /* color:rgb(219, 204, 201); */
+  color: rgb(103, 101, 101);
+}
+.dark-mode .blue {
+  background: #45595c;
+  color: rgb(24, 21, 21);
+  font-weight: 700;
+}
+
+.dark-mode .green {
+  background: #333934;
+  color: rgb(24, 21, 21);
+  font-weight: 700;
+}
+.dark-mode .purple {
+  background: #5c5a63;
+  color: rgb(24, 21, 21);
+  font-weight: 700;
+}
+.dark-mode .orange {
+  background: #a89d98;
+  color: rgb(24, 21, 21);
+  font-weight: 700;
+}
+/*DarkMode*/
 div {
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 30px;
 }
-.dark-mode p, .dark-mode .sub_title{
-  color:rgb(219, 204, 201);
-}
+
 .sub_title{
   font-size: 21px;
   padding-bottom: 20px;

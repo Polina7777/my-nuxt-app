@@ -6,13 +6,20 @@ import phone from "../static/images/phone.svg";
 import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
+import like from "../static/images/like.svg";
 import burger from "../static/images/burger.svg";
+import searchDark from "../static/images/search-dark.svg";
+import vkDark from "../static/images/vk-dark.svg";
+import viberDark from "../static/images/viber.svg";
+import basketDark from "../static/images/basket-dark.svg";
+import phoneDark from "../static/images/phone-dark.svg";
 import { data } from "../static/data";
 import { IClickPopUpValue } from "static/interfaces";
 import ThePopUpMenu from "@/components/ThePopUpMenu.vue";
 import TheLanguageButton from "@/components/TheLanguageButton.vue";
-import  TheThemeButton  from "@/components/TheThemeButton.vue";
-import  TheColorMode  from "@/components/TheColorMode.vue";
+import TheThemeButton from "@/components/TheThemeButton.vue";
+import TheColorMode from "@/components/TheColorMode.vue";
+
 export default {
   props: {
     value: String,
@@ -67,21 +74,25 @@ export default {
   },
   mounted() {
     this.authListener();
-    this.theme = localStorage.getItem('theme') as string
+    this.theme = localStorage.getItem("theme") as string;
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
     }
   },
 
-  
   data() {
     return {
       popUpList1: data.popUpList1,
       popUpList2: data.popUpList2,
       openAuthModal: false,
       openRegModal: false,
-
+      like: like,
+      phoneDark:phoneDark,
+      basketDark:basketDark,
+      vkDark:vkDark,
+      viberDark:viberDark,
+      searchDark:searchDark,
       navScheme1: [
         {
           title: this.$t("navScheme1Title1"),
@@ -136,7 +147,7 @@ export default {
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
       isLoggedIn: false,
-      theme:'light'
+      theme: "light",
     };
   },
   methods: {
@@ -188,7 +199,7 @@ export default {
 };
 </script>
 <template>
-  <header v-if="!mobileVersion" :class="theme === 'dark'?'dark':null">
+  <header v-if="!mobileVersion" :class="theme === 'dark' ? 'dark' : null">
     <div class="header_buttons">
       <TheLanguageButton />
       <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">
@@ -201,16 +212,25 @@ export default {
         Sign Out
       </button>
       <nuxt-link>
-        <button class="profile" v-show="isLoggedIn" @click="navigateTo('/user')">
+        <button
+          class="profile"
+          v-show="isLoggedIn"
+          @click="navigateTo('/user')"
+        >
           Profile
-        </button></nuxt-link>
-        <!-- <nuxt-link to="favorites"> -->
-          <button class="fav_button" @click="navigateTo('/favorites')">
-        <img class="like"  src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"/>
+        </button></nuxt-link
+      >
+      <!-- <nuxt-link to="favorites"> -->
+      <button class="fav_button" @click="navigateTo('/favorites')">
+        <!-- <img
+          class="like"
+          src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
+        /> -->
+        <img class="like" :src="like" />
       </button>
       <!-- <TheThemeButton/> -->
-      <TheColorMode/>
-        <!-- </nuxt-link> -->
+      <TheColorMode />
+      <!-- </nuxt-link> -->
       <Teleport to="body">
         <TheAuthModal
           :openAuthModal="openAuthModal"
@@ -243,17 +263,21 @@ export default {
           :value="value"
           @input="updateValue"
         />
-        <img class="search_img" :src="search" alt="search" />
+        <!-- <img class="search_img" :src="search" alt="search" /> -->
+        <img class="search_img" :src="searchDark" alt="search" />
         <nuxt-link to="basket">
-          <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
+          <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
+          <img :src="basketDark" alt="basket" class="basket-img" @click="navigateTo('/basket')" />
         </nuxt-link>
-      
       </div>
       <div class="contacts_wrapper">
-        <img :src="phone" alt="phone" />
+        <!-- <img :src="phone" alt="phone" /> -->
+        <img :src="phoneDark" alt="phone" />
         <p class="phone">{{ phoneNumber }}</p>
-        <img :src="whatsapp" alt="whatsapp" />
-        <img :src="vk" alt="vk" />
+        <!-- <img :src="whatsapp" alt="whatsapp" /> -->
+        <img :src="viberDark" alt="whatsapp" />
+        <!-- <img :src="vk" alt="vk" /> -->
+        <img :src="vkDark" alt="vk" />
       </div>
     </div>
     <ul class="navigation">
@@ -322,7 +346,10 @@ export default {
           <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
         </nuxt-link>
         <nuxt-link to="favorites">
-        <img class="like"  src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"/>
+          <img
+            class="like"
+            src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
+          />
         </nuxt-link>
       </div>
     </div>
@@ -395,16 +422,7 @@ p {
   align-self: end;
   gap: 10px;
 }
-.dark-mode .profile:hover,
-.dark-mode .profile:active
-.dark-mode .fav_button:active,
-.dark-mode .fav_button:hover{
-  /* background-color: rgb(13, 121, 121); */
-  background-color:rgb(168, 138, 134);
-    color: #ffffff;
-    font-size: 15px;
-    /* padding: 10px 25px; */
-}
+
 .phone {
   min-width: 140px;
 }
@@ -429,44 +447,23 @@ img {
   width: 21px;
   height: 21px;
 }
-.dark-mode input{
- background-color:  rgb(168, 138, 134);
 
-}
-.dark-mode input::placeholder{
-color:  rgb(54, 43, 41);
-}
-.sign,.profile, .fav_button{
+.sign,
+.profile,
+.fav_button {
   font-size: 15px;
   padding: 7px 17px;
   background-color: #efe1e1;
   color: white;
   height: 40px;
   align-items: center;
+}
 
-}
-  .dark-mode .sign, .dark-mode .fav_button, .dark-mode .profile{ 
-    /* background-color: rgb(6, 89, 89); */
-    background-color: rgb(168, 138, 134);
-    color: #ffffff;
-    font-size: 15px;
-  padding: 7px 17px;
-  height: 40px;
-  align-items: center;
-   }
-   .dark-mode .fav_button{
-  padding: 7px 33px;
-}
-.dark-mode .fav_button:hover,
-.dark-mode .fav_button:active{
-  padding: 7px 33px;
-  background-color: rgb(131, 110, 107);
-}
-.fav_button{
+.fav_button {
   padding: 7px 33px;
 }
 
-.profile{
+.profile {
   padding: 10px 25px;
 }
 .dark-mode .profile {
@@ -522,15 +519,6 @@ button,
   color: black;
   align-items: center;
 }
-.dark-mode .button {
-  /* background-color: rgb(6, 89, 89); */
-  background-color: rgb(168, 138, 134);
-  color: rgb(255, 255, 255);
-  align-items: center;
-}
-.dark-mode .button:hover, .dark-mode .button:active{
-  background-color: rgb(131, 110, 107);
-}
 
 .popup_button {
   background-color: #efe1e1;
@@ -544,28 +532,7 @@ button:active,
 .popup_button {
   background-color: rgb(131, 110, 107);
 }
-.dark-mode .popup_button {
-  /* background-color:  rgb(58, 169, 169); */
-  background-color: rgb(131, 110, 107);
-}
-.dark-mode a{
-  color: rgb(224, 201, 193);
-}
-.dark-mode a:hover,
-.dark-mode a:active
-{
-  color: rgb(234, 207, 204);
-}
-.dark-mode button:active,
-.dark-mode .sign:active,
-.dark-mode .sign:hover,
-.dark-mode .profile:active,
-.dark-mode .profile:hover
-.dark-mode .popup_button {
-  /* background-color: rgb(13, 121, 121); */
-  /* background-color: rgb(168, 138, 134); */
-  background-color: rgb(131, 110, 107);
-}
+
 .plus_button {
   position: relative;
 }
@@ -582,6 +549,102 @@ button:active,
 .title {
   font-size: 27px;
 }
+
+/* DarkMode */
+
+.dark-mode .profile:hover,
+.dark-mode .profile:active .dark-mode .fav_button:active,
+.dark-mode .fav_button:hover {
+  /* background-color: rgb(13, 121, 121); */
+  /* background-color:rgb(168, 138, 134);
+    color: #ffffff; */
+  font-size: 15px;
+  background-color: transparent;
+  border: 1.7px solid #2d2a2a;
+  /* color: rgb(98, 98, 98); */
+  color: rgb(181, 173, 173);
+}
+.dark-mode .button {
+  /* background-color: rgb(6, 89, 89); */
+  /* background-color: rgb(168, 138, 134);
+  color: rgb(255, 255, 255); */
+  background-color: transparent;
+  border: 1.7px solid #2d2a2a;
+  color: rgb(98, 98, 98);
+  align-items: center;
+}
+.dark-mode .button:hover,
+.dark-mode .button:active {
+  background-color: rgb(131, 110, 107);
+  color: rgb(181, 173, 173);
+}
+
+.dark-mode input {
+  /* background-color:  rgb(168, 138, 134); */
+  /* background-color:  rgb(104, 100, 99); */
+  background-color: transparent;
+  border: 1px solid rgb(71, 70, 70);
+  color: rgb(103, 101, 101);
+}
+.dark-mode input::placeholder {
+  color: rgb(103, 101, 101);
+}
+
+.dark-mode .sign,
+.dark-mode .fav_button,
+.dark-mode .profile {
+  /* background-color: rgb(6, 89, 89); */
+  /* background-color: rgb(168, 138, 134); */
+  background-color: transparent;
+  border: 1.7px solid #2d2a2a;
+  color: rgb(98, 98, 98);
+  /* color: #ffffff; */
+  font-size: 15px;
+  padding: 7px 17px;
+  height: 40px;
+  align-items: center;
+}
+.dark-mode .profile {
+  padding: 7px 23.7px;
+}
+.dark-mode .fav_button {
+  padding: 7px 33px;
+}
+.dark-mode .fav_button:hover,
+.dark-mode .fav_button:active {
+  padding: 7px 33px;
+  background-color: rgb(131, 110, 107);
+}
+.dark-mode .basket-img{
+width: 31px;
+height: 31px;
+}
+.dark-mode .popup_button {
+  /* background-color:  rgb(58, 169, 169); */
+  /* background-color: rgb(131, 110, 107); */
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+.dark-mode a {
+  color: rgb(103, 101, 101);
+}
+.dark-mode a:hover,
+.dark-mode a:active {
+  color: rgb(234, 207, 204);
+}
+
+.dark-mode button:active,
+.dark-mode .sign:active,
+.dark-mode .sign:hover,
+.dark-mode .profile:active,
+.dark-mode .profile:hover .dark-mode .popup_button {
+  /* background-color: rgb(13, 121, 121); */
+  /* background-color: rgb(168, 138, 134); */
+  background-color: rgb(131, 110, 107);
+  color: rgb(181, 173, 173);
+}
+/*DarkMode*/
 @media (max-width: 1100px) {
   .header-wrapper {
     flex-wrap: wrap;

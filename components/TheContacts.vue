@@ -30,6 +30,16 @@ export default {
 </template>
 
 <style scoped>
+/*DarkMode*/
+.dark-mode p{
+  color: rgb(103, 101, 101);
+}
+.dark-mode .contacts_text{
+  background-color: rgb(41, 40, 40);;
+  color:rgb(103, 101, 101);
+}
+
+/*DarkMode*/
 div {
   display: flex;
   flex-direction: column;
@@ -45,13 +55,6 @@ ul {
   align-items: start;
   flex-wrap: wrap;
   padding: 30px;
-}
-.dark-mode p{
-  color:rgb(190, 170, 166);
-}
-.dark-mode .contacts_text{
-  background-color: rgb(168, 138, 134);;
-  color:rgb(75, 66, 65);
 }
 
 img {

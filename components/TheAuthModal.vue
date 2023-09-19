@@ -27,6 +27,24 @@ const props = defineProps({
   </Transition>
 </template>
 <style scoped>
+.dark-mode .modal-mask{
+  /* background-color:  rgba(144, 123, 122, 0.591); */
+  background-color:  rgba(143, 143, 143, 0.591);
+}
+.dark-mode .modal-container{
+ /* background-color: rgb(57, 85, 85); */
+ /* background-color: rgb(168, 138, 134); */
+ /* border: 2px solid  rgb(214, 194, 191); */
+  /* background-color: rgb(57, 85, 85); */
+ background-color: rgb(22, 22, 22);
+ border: 1px solid rgb(71, 70, 70);
+}
+.dark-mode .modal-default-button{
+  background-color: transparent;
+  color: rgb(103, 101, 101);
+  /* color: rgb(214, 194, 191); */
+}
+/*DarkMode*/
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -40,19 +58,7 @@ const props = defineProps({
   align-items: center;
   transition: opacity 0.3s ease;
 }
-.dark-mode .modal-mask{
-  background-color:  rgba(144, 123, 122, 0.591);
-}
-.dark-mode .modal-container{
- /* background-color: rgb(57, 85, 85); */
- background-color: rgb(168, 138, 134);
- border: 2px solid  rgb(214, 194, 191);
 
-}
-.dark-mode .modal-default-button{
-  background-color: transparent;
-  color: rgb(214, 194, 191);
-}
 #show-modal {
   padding: 5px 10px;
   height: 35px;

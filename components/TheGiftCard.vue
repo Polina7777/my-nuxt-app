@@ -176,6 +176,59 @@ export default {
   </div>
 </template>
 <style scoped>
+
+/*DarkMode*/
+.dark-mode input {
+  /* background-color:  rgb(168, 138, 134); */
+  /* background-color:  rgb(104, 100, 99); */
+  background-color: transparent;
+  border: 1px solid rgb(71, 70, 70);
+  color: rgb(103, 101, 101);
+}
+.dark-mode input::placeholder {
+  color: rgb(103, 101, 101);
+}
+.dark-mode p{
+  /* color: rgb(216, 227, 227); */
+/* color:  rgb(168, 138, 134); */
+color: rgb(103, 101, 101);
+}
+.dark-mode button{
+  /* background-color:  rgb(6, 89, 89); */
+  /* background-color: rgb(131, 110, 107); */
+  background-color: rgb(28, 27, 27);
+  border: none;
+  /* border: 1.7px solid #2d2a2a; */
+  color: rgb(181, 173, 173);
+}
+.dark-mode .count_buttons{
+  /* background-color:  rgb(6, 89, 89); */
+  /* background-color: rgb(131, 110, 107); */
+  background-color: rgb(28, 27, 27);
+border: none;
+  color: rgb(181, 173, 173);
+}
+.dark-mode button:active,
+.dark-mode button:hover{
+  /* background-color: rgb(13, 121, 121); */
+  /* background-color:rgb(90, 68, 64); */
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+.dark-mode .count_buttons:active,
+.dark-mode .count_buttons:hover{
+  background-color: rgb(131, 110, 107);
+}
+.dark-mode .basket_button{
+  border: 1.7px solid #2d2a2a;
+}
+.dark-mode .basket_button:hover, .dark-mode .basket_button:active {
+  background-color: rgb(131, 110, 107);
+  color: rgb(181, 173, 173);
+}
+/*DarkMode*/
+
 .box {
   display: flex;
   flex-direction: row;
@@ -191,30 +244,14 @@ img {
   margin: auto;
   padding: 30px;
 }
-.dark-mode input{
+/* .dark-mode input{
  background-color:  rgb(168, 138, 134);
   color: #efe1e1;
- /* background-color: rgb(216, 227, 227); */
-}
-.dark-mode p{
-  /* color: rgb(216, 227, 227); */
-color:  rgb(168, 138, 134);
-}
-.dark-mode button,.dark-mode .count_buttons{
-  /* background-color:  rgb(6, 89, 89); */
-  background-color: rgb(131, 110, 107);
-}
-.dark-mode button:active,
-.dark-mode button:hover{
-  /* background-color: rgb(13, 121, 121); */
+ /* background-color: rgb(216, 227, 227); }
+ */
 
-  background-color:rgb(90, 68, 64);
-}
-.dark-mode .count_buttons:active,
-.dark-mode .count_buttons:hover{
-  /* background-color: rgb(13, 121, 121); */
-  background-color: rgb(131, 110, 107);
-}
+
+
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -243,7 +280,6 @@ input {
 }
 .subtext {
   padding: 10px 20px;
-  margin: 10px;
 }
 .subtextClicked {
   padding: 10px 20px;

@@ -166,8 +166,8 @@ export default {
         <button @click="increaseQuantity(cardNew)">+</button>
       </div>
 
-      <button v-if="!basket" @click="addToBacket">{{ $t('bigCardAdd') }}</button>
-      <button v-if="basket" @click="deleteFromBacket">{{  $t('bigCardDelete')}}</button>
+      <button v-if="!basket" @click="addToBacket" class="basket">{{ $t('bigCardAdd') }}</button>
+      <button v-if="basket" @click="deleteFromBacket" class="basket">{{  $t('bigCardDelete')}}</button>
       <!-- <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
       <button v-if="basket" @click="deleteFromBacket">{{deleteText}}</button> -->
       <!-- <p class="title">{{ title }}</p> -->
@@ -222,6 +222,42 @@ export default {
 </template>
 
 <style scoped>
+/*DarkMode*/
+.dark-mode .count_buttons:hover,
+.dark-mode .count_buttons:active,
+.dark-mode button:hover,
+.dark-mode button:active {
+  background-color: rgb(131, 110, 107);
+}
+
+.dark-mode button, .dark-mode .count_buttons{
+  /* background-color: rgb(131, 110, 107); */
+  background-color: rgb(28, 27, 27);
+  color: rgb(181, 173, 173);
+}
+.dark-mode .count_buttons{
+  border: 1.7px solid #2d2a2a;
+}
+.dark-mode .basket{
+  border: 1.7px solid #2d2a2a;
+}
+
+ .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
+  background-color: rgb(131, 110, 107);
+}
+.dark-mode .box_button,
+.dark-mode .box_button:hover,
+.dark-mode .box_button:active{
+  background: transparent;
+  background-color:rgb(93, 91, 91);
+  border: none;
+  font-size: 27px;
+}
+.dark-mode .card_wrapper{
+  color:  rgb(103, 101, 101);
+}
+
+/*DarkMode*/
 .card_wrapper {
   display: flex;
   flex-direction: row;
@@ -270,12 +306,7 @@ color:rgb(90, 68, 64);
 .button:active {
   background:  rgb(6, 89, 89);
 } */
-.dark-mode .count_buttons:hover,
-.dark-mode .count_buttons:active,
-.dark-mode button:hover,
-.dark-mode button:active {
-  background-color: rgb(131, 110, 107);
-}
+
 .description_small {
   width: 80%;
   font-size: 23px;
@@ -294,17 +325,7 @@ img {
   width: 300px;
   height: 300px;
 }
-.dark-mode button, .dark-mode .count_buttons{
-  background-color: rgb(131, 110, 107);
-}
- .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
-  background-color:rgb(90, 68, 64);
-}
-/* .dark-mode button:active,
-.dark-mode button:hover {
-  background-color: rgb(13, 121, 121);
-  padding: 15px 25px;
-} */
+
 button {
   padding: 15px 25px;
   background: #efe1e1;

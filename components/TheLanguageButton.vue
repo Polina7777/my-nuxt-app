@@ -36,10 +36,19 @@ export default {
   color: white;
   z-index: 1000;
 }
+
+.lang_button:active, .lang_button:hover {
+  background-color: #b49696;
+}
+
+/*DarkMode*/
 .dark-mode .lang_button {
   /* background-color: rgb(6, 89, 89); */
-  background-color: rgb(168, 138, 134);
-    color: #ffffff;
+  /* background-color: rgb(168, 138, 134);
+    color: #ffffff; */
+    background-color: transparent;
+    border: 1.7px solid  #2d2a2a;
+    color: rgb(98, 98, 98);
     font-size: 14px;
   padding: 10px 35px;
 }
@@ -51,7 +60,6 @@ export default {
     font-size: 14px;
     padding: 10px 35px;
 }
-.lang_button:active, .lang_button:hover {
-  background-color: #b49696;
-}
+   
+/*DarkMode*/
 </style>

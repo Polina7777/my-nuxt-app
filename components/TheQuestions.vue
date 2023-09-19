@@ -128,6 +128,19 @@ this.questions=[
   </div>
 </template>
 <style scoped>
+
+/*DarkMode*/
+.dark-mode p, .dark-mode .title, .dark-mode button{
+  /* color:rgb(190, 170, 166); */
+  color: rgb(103, 101, 101);
+}
+.dark-mode button:active,
+.dark-mode button:hover
+{
+  /* color:rgb(221, 204, 201); */
+  color: rgb(103, 101, 101);
+}
+/*DarkMode*/
 .question_list {
   margin: auto;
   max-width: 70%;
@@ -138,14 +151,6 @@ ul {
 }
 li{
   border-bottom: 1px solid rgb(221, 204, 201);
-}
-.dark-mode p, .dark-mode .title, .dark-mode button{
-  color:rgb(190, 170, 166);
-}
-.dark-mode button:active,
-.dark-mode button:hover
-{
-  color:rgb(221, 204, 201);
 }
 .question {
   font-size: 21px;

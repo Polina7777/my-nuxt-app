@@ -55,6 +55,19 @@ export default {
 </template>
 
 <style scoped>
+/*DarkMode*/
+
+.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
+  /* color: #b49696; */
+  color: rgb(121, 119, 119);
+}
+.dark-mode li{
+background-color: transparent;
+border: 1.7px solid  rgb(149, 147, 147);
+color: #959393;
+}
+
+/*DarkMode*/
 .list_wrapper {
   padding-top: 35px;
   display: flex;
@@ -62,9 +75,9 @@ export default {
   min-height: 400px;
   margin: auto;
 }
-.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
+/* .dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
   color: rgb(216, 227, 227);
-}
+} */
 .title {
   text-align: center;
 }
@@ -87,7 +100,7 @@ height: 210px;
   border: 1.7px solid #dadedf;
   border-radius: 10px;
 }
-.dark-mode li {
+/* .dark-mode li {
   display: flex;
 flex-direction: column;
 justify-content: center;
@@ -97,7 +110,7 @@ height: 210px;
   text-align: center;
   border: 1.7px solid #dadedf;
   border-radius: 10px;
-}
+} */
 .no-result {
   text-align: center;
   font-size: 27px;

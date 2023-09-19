@@ -4,6 +4,7 @@ import { favoritesApi } from "../api-requests/favorites-api";
 import { productsApi } from "../api-requests/products-api";
 import { productsEnApi } from "../api-requests/products-api-en";
 import { basketsApi } from "../api-requests/basket-api";
+import like from "../static/images/like.svg"
 import { userInfo } from "os";
 export default {
   props: {
@@ -11,6 +12,7 @@ export default {
   },
   data() {
     return {
+      like:like,
       router: useRouter(),
       cardData: ref(null),
       basket: ref(this.card?.attributes.basket),
@@ -232,13 +234,14 @@ export default {
 </script>
 <!-- @click="navigateTo(`/${card?.id}?title=${card?.attributes.description_small}`)" -->
 <!-- :to="`/${card?.id}`" -->
+<!-- src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg" -->
 <template>
   <div class="card_wrapper">
     <button class="button_like" @click="likeClick">
       <img
         class="like"
         v-if="!likeClicked && router.currentRoute.path !== '/user' "
-        src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
+        :src="like"
       />
       <img
         class="like"
@@ -288,9 +291,36 @@ button {
   background: #efe1e1;
   color: white;
 }
+
+.button_like,
+.button_like:hover,
+.button_like:active,
+.dark-mode .button_like,
+.dark-mode .button_like:hover,
+.dark-mode .button_like:active {
+  background: transparent;
+  padding: 0;
+  align-self: end;
+  border: none;
+}
+.like {
+  width: 21px;
+  height: 21px;
+}
+/*DarkMode*/
+.dark-mode .button_like,
+.dark-mode .button_like:hover,
+.dark-mode .button_like:active {
+  background: transparent;
+  padding: 0;
+  align-self: end;
+}
 .dark-mode button{
   /* background-color:  rgb(6, 89, 89); */
-  background-color: rgb(168, 138, 134);
+  /* background-color: rgb(168, 138, 134); */
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid  #2d2a2a;
+    color: rgb(181, 173, 173);
 }
 .dark-mode button:active,
 .dark-mode button:hover {
@@ -303,19 +333,5 @@ button:active,
 button:hover {
   background-color: #b49696;
 }
-
-.button_like,
-.button_like:hover,
-.button_like:active,
-.dark-mode .button_like,
-.dark-mode .button_like:hover,
-.dark-mode .button_like:active {
-  background: transparent;
-  padding: 0;
-  align-self: end;
-}
-.like {
-  width: 21px;
-  height: 21px;
-}
+/*DarkMode*/
 </style>

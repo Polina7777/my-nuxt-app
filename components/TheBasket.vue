@@ -200,6 +200,54 @@ console.log(item)
 </template>
 
 <style scoped>
+/*DarkMode*/
+
+
+.dark-mode button{
+  /* background-color:  rgb(15, 60, 60); */
+  /* background-color:rgb(90, 68, 64); */
+  background-color: rgb(28, 27, 27);
+  /* border: 1.7px solid #2d2a2a; */
+  color: rgb(181, 173, 173);
+}
+.dark-mode button:active,
+.dark-mode button:hover {
+  /* background-color: rgb(13, 121, 121); */
+  background-color: rgb(69, 67, 67);
+}
+.dark-mode button, .dark-mode .count_buttons{
+  background-color:  rgb(69, 67, 67);
+  color: #d1c4c4;
+}
+ .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
+  background-color:rgb(90, 68, 64);
+}
+/* .dark-mode .count_buttons:hover,
+.dark-mode .count_buttons:active,
+.dark-mode button:hover,
+.dark-mode button:active {
+  background-color: rgb(131, 110, 107);
+} */
+.dark-mode .card-wrapper{
+  /* color: #d1c4c4; */
+  color: rgb(103, 101, 101);
+}
+.dark-mode .box_button,
+.dark-mode .box_button:hover,
+.dark-mode .box_button:active{
+  background: transparent;
+color:rgb(90, 68, 64);
+  font-size: 27px;
+}
+
+.dark-mode .ordering {
+  /* background-color:  rgb(58, 169, 169); */
+  /* background-color: rgb(131, 110, 107); */
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+/*DarkMode*/
 div {
   display: flex;
   flex-direction: column;
@@ -233,9 +281,7 @@ th {
 .card-wrapper {
   padding: 21px;
 }
-.dark-mode .card-wrapper{
-  color: #d1c4c4;
-}
+
 .box_button,
 .box_button:hover,
 .box_button:active,
@@ -246,25 +292,7 @@ th {
 color:rgb(90, 68, 64);
   font-size: 27px;
 }
-.dark-mode button, .dark-mode .count_buttons{
-  background-color: rgb(131, 110, 107);
-  color: #d1c4c4;
-}
- .dark-mode .count_buttons:hover, .dark-mode .count_buttons:active{
-  background-color:rgb(90, 68, 64);
-}
-/* .count_buttons:hover,
-.count_buttons:active,
-.button:hover,
-.button:active {
-  background:  rgb(6, 89, 89);
-} */
-.dark-mode .count_buttons:hover,
-.dark-mode .count_buttons:active,
-.dark-mode button:hover,
-.dark-mode button:active {
-  background-color: rgb(131, 110, 107);
-}
+
 .button_td {
   display: flex;
   flex-direction: column;

@@ -90,6 +90,31 @@ async function onSubmit(values:any) {
   </template>
   
 <style scoped>
+.dark-mode input {
+  background-color: transparent;
+  border: 1px solid rgb(71, 70, 70);
+  color: rgb(103, 101, 101);
+}
+.dark-mode input::placeholder {
+  color: rgb(103, 101, 101);
+}
+.dark-mode .title{
+  color: rgb(103, 101, 101);
+}
+
+.dark-mode button{
+  /* background-color:  rgb(15, 60, 60); */
+  /* background-color:rgb(90, 68, 64); */
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+.dark-mode button:active,
+.dark-mode button:hover {
+  /* background-color: rgb(13, 121, 121); */
+  background-color: rgb(131, 110, 107);
+}
+/*DarkMode*/
 .form_wrapper{
     display: flex;
     flex-direction: column;
@@ -144,26 +169,7 @@ div{
 .ordering:hover{
   background: #B49696;
 }
-.dark-mode .title{
-  color: rgb(90, 68, 64);
-  /* color: rgb(216, 227, 227); */
-}
-.dark-mode button{
-  /* background-color:  rgb(15, 60, 60); */
-  background-color:rgb(90, 68, 64);
-}
-.dark-mode button:active,
-.dark-mode button:hover {
-  /* background-color: rgb(13, 121, 121); */
-  background-color: rgb(131, 110, 107);
-}
-.dark-mode input{
-  background-color: rgb(215, 203, 201);
- /* background-color: rgb(216, 227, 227); */
-}
-.dark-mode input::placeholder{
-color:  rgb(54, 43, 41);
-}
+
 label {
   display: flex;
   flex-direction: row;

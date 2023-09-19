@@ -79,9 +79,7 @@ mounted() {
   margin: auto;
   width: 100%;
 }
-.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
-  color: #b49696;
-}
+
 .title {
   text-align: center;
 }
@@ -96,17 +94,30 @@ ul {
 li {
   text-align: center;
   padding: 10px;
-  border: 1.7px solid  #b49696;
+  border: 1.7px solid  #c2c1c1;
   border-radius: 10px;
   background-color: white;
 }
+
 .no-result {
   text-align: center;
   font-size: 27px;
   color: #b49696;
   margin: auto;
 }
+/*DarkMode*/
 
+.dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
+  /* color: #b49696; */
+  color: rgb(98, 98, 98);
+}
+.dark-mode li{
+background-color: transparent;
+border: 1.7px solid  #2d2a2a;
+color: rgb(98, 98, 98);
+}
+
+/*DarkMode*/
 @media (max-width: 610px) {
   .list_wrapper {
     padding: 21px;

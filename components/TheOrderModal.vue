@@ -25,6 +25,25 @@ const props = defineProps({
   </Transition>
 </template>
 <style scoped>
+
+.dark-mode .modal-mask{
+  /* background-color:  rgba(144, 123, 122, 0.591); */
+  background-color:  rgba(143, 143, 143, 0.591);
+}
+.dark-mode .modal-container{
+ /* background-color: rgb(57, 85, 85); */
+ /* background-color: rgb(168, 138, 134); */
+ /* border: 2px solid  rgb(214, 194, 191); */
+  /* background-color: rgb(57, 85, 85); */
+ background-color: rgb(65, 62, 62);
+ border: 1px solid rgb(71, 70, 70);
+}
+.dark-mode .modal-default-button{
+  background-color: transparent;
+  color: rgb(103, 101, 101);
+  /* color: rgb(214, 194, 191); */
+}
+/*DarkMode*/
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -65,11 +84,10 @@ const props = defineProps({
   gap: 0;
   z-index: 1000;
 }
-.dark-mode .modal-mask{
+/* .dark-mode .modal-mask{
   background-color:  rgba(144, 123, 122, 0.591);
 }
 .dark-mode .modal-container{
- /* background-color: rgb(57, 85, 85); */
  background-color: rgb(168, 138, 134);
  border: 2px solid  rgb(214, 194, 191);
 
@@ -77,7 +95,7 @@ const props = defineProps({
 .dark-mode .modal-default-button{
   background-color: transparent;
   color: rgb(214, 194, 191);
-}
+} */
 .close {
   padding: 5px 8px;
   position: absolute;

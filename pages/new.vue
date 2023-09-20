@@ -33,18 +33,19 @@ return  this.$i18n.locale;
   },
   methods: {
     async getNewProducts() {
-      if (this.$i18n.locale === "ru") {
+      // if (this.$i18n.locale === "ru") {
         const newProducts = await productsApi.getAllNewProducts(
-          this.searchString
+          this.searchString,
+          this.$i18n.locale 
         );
         this.productsListNew = newProducts;
-      } else {
-        console.log(this.$i18n.locale);
-        const newProducts = await productsEnApi.getAllNewProductsEn(
-          this.searchString
-        );
-        this.productsListNew = newProducts;
-      }
+      // } else {
+      //   console.log(this.$i18n.locale);
+      //   const newProducts = await productsEnApi.getAllNewProductsEn(
+      //     this.searchString
+      //   );
+      //   this.productsListNew = newProducts;
+      // }
     },
  
   },

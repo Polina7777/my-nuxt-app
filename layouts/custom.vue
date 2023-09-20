@@ -2,12 +2,6 @@
 <script >
 
 export default{
-  props:{
-    currentLoc:String,
-  },
-  updated() {
-  this.currentLocale = this.$i18n.locale
-},
 data(){
   return{
     currentLocale:this.$i18n.locale
@@ -15,7 +9,6 @@ data(){
 },
 watch: {
     currentLocale: async function(){
-      console.log(this.currentLocale)
      this.navScheme1=[
     {
       title: this.$t('navScheme1Title1'),
@@ -60,24 +53,12 @@ watch: {
   <div >
     <slot />
   </div>
-  <TheFooter :currentLoc="currentLoc"/>
+  <TheFooter/>
 </template>
 <style>
 * {
   box-sizing: border-box;
 }
-/* body {
-
-    color: var(--color-text);
-    background-color:var(--background-general);
-    line-height: 1.6;
-    font-family: Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
-      Cantarell, 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
-    font-size: 15px;
-    text-rendering: optimizeLegibility;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  } */
 header{
   align-items: center;
 }

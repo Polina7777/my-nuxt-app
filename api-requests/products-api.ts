@@ -1,127 +1,133 @@
 export const url_ngrok =  'http://localhost:1337/';
 
-export const getAllProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products`,{method:'GET'});
+export const getAllProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 
-export const getAllProductsWithCollection = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?populate=*`,{method:'GET'});
+export const getAllProductsWithCollection = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&populate=*`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const filterProductsBySearchString = async(string:string)=>{
-  const response = await fetch(`${url_ngrok}api/products?filters[description_small][$containsi]=${string}`,{method:'GET'});
+export const filterProductsBySearchString = async(string:string,locale:any)=>{
+  const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[description_small][$containsi]=${string}`,{method:'GET'});
   const data = await response.json();
   const products = data.data
   return products;
 }
-export const filterProductsByPopUpFilter = async(string:string)=>{
-  const response = await fetch(`${url_ngrok}api/products?filters[${string}]=true`,{method:'GET'});
+export const filterProductsByFiltersForm = async(brand:string,locale:any)=>{
+  const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}`,{method:'GET'});
+  const data = await response.json();
+  const products = data.data
+  return products;
+}
+export const filterProductsByPopUpFilter = async(string:string,locale:any)=>{
+  const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[${string}]=true`,{method:'GET'});
   const data = await response.json();
   const products = data.data
   return products;
 }
 
-export const getProductsById = async(id:string)=>{
-    const response = await fetch(`${url_ngrok}api/products/${id}`,{method:'GET'});
+export const getProductsById = async(id:string,locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`,{method:'GET'});
     const data = await response.json();
     const product = data.data
     return product;
 }
-export const getProductsBySmallDescription = async(title:string)=>{
-  const response = await fetch(`${url_ngrok}api/products?filters[description_small][$containsi]=${title}`,{method:'GET'});
+export const getProductsBySmallDescription = async(title:string,locale:any)=>{
+  const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[description_small][$containsi]=${title}`,{method:'GET'});
   const data = await response.json();
   const product = data.data
   return product;
 }
-export const getProductsByIdWithCollection = async(id:string)=>{
-    const response = await fetch(`${url_ngrok}api/products/${id}?populate=*`,{method:'GET'});
+export const getProductsByIdWithCollection = async(id:string,locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}&populate=*`,{method:'GET'});
     const data = await response.json();
     const product = data.data
     return product;
 }
-export const sortProductsASC = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?sort=title%3Aasc&populate=*`,{method:'GET'});
+export const sortProductsASC = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&sort=title%3Aasc&populate=*`,{method:'GET'});
     const data = await response.json();
     const product = data.data
     return product;
 }
-export const sortProductsDESC = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?sort=title%3Adesc&populate=*`,{method:'GET'});
+export const sortProductsDESC = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&sort=title%3Adesc&populate=*`,{method:'GET'});
     const data = await response.json();
     const product = data.data
     return product;
 }
-export const getAllNewProducts = async(string:string)=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[new]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
+export const getAllNewProducts = async(string:string,locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[new]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllSaleProducts = async(string:string)=>{
+export const getAllSaleProducts = async(string:string,locale:any)=>{
     const sale = true;
-    const response = await fetch(`${url_ngrok}api/products?filters[sale]=${sale}&filters[description_small][$containsi]=${string}`,{method:'GET'});
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[sale]=${sale}&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllBestsellerProducts = async(string:string)=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[bestseller]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
+export const getAllBestsellerProducts = async(string:string,locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[bestseller]=true&filters[description_small][$containsi]=${string}`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllForBodyProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[forBody]=true`,{method:'GET'});
+export const getAllForBodyProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[forBody]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllProblemSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[problemSkin]=true`,{method:'GET'});
+export const getAllProblemSkinProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[problemSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllDrySkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[drySkin]=true`,{method:'GET'});
+export const getAllDrySkinProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[drySkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllOilySkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[oilySkin]=true`,{method:'GET'});
+export const getAllOilySkinProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[oilySkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllSensitiveSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[sensitiveSkin]=true`,{method:'GET'});
+export const getAllSensitiveSkinProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[sensitiveSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllMatureSkinProducts = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[matureSkin]=true`,{method:'GET'});
+export const getAllMatureSkinProducts = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[matureSkin]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
-export const getAllProductsFromBasket = async()=>{
-    const response = await fetch(`${url_ngrok}api/products?filters[basket]=true`,{method:'GET'});
+export const getAllProductsFromBasket = async(locale:any)=>{
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}filters[basket]=true`,{method:'GET'});
     const data = await response.json();
     const products = data.data
     return products;
 }
 
 
-export const addProductToBasket = async (id: string) => {
+export const addProductToBasket = async (id: string,locale:any) => {
     try {
-      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+      const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -136,9 +142,9 @@ export const addProductToBasket = async (id: string) => {
       console.log(error)
     }
   };
-  export const deleteProductFromBasket = async (id: string) => {
+  export const deleteProductFromBasket = async (id: string,locale:any) => {
     try {
-      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+      const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -153,9 +159,9 @@ export const addProductToBasket = async (id: string) => {
       console.log(error)
     }
   };
-  export const changeProductCountInBasket = async (id: string,count:any) => {
+  export const changeProductCountInBasket = async (id: string,count:any,locale:any) => {
     try {
-      const response = await fetch(`${url_ngrok}api/products/${id}`, {
+      const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -171,4 +177,4 @@ export const addProductToBasket = async (id: string) => {
     }
   };
   
-export const productsApi = {getAllProducts,getProductsById,getProductsBySmallDescription,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket, changeProductCountInBasket,filterProductsBySearchString, filterProductsByPopUpFilter}
+export const productsApi = {getAllProducts,getProductsById,getProductsBySmallDescription,getProductsByIdWithCollection,getAllProductsWithCollection,sortProductsASC, sortProductsDESC,getAllBestsellerProducts,getAllDrySkinProducts,getAllForBodyProducts,getAllMatureSkinProducts, getAllNewProducts,getAllOilySkinProducts,getAllProblemSkinProducts,getAllSaleProducts,getAllSensitiveSkinProducts,getAllProductsFromBasket,addProductToBasket,deleteProductFromBasket, changeProductCountInBasket,filterProductsBySearchString, filterProductsByPopUpFilter,filterProductsByFiltersForm}

@@ -1,15 +1,14 @@
-<script>
+<script lang="ts">
 import logo from "../static/images/logo-header.svg";
 import phone from "../static/images/phone.svg";
 import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
+import vkDark from "../static/images/vk-dark.svg";
+import viberDark from "../static/images/viber.svg";
 import plus from "../static/images/plus.svg";
-import { data } from "../static/data";
+
 
 export default {
-  props:{
-    currentLoc:String,
-  },
   updated() {
   // this.currentLocale = this.$i18n.locale
   // console.log(this.currentLocale)
@@ -104,6 +103,8 @@ export default {
       phone: phone,
       whatsapp: whatsapp,
       vk: vk,
+      vkDark:vkDark,
+      viberDark:viberDark,
       phoneNumber: "+7 (999) 131-32-49",
       mobileVersion:false,
       // currentLocale:this.$i18n.locale,
@@ -227,8 +228,10 @@ export default {
     </ul>
     <div class="contacts_wrapper">
       <p>{{ phoneNumber }}</p>
-      <img :src="whatsapp" alt="whatsapp" />
-      <img :src="vk" alt="vk" />
+      <!-- <img :src="viberDark" alt="whatsapp" />
+      <img :src="dark" alt="vkDark" /> -->
+      <img :src="whatsapp" alt="whatsapp" /> 
+    <img :src="vk" alt="vk" />
     </div>
   </footer>
 </template>
@@ -248,17 +251,13 @@ ul,
 }
 /* DarkMode*/
 .dark-mode footer{
-  /* background-color: rgb(57, 85, 85);
- border: 2px solid rgb(42, 69, 69); */
- /* background-color: rgb(131, 110, 107); */
  background-color:  transparent;
 }
 .dark-mode ul,
 .dark-mode .contacts_wrapper {
   display: flex;
   flex-direction: column;
-  color: rgb(103, 101, 101);
-  /* color: rgb(218, 197, 189); */
+  color: rgb(181, 173, 173);
 }
 /*DarkMode*/
 @media (max-width:700px) {

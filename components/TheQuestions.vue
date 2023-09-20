@@ -7,7 +7,6 @@ updated() {
     return {
       route: useRoute(),
       currentLocale:this.$i18n.locale,
-      // title:'Популярные вопросы',
       questions: [
         {
           question:this.$t('question1'),
@@ -101,7 +100,6 @@ this.questions=[
 
 <template>
   <div class="question_list">
-    <!-- <p class="title">{{ title }}</p> -->
     <p class="title">{{ $t('questionTitle') }}</p>
     <ul>
       <li v-for="(item, index) in questions" :key="index">
@@ -131,14 +129,12 @@ this.questions=[
 
 /*DarkMode*/
 .dark-mode p, .dark-mode .title, .dark-mode button{
-  /* color:rgb(190, 170, 166); */
-  color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
 }
 .dark-mode button:active,
 .dark-mode button:hover
 {
-  /* color:rgb(221, 204, 201); */
-  color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
 }
 /*DarkMode*/
 .question_list {

@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 
-
 const props = defineProps({
  openAuthModal: Boolean,
   user:Function,
@@ -28,21 +27,15 @@ const props = defineProps({
 </template>
 <style scoped>
 .dark-mode .modal-mask{
-  /* background-color:  rgba(144, 123, 122, 0.591); */
   background-color:  rgba(143, 143, 143, 0.591);
 }
 .dark-mode .modal-container{
- /* background-color: rgb(57, 85, 85); */
- /* background-color: rgb(168, 138, 134); */
- /* border: 2px solid  rgb(214, 194, 191); */
-  /* background-color: rgb(57, 85, 85); */
  background-color: rgb(22, 22, 22);
  border: 1px solid rgb(71, 70, 70);
 }
 .dark-mode .modal-default-button{
   background-color: transparent;
-  color: rgb(103, 101, 101);
-  /* color: rgb(214, 194, 191); */
+  color: rgb(181, 173, 173);
 }
 /*DarkMode*/
 .modal-mask {
@@ -240,96 +233,5 @@ button:hover {
   .modal-container{
 width: 70%;
 }
-  
 }
-/* @media (max-width: 937px) {
-  .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 29%;
-  gap: 0;
-  z-index: 1000;
-}
-}
-@media (max-width: 888px) {
-  .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 31%;
-  gap: 0;
-  z-index: 1000;
-}
-} */
 </style>
-
-<!-- <style scoped>
-.modal-mask {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  transition: opacity 0.3s ease;
-}
-
-.modal-container {
-  width: 40%;
-  min-width: 300px;
-  margin: auto;
-  padding: 20px 30px;
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
-  transition: all 0.3s ease;
-  border:2px solid rgb(199, 199, 232);
-  background-color: var(--background-general);
-border-radius:10px;
-color:rgba(0, 0, 255, 0.129);
-}
-.episodes_list{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-}
-.modal-default-button{
-    padding:5px 8px;
-    border:2px solid rgb(199, 199, 232);
-    background-color: var(--background-general);
-    border-radius:10px;
-    color:rgb(240, 240, 245);
-    font-size: 1rem;
-  }
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-
-.modal-body {
-  margin: 10px 0;
-  display: flex;
-flex-direction: column;
-justify-content: center;
-}
-
-.modal-default-button {
-  float: right;
-}
-.modal-enter-from {
-  opacity: 0;
-}
-
-.modal-leave-to {
-  opacity: 0;
-}
-
-.modal-enter-from .modal-container,
-.modal-leave-to .modal-container {
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-</style> -->

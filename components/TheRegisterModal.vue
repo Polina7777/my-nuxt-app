@@ -23,21 +23,15 @@ const props = defineProps({
 <style scoped>
 /*DarkMode*/
 .dark-mode .modal-mask{
-  /* background-color:  rgba(144, 123, 122, 0.591); */
   background-color:  rgba(143, 143, 143, 0.591);
 }
 .dark-mode .modal-container{
- /* background-color: rgb(57, 85, 85); */
- /* background-color: rgb(168, 138, 134); */
- /* border: 2px solid  rgb(214, 194, 191); */
-  /* background-color: rgb(57, 85, 85); */
  background-color: rgb(22, 22, 22);
  border: 1px solid rgb(71, 70, 70);
 }
 .dark-mode .modal-default-button{
   background-color: transparent;
-  color: rgb(103, 101, 101);
-  /* color: rgb(214, 194, 191); */
+  color: rgb(181, 173, 173);
 }
 /*DarkMode*/
 .modal-mask {

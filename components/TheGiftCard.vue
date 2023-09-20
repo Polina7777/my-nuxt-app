@@ -88,9 +88,9 @@ export default {
         <p class="title">{{ $t('giftcardInputTitle1') }}</p>
         <!-- <p class="title">{{ text1 }}</p> -->
         <div class="count_buttons">
-          <button @click="decreaseQuantity()">-</button>
+          <button @click="decreaseQuantity()" id="minus">-</button>
           {{ giftCardInfo ? giftCardInfo.count : 0 }}
-          <button @click="increaseQuantity()">+</button>
+          <button @click="increaseQuantity()" id="plus">+</button>
         </div>
         <p class="title">{{ $t('giftcardInputTitle2') }}</p>
         <!-- <p class="title">{{ text2 }}</p> -->
@@ -178,40 +178,35 @@ export default {
 <style scoped>
 
 /*DarkMode*/
+.dark-mode #plus, .dark-mode #minus{
+  border: none;
+  background-color: transparent;
+}
 .dark-mode input {
-  /* background-color:  rgb(168, 138, 134); */
-  /* background-color:  rgb(104, 100, 99); */
   background-color: transparent;
   border: 1px solid rgb(71, 70, 70);
   color: rgb(103, 101, 101);
 }
 .dark-mode input::placeholder {
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 .dark-mode p{
-  /* color: rgb(216, 227, 227); */
-/* color:  rgb(168, 138, 134); */
-color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
+/* color: rgb(103, 101, 101); */
 }
 .dark-mode button{
-  /* background-color:  rgb(6, 89, 89); */
-  /* background-color: rgb(131, 110, 107); */
   background-color: rgb(28, 27, 27);
   border: none;
-  /* border: 1.7px solid #2d2a2a; */
   color: rgb(181, 173, 173);
 }
 .dark-mode .count_buttons{
-  /* background-color:  rgb(6, 89, 89); */
-  /* background-color: rgb(131, 110, 107); */
   background-color: rgb(28, 27, 27);
 border: none;
   color: rgb(181, 173, 173);
 }
 .dark-mode button:active,
 .dark-mode button:hover{
-  /* background-color: rgb(13, 121, 121); */
-  /* background-color:rgb(90, 68, 64); */
   background-color: rgb(28, 27, 27);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
@@ -244,14 +239,6 @@ img {
   margin: auto;
   padding: 30px;
 }
-/* .dark-mode input{
- background-color:  rgb(168, 138, 134);
-  color: #efe1e1;
- /* background-color: rgb(216, 227, 227); }
- */
-
-
-
 .wrapper {
   display: flex;
   flex-direction: row;
@@ -343,7 +330,6 @@ button {
 .count_buttons {
   margin-bottom: 10px;
   margin: auto;
-  width: 100px;
   align-items: center;
 }
 .count_buttons:hover,

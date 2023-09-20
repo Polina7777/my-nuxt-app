@@ -51,9 +51,7 @@ async function onSubmit(values) {
 <template>
   <Form :validation-schema="schema" @submit="onSubmit" v-slot="{ values }">
     <div class="card_pay">
-      <!-- <p class="title">{{ title }}</p> -->
       <p class="title">{{ $t('payTitle') }}</p>
-      <!-- <p>{{ `${subtitle} ${$route.query.amount} p.` }}</p> -->
       <p>{{ `${$t('paySubTitle')} ${$route.query.amount} p.` }}</p>
       <Field
         name="number"

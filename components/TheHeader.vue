@@ -422,7 +422,10 @@ p {
   align-self: end;
   gap: 10px;
 }
-
+.basket-img{
+width: 31px;
+height: 31px;
+}
 .phone {
   min-width: 140px;
 }
@@ -555,22 +558,16 @@ button:active,
 .dark-mode .profile:hover,
 .dark-mode .profile:active .dark-mode .fav_button:active,
 .dark-mode .fav_button:hover {
-  /* background-color: rgb(13, 121, 121); */
-  /* background-color:rgb(168, 138, 134);
-    color: #ffffff; */
   font-size: 15px;
-  background-color: transparent;
+  /* background-color: transparent; */
+  background-color: rgb(131, 110, 107);
   border: 1.7px solid #2d2a2a;
-  /* color: rgb(98, 98, 98); */
   color: rgb(181, 173, 173);
 }
 .dark-mode .button {
-  /* background-color: rgb(6, 89, 89); */
-  /* background-color: rgb(168, 138, 134);
-  color: rgb(255, 255, 255); */
   background-color: transparent;
   border: 1.7px solid #2d2a2a;
-  color: rgb(98, 98, 98);
+  color: rgb(181, 173, 173);
   align-items: center;
 }
 .dark-mode .button:hover,
@@ -580,14 +577,14 @@ button:active,
 }
 
 .dark-mode input {
-  /* background-color:  rgb(168, 138, 134); */
-  /* background-color:  rgb(104, 100, 99); */
   background-color: transparent;
   border: 1px solid rgb(71, 70, 70);
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 .dark-mode input::placeholder {
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 
 .dark-mode .sign,
@@ -597,8 +594,8 @@ button:active,
   /* background-color: rgb(168, 138, 134); */
   background-color: transparent;
   border: 1.7px solid #2d2a2a;
-  color: rgb(98, 98, 98);
-  /* color: #ffffff; */
+  /* color: rgb(98, 98, 98); */
+  color: rgb(181, 173, 173);
   font-size: 15px;
   padding: 7px 17px;
   height: 40px;
@@ -620,14 +617,13 @@ width: 31px;
 height: 31px;
 }
 .dark-mode .popup_button {
-  /* background-color:  rgb(58, 169, 169); */
-  /* background-color: rgb(131, 110, 107); */
   background-color: rgb(28, 27, 27);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
 .dark-mode a {
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 .dark-mode a:hover,
 .dark-mode a:active {
@@ -639,8 +635,6 @@ height: 31px;
 .dark-mode .sign:hover,
 .dark-mode .profile:active,
 .dark-mode .profile:hover .dark-mode .popup_button {
-  /* background-color: rgb(13, 121, 121); */
-  /* background-color: rgb(168, 138, 134); */
   background-color: rgb(131, 110, 107);
   color: rgb(181, 173, 173);
 }

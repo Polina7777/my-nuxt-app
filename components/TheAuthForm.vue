@@ -93,13 +93,16 @@ async function onSubmit(values:any) {
 .dark-mode input {
   background-color: transparent;
   border: 1px solid rgb(71, 70, 70);
-  color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
+  /* color: rgb(103, 101, 101); */
 }
 .dark-mode input::placeholder {
-  color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
+  /* color: rgb(103, 101, 101); */
 }
 .dark-mode .title{
-  color: rgb(103, 101, 101);
+  color: rgb(181, 173, 173);
+  /* color: rgb(103, 101, 101); */
 }
 
 .dark-mode button{

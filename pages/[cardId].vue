@@ -9,7 +9,7 @@ export default{
   this.currentLocale = this.$i18n.locale
 },
 beforeUpdate() {
-      this.currentLocal = this.$i18n.locale
+      this.currentLocale = this.$i18n.locale
   },
   computed:{
   currentLocal(){
@@ -25,15 +25,9 @@ return  this.$i18n.locale;
 },
 methods:{
    async getCardData(){
-    if (this.$i18n.locale === "ru") {
-      const cardInfo = await productsApi.getProductsById(this.route.params.cardId);
+      console.log('in cardId')
+      const cardInfo = await productsApi.getProductsById(this.route.params.cardId,this.$i18n.locale );
    this.info = cardInfo;
-      } else {
-        console.log(this.route.params.cardId,'dscs')
-        const cardInfo = await productsEnApi.getProductsEnById(this.route.params.cardId);
-        console.log(cardInfo,'scnksdc')
-   this.info = cardInfo;
-      }
    }
 
 },
@@ -49,8 +43,8 @@ watch: {
   <div :key="currentLocal">
   <NuxtLayout  name="custom">
     <TheHeader/>
+    {{ info }}
     <TheBigCard v-if="info" :card="info"/>
-    <!-- <TheFooter/> -->
   </NuxtLayout>
 </div>
 </template>

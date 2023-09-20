@@ -41,7 +41,7 @@ export default {
   },
   methods: {
     async getUser() {
-      this.userInfo = JSON.parse(localStorage.getItem("userData") as string);
+      this.userInfo = JSON.parse(localStorage.getItem("userData"));
       const user = await userApi.getUsersById(this.userInfo?.id);
       this.userData = user;
       this.getUsersFavoritesList();
@@ -49,15 +49,15 @@ export default {
     },
 
     async getCardInfoById() {
-      if (this.$i18n.locale === "ru") {
-        const product = await productsApi.getProductsById(this.card?.id);
+      // if (this.$i18n.locale === "ru") {
+        const product = await productsApi.getProductsById(this.card?.id,this.$i18n.locale );
         this.cardData = product;
         this.info = product;
-      } else {
-        const product = await productsEnApi.getProductsEnById(this.card?.id);
-        this.cardData = product;
-        this.info = product;
-      }
+      // } else {
+      //   const product = await productsEnApi.getProductsEnById(this.card?.id);
+      //   this.cardData = product;
+      //   this.info = product;
+      // }
     },
     navigateTo(link: any) {
       this.$router.push(link);

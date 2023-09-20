@@ -10,7 +10,7 @@ export default {
   this.currentLocale = this.$i18n.locale
 },
 beforeUpdate() {
-      this.currentLocal = this.$i18n.locale
+      this.currentLocale = this.$i18n.locale
   },
   computed:{
   currentLocal(){
@@ -29,14 +29,8 @@ return  this.$i18n.locale;
   },
   methods: {
     async getSaleProducts() {
-  if(this.$i18n.locale === 'ru'){
-    const saleProducts = await productsApi.getAllSaleProducts(this.searchString);
+    const saleProducts = await productsApi.getAllSaleProducts(this.searchString,this.$i18n.locale );
       this.productsListSale = saleProducts;
-  }else{
-    const saleProducts = await productsEnApi.getAllSaleProductsEn(this.searchString);
-      this.productsListSale = saleProducts;
-  }
-  
     },
   },
   watch: {

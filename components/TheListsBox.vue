@@ -18,7 +18,6 @@ export default {
   // },
 beforeUpdate(){
   this.currentLocale =  this.$i18n.locale
-  console.log(this.currentLocale)
 },
   data() {
     return {
@@ -31,47 +30,19 @@ beforeUpdate(){
   },
   methods: {
     async getSaleProducts() {
-      if(this.$i18n.locale === 'ru'){
-    console.log(this.$i18n.locale)
-    const saleProducts = await productsApi.getAllSaleProducts(this.searchString as string);
+    const saleProducts = await productsApi.getAllSaleProducts(this.searchString as string,this.$i18n.locale );
       this.productsListSale = saleProducts;
-  }else{
-    console.log(this.$i18n.locale)
-    const saleProducts = await productsEnApi.getAllSaleProductsEn(this.searchString as string);
-      this.productsListSale = saleProducts;
-  }
-      // const saleProducts = await productsApi.getAllSaleProducts(this.searchString as string);
-      // this.productsListSale = saleProducts
     },
     async getNewProducts() {
-      if (this.$i18n.locale === "ru") {
         const newProducts = await productsApi.getAllNewProducts(
-          this.searchString as string
+          this.searchString as string,
+          this.$i18n.locale 
         );
-        console.log(newProducts)
         this.productsListNew = newProducts;
-      } else {
-        console.log(this.$i18n.locale);
-        const newProducts = await productsEnApi.getAllNewProductsEn(
-          this.searchString as string
-        );
-        console.log(newProducts)
-        this.productsListNew = newProducts;
-      }
-      // const newProducts = await productsApi.getAllNewProducts(this.searchString as string);
-      // this.productsListNew = newProducts;
     },
     async getBestsellerProducts() {
-      if (this.$i18n.locale === "ru") {
-        const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString as string);
+        const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString as string,this.$i18n.locale );
       this.productsListBestseller = bestsellerProducts;
-      } else {
-        console.log(this.$i18n.locale);
-        const bestsellerProducts = await productsEnApi.getAllBestsellerProductsEn(this.searchString as string);
-      this.productsListBestseller = bestsellerProducts;
-      }
-      // const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString as string);
-      // this.productsListBestseller = bestsellerProducts;
     },
     handleLocaleChange() {
       // Вызывайте здесь вашу логику, которую вы хотите выполнить при изменении локализации.
@@ -84,7 +55,6 @@ beforeUpdate(){
   },
   watch: {
     currentLocale: async function(){
-      console.log(this.currentLocale)
       this.getSaleProducts();
     this.getNewProducts();
     this.getBestsellerProducts();
@@ -101,9 +71,6 @@ beforeUpdate(){
     <TheList :titleProps="$t('listsTitle1')" :itemList="productsListSale" />
     <TheList :titleProps="$t('listsTitle2')" :itemList="productsListNew" />
     <TheList :titleProps="$t('listsTitle3')" :itemList="productsListBestseller" />
-    <!-- <TheList titleProps="Акции" :itemList="productsListSale" />
-    <TheList titleProps="Новинки" :itemList="productsListNew" />
-    <TheList titleProps="Хиты продаж" :itemList="productsListBestseller" /> -->
   </div>
 </template>
 <style scoped>

@@ -75,9 +75,6 @@ color: #959393;
   min-height: 400px;
   margin: auto;
 }
-/* .dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
-  color: rgb(216, 227, 227);
-} */
 .title {
   text-align: center;
 }

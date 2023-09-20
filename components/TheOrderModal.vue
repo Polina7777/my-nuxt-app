@@ -27,21 +27,15 @@ const props = defineProps({
 <style scoped>
 
 .dark-mode .modal-mask{
-  /* background-color:  rgba(144, 123, 122, 0.591); */
   background-color:  rgba(143, 143, 143, 0.591);
 }
 .dark-mode .modal-container{
- /* background-color: rgb(57, 85, 85); */
- /* background-color: rgb(168, 138, 134); */
- /* border: 2px solid  rgb(214, 194, 191); */
-  /* background-color: rgb(57, 85, 85); */
  background-color: rgb(65, 62, 62);
  border: 1px solid rgb(71, 70, 70);
 }
 .dark-mode .modal-default-button{
   background-color: transparent;
   color: rgb(103, 101, 101);
-  /* color: rgb(214, 194, 191); */
 }
 /*DarkMode*/
 .modal-mask {
@@ -84,18 +78,6 @@ const props = defineProps({
   gap: 0;
   z-index: 1000;
 }
-/* .dark-mode .modal-mask{
-  background-color:  rgba(144, 123, 122, 0.591);
-}
-.dark-mode .modal-container{
- background-color: rgb(168, 138, 134);
- border: 2px solid  rgb(214, 194, 191);
-
-}
-.dark-mode .modal-default-button{
-  background-color: transparent;
-  color: rgb(214, 194, 191);
-} */
 .close {
   padding: 5px 8px;
   position: absolute;
@@ -177,8 +159,6 @@ align-items: flex-start;
 .modal-default-button {
   padding: 5px 8px;
   background: #ffffff;
-  /* border: 2px solid #d7b5b5;
-  background-color: #d7b5b5; */
   border-radius: 10px;
   color:  #d7b5b5;
   font-size: 15px;
@@ -248,24 +228,5 @@ button:hover {
   .modal-container{
 width: 70%;
 }
-  
 }
-/* @media (max-width: 937px) {
-  .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 29%;
-  gap: 0;
-  z-index: 1000;
-}
-}
-@media (max-width: 888px) {
-  .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 31%;
-  gap: 0;
-  z-index: 1000;
-}
-} */
 </style>

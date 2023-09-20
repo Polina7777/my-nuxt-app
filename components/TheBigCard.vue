@@ -9,113 +9,67 @@ export default {
   created() {
     this.getTheSameProductsList();
   },
-  beforeUpdate(){
-  this.currentLocale =  this.$i18n.locale
-},
+//   beforeUpdate(){
+//   this.currentLocale =  this.$i18n.locale
+// },
+// updated() {
+//   this.currentLocale = this.$i18n.locale;
+// },
 // beforeMount() {
 //   this.currentLocale =  this.$i18n.locale
 // },
+
   data() {
     return {
        addText: "В корзину",
       deleteText: "Добавлено",
       title: "Описание",
       title1: "Применение",
-      showTitle1Description: ref(false),
-      // showTitle1Description: false,
+      showTitle1Description: false,
       title2: "Состав",
-      showTitle2Description: ref(false),
-      // showTitle2Description:false,
+      showTitle2Description: false,
       sameProductsList: ref([]),
-      basket: ref(this.card?.attributes.basket),
-      cardNew: ref({ product: this.card, count: 1 }),
-      //  basket: this.card?.attributes.basket,
-      // cardNew: { product: this.card, count: 1 },
-      currentLocale: this.$i18n.locale,
-      // isMounted:ref(false)
+      basket: this.info?.attributes.basket,
+      cardNew: { product: this.info, count: 1 },
+      currentLocale:this.$i18n.locale,
        route:useRoute(),
        router:useRouter(),
+       info:this.card,
     };
   },
 
   methods: {
     async addToBacket() {
-      if (this.$i18n.locale === "ru") {
         const addedProduct = await productsApi.addProductToBasket(
-        this.cardNew.product?.id
+        this.cardNew.product?.id,this.$i18n.locale 
       );
       const changeCount = await productsApi.changeProductCountInBasket(
         this.cardNew.product?.id,
-        this.cardNew.count
+        this.cardNew.count,
+        this.$i18n.locale 
       );
       this.basket = true;
-      } else {
-        const addedProduct = await productsEnApi.addProductEnToBasket(
-        this.cardNew.product?.id
-      );
-      const changeCount = await productsEnApi.changeProductEnCountInBasket(
-        this.cardNew.product?.id,
-        this.cardNew.count
-      );
-      this.basket = true;
-      }
-    
     },
     async deleteFromBacket() {
-      if (this.$i18n.locale === "ru") {
         const deleteProduct = await productsApi.deleteProductFromBasket(
-        this.cardNew.product?.id
+        this.cardNew.product?.id,
+        this.$i18n.locale 
       );
       const changeCount = await productsApi.changeProductCountInBasket(
         this.cardNew.product?.id,
-        this.cardNew.count
+        this.cardNew.count,
+        this.$i18n.locale 
       );
       this.basket = false;
-      } else {
-        const deleteProduct = await productsEnApi.deleteProductEnFromBasket(
-        this.cardNew.product?.id
-      );
-      const changeCount = await productsEnApi.changeProductEnCountInBasket(
-        this.cardNew.product?.id,
-        this.cardNew.count
-      );
-      this.basket = false;
-      }
-
-  
     },
     async getTheSameProductsList() {
-
-      if (this.$i18n.locale === "ru") {
-        const list = await productsApi.getAllMatureSkinProducts();
+        const list = await productsApi.getAllMatureSkinProducts(this.$i18n.locale );
       this.sameProductsList = list;
-      } else {
-        const list = await productsEnApi.getAllMatureSkinProductsEn();
-      this.sameProductsList = list;
-      }
-     
     },
     async getCardData(){
-    if (this.$i18n.locale === "ru") {
-      console.log(this.cardNew.product?.id)
-      const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id);
+      console.log('in bigcard')
+      const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id,this.$i18n.locale );
    this.info = cardInfo;
-      } else {
-        const cardInfo = await productsEnApi.getProductsEnById(this.cardNew.product?.id);
-   this.info = cardInfo;
-  // console.log(this.cardNew.product?.id)
-  // const cardInfo = await productsEnApi.getProductsEnByRuId(this.route.params.cardId);
-  //  this.info = cardInfo;
-      }
-  // if (this.$i18n.locale === "ru") {
-  //   console.log(this.route.query.title)
-  //     const cardInfo = await productsApi.getProductsBySmallDescription(this.route.query.title);
-  //  this.info = cardInfo;
-  //     } else {
-  //       console.log(this.route.query.title)
-  //       const cardInfo = await productsEnApi.getProductsEnBySmallDescription(this.route.query.title);
-  //  this.info = cardInfo;
-  //     }
    },
  
     increaseQuantity(item:IBasketCard) {
@@ -144,35 +98,35 @@ export default {
 //   watch: {
 //     currentLocale: async function(){
 //  this.getTheSameProductsList();
-//  this.getCardData()
+//  this.getCardData();
 //     }, 
 //   },
 };
 </script>
 
 <template>
-
-  <div class="card_wrapper">
-    <nuxt-link :to="`/${card?.id}`">
-      <img :src="card?.attributes.image" alt="card-image" />
+{{ card}}
+  <div class="card_wrapper" :key="info?.id">
+    <nuxt-link :to="`/${info?.id}`">
+      <!-- <img :src="card?.attributes.image" alt="card-image" /> -->
+      <img :src="info?.attributes.image" alt="card-image" />
     </nuxt-link>
     <div class="info_box">
-      <p class="description_small">{{ card?.attributes.description_small }}</p>
-      <p>{{ card?.attributes.price }}</p>
-
+      <!-- <p class="description_small">{{ card?.attributes.description_small }}</p> -->
+      <p class="description_small">{{ info?.attributes.description_small }}</p>
+      <!-- <p>{{ card?.attributes.price }}</p> -->
+      <p>{{ info?.attributes.price }}</p>
       <div v-if="!basket" class="count_buttons">
-        <button @click="decreaseQuantity(cardNew)">-</button>
+        <button @click="decreaseQuantity(cardNew)" id="minus">-</button>
         {{ cardNew.count }}
-        <button @click="increaseQuantity(cardNew)">+</button>
+        <button @click="increaseQuantity(cardNew)" id="plus">+</button>
       </div>
 
       <button v-if="!basket" @click="addToBacket" class="basket">{{ $t('bigCardAdd') }}</button>
       <button v-if="basket" @click="deleteFromBacket" class="basket">{{  $t('bigCardDelete')}}</button>
-      <!-- <button v-if="!basket" @click="addToBacket">{{ addText }}</button>
-      <button v-if="basket" @click="deleteFromBacket">{{deleteText}}</button> -->
-      <!-- <p class="title">{{ title }}</p> -->
       <p class="title">{{ $t('bigCardTitle1') }}</p>
-      <p class="description">{{ card?.attributes.description }}</p>
+      <!-- <p class="description">{{ card?.attributes.description }}</p> -->
+      <p class="description">{{ info?.attributes.description }}</p>
       <div class="box">
         <!-- <p class="title">{{ title1 }}</p> -->
         <p class="title">{{ $t('bigCardTitle2') }}</p>
@@ -192,7 +146,8 @@ export default {
         </button>
       </div>
       <p v-if="showTitle1Description" class="description">
-        {{ card?.attributes.applying }}
+        <!-- {{ card?.attributes.applying }} -->
+        {{ info?.attributes.applying }}
       </p>
 
       <div class="box">
@@ -214,7 +169,8 @@ export default {
         </button>
       </div>
       <p v-if="showTitle2Description" class="description">
-        {{ card?.attributes.composition }}
+        <!-- {{ card?.attributes.composition }} -->
+        {{ info?.attributes.composition }}
       </p>
     </div>
   </div>
@@ -223,13 +179,19 @@ export default {
 
 <style scoped>
 /*DarkMode*/
+.dark-mode #plus, .dark-mode #minus{
+  border: none;
+  background-color: transparent;
+}
 .dark-mode .count_buttons:hover,
 .dark-mode .count_buttons:active,
 .dark-mode button:hover,
 .dark-mode button:active {
   background-color: rgb(131, 110, 107);
 }
-
+.dark-mode .box_button{
+  color: rgb(180, 172, 172);
+}
 .dark-mode button, .dark-mode .count_buttons{
   /* background-color: rgb(131, 110, 107); */
   background-color: rgb(28, 27, 27);
@@ -249,12 +211,14 @@ export default {
 .dark-mode .box_button:hover,
 .dark-mode .box_button:active{
   background: transparent;
-  background-color:rgb(93, 91, 91);
+  /* background-color:rgb(93, 91, 91); */
+  color: rgb(181, 173, 173);
   border: none;
   font-size: 27px;
 }
 .dark-mode .card_wrapper{
-  color:  rgb(103, 101, 101);
+  /* color:  rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 
 /*DarkMode*/
@@ -297,7 +261,6 @@ export default {
 .dark-mode .box_button:hover,
 .dark-mode .box_button:active{
   background: transparent;
-color:rgb(90, 68, 64);
   font-size: 27px;
 }
 /* .count_buttons:hover,

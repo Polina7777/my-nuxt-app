@@ -133,21 +133,22 @@ updated() {
 /*DarkMode*/
 .dark-mode p, .dark-mode .sub_title{
   /* color:rgb(219, 204, 201); */
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 .dark-mode .blue {
-  background: #45595c;
+  background: #6d8286;
   color: rgb(24, 21, 21);
   font-weight: 700;
 }
 
 .dark-mode .green {
-  background: #333934;
+  background: #7a867c;
   color: rgb(24, 21, 21);
   font-weight: 700;
 }
 .dark-mode .purple {
-  background: #5c5a63;
+  background: #8f8d99;
   color: rgb(24, 21, 21);
   font-weight: 700;
 }

@@ -90,6 +90,25 @@ export default {
 </template>
 
 <style scoped>
+/*DarkMode*/
+.dark-mode #popup_list_one  {
+  background-color: rgb(52, 49, 49);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+
+}
+.dark-mode #popup_list_one_item {
+  font-size: 21px;
+}
+.dark-mode #popup_list_two_item {
+  color: black;
+  font-size: 14px;
+}
+.dark-mode #popup_list_two {
+  background-color: rgb(131, 120, 120);
+  border: 1.7px solid #2d2a2a;
+}
+/*DarkMode*/
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -148,8 +167,8 @@ li{
   color: white;
   max-width: 320px;
   min-width: 250px;
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
+  /* border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px; */
 }
 
 #popup_list_one_item {

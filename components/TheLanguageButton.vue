@@ -43,18 +43,15 @@ export default {
 
 /*DarkMode*/
 .dark-mode .lang_button {
-  /* background-color: rgb(6, 89, 89); */
-  /* background-color: rgb(168, 138, 134);
-    color: #ffffff; */
     background-color: transparent;
     border: 1.7px solid  #2d2a2a;
-    color: rgb(98, 98, 98);
+    /* color: rgb(98, 98, 98); */
+    color: rgb(181, 173, 173);
     font-size: 14px;
   padding: 10px 35px;
 }
 .dark-mode .lang_button:hover,
 .dark-mode .lang_button:active{
-  /* background-color: rgb(13, 121, 121); */
   background-color: rgb(131, 110, 107);
     color: #ffffff;
     font-size: 14px;

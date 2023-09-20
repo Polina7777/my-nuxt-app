@@ -19,9 +19,6 @@ export default {
     <p class="title">{{ $t('basketTitle')}}</p>
     <!-- <p class="title">{{ text }}</p> -->
     <div>
-      <!-- <p>{{ `${string1} ${amount} p.` }}</p>
-      <p>{{ `${string2}    0 p.` }}</p>
-      <p>{{ `${string3} ${amount} p.` }}</p> -->
       <p>{{ `${$t('basketString1')} ${amount} p.` }}</p>
       <p>{{ `${$t('basketString2')}    0 p.` }}</p>
       <p>{{ `${$t('basketString3')} ${amount} p.` }}</p>

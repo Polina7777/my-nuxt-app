@@ -1,5 +1,6 @@
 <script lang="ts">
 import logo from "../static/images/logo.svg";
+import logoDark from '../static/images/logo-header.svg'
 
 export default {
   mounted() {
@@ -26,6 +27,7 @@ export default {
       //   "KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам.Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!",
       theme:'light',
       logo: logo,
+      logoDark: logoDark,
       mobileVersion: false,
       currentLocale:this.$i18n.locale,
     };
@@ -35,13 +37,6 @@ export default {
       this.$router.push(link);
     },
   },
-  // watch: {
-  //   currentLocale: async function(){
-  //     // this.title=this.$t('aboutBoxTitle');
-  //     // this.text1=this.$t('aboutBoxText1');
-  //     // this.text2=this.$t('aboutBoxText2');
-  //   }, 
-  // },
 };
 </script>
 
@@ -57,7 +52,8 @@ export default {
     </div>
     <div v-if="mobileVersion" class="info">
       <div class="text_wrapper-mobile">
-        <img :src="logo" alt="logo" />
+        <!-- <img :src="logo" alt="logo" /> -->
+        <img :src="logoDark" alt="logoDark" />
         <p class="text1">{{ $t('aboutBoxText1') }}</p>
         <p class="text1">{{ $t('aboutBoxText2') }}</p>
       </div>
@@ -66,6 +62,14 @@ export default {
 </template>
 
 <style scoped>
+/*DarkMode*/
+
+.dark-mode .wrapper{
+  background: linear-gradient(93.24deg, rgb(17, 17, 17) 10.08%, #414141 71.01%, #544f4f 100%, #786d6d);
+  color: rgb(181, 173, 173);
+}
+
+/*DarkMode*/
 .wrapper {
   display: flex;
   flex-direction: column;
@@ -83,16 +87,22 @@ export default {
 .text2 {
   display: flex;
   flex-direction: column;
-  width: 40%;
+  /* width: 40%; */
 }
 .info {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+  grid-gap: 17px;
+  grid-auto-flow: dense;
+  padding: 20px 30px;
+
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   white-space: break-spaces;
   width: 70%;
-  gap: 70px;
+  gap: 70px; */
 }
 .text {
   width: 90%;

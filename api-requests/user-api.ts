@@ -8,7 +8,7 @@ export const getUsers = async () => {
   const users = data;
   return users;
 };
-export const getUsersById = async (id: string) => {
+export const getUsersById = async (id:any) => {
   const response = await fetch(`${url_ngrok}api/users/${id}?populate=*`, {
     method: "GET",
   });

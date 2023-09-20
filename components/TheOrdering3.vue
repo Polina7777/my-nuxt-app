@@ -203,7 +203,6 @@ const price =
             : Number($route.query.amount)
         "
       />
-      <!-- <button class="ordering">Оформить заказ</button> -->
       <Teleport to="body">
         <TheTextModal
           :openTextModal="openTextModal"
@@ -218,6 +217,39 @@ const price =
 </template>
 
 <style scoped>
+/*DarkMode*/
+.dark-mode .form_wrapper{
+  color: rgb(181, 173, 173);
+}
+.dark-mode input {
+  background-color: transparent;
+  border: 2px solid rgb(163, 158, 158);
+  color: rgb(181, 173, 173);
+  margin: 5px 0;
+}
+.dark-mode input::placeholder {
+  color: rgb(181, 173, 173);
+}
+.dark-mode   li {
+  background-color: rgb(52, 49, 49);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+  }
+  .dark-mode li:active, .dark-mode li:hover{
+    background-color: rgb(131, 110, 107);
+    color: rgb(181, 173, 173);
+  }
+  .dark-mode button:active,
+.dark-mode button:hover
+{
+  background-color: rgb(131, 110, 107);
+}
+.dark-mode .ordering {
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+/*DarkMode*/
 .form_wrapper {
   display: flex;
   flex-direction: column;

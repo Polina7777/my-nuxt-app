@@ -298,17 +298,11 @@ export default {
 <style scoped>
 /*DarkMode*/
 .dark-mode .profile_wrapper{
-  /* background-color: rgb(57, 85, 85);
- border: 2px solid rgb(42, 69, 69); */
- /* background-color: rgb(168, 138, 134);
- border: 2px solid  rgb(214, 194, 191); */
  background-color: rgb(28, 27, 27);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
 .dark-mode .info_wrapper{
-  /* background-color: rgb(109, 132, 132);
- border: 2px solid rgb(42, 69, 69); */
  background-color: rgb(52, 49, 49);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
@@ -320,11 +314,6 @@ export default {
   color:rgb(114, 95, 91);
 }
 .dark-mode .order_info, .dark-mode .order_status{
-  /* background-color: rgb(109, 132, 132);
- color:rgb(216, 227, 227); */
- /* background-color: rgb(205, 184, 181);
- border: 2px solid  rgb(226, 207, 204);
- color:rgb(133, 104, 97); */
  background-color: rgb(52, 49, 49);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
@@ -340,10 +329,9 @@ export default {
 }
 .dark-mode button{
   background-color: transparent;
+  color: rgb(181, 173, 173);
 }
 .dark-mode .order_button{
-  /* background-color: rgb(94, 111, 111); */
-  /* background-color: rgb(168, 138, 134); */
   background-color: rgb(73, 71, 71);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
@@ -351,7 +339,6 @@ export default {
 .dark-mode button:active,
 .dark-mode button:hover
 {
-  /* background-color: rgb(13, 121, 121); */
   background-color: rgb(131, 110, 107);
 }
 

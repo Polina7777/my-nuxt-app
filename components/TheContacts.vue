@@ -32,11 +32,13 @@ export default {
 <style scoped>
 /*DarkMode*/
 .dark-mode p{
-  color: rgb(103, 101, 101);
+  /* color: rgb(103, 101, 101); */
+  color: rgb(181, 173, 173);
 }
 .dark-mode .contacts_text{
-  background-color: rgb(41, 40, 40);;
-  color:rgb(103, 101, 101);
+  background-color: rgb(41, 40, 40);
+  color: rgb(181, 173, 173);
+  /* color:rgb(103, 101, 101); */
 }
 
 /*DarkMode*/

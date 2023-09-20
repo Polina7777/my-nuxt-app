@@ -44,7 +44,8 @@ img{
   /* background-color:  rgb(85, 85, 85); */
   /* background-color: rgb(0, 0, 0); */
   background-color: rgb(19, 19, 19);
-  color: rgb(98, 98, 98);
+  /* color: rgb(98, 98, 98); */
+  color: rgb(181, 173, 173);
   font-weight: 600;
 }
 

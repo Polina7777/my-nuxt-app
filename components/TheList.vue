@@ -1,17 +1,15 @@
 <script lang="ts">
 import TheCard from "@/components/TheCard.vue";
+import sort from "../static/images/sort.svg"
 
 export default {
   props: {
     titleProps: String,
     itemList: Array,
   },
+
   updated() {
   this.currentLocale = this.$i18n.locale
-  this.theme = localStorage.getItem('theme') as string
-},
-mounted() {
-  this.theme = localStorage.getItem('theme') as string
 },
   beforeUpdate() {
     this.text = this.titleProps
@@ -25,7 +23,9 @@ mounted() {
         : null,
       router: useRouter(),
       currentLocale:this.$i18n.locale,
-      theme:'light',
+      sort:sort,
+      sortAsc: false,
+    // productsList:this.itemList
     };
   },
   methods: {
@@ -36,13 +36,62 @@ mounted() {
         this.$router.push("/sale");
       }
     },
+    toggleSortType() {
+      console.log(this.sortAsc)
+      return (this.sortAsc = !this.sortAsc);
+
+    },
+    async sortCardList() {
+      // this.loading = true
+      // this.error = false
+      try {
+        let sortList
+        if (this.sortAsc) {
+          sortList = this.itemList?.sort(function (a: any, b: any) {
+            if (a.attributes.brand < b.attributes.brand) {
+              return -1
+            }
+            if (a.attributes.brand > a.attributes.brand) {
+              return 1
+            }
+            return 0
+          })
+          return (this.productsList = sortList)
+        } else {
+          sortList = this.itemList?.sort(function (a: any, b: any) {
+            if (b.attributes.brand < a.attributes.brand) {
+              return -1
+            }
+            if (a.attributes.brand > a.attributes.brand) {
+              return 1
+            }
+            return 0
+          })
+          return (this.productsList = sortList)
+        }
+      } catch (err) {
+        // this.error = true
+      } finally {
+        // this.loading = false
+      }
+    },
   },
-  components: { TheCard },
+  watch:{
+    sortAsc: async function sort() {
+      this.sortCardList()
+    },
+  },
+
+  components: { TheCard},
 };
 </script>
 <template>
-  <div :class="`list_wrapper ${theme}`" :key="currentLocale">
+  <div class="list_wrapper" >
+    <div class="title_wrapper">
     <p class="title">{{ titleProps }}</p>
+    <img v-show="router.currentRoute.path === '/new' ||
+        router.currentRoute.path === '/sale'" :src="sort" alt="sort" class="img_sort" @click="toggleSortType"/>
+  </div>
     <ul v-if="itemList?.length"
       :class="
         router.currentRoute.path === '/new' ||
@@ -79,9 +128,19 @@ mounted() {
   margin: auto;
   width: 100%;
 }
-
+.img_sort{
+  width: 37px;
+  height: 37px;
+}
+.title_wrapper{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
 .title {
   text-align: center;
+  position: relative;
 }
 .show_more {
   text-align: end;
@@ -109,12 +168,12 @@ li {
 
 .dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
   /* color: #b49696; */
-  color: rgb(98, 98, 98);
+  color: rgb(181, 173, 173);
 }
 .dark-mode li{
 background-color: transparent;
 border: 1.7px solid  #2d2a2a;
-color: rgb(98, 98, 98);
+color: rgb(181, 173, 173);
 }
 
 /*DarkMode*/

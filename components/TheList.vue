@@ -1,11 +1,14 @@
 <script lang="ts">
 import TheCard from "@/components/TheCard.vue";
 import sort from "../static/images/sort.svg"
-
+import filter from "../static/images/filter.svg"
 export default {
   props: {
     titleProps: String,
     itemList: Array,
+    // openFiltersModal: Boolean,
+  user:Function,
+  filterListByFiltersForm:Function,
   },
 
   updated() {
@@ -25,6 +28,8 @@ export default {
       currentLocale:this.$i18n.locale,
       sort:sort,
       sortAsc: false,
+      filter:filter,
+      openFilterModal:false,
     // productsList:this.itemList
     };
   },
@@ -40,6 +45,9 @@ export default {
       console.log(this.sortAsc)
       return (this.sortAsc = !this.sortAsc);
 
+    },
+    filterClick(){
+      this.openFilterModal = !this.openFilterModal;
     },
     async sortCardList() {
       // this.loading = true
@@ -89,6 +97,15 @@ export default {
   <div class="list_wrapper" >
     <div class="title_wrapper">
     <p class="title">{{ titleProps }}</p>
+    <img :src="filter" alt="filter" class="filter_img" @click="filterClick" v-show="router.currentRoute.path === '/new' ||
+        router.currentRoute.path === '/sale'" />
+<Teleport to="body">
+      <TheFiltersModal
+        :openFilterModal="openFilterModal"
+        :filterListByFiltersForm="filterListByFiltersForm"
+        @close="openFilterModal = false"
+      />
+    </Teleport>
     <img v-show="router.currentRoute.path === '/new' ||
         router.currentRoute.path === '/sale'" :src="sort" alt="sort" class="img_sort" @click="toggleSortType"/>
   </div>
@@ -129,14 +146,19 @@ export default {
   width: 100%;
 }
 .img_sort{
-  width: 37px;
-  height: 37px;
+  width: 31px;
+  height: 31px;
 }
+.filter_img{
+    width: 21px;
+    height: 21px;
+    align-self: center;
+  }
 .title_wrapper{
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 20px;
+  gap: 7px;
 }
 .title {
   text-align: center;

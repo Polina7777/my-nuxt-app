@@ -12,9 +12,29 @@ const route = useRoute();
 const router = useRouter();
 const schema = {
   brand: (value: string) => {
-    if (!value) {
-      return "This field is required";
-    }
+    // if (!value) {
+    //   return "This field is required";
+    // }
+    // const regex = /^[A-Za-zА-Яа-яЁё\s]+$/u;
+    // if (!regex.test(value)) {
+    //   return "This field must be a alphabet type";
+    // }
+    return true;
+  },
+ priceFrom: (value: string) => {
+    // if (!value) {
+    //   return "This field is required";
+    // }
+    // const regex = /^[A-Za-zА-Яа-яЁё\s]+$/u;
+    // if (!regex.test(value)) {
+    //   return "This field must be a alphabet type";
+    // }
+    return true;
+  },
+  priceTo: (value: string) => {
+    // if (!value) {
+    //   return "This field is required";
+    // }
     // const regex = /^[A-Za-zА-Яа-яЁё\s]+$/u;
     // if (!regex.test(value)) {
     //   return "This field must be a alphabet type";
@@ -33,12 +53,12 @@ async function getUser() {
 }
 
 async function onSubmit(values: any) {
-    props.filterListByFiltersForm(values.brand)
+    props.filterListByFiltersForm(values)
 }
 </script>
 <template>
   <div class="form_wrapper">
-    <p class="title">{{ 'Filter by Brand' }}</p>
+    <p class="title">{{ 'Brand:' }}</p>
     <Form
       :validation-schema="schema"
       @submit="onSubmit"
@@ -69,6 +89,41 @@ async function onSubmit(values: any) {
               </li>
               <ErrorMessage name="brand" class="error_text" />
             </div>
+            <div class="field_box">
+              <p>Price:</p>
+              <!-- <li
+                class="radio_inputs"
+                v-for="(item, index) in brands"
+                :key="index"
+              > -->
+                <label class="price">
+                 From:
+                 <Field
+                    name="priceFrom"
+                  type="text"
+                  />
+                  <!-- {{ ` ${item.type}   ${item.price} p. ` }} -->
+                </label>
+              <!-- </li> -->
+              <ErrorMessage name="priceForm" class="error_text" />
+            </div>
+            <div class="field_box">
+              <!-- <li
+                class="radio_inputs"
+                v-for="(item, index) in brands"
+                :key="index"
+              > -->
+                <label class="price">
+                  To:
+                  <Field
+                    name="priceTo"
+                  type="text"
+                  />
+                  <!-- {{ ` ${item.type}   ${item.price} p. ` }} -->
+                </label>
+              <!-- </li> -->
+              <ErrorMessage name="priceTo" class="error_text" />
+            </div>
           </ul>
         </div>
         <div>
@@ -77,14 +132,7 @@ async function onSubmit(values: any) {
         </div>
       </div>
 
-      <!-- <Teleport to="body">
-        <TheTextModal
-          :openTextModal="openTextModal"
-          @close="openTextModal = false"
-          :message="$t('orderAccepted')"
-        />
-      </Teleport> -->
-      <!-- @click="openTextModal = true" -->
+
       <button class="ordering" >{{"Filter" }}</button>
     </Form>
 
@@ -94,13 +142,20 @@ async function onSubmit(values: any) {
 <style scoped>
 /*DarkMode*/
 .dark-mode .form_wrapper{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap:7px;
+  /* background-color: rgb(41, 40, 40);
+ width: 300px; */
   color: rgb(181, 173, 173);
 }
 .dark-mode input {
   background-color: transparent;
   border: 2px solid rgb(163, 158, 158);
   color: rgb(181, 173, 173);
-  margin: 5px 0;
+  /* margin: 5px 0; */
 }
 .dark-mode input::placeholder {
   color: rgb(181, 173, 173);
@@ -130,15 +185,16 @@ async function onSubmit(values: any) {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 20px;
-  width: 100%;
+ width: 300px;
+ padding: 10px 0;
+ margin-top: 25px;
+ border-radius: 10px;
 }
 .form {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 70%;
 }
 div {
   display: flex;
@@ -156,66 +212,61 @@ div {
   width: 100%;
 }
 .error_text {
-  padding-left: 21px;
+  padding-left: 17px;
   color: rgb(104, 9, 9);
 }
 .title {
-  font-size: 27px;
+  font-size: 17px;
+  padding: 0;
 }
 .ordering {
   background: #efe1e1;
-  margin: 20px auto;
+  border: 1px solid #b49696;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   border: none;
   border-radius: 19px;
   color: white;
   align-self: center;
-  padding: 20px 25px;
+  padding: 10px 31px;
 }
-
 .ordering:hover {
   background: #b49696;
 }
 .radio_inputs {
   display: flex;
   flex-direction: column;
-  /* min-width: 300px; */
+  overflow: scroll;
 }
 label {
   display: flex;
   flex-direction: row;
   align-items: center;
 }
-.input {
-  margin: 20px;
-  background: #efe1e1;
-  padding: 11px;
-  border-radius: 10px;
-  border-color: transparent;
-  width: 80%;
-  min-width: 250px;
-  position: relative;
+.price {
+  flex-direction: column;
+  text-align: start;
+  align-items: start;
 }
-.comment_input {
-  height: 170px;
-  margin: 20px;
+input {
+  margin: 0;
   background: #efe1e1;
   padding: 7px;
   border-radius: 10px;
   border-color: transparent;
-  width: 80%;
-  min-width: 250px;
+  width: 250px;
+  min-width: 210px;
   position: relative;
+  border: 2px solid #b49696;
 }
 .radio {
   margin: 10px;
-  width: 20px;
-  min-width: 20px;
+  width: 10px;
+  min-width: 10px;
 }
 p {
-  padding: 11px;
-  font-size: 21px;
+  font-size: 17px;
 }
 ul {
   display: flex;
@@ -224,19 +275,17 @@ ul {
   list-style: none;
   text-decoration: none;
   align-items: self-start;
-  gap: 20px;
-  margin: 17px 20px;
   padding: 0;
 }
 li {
   border: 2px solid #b49696;
   background: #efe1e1;
   border-radius: 7px;
-  width: 300px;
-  min-width: 250px;
-  padding: 11px;
+  width: 250px;
+  min-width: 230px;
+  padding: 0;
   color: white;
-  font-size: 17px;
+  font-size: 11px;
 }
 li:hover,
 a:hover {

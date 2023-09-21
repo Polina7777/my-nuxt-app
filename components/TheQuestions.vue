@@ -134,7 +134,7 @@ this.questions=[
 .dark-mode button:active,
 .dark-mode button:hover
 {
-  color: rgb(181, 173, 173);
+  color: #b5adad;
 }
 /*DarkMode*/
 .question_list {

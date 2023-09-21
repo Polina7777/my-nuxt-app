@@ -1,6 +1,6 @@
 <script>
 import { productsApi } from "../api-requests/products-api";
-import { productsEnApi } from "../api-requests/products-api-en";
+
 
 export default{
   layout: 'custom',
@@ -16,6 +16,7 @@ export default{
     filterFormValue:'',
     router: useRoute(),
     filterName:'',
+    openFiltersModal:false,
  currentLocale: this.$i18n.locale,
   }
 },
@@ -32,8 +33,7 @@ methods:{
   },
   async filterListByFiltersForm(filterValue){
     this.filterFormValue = filterValue;
-    console.log(this.filterFormValue)
-    const list = await productsApi.filterProductsByFiltersForm(filterValue, this.$i18n.locale)
+    const list = await productsApi.filterProductsByFiltersForm(filterValue.brand,filterValue.priceFrom,filterValue.priceTo, this.$i18n.locale)
    this.filteredList = list;
    console.log(this.filteredList)
   }
@@ -55,9 +55,10 @@ watch: {
     <div>
       <NuxtLayout name="custom" >
    <TheHeader :value="searchString"
-:popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data" />
-<TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/>
-  <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString"/>
+:popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
+<!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
+
+  <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString" />
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
   <TheList v-if="filterFormValue" :title-props="`Brand ${filterFormValue}` " :itemList="filteredList"/>

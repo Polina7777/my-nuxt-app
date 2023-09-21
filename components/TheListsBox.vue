@@ -1,9 +1,13 @@
 <script lang="ts">
 import { productsApi } from "../api-requests/products-api";
-import { productsEnApi } from "../api-requests/products-api-en";
+import filter from "../static/images/filter.svg"
+
 export default {
   props:{
     searchString:String,
+    openFiltersModal: Boolean,
+  user:Function,
+  filterListByFiltersForm:Function,
   },
   created() {
     this.getSaleProducts();
@@ -24,6 +28,8 @@ beforeUpdate(){
         productsListSale:[],
         productsListNew:[],
         productsListBestseller:[],
+        filter:filter,
+        openFilterModal:this.openFiltersModal,
         currentLocale: this.$i18n.locale, // Сохраняем текущий язык в data компонента
   
     };
@@ -43,6 +49,9 @@ beforeUpdate(){
     async getBestsellerProducts() {
         const bestsellerProducts = await productsApi.getAllBestsellerProducts(this.searchString as string,this.$i18n.locale );
       this.productsListBestseller = bestsellerProducts;
+    },
+    filterClick(){
+      this.openFilterModal = !this.openFilterModal;
     },
     handleLocaleChange() {
       // Вызывайте здесь вашу логику, которую вы хотите выполнить при изменении локализации.
@@ -68,6 +77,14 @@ beforeUpdate(){
 
 <template>
   <div>
+    <!-- <img :src="filter" alt="filter" class="filter_img" @click="filterClick"/>
+<Teleport to="body">
+      <TheFiltersModal
+        :openFiltersModal="openFilterModal"
+        @close="openFilterModal = false"
+        :filterListByFiltersForm="filterListByFiltersForm"
+      />
+    </Teleport> -->
     <TheList :titleProps="$t('listsTitle1')" :itemList="productsListSale" />
     <TheList :titleProps="$t('listsTitle2')" :itemList="productsListNew" />
     <TheList :titleProps="$t('listsTitle3')" :itemList="productsListBestseller" />

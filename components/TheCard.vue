@@ -42,10 +42,14 @@ export default {
   methods: {
     async getUser() {
       this.userInfo = JSON.parse(localStorage.getItem("userData"));
+      if(this.userInfo){
+        console.log(this.userInfo.id)
       const user = await userApi.getUsersById(this.userInfo?.id);
       this.userData = user;
       this.getUsersFavoritesList();
       this.getUsersBasketList();
+      }
+
     },
 
     async getCardInfoById() {

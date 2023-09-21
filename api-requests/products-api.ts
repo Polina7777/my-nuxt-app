@@ -19,11 +19,60 @@ export const filterProductsBySearchString = async(string:string,locale:any)=>{
   const products = data.data
   return products;
 }
-export const filterProductsByFiltersForm = async(brand:string,locale:any)=>{
-  const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}`,{method:'GET'});
+export const filterProductsByFiltersForm = async(brand:string,priceFrom:any,priceTo:any,locale:any)=>{
+  // let filterBrand = brand ? brand : "" ;
+  // let filterPriceFrom = priceFrom ? priceFrom : null ;
+  // let filterPriceTo = priceTo ? priceTo : null ;
+  console.log(brand,priceFrom,priceTo)
+  if( brand && priceFrom && priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}&filters[priceNum][$between]=${priceFrom}&filters[priceNum][$between]=${priceTo}`,{method:'GET'});
   const data = await response.json();
   const products = data.data
   return products;
+   }
+   else if(!brand){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[priceNum][$between]=${priceFrom}&filters[priceNum][$between]=${priceTo}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+   else if(!brand && priceFrom && !priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[priceNum][$gte]=${priceFrom}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+   else if(!brand && !priceFrom && priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[priceNum][$lte]=${priceTo}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+   else if(brand && !priceFrom && priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}&filters[priceNum][$between]=0&filters[priceNum][$between]=${priceTo}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+   else if(brand && priceFrom && !priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}&filters[priceNum][$gte]=${priceFrom}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+   else if(brand && !priceFrom && !priceTo){
+    const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[brand][$containsi]=${brand}`,{method:'GET'});
+    const data = await response.json();
+    const products = data.data
+    return products;
+   }
+  // else if (priceFrom){
+  //   const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[priceNum][$gte]=${priceFrom}&filters[priceNum][$between]=${priceTo}`,{method:'GET'});
+  //   const data = await response.json();
+  //   const products = data.data
+  //   return products;
+  // }
+
 }
 export const filterProductsByPopUpFilter = async(string:string,locale:any)=>{
   const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[${string}]=true`,{method:'GET'});

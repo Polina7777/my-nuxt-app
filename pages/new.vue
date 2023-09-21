@@ -28,24 +28,24 @@ return  this.$i18n.locale;
       router: useRoute(),
       filterName: "",
       currentLocale: this.$i18n.locale,
-      titleProps:this.$t('listsTitle2')
+      titleProps:this.$t('listsTitle2'),
+      filterFormValue:'',
     };
   },
   methods: {
+    async filterListByFiltersForm(filterValue:any){
+      this.openFiltersModal = false;
+    this.filterFormValue = filterValue;
+    const list = await productsApi.filterProductsByFiltersForm(filterValue.brand,filterValue.priceFrom,filterValue.priceTo, this.$i18n.locale)
+    this.productsListNew  = list;
+   console.log(this.filteredList)
+  },
     async getNewProducts() {
-      // if (this.$i18n.locale === "ru") {
         const newProducts = await productsApi.getAllNewProducts(
           this.searchString,
           this.$i18n.locale 
         );
         this.productsListNew = newProducts;
-      // } else {
-      //   console.log(this.$i18n.locale);
-      //   const newProducts = await productsEnApi.getAllNewProductsEn(
-      //     this.searchString
-      //   );
-      //   this.productsListNew = newProducts;
-      // }
     },
  
   },
@@ -62,7 +62,7 @@ return  this.$i18n.locale;
     },
 };
 </script>
-
+<!-- @close="openFiltersModal = false" -->
 <template>
   <div :key="currentLocal">
   <NuxtLayout name="custom">
@@ -73,7 +73,8 @@ return  this.$i18n.locale;
       @click="(data) => (popUpFilter = data)"
     />
     <div class="list_box">
-      <TheList :titleProps="titleProps" :itemList="productsListNew" />
+      <TheList :titleProps="titleProps" :itemList="productsListNew"
+        :filterListByFiltersForm="filterListByFiltersForm"/>
       <!-- <TheList titleProps="Новинки" :itemList="productsListNew" /> -->
     </div>
     <!-- <TheFooter/> -->

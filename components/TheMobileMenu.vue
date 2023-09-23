@@ -7,6 +7,9 @@ import whatsapp from "../static/images/whatsapp.svg";
 import vk from "../static/images/vk.svg";
 import plus from "../static/images/plus.svg";
 import { data } from "../static/data";
+import vkDark from "../static/images/vk-dark.svg";
+import viberDark from "../static/images/viber.svg";
+import phoneDark from "../static/images/phone-dark.svg";
 export default {
   props: {
     showMobileMenu: Boolean,
@@ -28,11 +31,15 @@ export default {
       phone: phone,
       whatsapp: whatsapp,
       vk: vk,
+      phoneDark:phoneDark,
+      vkDark:vkDark,
+      viberDark:viberDark,
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
       openPopup: false,
       openAuthModal:false,
-      openRegModal:false
+      openRegModal:false,
+      
     };
   },
   methods: {
@@ -116,6 +123,7 @@ export default {
                 </div>
               </li>
             </ul>
+            <NuxtLink class="fav" @click="navigateTo('/favorites')"> {{ $t('fav') }} </NuxtLink>
             <ul>
               <li v-for="(item, index) in navScheme1" :key="index">
                 <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
@@ -123,10 +131,13 @@ export default {
             </ul>
 
             <div class="contacts_wrapper">
-              <img :src="phone" alt="phone" />
+              <!-- <img :src="phone" alt="phone" /> -->
+              <img :src="phoneDark" alt="phone" />
               <p>{{ phoneNumber }}</p>
-              <img :src="whatsapp" alt="whatsapp" />
-              <img :src="vk" alt="vk" />
+              <!-- <img :src="whatsapp" alt="whatsapp" /> -->
+              <img :src="viberDark" alt="whatsapp" />
+              <!-- <img :src="vk" alt="vk" /> -->
+              <img :src="vkDark" alt="vk" />
             </div>
           </slot>
         </div>
@@ -136,6 +147,19 @@ export default {
 </template>
 
 <style scoped>
+
+/*DarkMode*/
+.dark-mode .modal-container{
+  background-color: rgb(28, 27, 27);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
+.dark-mode .modal-default-button {
+background: transparent;
+border: none;
+color: rgb(102, 95, 95);
+}
+/*DarkMode*/
 .modal-mask {
   position: fixed;
   z-index: 9998;
@@ -184,6 +208,9 @@ export default {
   height: 100px;
   padding-left: 50px;
 }
+.fav{
+  padding: 0 11px;
+}
 
 a {
   color: white;
@@ -194,7 +221,6 @@ a {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 10px;
 }
 
 .modal-default-button {

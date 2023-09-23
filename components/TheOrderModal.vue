@@ -143,9 +143,9 @@ text-align: start;
 flex-direction: column;
 justify-content: space-evenly;
 align-items: flex-start;
-
   position: absolute;
-  left: 250px;
+  /* left: 250px; */
+  left: 248px;
   top: 0px;
   color: black;
   background: white;

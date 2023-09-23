@@ -19,6 +19,7 @@ import ThePopUpMenu from "@/components/ThePopUpMenu.vue";
 import TheLanguageButton from "@/components/TheLanguageButton.vue";
 import TheThemeButton from "@/components/TheThemeButton.vue";
 import TheColorMode from "@/components/TheColorMode.vue";
+import TheChatModal  from "@/components/TheChatModal.vue";
 
 export default {
   props: {
@@ -26,7 +27,7 @@ export default {
     popUpValue: Object,
   },
   emits: ["input", "click"],
-  components: { ThePopUpMenu, TheLanguageButton, TheThemeButton, TheColorMode },
+  components: { ThePopUpMenu, TheLanguageButton, TheThemeButton, TheColorMode,TheChatModal },
   beforeUpdate() {
     (this.navScheme1 = [
       {
@@ -74,7 +75,7 @@ export default {
   },
   mounted() {
     this.authListener();
-    this.theme = localStorage.getItem("theme") as string;
+    // this.theme = localStorage.getItem("theme") as string;
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
@@ -147,7 +148,7 @@ export default {
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
       isLoggedIn: false,
-      theme: "light",
+    chatOpen:true,
     };
   },
   methods: {
@@ -177,6 +178,9 @@ export default {
       navigateTo("/");
       this.openPopup = !this.openPopup;
     },
+   openChat() {
+      this.chatOpen = !this.chatOpen;
+    },
     mobileMenuOpen() {
       this.showMobileMenu = true;
     },
@@ -199,7 +203,7 @@ export default {
 };
 </script>
 <template>
-  <header v-if="!mobileVersion" :class="theme === 'dark' ? 'dark' : null">
+  <header v-if="!mobileVersion">
     <div class="header_buttons">
       <TheLanguageButton />
       <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">
@@ -228,7 +232,7 @@ export default {
         /> -->
         <img class="like" :src="like" />
       </button>
-      <!-- <TheThemeButton/> -->
+      <button class="fav_button" @click="openChat">Chat</button>
       <TheColorMode />
       <!-- </nuxt-link> -->
       <Teleport to="body">
@@ -241,6 +245,12 @@ export default {
         <TheRegisterModal
           :openRegModal="openRegModal"
           @close="openRegModal = false"
+        />
+      </Teleport>
+      <Teleport to="body">
+        <TheChatModal
+          :chatOpen="chatOpen"
+          @close="chatOpen = false"
         />
       </Teleport>
     </div>
@@ -332,6 +342,13 @@ export default {
         @close="showMobileMenu = false"
       />
     </Teleport>
+    <button class="fav_button" @click="openChat">Open Chat</button>
+    <Teleport to="body">
+        <TheChatModal
+          :chatOpen="chatOpen"
+          @close="chatOpen = false"
+        />
+      </Teleport>
     <img
       class="logo-header"
       :src="logo"
@@ -341,15 +358,18 @@ export default {
     <div class="wrapper header-wrapper">
       <div class="input_wrapper">
         <input class="search_input" placeholder="Поиск товара" :value="value" />
-        <img class="search_img" :src="search" alt="search" />
+        <!-- <img class="search_img" :src="search" alt="search" /> -->
+        <img class="search_img" :src="searchDark" alt="search" />
         <nuxt-link to="basket">
-          <img :src="basket" alt="basket" @click="navigateTo('/basket')" />
+          <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
+          <img :src="basketDark" alt="basket" class="basket-img" @click="navigateTo('/basket')" />
         </nuxt-link>
         <nuxt-link to="favorites">
-          <img
+          <!-- <img
             class="like"
             src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg"
-          />
+          /> -->
+          <img class="like" :src="like" />
         </nuxt-link>
       </div>
     </div>
@@ -531,8 +551,7 @@ button,
 }
 button:active,
 .sign:active,
-.sign:hover,
-.popup_button {
+.sign:hover {
   background-color: rgb(131, 110, 107);
 }
 

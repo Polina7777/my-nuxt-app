@@ -267,7 +267,7 @@ ul,
   }
   footer {
   background-color: #efe1e1;
-  display:block;
+  /* display:block; */
   flex-direction: row;
   padding: 10px;
 }

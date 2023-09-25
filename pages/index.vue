@@ -4,9 +4,20 @@ import { productsApi } from "../api-requests/products-api";
 
 export default{
   layout: 'custom',
+  mounted(){
+    this.getBestSellerProducts();
+  },
   created() {
     this.filterListBySearchString();
+    this.getBestSellerProducts();
   },
+  updated(){
+    this.filterListBySearchString();
+    this.getBestSellerProducts();
+  },
+// beforeMount(){
+//  this.getBestSellerProducts();
+// },
   data(){
   return{
     searchString:'',
@@ -17,6 +28,8 @@ export default{
     router: useRoute(),
     filterName:'',
     openFiltersModal:false,
+    productsListBestSeller:[],
+    openSwiperModal:true,
  currentLocale: this.$i18n.locale,
   }
 },
@@ -36,7 +49,12 @@ methods:{
     const list = await productsApi.filterProductsByFiltersForm(filterValue.brand,filterValue.priceFrom,filterValue.priceTo, this.$i18n.locale)
    this.filteredList = list;
    console.log(this.filteredList)
-  }
+  },
+  async getBestSellerProducts() {
+    const bestsellerProducts = await productsApi.getAllBestsellerProducts('',this.$i18n.locale );
+    console.log(bestsellerProducts)
+      this.productsListBestSeller = bestsellerProducts;
+    },
   
 },
 watch: {
@@ -57,7 +75,8 @@ watch: {
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
 <!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
-
+<TheSwiper2 v-if="productsListBestSeller" :productsListBestSeller = "productsListBestSeller"  />
+<TheSwiperModal v-if="productsListBestSeller" :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/>
   <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString" />
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>

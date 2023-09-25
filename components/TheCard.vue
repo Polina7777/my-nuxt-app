@@ -337,5 +337,8 @@ button:active,
 button:hover {
   background-color: #b49696;
 }
+.dark-mode a{
+color: rgb(170, 162, 162);
+}
 /*DarkMode*/
 </style>

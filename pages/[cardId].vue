@@ -43,7 +43,6 @@ watch: {
   <div :key="currentLocal">
   <NuxtLayout  name="custom">
     <TheHeader/>
-    {{ info }}
     <TheBigCard v-if="info" :card="info"/>
   </NuxtLayout>
 </div>

@@ -105,7 +105,6 @@ export default {
 </script>
 
 <template>
-{{ card}}
   <div class="card_wrapper" :key="info?.id">
     <nuxt-link :to="`/${info?.id}`">
       <!-- <img :src="card?.attributes.image" alt="card-image" /> -->

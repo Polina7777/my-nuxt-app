@@ -17,6 +17,7 @@
   },
   "dependencies": {
     "@vee-validate/yup": "^4.11.3",
+    "nuxt-swiper": "^1.2.2",
     "vee-validate": "^4.11.3"
   }
 }

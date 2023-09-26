@@ -6,7 +6,6 @@ import place from '../static/images/place.svg'
 // })
 const props = defineProps(['productsListBestSeller'])
 
-
 // async function getSaleProducts() {
 //     const saleProducts = await productsApi.getAllSaleProducts('',this.$i18n.locale );
 //       productsListSale = saleProducts;
@@ -14,8 +13,8 @@ const props = defineProps(['productsListBestSeller'])
 // 
 // console.log(list)
 
-// const list = ref(props.productsListBestSeller)._value;
-const list = props.productsListBestSeller;
+const list = ref(props.productsListBestSeller)._value;
+// const list = props.productsListBestSeller;
 const data = [{item:'a'},{item:'b'},{item:'c'},{item:'d'}];
 const slides = ref(Array.from(list, (item,index) => {
   const r = Math.floor(Math.random() * 256)
@@ -34,7 +33,7 @@ console.log(item)
 </script>
 
 <template>
-  <div>
+  <div v-if="productsListBestSeller.length">
     <h2> {{ $t('listsTitle3') }} </h2>
         <hr>
     <Swiper
@@ -49,10 +48,11 @@ console.log(item)
       }"
       :creative-effect="{
         prev: {
-          shadow: false,
+          shadow: true,
           translate: ['-20%', 0, -1]
         },
         next: {
+          shadow:true,
           translate: ['100%', 0, 0]
         }
       }"
@@ -69,7 +69,7 @@ console.log(item)
       </SwiperSlide>
 
       <!-- useSwiper() within a swiper instance -->
-      <!-- <TheSwiperControls /> -->
+      <TheSwiperControls />
     </Swiper>
 
   </div>
@@ -80,25 +80,27 @@ console.log(item)
 .dark-mode .slide{
     background-color: rgb(40, 38, 38);
 /* border:1px solid rgb(72, 69, 69); */
-color:rgb(203, 191, 191);
+color:#cbbfbf;
 position:relative;
 }
 .dark-mode .slide_box{
 border:1px solid rgb(72, 69, 69);
 padding: 20px;
 border-radius: 10px;
-padding: 20px;
 position: relative;
 }
 /*DarkMode*/
 .slide{
     background-color: rgb(255, 255, 255);
-border: 1px solid rgb(71, 70, 70);
+/* border: 1px solid rgb(71, 70, 70); */
 color:rgb(175, 148, 148);
 position: relative;
 }
 .slide_box{
 border: 1px solid rgb(71, 70, 70);
+padding: 20px;
+border-radius: 10px;
+position: relative;
 }
 .swiper-slide {
   display: flex;

@@ -2,6 +2,7 @@
 
 const props = defineProps({
  openAuthModal: Boolean,
+ login:Function,
   user:Function,
 })
 </script>
@@ -18,7 +19,7 @@ const props = defineProps({
         </div>
         <div class="modal-body">
             <slot name="body">
-        <TheAuthForm :user='user'/>
+        <TheAuthForm :user='user' :login="login"/>
    </slot>
         </div>
       </div>

@@ -6,8 +6,10 @@ import { ordersApi } from "../api-requests/orders-api";
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { giftcardApi } from "../api-requests/giftcard-api";
 
+const props = defineProps(['register'])
 const route = useRoute();
 const router = useRouter();
+
 let user = null;
 const schema = {
   name: (value: string) => {
@@ -74,34 +76,34 @@ const schema = {
 
 async function onSubmit(values: any) {
   console.log('reg',values)
- register(values);
+ props.register(values);
 };
 
-async function register(data:any){
-      try {
-     const collectionFav = await favoritesApi.createFavoritesCollection();
-     const collectionBasket = await basketsApi.createBasketCollection();
-     const collectionGiftCard = await giftcardApi.createGiftCardCollection();
-     const collectionOrder = await ordersApi.createOrdersCollection();
-     console.log(collectionGiftCard);
-     console.log(collectionOrder);
-     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
-     if(res.jwt){ 
-     localStorage.setItem('jwt', res.jwt);
-     localStorage.setItem('userData', JSON.stringify(res.user));
-    router.push("/");
-  //  this.user({
-  //     jwt:res.jwt,
-  //     user:res.user
-  //   })
-     }else if(res.error){
-    alert(res.error.message)
-     }
-    }
-    catch (err) {
-      console.log(err);
-    }
-};
+// async function register(data:any){
+//       try {
+//      const collectionFav = await favoritesApi.createFavoritesCollection();
+//      const collectionBasket = await basketsApi.createBasketCollection();
+//      const collectionGiftCard = await giftcardApi.createGiftCardCollection();
+//      const collectionOrder = await ordersApi.createOrdersCollection();
+//      console.log(collectionGiftCard);
+//      console.log(collectionOrder);
+//      const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
+//      if(res.jwt){ 
+//      localStorage.setItem('jwt', res.jwt);
+//      localStorage.setItem('userData', JSON.stringify(res.user));
+//     router.push("/");
+//   //  this.user({
+//   //     jwt:res.jwt,
+//   //     user:res.user
+//   //   })
+//      }else if(res.error){
+//     alert(res.error.message)
+//      }
+//     }
+//     catch (err) {
+//       console.log(err);
+//     }
+// };
 </script>
 <template>
   <div class="form_wrapper">

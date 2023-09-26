@@ -5,7 +5,7 @@ import { productsApi } from "../api-requests/products-api";
 export default{
   layout: 'custom',
   mounted(){
-    this.getBestSellerProducts();
+    // this.getBestSellerProducts();
   },
   created() {
     this.filterListBySearchString();
@@ -14,6 +14,9 @@ export default{
   updated(){
     this.filterListBySearchString();
     this.getBestSellerProducts();
+  },
+  beforeCreate(){
+    this.getBestSellerProducts;
   },
 // beforeMount(){
 //  this.getBestSellerProducts();
@@ -29,7 +32,8 @@ export default{
     filterName:'',
     openFiltersModal:false,
     productsListBestSeller:[],
-    openSwiperModal:true,
+    openSwiperModal:false,
+    openSwiper2:false,
  currentLocale: this.$i18n.locale,
   }
 },
@@ -52,9 +56,11 @@ methods:{
   },
   async getBestSellerProducts() {
     const bestsellerProducts = await productsApi.getAllBestsellerProducts('',this.$i18n.locale );
-    console.log(bestsellerProducts)
       this.productsListBestSeller = bestsellerProducts;
+      this.openSwiperModal = true;
+      this.openSwiper2 = true;
     },
+
   
 },
 watch: {
@@ -75,8 +81,8 @@ watch: {
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
 <!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
-<TheSwiper2 v-if="productsListBestSeller" :productsListBestSeller = "productsListBestSeller"  />
-<TheSwiperModal v-if="productsListBestSeller" :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/>
+ <TheSwiper2  :productsListBestSeller = "productsListBestSeller"  />
+ <TheSwiperModal  :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/> 
   <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString" />
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
@@ -86,5 +92,7 @@ watch: {
   </NuxtLayout >
     </div>
   </template>
+
+
   <style>
 </style>

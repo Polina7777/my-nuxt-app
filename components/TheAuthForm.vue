@@ -3,7 +3,7 @@ import { userApi } from "../api-requests/user-api";
 import { ordersApi } from "../api-requests/orders-api";
 import { Form, Field, ErrorMessage } from 'vee-validate';
 
-
+const props = defineProps(['login'])
 const route = useRoute();
 const router = useRouter();
 let error=false;
@@ -11,7 +11,6 @@ let user= null;
 
 const schema = {
   password: (value:string) => {
-
     if (!value) {
         return 'This field is required';
       }
@@ -21,8 +20,6 @@ const schema = {
       }
       return true
   },
-
-
   email:(value:string)=>{
     if (!value) {
         return 'This field is required';
@@ -35,32 +32,32 @@ const schema = {
   }
 };
 async function onSubmit(values:any) {
-  login(values)
+  props.login(values)
   }
 
-  async function login(data:any) {             
-  try {
-  const res = await userApi.loginUser(data.email,data.password)
-  console.log(res)
-  if (res.jwt){
-    localStorage.setItem('jwt', res.jwt)
-     localStorage.setItem('userData', JSON.stringify(res.user))
-  router.push('/')
-    // user({
-    //   jwt:res.jwt,
-    //   user:res.user
-    // })
-  } else {
-    if(res.error){
-      alert(res.error.message)
-    }
+  // async function login(data:any) {             
+  // try {
+  // const res = await userApi.loginUser(data.email,data.password)
+  // console.log(res)
+  // if (res.jwt){
+  //   localStorage.setItem('jwt', res.jwt)
+  //    localStorage.setItem('userData', JSON.stringify(res.user))
+  // router.push('/')
+  //   // user({
+  //   //   jwt:res.jwt,
+  //   //   user:res.user
+  //   // })
+  // } else {
+  //   if(res.error){
+  //     alert(res.error.message)
+  //   }
   
-  }
-   } catch(error) {
-    console.log(error)
-      error = true
-         }
-       };
+  // }
+  //  } catch(error) {
+  //   console.log(error)
+  //     error = true
+  //        }
+  //      };
   async function userBearer(jwt:string,user:any){
     try {
       const res2 = userApi.userBearer(jwt,user)

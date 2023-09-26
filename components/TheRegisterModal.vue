@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 const props = defineProps({
-  openRegModal: Boolean
+  openRegModal: Boolean,
+  register: Function,
 })
 </script>
 <template>
@@ -13,7 +14,7 @@ const props = defineProps({
         </div>
         <div class="modal-body">
           <slot name="body">
-         <TheRegisterForm/>
+         <TheRegisterForm :register="register"/>
           </slot>
         </div>
       </div>

@@ -20,6 +20,11 @@ import TheLanguageButton from "@/components/TheLanguageButton.vue";
 import TheThemeButton from "@/components/TheThemeButton.vue";
 import TheColorMode from "@/components/TheColorMode.vue";
 import TheChatModal  from "@/components/TheChatModal.vue";
+import { userApi } from "../api-requests/user-api";
+import { favoritesApi } from "../api-requests/favorites-api";
+import { basketsApi } from "../api-requests/basket-api";
+import { giftcardApi } from "../api-requests/giftcard-api";
+import { ordersApi } from "../api-requests/orders-api";
 
 export default {
   props: {
@@ -81,6 +86,12 @@ export default {
       this.mobileVersion = true;
     }
   },
+  onMounted() {
+    this.authListener()
+  },
+beforeMount() {
+  this.authListener()
+},
 
   data() {
     return {
@@ -186,13 +197,60 @@ export default {
     },
     authListener() {
       const user = localStorage.getItem("jwt");
-      console.log(user);
       if (!user) {
         return (this.isLoggedIn = false);
       } else {
         return (this.isLoggedIn = true);
       }
     },
+    async login(data:any) {             
+  try {
+  const res = await userApi.loginUser(data.email,data.password)
+  console.log(res)
+  if (res.jwt){
+    localStorage.setItem('jwt', res.jwt)
+     localStorage.setItem('userData', JSON.stringify(res.user))
+    this.openAuthModal = false;
+  // router.push('/')
+    // user({
+    //   jwt:res.jwt,
+    //   user:res.user
+    // })
+  } else {
+    if(res.error){
+      alert(res.error.message)
+    }
+  
+  }
+   } catch(error) {
+    console.log(error)
+      error = true
+         }
+       },
+       async register(data:any){
+      try {
+     const collectionFav = await favoritesApi.createFavoritesCollection();
+     const collectionBasket = await basketsApi.createBasketCollection();
+     const collectionGiftCard = await giftcardApi.createGiftCardCollection();
+     const collectionOrder = await ordersApi.createOrdersCollection();
+     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
+     this.openRegModal = false;
+     if(res.jwt){ 
+     localStorage.setItem('jwt', res.jwt);
+     localStorage.setItem('userData', JSON.stringify(res.user));
+    // this.router.push("/");
+  //  this.user({
+  //     jwt:res.jwt,
+  //     user:res.user
+  //   })
+     }else if(res.error){
+    alert(res.error.message)
+     }
+    }
+    catch (err) {
+      console.log(err);
+    }
+},
     signOut() {
       this.$router.push("/");
       localStorage.removeItem("jwt");
@@ -200,25 +258,35 @@ export default {
       return (this.userData = null);
     },
   },
+//   watch: {
+//  userData: async function (){
+//     }, 
+
+//   },
+  watch: {
+    userData: async function checkIsLogged() {
+      this.authListener()
+    }
+  },
 };
 </script>
 <template>
   <header v-if="!mobileVersion">
     <div class="header_buttons">
       <TheLanguageButton />
-      <button class="sign" v-show="!isLoggedIn" @click="openAuthModal = true">
+      <button class="sign" v-if="!isLoggedIn" @click="openAuthModal = true">
         Sign In
       </button>
-      <button class="sign" v-show="!isLoggedIn" @click="openRegModal = true">
+      <button class="sign" v-if="!isLoggedIn" @click="openRegModal = true">
         Sign Up
       </button>
-      <button class="sign" v-show="isLoggedIn" @click="signOut()">
+      <button class="sign" v-if="isLoggedIn" @click="signOut()">
         Sign Out
       </button>
       <nuxt-link>
         <button
           class="profile"
-          v-show="isLoggedIn"
+          v-if="isLoggedIn"
           @click="navigateTo('/user')"
         >
           Profile
@@ -239,12 +307,14 @@ export default {
         <TheAuthModal
           :openAuthModal="openAuthModal"
           @close="openAuthModal = false"
+          :login="login"
         />
       </Teleport>
       <Teleport to="body">
         <TheRegisterModal
           :openRegModal="openRegModal"
           @close="openRegModal = false"
+          :register="register"
         />
       </Teleport>
       <Teleport to="body">

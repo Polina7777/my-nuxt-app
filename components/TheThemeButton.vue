@@ -34,6 +34,9 @@ export default {
   color: white;
   z-index: 1000;
 }
+button{
+  white-space: nowrap;
+}
 
 .lang_button:active, .lang_button:hover {
   background-color: #b49696;

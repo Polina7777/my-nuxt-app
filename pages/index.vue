@@ -1,5 +1,6 @@
 <script>
 import { productsApi } from "../api-requests/products-api";
+import TheParallax  from "../components/TheParallax.vue";
 
 
 export default{
@@ -72,6 +73,7 @@ watch: {
     },
 
   },
+  components:{TheParallax}
   
 }
 </script>
@@ -81,6 +83,8 @@ watch: {
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
 <!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
+<!-- <TheParallax2/> -->
+<TheParallax4 :productsListBestSeller = "productsListBestSeller" />
  <TheSwiper2  :productsListBestSeller = "productsListBestSeller"  />
  <TheSwiperModal  :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/> 
   <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString" />

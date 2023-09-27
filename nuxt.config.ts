@@ -6,7 +6,7 @@
 export default {
   devtools: { enabled: true },
   modules: [
-    '@nuxtjs/i18n','@nuxtjs/color-mode','nuxt-swiper'
+    '@nuxtjs/i18n','@nuxtjs/color-mode','nuxt-swiper','@vueuse/nuxt',
   ],
   colorMode: {
     preference: 'system', // default value of $colorMode.preference

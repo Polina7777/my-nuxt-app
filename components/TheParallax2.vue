@@ -121,7 +121,7 @@ const cardStyle = computed(() => ({
               src="https://jaromvogel.com/images/design/jumping_rabbit/page2layer4.png"
               alt=""
             >
-          </div>
+        </div>
         </div>
       </div>
       <div class="note opacity-1">

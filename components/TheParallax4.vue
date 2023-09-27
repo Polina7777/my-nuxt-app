@@ -27,7 +27,7 @@ const cardWindowStyle: CSSProperties = {
   fontSize: '6rem',
   position: 'absolute',
 //   top: 'calc(50% - 1em)',
-//   left: 'calc(50% - 1em)',
+//  left: 'calc(50% - 1em)',
 top:'9%',
 // left:'11%',
 left:'3%',

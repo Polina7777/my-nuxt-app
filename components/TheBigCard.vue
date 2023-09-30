@@ -5,20 +5,32 @@ import { IBasketCard } from "../static/interfaces";
 export default {
   props: {
     card: Object,
+    id:Number
   },
   created() {
     this.getTheSameProductsList();
+  // this.getCardData()
   },
 //   beforeUpdate(){
 //   this.currentLocale =  this.$i18n.locale
 // },
 // updated() {
-//   this.currentLocale = this.$i18n.locale;
+//    this.currentLocale = this.$i18n.locale;
+  
 // },
+// computed:{
+//   currentLocal(){
+// return  this.$i18n.locale;
+//   }
+// // },
 // beforeMount() {
 //   this.currentLocale =  this.$i18n.locale
 // },
-
+// computed:{
+//   cardId(){
+// return  this.$i18n.locale;
+//   }
+// },
   data() {
     return {
        addText: "В корзину",
@@ -30,11 +42,13 @@ export default {
       showTitle2Description: false,
       sameProductsList: ref([]),
       basket: this.info?.attributes.basket,
-      cardNew: { product: this.info, count: 1 },
+      cardNew: { product: this.card, count: 1 },
       currentLocale:this.$i18n.locale,
        route:useRoute(),
        router:useRouter(),
-       info:this.card,
+      // info:this.card,
+      cardId:this.id,
+       info:null,
     };
   },
 
@@ -67,8 +81,10 @@ export default {
       this.sameProductsList = list;
     },
     async getCardData(){
-      console.log('in bigcard')
-      const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id,this.$i18n.locale );
+      console.log('in bigcard',this.id,this.cardId)
+      // const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id,this.$i18n.locale );
+      const cardInfo = await productsApi.getProductsById(this.id,this.$i18n.locale );
+      console.log(cardInfo)
    this.info = cardInfo;
    },
  
@@ -95,26 +111,34 @@ export default {
       }
     },
   },
-//   watch: {
+  watch: {
 //     currentLocale: async function(){
-//  this.getTheSameProductsList();
-//  this.getCardData();
+// //  this.getTheSameProductsList();
+//   this.getCardData(this.id);
 //     }, 
-//   },
+  // id:async function(){
+  //   console.log(this.id,'bbjbh')
+  //   // this.getCardData();
+  //   const cardInfo = await productsApi.getProductsById(this.id,this.$i18n.locale );
+  //     console.log(cardInfo)
+  //  this.info = cardInfo;
+  // }
+  },
 };
 </script>
-
+<!-- :key="currentLocale" -->
 <template>
-  <div class="card_wrapper" :key="info?.id">
-    <nuxt-link :to="`/${info?.id}`">
+  <!-- {{ card }} -->
+  <div class="card_wrapper"  >
+    <nuxt-link :to="`/${card?.id}`">
       <!-- <img :src="card?.attributes.image" alt="card-image" /> -->
-      <img :src="info?.attributes.image" alt="card-image" />
+      <img :src="card?.attributes.image" alt="card-image" />
     </nuxt-link>
     <div class="info_box">
       <!-- <p class="description_small">{{ card?.attributes.description_small }}</p> -->
-      <p class="description_small">{{ info?.attributes.description_small }}</p>
+      <p class="description_small">{{ card?.attributes.description_small }}</p>
       <!-- <p>{{ card?.attributes.price }}</p> -->
-      <p>{{ info?.attributes.price }}</p>
+      <p>{{ card?.attributes.price }}</p>
       <div v-if="!basket" class="count_buttons">
         <button @click="decreaseQuantity(cardNew)" id="minus">-</button>
         {{ cardNew.count }}
@@ -125,7 +149,7 @@ export default {
       <button v-if="basket" @click="deleteFromBacket" class="basket">{{  $t('bigCardDelete')}}</button>
       <p class="title">{{ $t('bigCardTitle1') }}</p>
       <!-- <p class="description">{{ card?.attributes.description }}</p> -->
-      <p class="description">{{ info?.attributes.description }}</p>
+      <p class="description">{{ card?.attributes.description }}</p>
       <div class="box">
         <!-- <p class="title">{{ title1 }}</p> -->
         <p class="title">{{ $t('bigCardTitle2') }}</p>
@@ -146,7 +170,7 @@ export default {
       </div>
       <p v-if="showTitle1Description" class="description">
         <!-- {{ card?.attributes.applying }} -->
-        {{ info?.attributes.applying }}
+        {{ card?.attributes.applying }}
       </p>
 
       <div class="box">
@@ -169,7 +193,7 @@ export default {
       </div>
       <p v-if="showTitle2Description" class="description">
         <!-- {{ card?.attributes.composition }} -->
-        {{ info?.attributes.composition }}
+        {{ card?.attributes.composition }}
       </p>
     </div>
   </div>
@@ -234,6 +258,16 @@ export default {
 
 .count_buttons,
 .button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  background: #efe1e1;
+  align-items: center;
+  border-radius: 19px;
+  width: 131px;
+  color: white;
+}
+button{
   display: flex;
   flex-direction: row;
   justify-content: center;

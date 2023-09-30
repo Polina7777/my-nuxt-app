@@ -22,7 +22,6 @@ const slides = ref(Array.from(list, (item,index) => {
   const b = Math.floor(Math.random() * 256)
   // Figure out contrast color for font
   const contrast = r * 0.299 + g * 0.587 + b * 0.114 > 186 ? 'black' : 'white'
-console.log(item)
   return { 
     // bg: `rgb(${r}, ${g}, ${b}),`
     border:' 1px solid rgb(71, 70, 70)',

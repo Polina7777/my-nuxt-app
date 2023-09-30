@@ -59,8 +59,11 @@ export default {
     },
     async getUser(){
       this.userInfo = JSON.parse(localStorage.getItem('userData'))
-  const user = await userApi.getUsersById(this.userInfo.id);
+      if(this.userInfo){
+        const user = await userApi.getUsersById(this.userInfo.id);
   this.userData = user;
+      }
+
     },
     async addToBacket() {
       console.log(this.userInfo)

@@ -16,6 +16,14 @@ export default{
     this.filterListBySearchString();
     this.getBestSellerProducts();
   },
+  beforeUpdate() {
+      this.currentLocale = this.$i18n.locale
+  },
+  computed:{
+  currentLocal(){
+return  this.$i18n.locale;
+  }
+},
   beforeCreate(){
     this.getBestSellerProducts;
   },
@@ -71,6 +79,9 @@ watch: {
    popUpFilter: async function filterPopUp(){
      this.filterListByPopUp()
     },
+    currentLocale: async function(){
+      this.getSaleProducts();
+    },
 
   },
   components:{TheParallax}
@@ -78,12 +89,13 @@ watch: {
 }
 </script>
 <template>
-    <div>
+    <div :key="currentLocal">
       <NuxtLayout name="custom" >
    <TheHeader :value="searchString"
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
 <!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
 <!-- <TheParallax2/> -->
+<TheScrollParallax :productsListBestSeller = "productsListBestSeller"/>
 <TheParallax4 :productsListBestSeller = "productsListBestSeller" />
  <TheSwiper2  :productsListBestSeller = "productsListBestSeller"  />
  <TheSwiperModal  :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/> 

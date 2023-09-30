@@ -25,25 +25,31 @@ return  this.$i18n.locale;
 },
 methods:{
    async getCardData(){
-      console.log('in cardId')
+      // console.log('in cardId')
+      // console.log(this.$i18n.locale)
       const cardInfo = await productsApi.getProductsById(this.route.params.cardId,this.$i18n.locale );
+   console.log(cardInfo)
    this.info = cardInfo;
    }
 
 },
 watch: {
-    currentLocale: async function(){
-   this.getCardData()
-    }, 
-  },
+  //   currentLocale: async function(){
+  //  this.getCardData()
+  //   }, 
+  // },
+  currentLocal: async function(){
+    this.getCardData()
+  }
+}
 }
 </script>
-
+<!-- :key="currentLocal" -->
 <template>
-  <div :key="currentLocal">
+  <div :key="currentLocal" >
   <NuxtLayout  name="custom">
     <TheHeader/>
-    <TheBigCard v-if="info" :card="info"/>
+    <TheBigCard v-if="info" :card="info" :id="info.id"/>
   </NuxtLayout>
 </div>
 </template>

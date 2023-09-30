@@ -2,15 +2,20 @@
 export default {
   created() {
     setTimeout(() => {
-      const consultantMessage = "Консультант: Здравствуйте, чем могу помочь?";
+      // const consultantMessage = "Консультант: Здравствуйте, чем могу помочь?";
+      const consultantMessage = this.$t('chat.consultantMessage');
       this.messages.push(consultantMessage);
     }, 700);
+  },
+  updated(){
+   this.currentLocale=this.$i18n.locale
   },
   data() {
     return {
       messages: [],
       newMessage: "",
       consultantMessage: "",
+      currentLocale:this.$i18n.locale,
       deliveryWordsToCheck: [
         "доставка",
         // "способы доставки",
@@ -148,15 +153,17 @@ export default {
 
       //   let consultantMessage = "";
       if (this.newMessage.trim() !== "") {
-        this.messages.push(`Вы: ${this.newMessage}`);
+        // this.messages.push(`Вы: ${this.newMessage}`);
+        this.messages.push(`${this.$t('chat.you')}: ${this.newMessage}`);
   this.deliveryWordsToCheck.forEach((word) => {
           if (this.newMessage.includes(word)) {
             console.log("delivery");
             console.log(`Строка содержит слово "${word}".`);
             this.newMessage = "";
-            this.consultantMessage =
-              "Консультант: Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта. Пункт выдачи СДЭК: 350 р. (бесплатно при заказе от 3000 р.).Сроки: 1-3 рабочих дня. Почта России: 350 р. (бесплатно при заказе от 3000 р.).Сроки: 10-14 рабочих дня. Самовывоз: 350 р.(бесплатно при заказе от 3000 р.).Самовывоз производится по адресам : г.Бавлы, Пионерская 15 либо г.Альметьевск, Джалиля 32.  Сроки: 1-3 рабочих дня. Курьером до двери: 100 р.(бесплатно при заказе от 1000 р.). Сроки: 1-3 рабочих дня.";
-              setTimeout(() => {
+            // this.consultantMessage =
+            //   "Консультант: Для выбора доступны службы доставки СДЭК и Почта России, в зависимости от населённого пункта. Пункт выдачи СДЭК: 350 р. (бесплатно при заказе от 3000 р.).Сроки: 1-3 рабочих дня. Почта России: 350 р. (бесплатно при заказе от 3000 р.).Сроки: 10-14 рабочих дня. Самовывоз: 350 р.(бесплатно при заказе от 3000 р.).Самовывоз производится по адресам : г.Бавлы, Пионерская 15 либо г.Альметьевск, Джалиля 32.  Сроки: 1-3 рабочих дня. Курьером до двери: 100 р.(бесплатно при заказе от 1000 р.). Сроки: 1-3 рабочих дня.";
+              this.consultantMessage = this.$t('chat.consultantMessageDelivery')
+            setTimeout(() => {
                 this.messages.push(this.consultantMessage);
         }, 1000);
              
@@ -165,8 +172,9 @@ export default {
               if (this.newMessage.includes(word)) {
                 console.log(`Строка содержит слово "${word}".`);
                 this.newMessage = "";
-                this.consultantMessage =
-                  "Консультант: Вы можете связаться с нами по номеру +7 (999) 131-32-49, либо в мессенджере Viber . А также в социальной сети ВКонтакте.";
+                // this.consultantMessage =
+                //   "Консультант: Вы можете связаться с нами по номеру +7 (999) 131-32-49, либо в мессенджере Viber . А также в социальной сети ВКонтакте.";
+                  this.consultantMessage = this.$t('chat.consultantMessageContacts')
                   setTimeout(() => {
                 this.messages.push(this.consultantMessage);
         }, 1000);
@@ -179,9 +187,10 @@ export default {
                   if (this.newMessage.includes(word)) {
                     console.log(`Строка содержит слово "${word}".`);
                     this.newMessage = "";
-                    this.consultantMessage =
-                      "Консультант: KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам. Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!";
-                      setTimeout(() => {
+                    // this.consultantMessage =
+                    //   "Консультант: KameLAb - мультибрендовый интернет-магазин косметики. Мы предлагаем вам большой выбор брендов, среди которых вы обязательно найдете то, что нужно вам. Мы сотрудничаем с официальными дистрибьюторами, поэтому вы можете быть уверены в качестве и оригинальности представленной продукции на сайте. Вы всегда можете получить бесплатную консультацию по подбору ухода от наших специалистов. Спасибо, что выбираете нас!";
+                    this.consultantMessage = this.$t('chat.consultantMessageAbout')
+                    setTimeout(() => {
                 this.messages.push(this.consultantMessage);
         }, 1000);
                   }
@@ -192,8 +201,10 @@ export default {
                       if (this.newMessage.includes(word)) {
                         console.log(`Строка содержит слово "${word}".`);
                         this.newMessage = "";
+                        // this.consultantMessage =
+                        //   "Консультант: Здравствуйте, чем могу помочь?";
                         this.consultantMessage =
-                          "Консультант: Здравствуйте, чем могу помочь?";
+                        this.$t('chat.consultantMessage');
                           setTimeout(() => {
                 this.messages.push(this.consultantMessage);
         }, 1000);
@@ -201,7 +212,8 @@ export default {
     
       }else{
         setTimeout(() => {
-          const consultantMessage = "Консультант: Задайте Ваш вопрос.";
+          // const consultantMessage = "Консультант: Задайте Ваш вопрос.";
+          const consultantMessage = this.$t('chat.consultantMessageAsk');
           this.messages.push(consultantMessage);
         }, 1000);
       }
@@ -213,7 +225,7 @@ export default {
 </script>
 
 <template>
-  <div class="form_wrapper">
+  <div class="form_wrapper" :key="currentLocale">
     <div class="chat">
       <div class="chat-messages">
         <div
@@ -228,7 +240,7 @@ export default {
         <input
           v-model="newMessage"
           @keyup.enter="sendMessage"
-          placeholder="Введите сообщение"
+          :placeholder="$t('chat.enterMessage')"
         />
       </div>
     </div>

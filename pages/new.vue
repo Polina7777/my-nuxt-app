@@ -11,7 +11,7 @@ created() {
   this.currentLocale = this.$i18n.locale
 },
   beforeUpdate() {
-      this.currentLocal = this.$i18n.locale
+      this.currentLocale = this.$i18n.locale
   },
 computed:{
   currentLocal(){

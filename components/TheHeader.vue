@@ -373,7 +373,7 @@ beforeMount() {
               : 'button'
           "
           @click="
-            item.title === 'Каталог' ? popUpOpen() : navigateTo(item.navigate)
+            item.title === 'Каталог' || item.title === 'Catalog'  ? popUpOpen() : navigateTo(item.navigate)
           "
         >
           {{ item.title }}

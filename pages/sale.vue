@@ -6,7 +6,7 @@ export default {
     this.getSaleProducts();
   },
   updated() {
-  this.currentLocale = this.$i18n.locale
+  this.currentLocale = this.$i18n.locale;
 },
 beforeUpdate() {
       this.currentLocale = this.$i18n.locale
@@ -33,7 +33,6 @@ return  this.$i18n.locale;
     this.filterFormValue = filterValue;
     const list = await productsApi.filterProductsByFiltersForm(filterValue.brand,filterValue.priceFrom,filterValue.priceTo, this.$i18n.locale)
     this.productsListSale = list;
-   console.log(this.filteredList)
   },
     async getSaleProducts() {
     const saleProducts = await productsApi.getAllSaleProducts(this.searchString,this.$i18n.locale );

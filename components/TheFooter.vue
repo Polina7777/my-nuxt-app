@@ -55,7 +55,6 @@ export default {
     },
   ]   
     this.currentLocale = this.$i18n.locale
-    console.log(this.currentLocale)
   },
   beforeUpdate() {
     this.navScheme1= [

@@ -58,7 +58,7 @@ async function onSubmit(values: any) {
 </script>
 <template>
   <div class="form_wrapper">
-    <p class="title">{{ 'Brand:' }}</p>
+    <p class="title">{{ $t('filtersBox.brand') }}</p>
     <Form
       :validation-schema="schema"
       @submit="onSubmit"
@@ -90,14 +90,14 @@ async function onSubmit(values: any) {
               <ErrorMessage name="brand" class="error_text" />
             </div>
             <div class="field_box">
-              <p>Price:</p>
+              <p>{{ $t('filtersBox.price') }}</p>
               <!-- <li
                 class="radio_inputs"
                 v-for="(item, index) in brands"
                 :key="index"
               > -->
                 <label class="price">
-                 From:
+                  {{ $t('filtersBox.from') }}
                  <Field
                     name="priceFrom"
                   type="text"
@@ -114,7 +114,7 @@ async function onSubmit(values: any) {
                 :key="index"
               > -->
                 <label class="price">
-                  To:
+                  {{ $t('filtersBox.to') }}
                   <Field
                     name="priceTo"
                   type="text"
@@ -133,7 +133,7 @@ async function onSubmit(values: any) {
       </div>
 
 
-      <button class="ordering" >{{"Filter" }}</button>
+      <button class="ordering" >{{$t('filtersBox.filter') }}</button>
     </Form>
 
   </div>

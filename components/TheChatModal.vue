@@ -23,7 +23,7 @@ const props = defineProps({
               @click="$emit('close')"
             >x</button>
           <slot name="header">
-            <span>Чат с консультантом</span>
+            <span>{{$t('chat.chatWithСonsultant')}}</span>
           </slot>
         </div>
         <div class="modal-body">
@@ -88,8 +88,12 @@ const props = defineProps({
     z-index: 9998;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    /* width: 100%;
+    height: 100%; */
+    width: 300px;
+    height: 300px;
+    left: 45%;
+    top: 41%;
     /* background-color: rgba(201, 171, 171, 0.472); */
     display: flex;
     justify-content: center;
@@ -122,7 +126,7 @@ const props = defineProps({
     min-height: 320px;
     padding: 0 10px ;
     left: 65%;
-top: 63%;
+    top: 63%;
   }
   .modal-header{
     padding: 10px 0 10px;

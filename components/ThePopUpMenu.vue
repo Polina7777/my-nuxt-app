@@ -9,15 +9,343 @@ export default {
   mounted() {},
   data() {
     return {
-      face: data.face,
-      hair: data.hair,
-      body: data.body,
-      makeUp: data.makeUp,
-      sets: data.sets,
-      mini: data.mini,
-      popUpList1: data.popUpList1,
-      popUpList2: data.popUpList2,
-      popUpList: [...data.popUpList1, ...data.popUpList2],
+      // face: data.face,
+      // hair: data.hair,
+      // body: data.body,
+      // makeUp: data.makeUp,
+      // sets: data.sets,
+      // mini: data.mini,
+      // popUpList1: data.popUpList1,
+      // popUpList2: data.popUpList2,
+      // popUpList: [...data.popUpList1, ...data.popUpList2],
+      face: [
+        {
+          title: this.$t("popupListFace.makeUpRemoval"),
+          filter: "makeUpRemoval",
+        },
+        { title: this.$t("popupListFace.cleansing"), filter: "cleansing" },
+        { title: this.$t("popupListFace.exfoliation"), filter: "exfoliation" },
+        { title: this.$t("popupListFace.toning"), filter: "toning" },
+        { title: this.$t("popupListFace.serum"), filter: "serum" },
+        { title: this.$t("popupListFace.cream"), filter: "cream" },
+        { title: this.$t("popupListFace.mask"), filter: "mask" },
+        { title: this.$t("popupListFace.sheetMask"), filter: "sheetMask" },
+        { title: this.$t("popupListFace.eyesCream"), filter: "eyesCream" },
+        { title: this.$t("popupListFace.patches"), filter: "patches" },
+        { title: this.$t("popupListFace.pointMeans"), filter: "pointMeans" },
+        { title: this.$t("popupListFace.spf"), filter: "spf" },
+        { title: this.$t("popupListFace.accessories"), filter: "accessories" },
+      ],
+      hair: [
+        { title: this.$t("popupListHair.cleansing"), filter: "cleansing" },
+        { title: this.$t("popupListHair.exfoliation"), filter: "exfoliation" },
+        { title: this.$t("popupListHair.serum"), filter: "serum" },
+        { title: this.$t("popupListHair.cream"), filter: "cream" },
+        { title: this.$t("popupListHair.mask"), filter: "mask" },
+        { title: this.$t("popupListHair.spf"), filter: "spf" },
+        {
+          title: this.$t("popupListHair.professional_care"),
+          filter: "professional_care",
+        },
+        { title: this.$t("popupListHair.accessories"), filter: "accessories" },
+      ],
+      body: [
+        { title: this.$t("popupListBody.cleansing"), filter: "cleansing" },
+        { title: this.$t("popupListBody.exfoliation"), filter: "exfoliation" },
+        { title: this.$t("popupListBody.toning"), filter: "toning" },
+        { title: this.$t("popupListBody.serum"), filter: "serum" },
+        { title: this.$t("popupListBody.cream"), filter: "cream" },
+        {
+          title: this.$t("popupListBody.self-tanning"),
+          filter: "self-tanning",
+        },
+        {
+          title: this.$t("popupListBody.brushes_massagers"),
+          filter: "brushes_massagers",
+        },
+        { title: this.$t("popupListBody.scrubs"), filter: "scrubs" },
+        { title: this.$t("popupListBody.wraps"), filter: "wraps" },
+        { title: this.$t("popupListBody.spf"), filter: "spf" },
+      ],
+      makeUp: [
+        { title: this.$t("popupListMakeUp.forLips"), filter: "forLips" },
+        { title: this.$t("popupListMakeUp.forEyes"), filter: "forEyes" },
+        { title: this.$t("popupListMakeUp.forFace"), filter: "forFace" },
+        { title: this.$t("popupListMakeUp.forBrows"), filter: "forBrows" },
+        { title: this.$t("popupListMakeUp.brushes"), filter: "brushes" },
+        { title: this.$t("popupListMakeUp.palletes"), filter: "palletes" },
+        { title: this.$t("popupListMakeUp.sponges"), filter: "sponges" },
+        {
+          title: this.$t("popupListMakeUp.accessories"),
+          filter: "accessories",
+        },
+      ],
+      sets: [
+        {
+          title: this.$t("popupListSetsMini.makeUpRemoval"),
+          filter: "makeUpRemoval",
+        },
+        { title: this.$t("popupListSetsMini.cleansing"), filter: "cleansing" },
+        {
+          title: this.$t("popupListSetsMini.exfoliation"),
+          filter: "exfoliation",
+        },
+        { title: this.$t("popupListSetsMini.toning"), filter: "toning" },
+        { title: this.$t("popupListSetsMini.serum"), filter: "serum" },
+        { title: this.$t("popupListSetsMini.cream"), filter: "cream" },
+        { title: this.$t("popupListSetsMini.mask"), filter: "mask" },
+        { title: this.$t("popupListSetsMini.sheetMask"), filter: "sheetMask" },
+        { title: this.$t("popupListSetsMini.eyesCream"), filter: "eyesCream" },
+        { title: this.$t("popupListSetsMini.patches"), filter: "patches" },
+        { title: this.$t("popupListSetsMini.forLips"), filter: "forLips" },
+        {
+          title: this.$t("popupListSetsMini.pointMeans"),
+          filter: "pointMeans",
+        },
+        { title: this.$t("popupListSetsMini.spf"), filter: "spf" },
+        {
+          title: this.$t("popupListSetsMini.accessories"),
+          filter: "accessories",
+        },
+      ],
+      mini: [
+        {
+          title: this.$t("popupListSetsMini.makeUpRemoval"),
+          filter: "makeUpRemoval",
+        },
+        { title: this.$t("popupListSetsMini.cleansing"), filter: "cleansing" },
+        {
+          title: this.$t("popupListSetsMini.exfoliation"),
+          filter: "exfoliation",
+        },
+        { title: this.$t("popupListSetsMini.toning"), filter: "toning" },
+        { title: this.$t("popupListSetsMini.serum"), filter: "serum" },
+        { title: this.$t("popupListSetsMini.cream"), filter: "cream" },
+        { title: this.$t("popupListSetsMini.mask"), filter: "mask" },
+        { title: this.$t("popupListSetsMini.sheetMask"), filter: "sheetMask" },
+        { title: this.$t("popupListSetsMini.eyesCream"), filter: "eyesCream" },
+        { title: this.$t("popupListSetsMini.patches"), filter: "patches" },
+        { title: this.$t("popupListSetsMini.forLips"), filter: "forLips" },
+        {
+          title: this.$t("popupListSetsMini.pointMeans"),
+          filter: "pointMeans",
+        },
+        { title: this.$t("popupListSetsMini.spf"), filter: "spf" },
+        {
+          title: this.$t("popupListSetsMini.accessories"),
+          filter: "accessories",
+        },
+      ],
+      popUpList1: [
+        {
+          title: this.$t("popupList1.forFace"),
+          filter: "forFace",
+          popup: [
+            {
+              title: this.$t("popupListFace.makeUpRemoval"),
+              filter: "makeUpRemoval",
+            },
+            { title: this.$t("popupListFace.cleansing"), filter: "cleansing" },
+            {
+              title: this.$t("popupListFace.exfoliation"),
+              filter: "exfoliation",
+            },
+            { title: this.$t("popupListFace.toning"), filter: "toning" },
+            { title: this.$t("popupListFace.serum"), filter: "serum" },
+            { title: this.$t("popupListFace.cream"), filter: "cream" },
+            { title: this.$t("popupListFace.mask"), filter: "mask" },
+            { title: this.$t("popupListFace.sheetMask"), filter: "sheetMask" },
+            { title: this.$t("popupListFace.eyesCream"), filter: "eyesCream" },
+            { title: this.$t("popupListFace.patches"), filter: "patches" },
+            {
+              title: this.$t("popupListFace.pointMeans"),
+              filter: "pointMeans",
+            },
+            { title: this.$t("popupListFace.spf"), filter: "spf" },
+            {
+              title: this.$t("popupListFace.accessories"),
+              filter: "accessories",
+            },
+          ],
+        },
+        {
+          title: this.$t("popupList1.forHair"),
+          filter: "forHair",
+          popup: [
+            { title: this.$t("popupListHair.cleansing"), filter: "cleansing" },
+            {
+              title: this.$t("popupListHair.exfoliation"),
+              filter: "exfoliation",
+            },
+            { title: this.$t("popupListHair.serum"), filter: "serum" },
+            { title: this.$t("popupListHair.cream"), filter: "cream" },
+            { title: this.$t("popupListHair.mask"), filter: "mask" },
+            { title: this.$t("popupListHair.spf"), filter: "spf" },
+            {
+              title: this.$t("popupListHair.professional_care"),
+              filter: "professional_care",
+            },
+            {
+              title: this.$t("popupListHair.accessories"),
+              filter: "accessories",
+            },
+          ],
+        },
+        {
+          title: this.$t("popupList1.forMakeUp"),
+          filter: "forMakeUp",
+          popup: [
+            { title: this.$t("popupListMakeUp.forLips"), filter: "forLips" },
+            { title: this.$t("popupListMakeUp.forEyes"), filter: "forEyes" },
+            { title: this.$t("popupListMakeUp.forFace"), filter: "forFace" },
+            { title: this.$t("popupListMakeUp.forBrows"), filter: "forBrows" },
+            { title: this.$t("popupListMakeUp.brushes"), filter: "brushes" },
+            { title: this.$t("popupListMakeUp.palletes"), filter: "palletes" },
+            { title: this.$t("popupListMakeUp.sponges"), filter: "sponges" },
+            {
+              title: this.$t("popupListMakeUp.accessories"),
+              filter: "accessories",
+            },
+          ],
+        },
+        {
+          title: this.$t("popupList1.forBody"),
+          filter: "forBody",
+          popup: [
+            { title: this.$t("popupListBody.cleansing"), filter: "cleansing" },
+            {
+              title: this.$t("popupListBody.exfoliation"),
+              filter: "exfoliation",
+            },
+            { title: this.$t("popupListBody.toning"), filter: "toning" },
+            { title: this.$t("popupListBody.serum"), filter: "serum" },
+            { title: this.$t("popupListBody.cream"), filter: "cream" },
+            {
+              title: this.$t("popupListBody.self-tanning"),
+              filter: "self-tanning",
+            },
+            {
+              title: this.$t("popupListBody.brushes_massagers"),
+              filter: "brushes_massagers",
+            },
+            { title: this.$t("popupListBody.scrubs"), filter: "scrubs" },
+            { title: this.$t("popupListBody.wraps"), filter: "wraps" },
+            { title: this.$t("popupListBody.spf"), filter: "spf" },
+          ],
+        },
+        {
+          title: this.$t("popupList1.sets"),
+          filter: "sets",
+          popup: [
+            {
+              title: this.$t("popupListSetsMini.makeUpRemoval"),
+              filter: "makeUpRemoval",
+            },
+            {
+              title: this.$t("popupListSetsMini.cleansing"),
+              filter: "cleansing",
+            },
+            {
+              title: this.$t("popupListSetsMini.exfoliation"),
+              filter: "exfoliation",
+            },
+            { title: this.$t("popupListSetsMini.toning"), filter: "toning" },
+            { title: this.$t("popupListSetsMini.serum"), filter: "serum" },
+            { title: this.$t("popupListSetsMini.cream"), filter: "cream" },
+            { title: this.$t("popupListSetsMini.mask"), filter: "mask" },
+            {
+              title: this.$t("popupListSetsMini.sheetMask"),
+              filter: "sheetMask",
+            },
+            {
+              title: this.$t("popupListSetsMini.eyesCream"),
+              filter: "eyesCream",
+            },
+            { title: this.$t("popupListSetsMini.patches"), filter: "patches" },
+            { title: this.$t("popupListSetsMini.forLips"), filter: "forLips" },
+            {
+              title: this.$t("popupListSetsMini.pointMeans"),
+              filter: "pointMeans",
+            },
+            { title: this.$t("popupListSetsMini.spf"), filter: "spf" },
+            {
+              title: this.$t("popupListSetsMini.accessories"),
+              filter: "accessories",
+            },
+          ],
+        },
+        {
+          title: this.$t("popupList1.mini"),
+          filter: "mini",
+          popup: [
+            {
+              title: this.$t("popupListSetsMini.makeUpRemoval"),
+              filter: "makeUpRemoval",
+            },
+            {
+              title: this.$t("popupListSetsMini.cleansing"),
+              filter: "cleansing",
+            },
+            {
+              title: this.$t("popupListSetsMini.exfoliation"),
+              filter: "exfoliation",
+            },
+            { title: this.$t("popupListSetsMini.toning"), filter: "toning" },
+            { title: this.$t("popupListSetsMini.serum"), filter: "serum" },
+            { title: this.$t("popupListSetsMini.cream"), filter: "cream" },
+            { title: this.$t("popupListSetsMini.mask"), filter: "mask" },
+            {
+              title: this.$t("popupListSetsMini.sheetMask"),
+              filter: "sheetMask",
+            },
+            {
+              title: this.$t("popupListSetsMini.eyesCream"),
+              filter: "eyesCream",
+            },
+            { title: this.$t("popupListSetsMini.patches"), filter: "patches" },
+            { title: this.$t("popupListSetsMini.forLips"), filter: "forLips" },
+            {
+              title: this.$t("popupListSetsMini.pointMeans"),
+              filter: "pointMeans",
+            },
+            { title: this.$t("popupListSetsMini.spf"), filter: "spf" },
+            {
+              title: this.$t("popupListSetsMini.accessories"),
+              filter: "accessories",
+            },
+          ],
+        },
+      ],
+      popUpList2: [
+        {
+          title: this.$t("popupListSetsMini.makeUpRemoval"),
+          filter: "makeUpRemoval",
+        },
+        { title: this.$t("popupListSetsMini.cleansing"), filter: "cleansing" },
+        {
+          title: this.$t("popupListSetsMini.exfoliation"),
+          filter: "exfoliation",
+        },
+        { title: this.$t("popupListSetsMini.toning"), filter: "toning" },
+        { title: this.$t("popupListSetsMini.serum"), filter: "serum" },
+        { title: this.$t("popupListSetsMini.cream"), filter: "cream" },
+        { title: this.$t("popupListSetsMini.mask"), filter: "mask" },
+        { title: this.$t("popupListSetsMini.sheetMask"), filter: "sheetMask" },
+        { title: this.$t("popupListSetsMini.eyesCream"), filter: "eyesCream" },
+        { title: this.$t("popupListSetsMini.patches"), filter: "patches" },
+        { title: this.$t("popupListSetsMini.forLips"), filter: "forLips" },
+        {
+          title: this.$t("popupListSetsMini.pointMeans"),
+          filter: "pointMeans",
+        },
+        { title: this.$t("popupListSetsMini.spf"), filter: "spf" },
+        {
+          title: this.$t("popupListSetsMini.accessories"),
+          filter: "accessories",
+        },
+      ],
+      // popUpList: [...this.popUpList1, ...this.popUpList2],
+      // popUpList2: data.popUpList2,
       clickPopUpValue: { title: "", open: false },
       phoneNumber: "+7 (999) 131-32-49",
       router: useRoute(),
@@ -25,19 +353,18 @@ export default {
     };
   },
   methods: {
-    updateClickPopUpValue(data:string) {
-        this.clickPopUpValue.title = data;
-        this.clickPopUpValue.open = true;
+    updateClickPopUpValue(data: string) {
+      this.clickPopUpValue.title = data;
+      this.clickPopUpValue.open = true;
     },
-    leavePopUpItem(event:MouseEvent) {
-        if(event.x < 200){
+    leavePopUpItem(event: MouseEvent) {
+      if (event.x < 200) {
         this.clickPopUpValue.title = "";
         this.clickPopUpValue.open = false;
-    }
+      }
     },
-}
-}
-
+  },
+};
 </script>
 <template>
   <Transition name="modal">
@@ -58,7 +385,17 @@ export default {
                 >
                   {{ item.title }}
                 </p>
-                <ul v-if="clickPopUpValue.title === item.title && clickPopUpValue.open===true && updatePopUpValue" class="popup_list" id="popup_list_two" >
+                <ul
+                  v-if="
+                    clickPopUpValue.title === item.title &&
+                    clickPopUpValue.open === true &&
+                    updatePopUpValue
+                  "
+                  class="popup_list"
+                  id="popup_list_two"
+                >
+                  <!-- {{clickPopUpValue }}
+                {{ item }} -->
                   <li v-for="(item2, index2) in item.popup" :key="index2">
                     <p
                       class="popup_item"
@@ -69,7 +406,11 @@ export default {
                     </p>
                   </li>
                 </ul>
-                <ul v-if="clickPopUpValue.title === '' && updatePopUpValue" class="popup_list" id="popup_list_two" >
+                <ul
+                  v-if="clickPopUpValue.title === '' && updatePopUpValue"
+                  class="popup_list"
+                  id="popup_list_two"
+                >
                   <li v-for="(item2, index2) in face" :key="index2">
                     <p
                       class="popup_item"
@@ -91,11 +432,10 @@ export default {
 
 <style scoped>
 /*DarkMode*/
-.dark-mode #popup_list_one  {
+.dark-mode #popup_list_one {
   background-color: rgb(52, 49, 49);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
-
 }
 .dark-mode #popup_list_one_item {
   font-size: 21px;
@@ -155,7 +495,7 @@ export default {
   color: gray;
   z-index: 100;
 }
-li{
+li {
   text-align: start;
 }
 
@@ -193,7 +533,7 @@ li{
   flex-direction: column;
   justify-content: center;
   align-items: center;
-text-align: start;
+  text-align: start;
   background: #d7b5b5;
   text-align: start;
   gap: 10px;
@@ -205,9 +545,9 @@ text-align: start;
 }
 #popup_list_two {
   display: flex;
-flex-direction: column;
-justify-content: space-evenly;
-align-items: flex-start;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: flex-start;
 
   position: absolute;
   left: 250px;
@@ -215,11 +555,11 @@ align-items: flex-start;
   color: black;
   background: white;
   text-align: start;
-  min-height:410px;
+  min-height: 410px;
   padding: 10px 10px 10px 20px;
   max-width: 320px;
   min-width: 250px;
-  width:100%;
+  width: 100%;
 }
 .modal-default-button {
   padding: 5px 8px;
@@ -292,20 +632,20 @@ button:hover {
 }
 @media (max-width: 937px) {
   .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 29%;
-  gap: 0;
-  z-index: 1000;
-}
+    position: absolute;
+    left: 8%;
+    top: 29%;
+    gap: 0;
+    z-index: 1000;
+  }
 }
 @media (max-width: 888px) {
   .modal-container {
-  position: absolute;
-  left: 8%;
-  top: 31%;
-  gap: 0;
-  z-index: 1000;
-}
+    position: absolute;
+    left: 8%;
+    top: 31%;
+    gap: 0;
+    z-index: 1000;
+  }
 }
 </style>

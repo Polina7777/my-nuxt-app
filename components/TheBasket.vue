@@ -21,11 +21,14 @@ export default {
   methods: {
     async getUser() {
       this.userInfo = JSON.parse(localStorage.getItem("userData") as string);
-      const user = await userApi.getUsersById(this.userInfo.id);
+      if(this.userInfo){
+        const user = await userApi.getUsersById(this.userInfo.id);
       this.userData = user;
       console.log(this.userData)
       this.getBasketProducts();
       // this.getUserBasketList();
+      }
+
     },
     async getBasketProducts() {
       if (this.userData) {

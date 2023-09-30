@@ -10,7 +10,6 @@ export default {
   user:Function,
   filterListByFiltersForm:Function,
   },
-
   updated() {
   this.currentLocale = this.$i18n.locale
 },
@@ -109,7 +108,8 @@ export default {
     <img v-show="router.currentRoute.path === '/new' ||
         router.currentRoute.path === '/sale'" :src="sort" alt="sort" class="img_sort" @click="toggleSortType"/>
   </div>
-    <ul v-if="itemList?.length"
+<ClientOnly>
+    <ul
       :class="
         router.currentRoute.path === '/new' ||
         router.currentRoute.path === '/sale'
@@ -117,10 +117,12 @@ export default {
           : null
       "
     >
-      <li v-for="(item, index) in itemList" :key="index" class="li_item">
+
+      <li  v-for="(item, index) in itemList" :key="index" class="li_item">
         <TheCard :card="item" />
       </li>
     </ul>
+  </ClientOnly>
     <p
       v-if="
         router.currentRoute.path !== '/new' &&
@@ -141,7 +143,7 @@ export default {
   padding-top: 35px;
   display: flex;
   flex-direction: column;
-  min-height: 400px;
+  min-height: 457px;
   margin: auto;
   width: 100%;
 }

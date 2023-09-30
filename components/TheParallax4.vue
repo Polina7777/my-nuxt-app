@@ -84,7 +84,8 @@ const layer3 = computed(() => ({
 const layer4 = layerBase
 
 const cardStyle = computed(() => ({
-  background: '#fff',
+  // background: '#fff',
+  backgroundColor:'transparent',
   height: '20rem',
   width: '78rem',
   borderRadius: '5px',
@@ -101,12 +102,13 @@ const cardStyle = computed(() => ({
 
 <template>
   <div>
+    <h2>{{ $t('listsTitle3') }} </h2> 
     <div ref="target" :style="targetStyle">
       <pre :style="infoStyle">{{ YAML.dump(parallax) }}</pre>
       <div :style="containerStyle">
         <div :style="cardStyle">
           <div :style="cardWindowStyle">
-            
+      
  <!-- <div class="cards"> -->
   <!-- <h3>Movies</h3>
   <h1>Popular</h1> -->
@@ -132,10 +134,10 @@ const cardStyle = computed(() => ({
     </div>
   </div> -->
 
-   <li v-for="(item, index) in list" :key="index" class="card">
+   <li v-for="(item, index) in productsListBestSeller" :key="index" class="card">
         <TheCard :card="item"  />
       </li>
-
+    
 <!-- </div> -->
             <!-- <img
               :style="layer0"
@@ -203,7 +205,8 @@ h3 {
 }
 
 .cards {
-  background: #fff;
+  /* background: #fff; */
+  background-color: transparent;
   border-radius: 15px;
   box-shadow: 0px 10px 20px 20px rgba(0,0,0,0.17);
   display: inline-block;
@@ -231,11 +234,11 @@ h3 {
   /* width: 175px; */
   width: 210px;
   text-align: center;
-  
-  /* // &:hover {
-  //   box-shadow: 5px 5px 20px -7px rgba(0,0,0,0.5);
-  //   transform: translatez(60px);
-  // } */
+
+   /* &:hover {
+   box-shadow: 5px 5px 20px -7px rgba(0,0,0,0.5);
+    transform: translatez(60px);
+   } */
   
   &:not(:last-child) {
     margin-right: 30px;
@@ -249,6 +252,7 @@ h3 {
 }
 li{
     padding: 10px 0 0 5px;
+    z-index: 2000;
 }
 .card__bg {
   bottom: -50px;

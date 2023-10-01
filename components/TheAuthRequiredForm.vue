@@ -1,14 +1,44 @@
-<script setup lang="ts">
+<script  lang="ts">
 
-const route = useRoute();
-const router = useRouter();
+// const route = useRoute();
+// const router = useRouter();
+export default{
+  props:{
+    authRequiredAuthClick: Function,
+  authRequiredRegClick: Function,
+  },
+  data(){
+return{
 
+}
+  },
+  methods:{
+    openReg(){
+      // if(this.openRegModal && this.closeModal){
+      //   this.openRegModal()
+      //   this.closeModal()
+      // }
+      if(this.authRequiredRegClick){
+      this.authRequiredRegClick()
+      }
+    },
+    openAuth(){
+      // if(this.openAuthModal && this.closeModal){
+      //   this.openAuthModal()
+      //   this.closeModal()
+      // }
+      if(this.authRequiredAuthClick){
+       this.authRequiredAuthClick()
+      }
+    }
+  }
+}
 </script>
 <template>
     <div class="form_wrapper">
         <p class="title">{{ $t('authorizationRequired')}}</p>
-    <button> {{ $t('authTitle') }}</button>
-    <button> {{ $t('regTitle') }}</button>
+    <button @click="openAuth"> {{ $t('authTitle') }}</button>
+    <button @click="openReg"> {{ $t('regTitle') }}</button>
     </div>
   </template>
   
@@ -59,7 +89,7 @@ div{
 }
 button{
  background: #efe1e1;
-  margin: 20px auto;
+  margin: 10px auto;
   display: flex;
   flex-direction: row;
   border: none;

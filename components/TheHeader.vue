@@ -19,7 +19,7 @@ import ThePopUpMenu from "@/components/ThePopUpMenu.vue";
 import TheLanguageButton from "@/components/TheLanguageButton.vue";
 import TheThemeButton from "@/components/TheThemeButton.vue";
 import TheColorMode from "@/components/TheColorMode.vue";
-import TheChatModal  from "@/components/TheChatModal.vue";
+import TheChatModal from "@/components/TheChatModal.vue";
 import { userApi } from "../api-requests/user-api";
 import { favoritesApi } from "../api-requests/favorites-api";
 import { basketsApi } from "../api-requests/basket-api";
@@ -32,7 +32,13 @@ export default {
     popUpValue: Object,
   },
   emits: ["input", "click"],
-  components: { ThePopUpMenu, TheLanguageButton, TheThemeButton, TheColorMode,TheChatModal },
+  components: {
+    ThePopUpMenu,
+    TheLanguageButton,
+    TheThemeButton,
+    TheColorMode,
+    TheChatModal,
+  },
   beforeUpdate() {
     (this.navScheme1 = [
       {
@@ -53,25 +59,21 @@ export default {
     ]),
       (this.navScheme2 = [
         {
-          // title: "Каталог",
           title: this.$t("navScheme2Title1"),
           navigate: "/",
           image: plus,
         },
         {
-          // title: "Новинки",
           title: this.$t("navScheme2Title2"),
           navigate: "/new",
           image: null,
         },
         {
-          // title: "Распродажи",
           title: this.$t("navScheme2Title3"),
           navigate: "/sale",
           image: null,
         },
         {
-          // title: "Подарочные сертификаты",
           title: this.$t("navScheme2Title4"),
           navigate: "/giftcard",
           image: null,
@@ -80,18 +82,20 @@ export default {
   },
   mounted() {
     this.authListener();
-    // this.theme = localStorage.getItem("theme") as string;
     const widthDevice = window.innerWidth;
     if (widthDevice < 650) {
       this.mobileVersion = true;
     }
   },
-  onMounted() {
-    this.authListener()
-  },
-beforeMount() {
-  this.authListener()
+updated() {
+  this.authListener(); 
 },
+  onMounted() {
+    this.authListener();
+  },
+  beforeMount() {
+    this.authListener();
+  },
 
   data() {
     return {
@@ -99,12 +103,13 @@ beforeMount() {
       popUpList2: data.popUpList2,
       openAuthModal: false,
       openRegModal: false,
+      openAuthRequiredModal: false,
       like: like,
-      phoneDark:phoneDark,
-      basketDark:basketDark,
-      vkDark:vkDark,
-      viberDark:viberDark,
-      searchDark:searchDark,
+      phoneDark: phoneDark,
+      basketDark: basketDark,
+      vkDark: vkDark,
+      viberDark: viberDark,
+      searchDark: searchDark,
       navScheme1: [
         {
           title: this.$t("navScheme1Title1"),
@@ -159,12 +164,28 @@ beforeMount() {
       internalPopUpValue: this.popUpValue,
       clickPopUpValue: { title: "", open: false },
       isLoggedIn: false,
-    chatOpen:true,
+      chatOpen: true,
+      userJWT: "",
     };
   },
   methods: {
     navigateTo(link: string) {
       this.$router.push(link);
+    },
+    basketButtonClick() {
+      if (this.isLoggedIn) {
+        navigateTo("/basket");
+      } else {
+        this.openAuthRequiredModal = true;
+      }
+    },
+    authRequiredAuthClick() {
+      this.openAuthModal = true;
+      this.openAuthRequiredModal = false;
+    },
+    authRequiredRegClick() {
+      this.openRegModal = true;
+      this.openAuthRequiredModal = false;
     },
     updateValue(event: any) {
       this.$emit("input", event.target.value);
@@ -189,7 +210,7 @@ beforeMount() {
       navigateTo("/");
       this.openPopup = !this.openPopup;
     },
-   openChat() {
+    openChat() {
       this.chatOpen = !this.chatOpen;
     },
     mobileMenuOpen() {
@@ -197,81 +218,94 @@ beforeMount() {
     },
     authListener() {
       const user = localStorage.getItem("jwt");
+      console.log(user)
       if (!user) {
-        return (this.isLoggedIn = false);
+      this.isLoggedIn = false;
       } else {
-        return (this.isLoggedIn = true);
+ this.isLoggedIn = true;
       }
     },
-    async login(data:any) {             
-  try {
-  const res = await userApi.loginUser(data.email,data.password)
-  console.log(res)
-  if (res.jwt){
-    localStorage.setItem('jwt', res.jwt)
-     localStorage.setItem('userData', JSON.stringify(res.user))
-    this.openAuthModal = false;
-  // router.push('/')
-    // user({
-    //   jwt:res.jwt,
-    //   user:res.user
-    // })
-  } else {
-    if(res.error){
-      alert(res.error.message)
-    }
-  
-  }
-   } catch(error) {
-    console.log(error)
-      error = true
-         }
-       },
-       async register(data:any){
+
+    async login(data: any) {
       try {
-     const collectionFav = await favoritesApi.createFavoritesCollection();
-     const collectionBasket = await basketsApi.createBasketCollection();
-     const collectionGiftCard = await giftcardApi.createGiftCardCollection();
-     const collectionOrder = await ordersApi.createOrdersCollection();
-     const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
-     this.openRegModal = false;
-     if(res.jwt){ 
-     localStorage.setItem('jwt', res.jwt);
-     localStorage.setItem('userData', JSON.stringify(res.user));
-    // this.router.push("/");
-  //  this.user({
-  //     jwt:res.jwt,
-  //     user:res.user
-  //   })
-     }else if(res.error){
-    alert(res.error.message)
-     }
-    }
-    catch (err) {
-      console.log(err);
-    }
-},
+        const res = await userApi.loginUser(data.email, data.password);
+        if (res.jwt) {
+          localStorage.setItem("jwt", res.jwt);
+          localStorage.setItem("userData", JSON.stringify(res.user));
+          this.openAuthModal = false;
+          this.userJWT = res.jwt;
+          // router.push('/')
+          // user({
+          //   jwt:res.jwt,
+          //   user:res.user
+          // })
+        } else {
+          if (res.error) {
+            alert(res.error.message);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+        error = true;
+      }
+    },
+
+    async register(data: any) {
+      try {
+        const collectionFav = await favoritesApi.createFavoritesCollection();
+        const collectionBasket = await basketsApi.createBasketCollection();
+        const collectionGiftCard = await giftcardApi.createGiftCardCollection();
+        const collectionOrder = await ordersApi.createOrdersCollection();
+        const res = await userApi.registerUser(
+          data.name,
+          data.surname,
+          data.email,
+          data.password,
+          collectionFav.id,
+          collectionBasket.id,
+          collectionGiftCard.id,
+          collectionOrder.id
+        );
+        this.openRegModal = false;
+        if (res.jwt) {
+          localStorage.setItem("jwt", res.jwt);
+          localStorage.setItem("userData", JSON.stringify(res.user));
+          this.userJWT = res.jwt;
+          // this.router.push("/");
+          //  this.user({
+          //     jwt:res.jwt,
+          //     user:res.user
+          //   })
+        } else if (res.error) {
+          alert(res.error.message);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    },
     signOut() {
       this.$router.push("/");
       localStorage.removeItem("jwt");
       localStorage.removeItem("userData");
-      return (this.userData = null);
+      this.userJWT = "";
+      this.authListener();
+      // return (this.userData = null);
     },
   },
-//   watch: {
-//  userData: async function (){
-//     }, 
+  //   watch: {
+  //  userData: async function (){
+  //     },
 
-//   },
-  watch: {
-    userData: async function checkIsLogged() {
-      this.authListener()
-    }
-  },
+  //   },
+  // watch: {
+  //   user: async function checkIsLogged() {
+  //     this.authListener();
+  //   },
+  // },
 };
 </script>
 <template>
-  <header v-if="!mobileVersion">
+  <header v-if="!mobileVersion" :key="user">
     <div class="header_buttons">
       <TheLanguageButton />
       <button class="sign" v-if="!isLoggedIn" @click="openAuthModal = true">
@@ -284,11 +318,7 @@ beforeMount() {
         Sign Out
       </button>
       <nuxt-link>
-        <button
-          class="profile"
-          v-if="isLoggedIn"
-          @click="navigateTo('/user')"
-        >
+        <button class="profile" v-if="isLoggedIn" @click="navigateTo('/user')">
           Profile
         </button></nuxt-link
       >
@@ -318,12 +348,17 @@ beforeMount() {
         />
       </Teleport>
       <Teleport to="body">
-        <TheChatModal
-          :chatOpen="chatOpen"
-          @close="chatOpen = false"
-        />
+        <TheChatModal :chatOpen="chatOpen" @close="chatOpen = false" />
       </Teleport>
     </div>
+    <Teleport to="body">
+      <TheAuthRequiredModal
+        :openAuthRequiredModal="openAuthRequiredModal"
+        @close="openAuthRequiredModal = false"
+        :authRequiredAuthClick="authRequiredAuthClick"
+        :authRequiredRegClick="authRequiredRegClick"
+      />
+    </Teleport>
     <ul class="nav">
       <li v-for="(item, index) in navScheme1" :key="index">
         <nuxt-link :to="item.navigate">{{ item.title }}</nuxt-link>
@@ -345,10 +380,15 @@ beforeMount() {
         />
         <!-- <img class="search_img" :src="search" alt="search" /> -->
         <img class="search_img" :src="searchDark" alt="search" />
-        <nuxt-link to="basket">
-          <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
-          <img :src="basketDark" alt="basket" class="basket-img" @click="navigateTo('/basket')" />
-        </nuxt-link>
+        <!-- <nuxt-link to="basket"> -->
+        <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
+        <img
+          :src="basketDark"
+          alt="basket"
+          class="basket-img"
+          @click="basketButtonClick"
+        />
+        <!-- </nuxt-link> -->
       </div>
       <div class="contacts_wrapper">
         <!-- <img :src="phone" alt="phone" /> -->
@@ -373,7 +413,9 @@ beforeMount() {
               : 'button'
           "
           @click="
-            item.title === 'Каталог' || item.title === 'Catalog'  ? popUpOpen() : navigateTo(item.navigate)
+            item.title === 'Каталог' || item.title === 'Catalog'
+              ? popUpOpen()
+              : navigateTo(item.navigate)
           "
         >
           {{ item.title }}
@@ -414,11 +456,16 @@ beforeMount() {
     </Teleport>
     <button class="fav_button" @click="openChat">Open Chat</button>
     <Teleport to="body">
-        <TheChatModal
-          :chatOpen="chatOpen"
-          @close="chatOpen = false"
-        />
-      </Teleport>
+      <TheChatModal :chatOpen="chatOpen" @close="chatOpen = false" />
+    </Teleport>
+    <Teleport to="body">
+      <TheAuthRequiredModal
+        :openAuthRequiredModal="openAuthRequiredModal"
+        @close="openAuthRequiredModal = false"
+        :authRequiredAuthClick="authRequiredAuthClick"
+        :authRequiredRegClick="authRequiredRegClick"
+      />
+    </Teleport>
     <img
       class="logo-header"
       :src="logo"
@@ -430,10 +477,15 @@ beforeMount() {
         <input class="search_input" placeholder="Поиск товара" :value="value" />
         <!-- <img class="search_img" :src="search" alt="search" /> -->
         <img class="search_img" :src="searchDark" alt="search" />
-        <nuxt-link to="basket">
-          <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
-          <img :src="basketDark" alt="basket" class="basket-img" @click="navigateTo('/basket')" />
-        </nuxt-link>
+        <!-- <nuxt-link to="basket"> -->
+        <!-- <img :src="basket" alt="basket" @click="navigateTo('/basket')" /> -->
+        <img
+          :src="basketDark"
+          alt="basket"
+          class="basket-img"
+          @click="basketButtonClick"
+        />
+        <!-- </nuxt-link> -->
         <nuxt-link to="favorites">
           <!-- <img
             class="like"
@@ -512,9 +564,9 @@ p {
   align-self: end;
   gap: 10px;
 }
-.basket-img{
-width: 31px;
-height: 31px;
+.basket-img {
+  width: 31px;
+  height: 31px;
 }
 .phone {
   min-width: 140px;
@@ -701,9 +753,9 @@ button:active,
   padding: 7px 33px;
   background-color: rgb(131, 110, 107);
 }
-.dark-mode .basket-img{
-width: 31px;
-height: 31px;
+.dark-mode .basket-img {
+  width: 31px;
+  height: 31px;
 }
 .dark-mode .popup_button {
   background-color: rgb(28, 27, 27);

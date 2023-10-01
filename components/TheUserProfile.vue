@@ -7,9 +7,13 @@ import ok from "../static/images/ok.svg";
 import pen from "../static/images/pen.svg";
 export default {
   created() {
+    // this.getUser();
+    if (this.userData) {
+      this.showUserInfo = true;
+    }
+  },
+  mounted() {
     this.getUser();
-    this.showUserInfo = true;
-    
   },
   beforeUpdate() {
     this.currentLocale = this.$i18n.locale;
@@ -130,7 +134,7 @@ export default {
       console.log(changedData);
     },
     async changeInput(item, value) {
-        item.change = true;
+      item.change = true;
       this.changedData = value;
     },
   },
@@ -144,177 +148,189 @@ export default {
 
 <template>
   <div class="profile_box">
-  <div class="profile_wrapper">
-    <p class="title">{{ $t("profile.title") }}</p>
-    <div class="hello_wrapper">
-      <p class="hello">
-        {{ `${$t("profile.hello")}, ${userData.name} ${userData.surname}  !` }}
-      </p>
-      <img
-        class="hello_image"
-        src="https://www.svgrepo.com/show/402888/waving-hand.svg"
-      />
-    </div>
-    <div class="buttons_wrapper">
-      <button :class="showUserInfo?'show':null"
-        @click="
-          {
-            showUserInfo = !showUserInfo;
-            showAdressInfo = false;
-            showOrdersInfo = false;
-            showReviewsInfo = false;
-          }
-        "
-      >
-      {{ $t("profile.myDetails") }}
-      </button>
-      <button :class="showAdressInfo?'show':null"
-        @click="
-          {
-            showAdressInfo = !showAdressInfo;
-            showUserInfo = false;
-            showOrdersInfo = false;
-            showReviewsInfo = false;
-          }
-        "
-      >
-      {{ $t("profile.myAdresses") }}
-      </button>
-      <button
-      :class="showOrdersInfo?'show':null"
-        @click="
-          {
-            showOrdersInfo = !showOrdersInfo;
-            showUserInfo = false;
-            showAdressInfo = false;
-            showReviewsInfo = false;
-          }
-        "
-      >
-      {{ $t("profile.myOrders") }}
-      </button>
-      <button
-      :class="showReviewsInfo?'show':null"
-        @click="
-          {
-            showReviewsInfo = !showReviewsInfo;
-            showUserInfo = false;
-            showAdressInfo = false;
-            showOrdersInfo = false;
-          }
-        "
-      >
-      {{ $t("profile.myReviews") }}
-      </button>
-    </div>
-    <p v-show="showUserInfo" class="subtitle">{{ $t("profile.myDetails") }}</p>
-    <div class="info_wrapper adress_info" v-show="showUserInfo">
-      <div v-for="(item, index) in userInfo" :key="index" class="user_item">
-        <label>{{ item.label }}</label>
-        <!-- :value="item.data" -->
-        <div class="input_wrapper">
-          <input
-            :placeholder="item.data"
-            @input="(event) => changeInput(item, event.target.value)"
-          />
-          <img
-            v-show="item.change && changedData"
-            @click="changeUserInfo(item.field, item)"
-            :src="ok"
-          />
-          <img v-show="!item.change || changedData === ''" :src="pen" />
-        </div>
-      </div>
-    </div>
-    <!-- </div> -->
-    <p v-show="showAdressInfo" class="subtitle">{{ $t("profile.myAdresses") }}</p>
-    <div class="info_wrapper adress_info" v-show="showAdressInfo">
-      <div
-        v-for="(item, index) in userAdress"
-        :key="index"
-        v-if="userData.adresses"
-        class="user_item"
-      >
-        <label>{{ item.label }}</label>
-        <div class="input_wrapper">
-          <input
-            :placeholder="item.data"
-            @change="(event) => changeInput(item, event.target.value)"
-
-          />
-          <img
-            v-show="item.change && changedData"
-            @click="changeAdressInfo(item.field, item)"
-            :src="ok"
-          />
-          <img v-show="!item.change || changedData === ''" :src="pen" />
-        </div>
-      </div>
-      <p v-if="!userData.adresses">"Add adress"</p>
-    </div>
-    <p v-show="showOrdersInfo" class="subtitle">{{ $t("profile.myOrders") }}</p>
-    <div class="grid_wrapper info_wrapper" v-show="showOrdersInfo">
-      <p class="orders">{{ $t("profile.orders") }}</p>
-      <p class="status">{{ $t("profile.status") }}</p>
-    </div>
-    <div
-      v-for="(item, index) in ordersList"
-      :key="index"
-      class="grid_wrapper info_wrapper"
-      v-show="showOrdersInfo"
-    >
-      <div class="order_info">
-        <p>Name: {{ item.attributes.name }}</p>
-        <p>Phone: {{ item.attributes.phone }}</p>
-        <p>Email: {{ item.attributes.email }}</p>
-        <p v-show="item.attributes.comment">
-          Comment: {{ item.attributes.comment }}
+    <div class="profile_wrapper">
+      <p class="title">{{ $t("profile.title") }}</p>
+      <div class="hello_wrapper">
+        <p class="hello">
+          {{
+            `${$t("profile.hello")}, ${userData.name} ${userData.surname}  !`
+          }}
         </p>
-        <p>Delivery: {{ item.attributes.delivery }}</p>
-        <p>Price: {{ item.attributes.price }} p.</p>
-        <p>Pay: {{ item.attributes.pay }}</p>
-        <button class="order_button" @click="openOrderModal = true">
-          Products
-        </button>
-        <Teleport to="body">
-          <TheOrderModal
-            :openOrderModal="openOrderModal"
-            @close="openOrderModal = false"
-            :items="modalOrderList"
-            :orderTitle="`${$t('order')} ${item.id}`"
-          />
-        </Teleport>
+        <img
+          class="hello_image"
+          src="https://www.svgrepo.com/show/402888/waving-hand.svg"
+        />
       </div>
-      <!-- {{ item }} -->
-      <p class="order_status">В обработке</p>
-    </div>
+      <div class="buttons_wrapper">
+        <button
+          :class="showUserInfo ? 'show' : null"
+          @click="
+            {
+              showUserInfo = !showUserInfo;
+              showAdressInfo = false;
+              showOrdersInfo = false;
+              showReviewsInfo = false;
+            }
+          "
+        >
+          {{ $t("profile.myDetails") }}
+        </button>
+        <button
+          :class="showAdressInfo ? 'show' : null"
+          @click="
+            {
+              showAdressInfo = !showAdressInfo;
+              showUserInfo = false;
+              showOrdersInfo = false;
+              showReviewsInfo = false;
+            }
+          "
+        >
+          {{ $t("profile.myAdresses") }}
+        </button>
+        <button
+          :class="showOrdersInfo ? 'show' : null"
+          @click="
+            {
+              showOrdersInfo = !showOrdersInfo;
+              showUserInfo = false;
+              showAdressInfo = false;
+              showReviewsInfo = false;
+            }
+          "
+        >
+          {{ $t("profile.myOrders") }}
+        </button>
+        <button
+          :class="showReviewsInfo ? 'show' : null"
+          @click="
+            {
+              showReviewsInfo = !showReviewsInfo;
+              showUserInfo = false;
+              showAdressInfo = false;
+              showOrdersInfo = false;
+            }
+          "
+        >
+          {{ $t("profile.myReviews") }}
+        </button>
+      </div>
+      <p v-show="showUserInfo" class="subtitle">
+        {{ $t("profile.myDetails") }}
+      </p>
+      <div class="info_wrapper adress_info" v-show="showUserInfo">
+        <div v-for="(item, index) in userInfo" :key="index" class="user_item">
+          <label>{{ item.label }}</label>
+          <!-- :value="item.data" -->
+          <div class="input_wrapper">
+            <input
+              :placeholder="item.data"
+              @input="(event) => changeInput(item, event.target.value)"
+            />
+            <img
+              v-show="item.change && changedData"
+              @click="changeUserInfo(item.field, item)"
+              :src="ok"
+            />
+            <img v-show="!item.change || changedData === ''" :src="pen" />
+          </div>
+        </div>
+      </div>
+      <!-- </div> -->
+      <p v-show="showAdressInfo" class="subtitle">
+        {{ $t("profile.myAdresses") }}
+      </p>
+      <div class="info_wrapper adress_info" v-show="showAdressInfo">
+        <div
+          v-for="(item, index) in userAdress"
+          :key="index"
+          v-if="userData.adresses"
+          class="user_item"
+        >
+          <label>{{ item.label }}</label>
+          <div class="input_wrapper">
+            <input
+              :placeholder="item.data"
+              @change="(event) => changeInput(item, event.target.value)"
+            />
+            <img
+              v-show="item.change && changedData"
+              @click="changeAdressInfo(item.field, item)"
+              :src="ok"
+            />
+            <img v-show="!item.change || changedData === ''" :src="pen" />
+          </div>
+        </div>
+        <p v-if="!userData.adresses">"Add adress"</p>
+      </div>
+      <p v-show="showOrdersInfo" class="subtitle">
+        {{ $t("profile.myOrders") }}
+      </p>
+      <div class="grid_wrapper info_wrapper" v-show="showOrdersInfo">
+        <p class="orders">{{ $t("profile.orders") }}</p>
+        <p class="status">{{ $t("profile.status") }}</p>
+      </div>
+      <div
+        v-for="(item, index) in ordersList"
+        :key="index"
+        class="grid_wrapper info_wrapper"
+        v-show="showOrdersInfo"
+      >
+        <div class="order_info">
+          <p>Name: {{ item.attributes.name }}</p>
+          <p>Phone: {{ item.attributes.phone }}</p>
+          <p>Email: {{ item.attributes.email }}</p>
+          <p v-show="item.attributes.comment">
+            Comment: {{ item.attributes.comment }}
+          </p>
+          <p>Delivery: {{ item.attributes.delivery }}</p>
+          <p>Price: {{ item.attributes.price }} p.</p>
+          <p>Pay: {{ item.attributes.pay }}</p>
+          <button class="order_button" @click="openOrderModal = true">
+            Products
+          </button>
+          <Teleport to="body">
+            <TheOrderModal
+              :openOrderModal="openOrderModal"
+              @close="openOrderModal = false"
+              :items="modalOrderList"
+              :orderTitle="`${$t('order')} ${item.id}`"
+            />
+          </Teleport>
+        </div>
+        <!-- {{ item }} -->
+        <p class="order_status">В обработке</p>
+      </div>
 
-    <div class="info_wrapper" v-show="showReviewsInfo">
-      <p v-show="showReviewsInfo" class="subtitle">{{ $t("profile.myReviews") }}</p>
+      <div class="info_wrapper" v-show="showReviewsInfo">
+        <p v-show="showReviewsInfo" class="subtitle">
+          {{ $t("profile.myReviews") }}
+        </p>
+      </div>
     </div>
   </div>
-</div>
 </template>
 <style scoped>
 /*DarkMode*/
-.dark-mode .profile_wrapper{
- background-color: rgb(28, 27, 27);
+.dark-mode .profile_wrapper {
+  background-color: rgb(28, 27, 27);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
-.dark-mode .info_wrapper{
- background-color: rgb(52, 49, 49);
+.dark-mode .info_wrapper {
+  background-color: rgb(52, 49, 49);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
-.dark-mode .grid_wrapper{
+.dark-mode .grid_wrapper {
   background-color: rgb(73, 70, 70);
- border: none;
+  border: none;
   background-color: transparent;
-  color:rgb(114, 95, 91);
+  color: rgb(114, 95, 91);
 }
-.dark-mode .order_info, .dark-mode .order_status{
- background-color: rgb(52, 49, 49);
+.dark-mode .order_info,
+.dark-mode .order_status {
+  background-color: rgb(52, 49, 49);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
@@ -327,18 +343,17 @@ export default {
 .dark-mode input::placeholder {
   color: rgb(135, 130, 130);
 }
-.dark-mode button{
+.dark-mode button {
   background-color: transparent;
   color: rgb(181, 173, 173);
 }
-.dark-mode .order_button{
+.dark-mode .order_button {
   background-color: rgb(73, 71, 71);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
 .dark-mode button:active,
-.dark-mode button:hover
-{
+.dark-mode button:hover {
   background-color: rgb(131, 110, 107);
 }
 
@@ -359,7 +374,7 @@ export default {
   margin: 5% auto;
 }
 
-.profile_box{
+.profile_box {
   min-height: 570px;
 }
 .input_wrapper {
@@ -471,4 +486,19 @@ button:active {
 .orders {
   background-color: yellow;
 } */
+@media (max-width: 650px) {
+  .grid_wrapper {
+    display: grid;
+    width: 100%;
+    grid-template-columns: repeat(auto-fit, minmax(156px, 1fr));
+    grid-auto-flow: dense;
+    grid-gap: 10px;
+    border-radius: 20px;
+  }
+  .buttons_wrapper{
+    display: flex;
+flex-wrap: wrap;
+justify-content: center;
+  }
+}
 </style>

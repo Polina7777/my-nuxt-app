@@ -1,38 +1,42 @@
 <script lang="ts" setup>
 const props = defineProps({
- openAuthRequiredModal: Boolean,
-
-})
+  openAuthRequiredModal: Boolean,
+  authRequiredAuthClick: Function,
+  authRequiredRegClick: Function,
+});
+// :openAuthModal="openAuthModal" :openRegModal="openRegModal" :closeModal="closeModal"
 </script>
 <template>
   <Transition name="modal">
     <div v-if="openAuthRequiredModal" class="modal-mask">
       <div class="modal-container">
         <div class="modal-header">
-            <button
-              class="modal-default-button"
-              @click="$emit('close')"
-            >x</button>
+          <button class="modal-default-button" @click="$emit('close')">
+            x
+          </button>
           <!-- <slot name="header">default header</slot> -->
         </div>
         <div class="modal-body">
-            <slot name="body">
-        <TheAuthRequiredForm/>
-   </slot>
+          <slot name="body">
+            <TheAuthRequiredForm
+            :authRequiredAuthClick="authRequiredAuthClick"
+          :authRequiredRegClick="authRequiredRegClick"
+            />
+          </slot>
         </div>
       </div>
     </div>
   </Transition>
 </template>
 <style scoped>
-.dark-mode .modal-mask{
-  background-color:  rgba(143, 143, 143, 0.591);
+.dark-mode .modal-mask {
+  background-color: rgba(143, 143, 143, 0.591);
 }
-.dark-mode .modal-container{
- background-color: rgb(22, 22, 22);
- border: 1px solid rgb(71, 70, 70);
+.dark-mode .modal-container {
+  background-color: rgb(22, 22, 22);
+  border: 1px solid rgb(71, 70, 70);
 }
-.dark-mode .modal-default-button{
+.dark-mode .modal-default-button {
   background-color: transparent;
   color: rgb(181, 173, 173);
 }
@@ -55,7 +59,7 @@ const props = defineProps({
   padding: 5px 10px;
   height: 35px;
   border: 2px solid#b49696;
-  background-color: #efd9d9 ;
+  background-color: #efd9d9;
   border-radius: 10px;
   color: #b49696;
   font-size: 1rem;
@@ -65,13 +69,13 @@ const props = defineProps({
 
 .modal-container {
   position: absolute;
-  background-color: #ffffff ;
+  background-color: #ffffff;
   border-radius: 10px;
   margin: auto;
   gap: 0;
   z-index: 1000;
 }
-.modal-container{
+.modal-container {
   width: 50%;
 }
 .close {
@@ -83,7 +87,7 @@ const props = defineProps({
   color: gray;
   z-index: 100;
 }
-li{
+li {
   text-align: start;
 }
 .modal-default-button {
@@ -92,7 +96,7 @@ li{
   /* border: 2px solid #d7b5b5;
   background-color: #d7b5b5; */
   border-radius: 10px;
-  color:  #d7b5b5;
+  color: #d7b5b5;
   font-size: 15px;
 }
 a {
@@ -142,8 +146,8 @@ button:hover {
   color: #efe1e1;
 }
 @media (max-width: 640px) {
-  .modal-container{
-width: 70%;
-}
+  .modal-container {
+    width: 70%;
+  }
 }
 </style>

@@ -38,40 +38,10 @@ const props = defineProps({
 
 
   
-  <!-- <script setup>
-//   export default {
-    const props = defineProps({
- chatOpen: Boolean,
-//   user:Function,
-})
-//     data() {
-//       return {
-//         isOpen: false,
-//         message: '',
-//       };
-//     },
-//     methods: {
-//       openChat() {
-//         this.isOpen = true;
-//       },
-//       closeChat() {
-//         this.isOpen = false;
-//       },
-//       sendMessage() {
-//         // Здесь вы можете добавить логику отправки сообщения
-//         const messageText = this.message;
-//         // Очищаем поле ввода после отправки сообщения
-//         this.message = '';
-//         // Добавляем логику отправки сообщения в чат
-//       },
-//     },
-//   };
-  </script> -->
-  
   <style scoped>
-  .dark-mode .modal-mask{
+  /* .dark-mode .modal-mask{ */
     /* background-color:  rgba(143, 143, 143, 0.591); */
-  }
+  /* } */
   .dark-mode .modal-container{
    /* background-color: rgb(22, 22, 22); */
    background-color: rgb(70, 68, 68);
@@ -88,12 +58,12 @@ const props = defineProps({
     z-index: 9998;
     top: 0;
     left: 0;
-    /* width: 100%;
-    height: 100%; */
+    width: 100%;
+    height: 100%;
     width: 300px;
     height: 300px;
-    left: 45%;
-    top: 41%;
+    /* left: 45%;
+    top: 41%; */
     /* background-color: rgba(201, 171, 171, 0.472); */
     display: flex;
     justify-content: center;

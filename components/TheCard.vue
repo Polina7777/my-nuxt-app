@@ -43,7 +43,6 @@ export default {
     async getUser() {
       this.userInfo = JSON.parse(localStorage.getItem("userData"));
       if(this.userInfo){
-        console.log(this.userInfo.id)
       const user = await userApi.getUsersById(this.userInfo?.id);
       this.userData = user;
       this.getUsersFavoritesList();
@@ -236,9 +235,7 @@ export default {
   },
 };
 </script>
-<!-- @click="navigateTo(`/${card?.id}?title=${card?.attributes.description_small}`)" -->
-<!-- :to="`/${card?.id}`" -->
-<!-- src="https://www.svgrepo.com/show/408364/heart-love-like-favorite.svg" -->
+
 <template>
   <div class="card_wrapper">
     <button class="button_like" @click="likeClick">

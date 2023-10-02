@@ -98,6 +98,11 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::adress.adress"
+    },
+    "reviews": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::review.review"
     }
   }
 }

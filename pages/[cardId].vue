@@ -21,14 +21,12 @@ return  this.$i18n.locale;
         info:null,
         route:useRoute(),
         currentLocale: this.$i18n.locale,
+         reviewsData:null,
     }
 },
 methods:{
    async getCardData(){
-      // console.log('in cardId')
-      // console.log(this.$i18n.locale)
       const cardInfo = await productsApi.getProductsById(this.route.params.cardId,this.$i18n.locale );
-   console.log(cardInfo)
    this.info = cardInfo;
    }
 
@@ -40,7 +38,7 @@ watch: {
   // },
   currentLocal: async function(){
     this.getCardData()
-  }
+  },
 }
 }
 </script>

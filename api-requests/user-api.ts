@@ -108,6 +108,30 @@ export const setBasketCollectionForUser = async (id: string, collection: any,tok
     }
     return data
 };
+export const setReviewForUser = async (id: string, reviewId: any,token: any) => {
+
+    console.log(token,'token')
+    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          basket: {
+            connect: [reviewId],
+          },
+        },
+      }),
+    });
+    const data = await response.json();
+    if(data.error){
+      return data.error
+    }
+    return data
+};
+
 
 export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any) => {
   const username = `${name} ${surname}`
@@ -178,4 +202,4 @@ export const userBearer = async (jwt: any,user: { id: any; })=>{
   return data;
 }
 
-export const userApi = { getUsers,changeUserData, getUsersById,setFavoritesCollectionForUser ,registerUser,loginUser,userBearer};
+export const userApi = { getUsers,changeUserData, getUsersById,setFavoritesCollectionForUser,setReviewForUser,registerUser,loginUser,userBearer};

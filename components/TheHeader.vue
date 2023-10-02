@@ -194,7 +194,6 @@ updated() {
       this.openPopup = false;
       this.showMobileMenu = false;
       this.internalPopUpValue = data;
-      console.log(this.internalPopUpValue);
       this.$emit("click", this.internalPopUpValue);
     },
     updateClickPopUpValue(data: string) {
@@ -218,7 +217,6 @@ updated() {
     },
     authListener() {
       const user = localStorage.getItem("jwt");
-      console.log(user)
       if (!user) {
       this.isLoggedIn = false;
       } else {

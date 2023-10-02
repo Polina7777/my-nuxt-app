@@ -1,11 +1,10 @@
 <script lang="ts">
 import { productsApi } from "../api-requests/products-api";
-import { productsEnApi } from "../api-requests/products-api-en";
 import { IBasketCard } from "../static/interfaces";
 export default {
   props: {
     card: Object,
-    id:Number
+    id:Number,
   },
   created() {
     this.getTheSameProductsList();
@@ -46,9 +45,9 @@ export default {
       currentLocale:this.$i18n.locale,
        route:useRoute(),
        router:useRouter(),
-      // info:this.card,
       cardId:this.id,
        info:null,
+       reviewsData:null
     };
   },
 
@@ -84,8 +83,8 @@ export default {
       console.log('in bigcard',this.id,this.cardId)
       // const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id,this.$i18n.locale );
       const cardInfo = await productsApi.getProductsById(this.id,this.$i18n.locale );
-      console.log(cardInfo)
    this.info = cardInfo;
+   this.reviewsData = cardInfo.attributes.reviews.data;
    },
  
     increaseQuantity(item:IBasketCard) {
@@ -112,6 +111,7 @@ export default {
     },
   },
   watch: {
+  
 //     currentLocale: async function(){
 // //  this.getTheSameProductsList();
 //   this.getCardData(this.id);
@@ -197,7 +197,8 @@ export default {
       </p>
     </div>
   </div>
-  <TheList :titleProps=" $t('bigCardOther')" :itemList="sameProductsList" />
+  <TheReviewList :productId="id" :card="card" :getCardData="getCardData" :key="reviewsData"/>
+  <!-- <TheList :titleProps=" $t('bigCardOther')" :itemList="sameProductsList" /> -->
 </template>
 
 <style scoped>
@@ -253,7 +254,7 @@ export default {
   margin: 0 auto;
   width: 71%;
   padding-top: 70px;
-  color: rgb(218, 197, 189);
+  /* color: rgb(218, 197, 189); */
 }
 
 .count_buttons,
@@ -295,14 +296,8 @@ button{
 .dark-mode .box_button:active{
   background: transparent;
   font-size: 27px;
+  color: rgb(123, 119, 119);
 }
-/* .count_buttons:hover,
-.count_buttons:active,
-.button:hover,
-.button:active {
-  background:  rgb(6, 89, 89);
-} */
-
 .description_small {
   width: 80%;
   font-size: 23px;

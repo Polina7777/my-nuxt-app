@@ -84,18 +84,17 @@ export const filterProductsByPopUpFilter = async(string:string,locale:any)=>{
 export const getProductsById = async(id:string,locale:any)=>{
     // const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`,{method:'GET'});
     if(locale === 'ru'){
-      const response = await fetch(`${url_ngrok}api/products/${id}`,{method:'GET'});
+      const response = await fetch(`${url_ngrok}api/products/${id}/?populate=*`,{method:'GET'});
       const data = await response.json();
       const product = data.data
       return product;
     }else{
-      const response = await fetch(`${url_ngrok}api/products/${id}?populate=localizations`,{method:'GET'});
+      // const response = await fetch(`${url_ngrok}api/products/${id}?populate=localizations`,{method:'GET'});
+      const response = await fetch(`${url_ngrok}api/products/${id}?populate=*`,{method:'GET'});
       const data = await response.json();
       const product = data.data.attributes.localizations.data;
       return product[0];
     }
-    
-
 }
 export const getProductsBySmallDescription = async(title:string,locale:any)=>{
   const response = await fetch(`${url_ngrok}api/products?locale=${locale}&filters[description_small][$containsi]=${title}`,{method:'GET'});

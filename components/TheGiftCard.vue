@@ -66,10 +66,7 @@ export default {
 
     },
     async addToBacket() {
-      console.log(this.userInfo)
       const giftcard = await giftcardApi.createNewGiftCard(this.giftCardInfo);
-      console.log(giftcard.id)
-      console.log(this.userData)
       if(giftcard){
         const addGiftCardToCollection = await giftcardApi.setGiftCardToCollection(this.userData.giftcard_collection.id, giftcard)
       const addGiftCardToBasket = await basketsApi.setBasketGiftCard(this.userData.basket.id,giftcard)
@@ -145,7 +142,6 @@ export default {
               "
               @click="subtitleClick(subtext4)"
             >
-              <!-- {{ subtext4 }} -->
               {{ $t('giftcardInputSubtext4') }}
             </p>
           </div>
@@ -163,7 +159,6 @@ export default {
           />
         </div>
         <p class="title">{{ $t('giftcardInputTitle4') }}</p>
-        <!-- <p class="title">{{ text4 }}</p> -->
         <input
           class="wide"
           type="text"
@@ -171,7 +166,6 @@ export default {
           v-model="giftCardInfo.giftcardText"
         />
         <button class="basket_button" @click="addToBacket">
-          <!-- {{ addText }} -->
           {{ $t('giftCardAdd') }}
         </button>
       </div>
@@ -191,12 +185,10 @@ export default {
   color: rgb(103, 101, 101);
 }
 .dark-mode input::placeholder {
-  /* color: rgb(103, 101, 101); */
   color: rgb(181, 173, 173);
 }
 .dark-mode p{
   color: rgb(181, 173, 173);
-/* color: rgb(103, 101, 101); */
 }
 .dark-mode button{
   background-color: rgb(28, 27, 27);

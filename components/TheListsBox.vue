@@ -13,13 +13,7 @@ export default {
     this.getSaleProducts();
     this.getNewProducts();
     this.getBestsellerProducts();
-    // console.log(this.currentLocale)
   },
-  // beforeUpdate(){
-  //   this.getSaleProducts();
-  //   this.getNewProducts();
-  //   this.getBestsellerProducts();
-  // },
 beforeUpdate(){
   this.currentLocale =  this.$i18n.locale
 },
@@ -30,7 +24,7 @@ beforeUpdate(){
         productsListBestseller:[],
         filter:filter,
         openFilterModal:this.openFiltersModal,
-        currentLocale: this.$i18n.locale, // Сохраняем текущий язык в data компонента
+        currentLocale: this.$i18n.locale,
   
     };
   },
@@ -54,12 +48,9 @@ beforeUpdate(){
       this.openFilterModal = !this.openFilterModal;
     },
     handleLocaleChange() {
-      // Вызывайте здесь вашу логику, которую вы хотите выполнить при изменении локализации.
-      // Например, перерисовка компонента или обновление данных.
-      // this.currentLocale = newLocale;
       this.getSaleProducts();
     this.getNewProducts();
-    this.getBestsellerProducts(); // Пример: загрузка данных заново
+    this.getBestsellerProducts(); 
     },
   },
   watch: {

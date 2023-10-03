@@ -1,12 +1,10 @@
 <script lang="ts">
-import { data } from "../static/data";
 export default {
   props: {
     openPopup: Boolean,
     updatePopUpValue: Function,
   },
   emits: ["close"],
-  mounted() {},
   data() {
     return {
       // face: data.face,

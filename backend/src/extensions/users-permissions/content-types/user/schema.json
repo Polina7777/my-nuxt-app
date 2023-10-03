@@ -103,6 +103,22 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::review.review"
+    },
+    "avatar": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "review_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::review-collection.review-collection"
     }
   }
 }

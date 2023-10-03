@@ -1,22 +1,27 @@
-<script setup>
+<script >
 import { productsApi } from '../api-requests/products-api';
 import place from '../static/images/place.svg'
 // const props = defineProps({
 // productsListSale:Array
 // })
-const props = defineProps(['productsListBestSeller'])
+// const props = defineProps(['productsListBestSeller'])
 
-// async function getSaleProducts() {
-//     const saleProducts = await productsApi.getAllSaleProducts('',this.$i18n.locale );
-//       productsListSale = saleProducts;
-//     };
-// 
-// console.log(list)
+export default{
+  created(){
+this.getSaleProducts()
+  },
+  data(){
+    return{
+      slides:[],
 
-const list = ref(props.productsListBestSeller)._value;
-// const list = props.productsListBestSeller;
-const data = [{item:'a'},{item:'b'},{item:'c'},{item:'d'}];
-const slides = ref(Array.from(list, (item,index) => {
+    }
+  },
+  methods:{
+    async getSaleProducts() {
+    const saleProducts = await productsApi.getAllSaleProducts('',this.$i18n.locale );
+    console.log(saleProducts)
+      // productsListSale = saleProducts;
+      this.slides = ref(Array.from(saleProducts, (item,index) => {
   const r = Math.floor(Math.random() * 256)
   const g = Math.floor(Math.random() * 256)
   const b = Math.floor(Math.random() * 256)
@@ -28,11 +33,22 @@ const slides = ref(Array.from(list, (item,index) => {
     color:'color: rgb(103, 101, 101)',
     bg: `black`, color: contrast, data:item  }
 }))
+console.log(this.slides,'slides')
+    },
+  }
+}
+
+
+// const list = props.productsListBestSeller
+// const list = props.productsListBestSeller;
+
+
 
 </script>
 
 <template>
-  <div v-if="productsListBestSeller.length">
+ <!-- v-if="productsListBestSeller.length" -->
+  <div>
     <h2> {{ $t('listsTitle3') }} </h2>
         <hr>
     <Swiper
@@ -56,7 +72,7 @@ const slides = ref(Array.from(list, (item,index) => {
         }
       }"
     >
-      <SwiperSlide
+      <!-- <SwiperSlide
         v-for="(slide, idx) in slides"
         :key="idx"
        class="slide"
@@ -65,7 +81,7 @@ const slides = ref(Array.from(list, (item,index) => {
       <img :src="place" alt="place" class="place"/>
         <TheCard :card="slide.data"/>
     </div>
-      </SwiperSlide>
+      </SwiperSlide> -->
 
       <!-- useSwiper() within a swiper instance -->
       <TheSwiperControls />

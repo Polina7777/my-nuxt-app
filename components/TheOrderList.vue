@@ -58,7 +58,6 @@ export default {
 /*DarkMode*/
 
 .dark-mode .title, .dark-mode .show_more, .dark-mode .no-result{
-  /* color: #b49696; */
   color: rgb(121, 119, 119);
 }
 .dark-mode li{

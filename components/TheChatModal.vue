@@ -60,8 +60,8 @@ const props = defineProps({
     left: 0;
     width: 100%;
     height: 100%;
-    width: 300px;
-    height: 300px;
+    /* width: 300px;
+    height: 300px; */
     /* left: 45%;
     top: 41%; */
     /* background-color: rgba(201, 171, 171, 0.472); */

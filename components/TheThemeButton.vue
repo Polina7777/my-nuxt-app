@@ -1,9 +1,6 @@
 <script>
 
 export default {
-//   beforeMount(){
-// this.language='ru'
-//   },
   data(){
     return{
     theme:'light'

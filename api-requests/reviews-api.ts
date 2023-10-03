@@ -5,12 +5,49 @@ export const getAllReviewCollections = async(locale:any)=>{
     const data = await response.json();
     const reviews = data.data
     return reviews;
-}
+} 
+
+export const createReviewsCollection = async () => {
+  const response = await fetch(`${url_ngrok}api/review-collections`, {
+    headers:{
+      "Content-Type": "application/json",
+      },
+    method: "POST",
+    body: JSON.stringify({
+      data: {
+        reviews: {
+        },
+      },
+    }),
+  });
+  const data = await response.json();
+  const collection = data.data
+ return collection
+};
+
+export const setReviewToReviewsCollection = async (id: string, reviewId: any) => {
+  try {
+    const response = await fetch(`${url_ngrok}api/review-collections/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+         reviews: {
+            connect: [reviewId],
+          },
+        },
+      }),
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
 export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
     const response = await fetch(`${url_ngrok}api/review-collections?populate=*&locale=${locale}&filters[product_id][$eq]=${productId}`,{method:'GET'});
     const data = await response.json();
     const reviews = data.data[0].attributes
-    // console.log(reviews)
     return reviews;
 }
   export const getAllReviewCollectionById = async(id:string,locale:any)=>{
@@ -84,7 +121,6 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
     }
   };
   export const setReviewToUser = async (id: string, userId: any,token:any) => {
-    // const reviewId = review.id;
     try {
       const response = await fetch(`${url_ngrok}api/reviews/${id}`, {
         headers:{
@@ -99,7 +135,6 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
           },
         }),
       });
-      console.log(await response.json())
       const response2 = await fetch(`${url_ngrok}api/users/${userId}`, {
         headers:{
         "Content-Type": "application/json",
@@ -114,10 +149,9 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
           },
         }),
       });
-      console.log(await response2.json())
     } catch (error) {
       console.log(error);
     }
   };
 
-  export const reviewApi = {getAllReviewCollections,getAllReviewCollectionById,getReviewCollectionByProductId,createNewReview,setReview,setReviewToUser}
+  export const reviewApi = {getAllReviewCollections,getAllReviewCollectionById,getReviewCollectionByProductId,createNewReview,setReview,setReviewToUser,createReviewsCollection,setReviewToReviewsCollection}

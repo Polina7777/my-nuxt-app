@@ -25,6 +25,7 @@ import { favoritesApi } from "../api-requests/favorites-api";
 import { basketsApi } from "../api-requests/basket-api";
 import { giftcardApi } from "../api-requests/giftcard-api";
 import { ordersApi } from "../api-requests/orders-api";
+import { reviewApi } from "../api-requests/reviews-api";
 
 export default {
   props: {
@@ -254,6 +255,7 @@ updated() {
         const collectionBasket = await basketsApi.createBasketCollection();
         const collectionGiftCard = await giftcardApi.createGiftCardCollection();
         const collectionOrder = await ordersApi.createOrdersCollection();
+        const collectionReviews = await reviewApi.createReviewsCollection();
         const res = await userApi.registerUser(
           data.name,
           data.surname,
@@ -262,7 +264,8 @@ updated() {
           collectionFav.id,
           collectionBasket.id,
           collectionGiftCard.id,
-          collectionOrder.id
+          collectionOrder.id,
+          collectionReviews.id
         );
         this.openRegModal = false;
         if (res.jwt) {
@@ -290,20 +293,11 @@ updated() {
       // return (this.userData = null);
     },
   },
-  //   watch: {
-  //  userData: async function (){
-  //     },
-
-  //   },
-  // watch: {
-  //   user: async function checkIsLogged() {
-  //     this.authListener();
-  //   },
-  // },
 };
 </script>
 <template>
-  <header v-if="!mobileVersion" :key="user">
+  <!-- :key="user" -->
+  <header v-if="!mobileVersion" >
     <div class="header_buttons">
       <TheLanguageButton />
       <button class="sign" v-if="!isLoggedIn" @click="openAuthModal = true">
@@ -313,7 +307,7 @@ updated() {
         Sign Up
       </button>
       <button class="sign" v-if="isLoggedIn" @click="signOut()">
-        Sign Out
+        Log Out
       </button>
       <nuxt-link>
         <button class="profile" v-if="isLoggedIn" @click="navigateTo('/user')">

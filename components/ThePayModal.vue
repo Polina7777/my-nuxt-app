@@ -2,8 +2,6 @@
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { ordersApi } from "../api-requests/orders-api";
 
-const title = "Оплата картой";
-const subtitle = "К оплате";
 const route = useRoute();
 const router = useRouter();
 const schema = {

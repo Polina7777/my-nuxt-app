@@ -6,8 +6,6 @@ export default {
   props: {
     titleProps: String,
     itemList: Array,
-    // openFiltersModal: Boolean,
-  user:Function,
   filterListByFiltersForm:Function,
   },
   updated() {
@@ -29,7 +27,6 @@ export default {
       sortAsc: false,
       filter:filter,
       openFilterModal:false,
-    // productsList:this.itemList
     };
   },
   methods: {
@@ -49,8 +46,6 @@ export default {
       this.openFilterModal = !this.openFilterModal;
     },
     async sortCardList() {
-      // this.loading = true
-      // this.error = false
       try {
         let sortList
         if (this.sortAsc) {

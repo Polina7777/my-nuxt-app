@@ -3,21 +3,11 @@ export default {
   props: {
     amount:Number|String
   },
-  data() {
-    return {
-        text: "Стоимость",
-      string1: "Товары .................................. ",
-      string2: "Скидка .................................. ",
-      string3: "Итого ................................... ",
-      
-    };
-  },
 };
 </script>
 <template>
   <div class="amount_box">
     <p class="title">{{ $t('basketTitle')}}</p>
-    <!-- <p class="title">{{ text }}</p> -->
     <div>
       <p>{{ `${$t('basketString1')} ${amount} p.` }}</p>
       <p>{{ `${$t('basketString2')}    0 p.` }}</p>

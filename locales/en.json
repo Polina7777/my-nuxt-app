@@ -230,6 +230,11 @@
     "filter":"Filter",
     "from":"From:",
     "to":"To:"
+},
+"reviews":{
+    "title":"Product reviews",
+    "noReviews":"No reviews!",
+    "addReview":"Add review"
 }
 
 }

@@ -3,9 +3,6 @@
 const props = defineProps({
     openReviewModal: Boolean,
     createReview:Function,
-
-//  login:Function,
-//   user:Function,
 })
 </script>
 <template>
@@ -17,7 +14,6 @@ const props = defineProps({
               class="modal-default-button"
               @click="$emit('close')"
             >x</button>
-          <!-- <slot name="header">default header</slot> -->
         </div>
         <div class="modal-body">
             <slot name="body">

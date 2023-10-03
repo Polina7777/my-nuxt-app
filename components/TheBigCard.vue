@@ -8,28 +8,8 @@ export default {
   },
   created() {
     this.getTheSameProductsList();
-  // this.getCardData()
   },
-//   beforeUpdate(){
-//   this.currentLocale =  this.$i18n.locale
-// },
-// updated() {
-//    this.currentLocale = this.$i18n.locale;
-  
-// },
-// computed:{
-//   currentLocal(){
-// return  this.$i18n.locale;
-//   }
-// // },
-// beforeMount() {
-//   this.currentLocale =  this.$i18n.locale
-// },
-// computed:{
-//   cardId(){
-// return  this.$i18n.locale;
-//   }
-// },
+
   data() {
     return {
        addText: "В корзину",
@@ -47,7 +27,7 @@ export default {
        router:useRouter(),
       cardId:this.id,
        info:null,
-       reviewsData:null
+       reviewsData:this.card?.attributes.reviews.data
     };
   },
 
@@ -80,10 +60,9 @@ export default {
       this.sameProductsList = list;
     },
     async getCardData(){
-      console.log('in bigcard',this.id,this.cardId)
-      // const cardInfo = await productsApi.getProductsById(this.cardNew.product?.id,this.$i18n.locale );
       const cardInfo = await productsApi.getProductsById(this.id,this.$i18n.locale );
    this.info = cardInfo;
+   console.log(cardInfo)
    this.reviewsData = cardInfo.attributes.reviews.data;
    },
  
@@ -110,26 +89,10 @@ export default {
       }
     },
   },
-  watch: {
-  
-//     currentLocale: async function(){
-// //  this.getTheSameProductsList();
-//   this.getCardData(this.id);
-//     }, 
-  // id:async function(){
-  //   console.log(this.id,'bbjbh')
-  //   // this.getCardData();
-  //   const cardInfo = await productsApi.getProductsById(this.id,this.$i18n.locale );
-  //     console.log(cardInfo)
-  //  this.info = cardInfo;
-  // }
-  },
 };
 </script>
-<!-- :key="currentLocale" -->
 <template>
-  <!-- {{ card }} -->
-  <div class="card_wrapper"  >
+  <div class="card_wrapper" >
     <nuxt-link :to="`/${card?.id}`">
       <!-- <img :src="card?.attributes.image" alt="card-image" /> -->
       <img :src="card?.attributes.image" alt="card-image" />
@@ -197,7 +160,7 @@ export default {
       </p>
     </div>
   </div>
-  <TheReviewList :productId="id" :card="card" :getCardData="getCardData" :key="reviewsData"/>
+  <TheReviewList :productId="id" :card="card" :getCardData="getCardData" :reviewsData="reviewsData"/>
   <!-- <TheList :titleProps=" $t('bigCardOther')" :itemList="sameProductsList" /> -->
 </template>
 

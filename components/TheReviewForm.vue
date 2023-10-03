@@ -1,15 +1,7 @@
 <script setup lang="ts">
-import { userApi } from "../api-requests/user-api";
-import { ordersApi } from "../api-requests/orders-api";
 import { Form, Field, ErrorMessage } from "vee-validate";
-import { reviewApi } from "../api-requests/reviews-api";
 
 const props = defineProps(['createReview'])
-const route = useRoute();
-const router = useRouter();
-let error = false;
-let user = null;
-let openAuthRequiredModal= false;
 
 const schema = {
   review: (value: string) => {

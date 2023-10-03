@@ -6,26 +6,20 @@ export default {
     productId: Number,
     card:Object,
     getCardData:Function,
+    reviewsData:Array
   },
   data() {
     return {
       reviews: [],
       openReviewModal: false,
       openTextModal: false,
+      user:null
     };
   },
-//   updated(){
-//     this.getCardData()
-//   },
-  mounted() {
-    // Выполните API запрос к Strapi для получения отзывов
-    // this.getReviews();
+ mounted(){
+     this.user = localStorage.getItem("jwt");
+     console.log(this.user)
   },
-  computed:{
- card(){
-return this.card;
-  }
-},
 
   methods: {
     async createReview(reviewText) {
@@ -37,10 +31,11 @@ return this.card;
           data.username,
           reviewText
         );
+        const user = await userApi.getUsersById(data.id)
         const setReview = await reviewApi.setReview(this.productId,review)
+        const setReviewToCollection = await reviewApi.setReviewToReviewsCollection(user.review_collection.id,review.id)
         const setReviewUser = await reviewApi.setReviewToUser(review.id,data.id,userJwt)
-        // const setReviewToUser = await userApi.setReviewForUser(data.id,review.id,userJwt)
-        console.log(review,setReview,setReviewUser)
+        const setReviewToUser = await userApi.setReviewForUser(data.id,review.id,userJwt)
         this.openReviewModal = false;
         this.openTextModal = true;
         this.getCardData()
@@ -55,10 +50,11 @@ return this.card;
 </script>
 
 <template>
-  <div :key="card">
-    <h2>Отзывы о продукте</h2>
+  <div :key="card" class="reviews_list">
+    <h2>{{ $t('reviews.title') }}</h2>
+    <!-- card.attributes.reviews.data -->
     <ul v-if="card.attributes.reviews.data.length">
-      <li v-for="review in card.attributes.reviews.data" :key="review.id">
+      <li v-for="review in reviewsData" :key="review.id">
         <div class="avatar">Avatar</div>
         <div class="review_wrapper">
           <p class="username">{{ review.attributes.username }}</p>
@@ -67,8 +63,8 @@ return this.card;
         </div>
       </li>
     </ul>
-    <p v-if="!card.attributes.reviews.data.length" class="no-result">No reviews!</p>
-    <button class="add" @click="openReviewModal = true">Add review</button>
+    <p v-if="!card.attributes.reviews.data.length" class="no-result">{{ $t('reviews.noReviews') }}</p>
+    <button class="add" v-if="user" @click="openReviewModal = true">{{ $t('reviews.addReview') }}</button>
   </div>
   <Teleport to="body">
     <TheReviewModal
@@ -109,6 +105,11 @@ return this.card;
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
+.dark-mode .reviews_list{
+  background-color: rgb(36, 35, 35);
+  border: 1.7px solid #2d2a2a;
+  color: rgb(181, 173, 173);
+}
 /* .dark-mode li:active, .dark-mode li:hover{
       background-color: rgb(131, 110, 107);
       color: rgb(181, 173, 173);
@@ -127,6 +128,17 @@ return this.card;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+.reviews_list{
+  border: 2px solid #b49696;
+  background: #efe1e1;
+  border-radius: 7px;
+  width: 80%;
+  min-width: 320px;
+ margin: 20px auto;
+}
+h2{
+  padding-bottom: 70px;
 }
 /* .form_wrapper {
     display: flex;

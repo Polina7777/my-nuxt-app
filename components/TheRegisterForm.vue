@@ -7,10 +7,6 @@ import { Form, Field, ErrorMessage } from "vee-validate";
 import { giftcardApi } from "../api-requests/giftcard-api";
 
 const props = defineProps(['register'])
-const route = useRoute();
-const router = useRouter();
-
-let user = null;
 const schema = {
   name: (value: string) => {
     if (!value) {
@@ -75,35 +71,9 @@ const schema = {
 };
 
 async function onSubmit(values: any) {
-  console.log('reg',values)
  props.register(values);
 };
 
-// async function register(data:any){
-//       try {
-//      const collectionFav = await favoritesApi.createFavoritesCollection();
-//      const collectionBasket = await basketsApi.createBasketCollection();
-//      const collectionGiftCard = await giftcardApi.createGiftCardCollection();
-//      const collectionOrder = await ordersApi.createOrdersCollection();
-//      console.log(collectionGiftCard);
-//      console.log(collectionOrder);
-//      const res = await userApi.registerUser(data.name,data.surname,data.email,data.password,collectionFav.id,collectionBasket.id, collectionGiftCard.id,collectionOrder.id)
-//      if(res.jwt){ 
-//      localStorage.setItem('jwt', res.jwt);
-//      localStorage.setItem('userData', JSON.stringify(res.user));
-//     router.push("/");
-//   //  this.user({
-//   //     jwt:res.jwt,
-//   //     user:res.user
-//   //   })
-//      }else if(res.error){
-//     alert(res.error.message)
-//      }
-//     }
-//     catch (err) {
-//       console.log(err);
-//     }
-// };
 </script>
 <template>
   <div class="form_wrapper">
@@ -182,27 +152,21 @@ async function onSubmit(values: any) {
   background-color: transparent;
   border: 1px solid rgb(71, 70, 70);
   color: rgb(181, 173, 173);
-  /* color: rgb(103, 101, 101); */
 }
 .dark-mode input::placeholder {
   color: rgb(181, 173, 173);
-  /* color: rgb(103, 101, 101); */
 }
 .dark-mode .title{
   color: rgb(181, 173, 173);
-  /* color: rgb(103, 101, 101); */
 }
 
 .dark-mode button{
-  /* background-color:  rgb(15, 60, 60); */
-  /* background-color:rgb(90, 68, 64); */
   background-color: rgb(28, 27, 27);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
 .dark-mode button:active,
 .dark-mode button:hover {
-  /* background-color: rgb(13, 121, 121); */
   background-color: rgb(131, 110, 107);
 }
 /*DarkMode*/

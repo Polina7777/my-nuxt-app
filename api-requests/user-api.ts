@@ -109,17 +109,15 @@ export const setBasketCollectionForUser = async (id: string, collection: any,tok
     return data
 };
 export const setReviewForUser = async (id: string, reviewId: any,token: any) => {
-
-    console.log(token,'token')
-    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+    const response = await fetch(`${url_ngrok}api/users/${id}?populate=*`, {
       headers:{
       "Content-Type": "application/json",
-      "Authorization": `Bearer ${token}`,
+      // "Authorization": `Bearer ${token}`,
       },
       method: "PUT",
       body: JSON.stringify({
         data: {
-          basket: {
+          reviews: {
             connect: [reviewId],
           },
         },
@@ -131,9 +129,29 @@ export const setReviewForUser = async (id: string, reviewId: any,token: any) => 
     }
     return data
 };
+export const setAvatarForUser = async (id: string, image: any,token: any) => {
+
+  const response = await fetch(`${url_ngrok}api/users/${id}?populate=*`, {
+    headers:{
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`,
+    },
+    method: "PUT",
+    body: JSON.stringify({
+      data: {
+        avatar: image
+      },
+    }),
+  });
+  const data = await response.json();
+  if(data.error){
+    return data.error
+  }
+  return data
+};
 
 
-export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any) => {
+export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any,collectionReviewsId:any) => {
   const username = `${name} ${surname}`
   const response = await fetch(`${url_ngrok}api/auth/local/register`, {
     headers:{
@@ -149,7 +167,8 @@ export const registerUser = async (name: any,surname: any,email: any,password: a
                 favorite: collectionFavId,
                 basket:collectionBasketId,
                 giftcard_collection:collectionGiftCardId,
-                order_collection:collectionOrderId
+                order_collection:collectionOrderId,
+                review_collection:collectionReviewsId
             }),
   });
   const data = await response.json();

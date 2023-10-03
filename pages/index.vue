@@ -5,9 +5,6 @@ import TheParallax  from "../components/TheParallax.vue";
 
 export default{
   layout: 'custom',
-  mounted(){
-    // this.getBestSellerProducts();
-  },
   created() {
     this.filterListBySearchString();
     this.getBestSellerProducts();
@@ -27,9 +24,7 @@ return  this.$i18n.locale;
   beforeCreate(){
     this.getBestSellerProducts;
   },
-// beforeMount(){
-//  this.getBestSellerProducts();
-// },
+
   data(){
   return{
     searchString:'',
@@ -95,16 +90,19 @@ watch: {
 :popUpValue="popUpFilter" @input="(data)=>searchString = data"  @click="(data)=>popUpFilter=data"/>
 <!-- <TheFiltersForm :filterListByFiltersForm="filterListByFiltersForm"/> -->
 <!-- <TheParallax2/> -->
-<TheScrollParallax :productsListBestSeller = "productsListBestSeller"/>
-<TheParallax4 :productsListBestSeller = "productsListBestSeller" />
- <TheSwiper2  :productsListBestSeller = "productsListBestSeller"  />
+<ClientOnly>
+<TheScrollParallax :productsListBestSeller = "productsListBestSeller"  v-if="!searchString && !popUpFilter.title && !filterFormValue"/>
+<TheParallax4 v-if="!searchString && !popUpFilter.title && !filterFormValue" :productsListBestSeller = "productsListBestSeller" />
+
+ <!-- <TheSwiper2  :productsListBestSeller = "productsListBestSeller"  /> -->
  <TheSwiperModal  :openSwiperModal="openSwiperModal" :productsListBestSeller = "productsListBestSeller" @close="openSwiperModal = false"/> 
+</ClientOnly>
   <TheListsBox v-if="!searchString && !popUpFilter.title && !filterFormValue" :searchString="searchString" />
   <TheList v-if="searchString" titleProps="" :itemList="filteredList"/>
   <TheList v-if="popUpFilter.title" :title-props="filterName" :itemList="filteredList"/>
   <TheList v-if="filterFormValue" :title-props="`Brand ${filterFormValue}` " :itemList="filteredList"/>
    <TheBrandsBox/>
-   <TheAboutBox/>
+   <!-- <TheAboutBox/> -->
   </NuxtLayout >
     </div>
   </template>

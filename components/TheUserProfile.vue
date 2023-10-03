@@ -219,6 +219,7 @@ export default {
         {{ $t("profile.myDetails") }}
       </p>
       <div class="info_wrapper adress_info" v-show="showUserInfo">
+        <TheAvatar/>
         <div v-for="(item, index) in userInfo" :key="index" class="user_item">
           <label>{{ item.label }}</label>
           <!-- :value="item.data" -->
@@ -298,7 +299,6 @@ export default {
             />
           </Teleport>
         </div>
-        <!-- {{ item }} -->
         <p class="order_status">В обработке</p>
       </div>
 

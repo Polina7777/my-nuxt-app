@@ -4,54 +4,66 @@ import { userApi } from "../api-requests/user-api";
 export default {
   props: {
     productId: Number,
-    card:Object,
-    getCardData:Function,
-    reviewsData:Array
+    card: Object,
+    getCardData: Function,
+    reviewsData: Array,
   },
   data() {
     return {
       reviews: [],
       openReviewModal: false,
       openTextModal: false,
-      user:null
+      user: null,
     };
   },
- mounted(){
-     this.user = localStorage.getItem("jwt");
-     console.log(this.user)
+  mounted() {
+    this.user = localStorage.getItem("jwt");
+    console.log(this.user);
   },
 
   methods: {
     async createReview(reviewText) {
       const userData = localStorage.getItem("userData");
       const data = JSON.parse(userData);
-      const userJwt = localStorage.getItem("jwt");;
+      const userJwt = localStorage.getItem("jwt");
       if (userData) {
         const review = await reviewApi.createNewReview(
           data.username,
-          reviewText
+          reviewText,
+          this.productId
         );
-        const user = await userApi.getUsersById(data.id)
-        const setReview = await reviewApi.setReview(this.productId,review)
-        const setReviewToCollection = await reviewApi.setReviewToReviewsCollection(user.review_collection.id,review.id)
-        const setReviewUser = await reviewApi.setReviewToUser(review.id,data.id,userJwt)
-        const setReviewToUser = await userApi.setReviewForUser(data.id,review.id,userJwt)
+        const user = await userApi.getUsersById(data.id);
+        const setReview = await reviewApi.setReview(this.productId, review);
+        const setReviewToCollection =
+          await reviewApi.setReviewToReviewsCollection(
+            user.review_collection.id,
+            review.id
+          );
+        const setReviewUser = await reviewApi.setReviewToUser(
+          review.id,
+          data.id,
+          userJwt
+        );
+        const setReviewToUser = await userApi.setReviewForUser(
+          data.id,
+          review.id,
+          userJwt
+        );
         this.openReviewModal = false;
         this.openTextModal = true;
-        this.getCardData()
+        this.getCardData();
         setTimeout(() => {
           this.openTextModal = false;
         }, 1700);
       }
     },
   },
-
 };
 </script>
 
 <template>
   <div :key="card" class="reviews_list">
-    <h2>{{ $t('reviews.title') }}</h2>
+    <h2>{{ $t("reviews.title") }}</h2>
     <!-- card.attributes.reviews.data -->
     <ul v-if="card.attributes.reviews.data.length">
       <li v-for="review in reviewsData" :key="review.id">
@@ -63,8 +75,12 @@ export default {
         </div>
       </li>
     </ul>
-    <p v-if="!card.attributes.reviews.data.length" class="no-result">{{ $t('reviews.noReviews') }}</p>
-    <button class="add" v-if="user" @click="openReviewModal = true">{{ $t('reviews.addReview') }}</button>
+    <p v-if="!card.attributes.reviews.data.length" class="no-result">
+      {{ $t("reviews.noReviews") }}
+    </p>
+    <button class="add" v-if="user" @click="openReviewModal = true">
+      {{ $t("reviews.addReview") }}
+    </button>
   </div>
   <Teleport to="body">
     <TheReviewModal
@@ -105,7 +121,7 @@ export default {
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
 }
-.dark-mode .reviews_list{
+.dark-mode .reviews_list {
   background-color: rgb(36, 35, 35);
   border: 1.7px solid #2d2a2a;
   color: rgb(181, 173, 173);
@@ -129,15 +145,15 @@ export default {
   flex-direction: column;
   justify-content: space-between;
 }
-.reviews_list{
+.reviews_list {
   border: 2px solid #b49696;
   background: #efe1e1;
   border-radius: 7px;
   width: 80%;
   min-width: 320px;
- margin: 20px auto;
+  margin: 20px auto;
 }
-h2{
+h2 {
   padding-bottom: 70px;
 }
 /* .form_wrapper {
@@ -164,8 +180,8 @@ div {
   text-align: -webkit-center;
   padding: 20px;
 }
-.no-result{
-    font-size: 21px;
+.no-result {
+  font-size: 21px;
 }
 .field_box {
   display: flex;

@@ -1,32 +1,102 @@
-<script>
-import { userApi } from '../api-requests/user-api';
+<script lang="ts">
+import { mediaApi } from "../api-requests/media-api";
+import { userApi } from "../api-requests/user-api";
+
+import axios from "axios";
 
 export default {
-    // props:{
-    //     userId:Number,
-    // },
+  props: {
+    userData: Object,
+    avatar: Object,
+  },
+  mounted() {
+    //   if(this.avatar){
+    //  console.log(this.avatar.attributes.avatar.data.attributes.url)}
+    this.getUserAvatar();
+  },
+  created() {
+    this.getUserAvatar(); 
+  },
+  data() {
+    return {
+      userInfo:this.userData,
+      avatarData: null,
+      baseUrl: "http://localhost:1337/api",
+    };
+  },
   methods: {
-    uploadAvatar(event) {
-        const userData = localStorage.getItem('userData')
-        const userInfo = JSON.parse(userData)
+    async uploadAvatar(event) {
+      console.log(this.userData);
       const file = event.target.files[0];
-    //   const uploadImg = userApi.changeUserData(userInfo.id,"avatar",file)
-    //   console.log(uploadImg)
-      // Вы можете использовать этот файл для загрузки на сервер или хранить локально.
-      // Далее сохраните URL аватарки в данных пользователя.
+      const token = localStorage.getItem("jwt");
+      // const avatar = await mediaApi.createAvatarImage(
+      //   file,
+      //   token,
+      //   this.userData.avatar_collection.id
+      // );
+      // console.log(avatar);
     },
+    async getUserAvatar() {
+      console.log(this.userInfo);
+      if (this.userInfo) {
+        console.log(this.userInfo.avatar_collection.id);
+        const avatar = await mediaApi.getAvatarCollectionById(
+          this.userInfo.avatar_collection.id,
+          this.$i18n.locale
+        );
+        this.avatarData = avatar;
+        console.log(this.avatarData)
+      }
+    },
+
+    //   let result = await fetch("http://localhost:1337/api/upload/", {
+    //     headers: {
+    //       // "Content-Type": "multipart/form-data",
+    //       Authorization: `Bearer:${token}`,
+    //     },
+    //     method: "POST",
+    //     // body:JSON.stringify(dataA)
+    //     // "field":"image",
+    //     //   "ref":"reviews",
+    //     //   "refId": 1,
+    //     //   "field":"image",
+    //     //   "files":file
+    //    body: formData
+    //     // timeout: 30000,
+    //   }).then((response) => response.json());
+    //   console.log(result);
+    // },
+    //}
+    // let result = await fetch("http://localhost:1337/api/upload", {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //       Authorization: `Bearer:${token}`,
+    //     },
+    //     method: "PUT",
+    //     // body:JSON.stringify(dataA)
+    //     // "field":"image",
+    //     //   "ref":"reviews",
+    //     //   "refId": 1,
+    //     //   "field":"image",
+    //     //   "files":file
+    //    body: formData
+    //     // timeout: 30000,
+    //   }).then((response) => response.json());
+    //   console.log(result);
   },
 };
 </script>
 
 <template>
-    
-      <p>Загрузить аватарку</p>
-      <div class="avatar_wrapper">
-      <input type="file" @change="uploadAvatar" />
-    </div>
-  </template>
-  
+  <!-- <ClientOnly>
+    {{`${baseUrl}${avatarData?.attributes.avatar.data.attributes.formats.small.url}`}}
+  <img :url="`${baseUrl}${avatarData.attributes.avatar.data.attributes.formats.small.url}`" alt="avatar"/>
+</ClientOnly> -->
+  <p>Загрузить аватарку</p>
+  <div class="avatar_wrapper">
+    <input type="file" name="files" @change="uploadAvatar" />
+  </div>
+</template>
 
 <style scoped>
 /*DarkMode*/
@@ -56,12 +126,12 @@ input {
   padding: 11px;
   min-width: 150px;
   width: 270px;
-    /* height: 180px;
+  /* height: 180px;
     border-radius: 50%; */
   border-color: transparent;
   position: relative;
 }
-p{
-    font-size: 17px;
+p {
+  font-size: 17px;
 }
 </style>

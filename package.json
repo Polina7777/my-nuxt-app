@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@vee-validate/yup": "^4.11.3",
+    "axios": "^1.5.1",
     "nuxt-swiper": "^1.2.2",
     "vee-validate": "^4.11.3",
     "vue-parallax-js": "^0.2.3"

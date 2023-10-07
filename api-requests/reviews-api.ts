@@ -6,7 +6,20 @@ export const getAllReviewCollections = async(locale:any)=>{
     const reviews = data.data
     return reviews;
 } 
-
+export const getReviewById = async(id:any,locale:any)=>{
+  if(locale === 'ru'){
+    const response = await fetch(`${url_ngrok}api/reviews/${id}?populate=*`,{method:'GET'});
+    const data = await response.json();
+    const review = data.data
+    return review;
+  }else{
+    const response = await fetch(`${url_ngrok}api/reviews/${id}?populate=*`,{method:'GET'});
+    const data = await response.json();
+    const review = data.data.attributes.localizations.data;
+    console.log(review)
+    return review[0];
+  }
+} 
 export const createReviewsCollection = async () => {
   const response = await fetch(`${url_ngrok}api/review-collections`, {
     headers:{
@@ -53,20 +66,19 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
   export const getAllReviewCollectionById = async(id:string,locale:any)=>{
       // const response = await fetch(`${url_ngrok}api/products/${id}?locale=${locale}`,{method:'GET'});
       if(locale === 'ru'){
-        const response = await fetch(`${url_ngrok}api/review-collections/${id}`,{method:'GET'});
+        const response = await fetch(`${url_ngrok}api/review-collections/${id}?populate=*`,{method:'GET'});
         const data = await response.json();
         const review = data.data
-        console.log(review)
         return review;
       }else{
-        const response = await fetch(`${url_ngrok}api/review-collections/${id}?populate=localizations`,{method:'GET'});
+        const response = await fetch(`${url_ngrok}api/review-collections/${id}?populate=*`,{method:'GET'});
         const data = await response.json();
         const review = data.data.attributes.localizations.data;
         console.log(review)
         return review[0];
       }
   }
-  export const createNewReview = async (username:any,review_text:any) => {
+  export const createNewReview = async (username:any,review_text:any,productId:any) => {
     try {
       const response = await fetch(`${url_ngrok}api/reviews/`, {
         headers: {
@@ -77,6 +89,7 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
           data: {
             username:username,
             review_text:review_text,
+            product_id:productId
           },
         }),
       });
@@ -154,4 +167,4 @@ export const getReviewCollectionByProductId = async(productId:any,locale:any)=>{
     }
   };
 
-  export const reviewApi = {getAllReviewCollections,getAllReviewCollectionById,getReviewCollectionByProductId,createNewReview,setReview,setReviewToUser,createReviewsCollection,setReviewToReviewsCollection}
+  export const reviewApi = {getAllReviewCollections,getAllReviewCollectionById,getReviewCollectionByProductId,createNewReview,setReview,setReviewToUser,createReviewsCollection,setReviewToReviewsCollection,getReviewById}

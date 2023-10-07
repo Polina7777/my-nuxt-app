@@ -1,0 +1,31 @@
+{
+  "kind": "collectionType",
+  "collectionName": "avatar_collections",
+  "info": {
+    "singularName": "avatar-collection",
+    "pluralName": "avatar-collections",
+    "displayName": "avatar_collection",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "avatars": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::avatar.avatar"
+    },
+    "avatar": {
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}

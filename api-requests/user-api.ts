@@ -39,6 +39,29 @@ export const setFavoritesCollectionForUser = async (id: string, collection: any,
     }
     return data
 };
+export const setAvatarCollectionForUser = async (id: string, collection: any,token: any) => {
+  const collectionId = String(collection.id);
+    console.log(token,'token')
+    const response = await fetch(`${url_ngrok}api/users/${id}`, {
+      headers:{
+      "Content-Type": "application/json",
+      "Authorization": `Bearer ${token}`,
+      },
+      method: "PUT",
+      body: JSON.stringify({
+        data: {
+          avatar_collection: {
+            connect: [collectionId],
+          },
+        },
+      }),
+    });
+    const data = await response.json();
+    if(data.error){
+      return data.error
+    }
+    return data
+};
 export const setGiftCardCollectionForUser = async (id: string, collection: any,token: any) => {
   const collectionId = String(collection.id);
     console.log(token,'token')
@@ -129,29 +152,25 @@ export const setReviewForUser = async (id: string, reviewId: any,token: any) => 
     }
     return data
 };
-export const setAvatarForUser = async (id: string, image: any,token: any) => {
+// export const setAvatarForUser = async (id: string, formData:any, image: any,token: any) => {
 
-  const response = await fetch(`${url_ngrok}api/users/${id}?populate=*`, {
-    headers:{
-    "Content-Type": "application/json",
-    "Authorization": `Bearer ${token}`,
-    },
-    method: "PUT",
-    body: JSON.stringify({
-      data: {
-        avatar: image
-      },
-    }),
-  });
-  const data = await response.json();
-  if(data.error){
-    return data.error
-  }
-  return data
-};
+//   const response = await fetch(`${url_ngrok}api/users/${id}`, {
+//     headers:{
+//     "Content-Type": "multipart/form-data",
+//     "Authorization": `Bearer ${token}`,
+//     },
+//     method: "POST",
+//     body: formData,
+//   });
+//   const data = await response.json();
+//   if(data.error){
+//     return data.error
+//   }
+//   return data
+// };
 
 
-export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any,collectionReviewsId:any) => {
+export const registerUser = async (name: any,surname: any,email: any,password: any,collectionFavId:any,collectionBasketId:any,collectionGiftCardId:any,collectionOrderId:any,collectionReviewsId:any,collectionAvatarsId:any) => {
   const username = `${name} ${surname}`
   const response = await fetch(`${url_ngrok}api/auth/local/register`, {
     headers:{
@@ -168,7 +187,8 @@ export const registerUser = async (name: any,surname: any,email: any,password: a
                 basket:collectionBasketId,
                 giftcard_collection:collectionGiftCardId,
                 order_collection:collectionOrderId,
-                review_collection:collectionReviewsId
+                review_collection:collectionReviewsId,
+                avatar_collection:collectionAvatarsId
             }),
   });
   const data = await response.json();
@@ -221,4 +241,4 @@ export const userBearer = async (jwt: any,user: { id: any; })=>{
   return data;
 }
 
-export const userApi = { getUsers,changeUserData, getUsersById,setFavoritesCollectionForUser,setReviewForUser,registerUser,loginUser,userBearer};
+export const userApi = { getUsers,changeUserData, getUsersById,setFavoritesCollectionForUser,setReviewForUser,registerUser,loginUser,userBearer,setAvatarCollectionForUser};

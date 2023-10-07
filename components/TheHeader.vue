@@ -26,6 +26,7 @@ import { basketsApi } from "../api-requests/basket-api";
 import { giftcardApi } from "../api-requests/giftcard-api";
 import { ordersApi } from "../api-requests/orders-api";
 import { reviewApi } from "../api-requests/reviews-api";
+import { mediaApi } from "../api-requests/media-api";
 
 export default {
   props: {
@@ -256,6 +257,7 @@ updated() {
         const collectionGiftCard = await giftcardApi.createGiftCardCollection();
         const collectionOrder = await ordersApi.createOrdersCollection();
         const collectionReviews = await reviewApi.createReviewsCollection();
+        const collectionAvatars = await mediaApi.createUserAvatarCollection();
         const res = await userApi.registerUser(
           data.name,
           data.surname,
@@ -265,7 +267,8 @@ updated() {
           collectionBasket.id,
           collectionGiftCard.id,
           collectionOrder.id,
-          collectionReviews.id
+          collectionReviews.id,
+          collectionAvatars.id
         );
         this.openRegModal = false;
         if (res.jwt) {

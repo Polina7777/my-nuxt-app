@@ -119,6 +119,11 @@
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::review-collection.review-collection"
+    },
+    "avatar_collection": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::avatar-collection.avatar-collection"
     }
   }
 }
